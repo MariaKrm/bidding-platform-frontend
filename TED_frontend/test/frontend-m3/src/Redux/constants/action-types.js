@@ -1,0 +1,6 @@
+export const REGISTER_TOKEN = "REGISTER_TOKEN";
+export const ASSIGN_USER = "ASSIGN_USER";
+export const STORE_FOLLOWERS = "STORE_FOLLOWERS";
+export const STORE_FOLLOWING = "STORE_FOLLOWING";
+export const RELOAD_POSTS = "RELOAD_POSTS";
+export const RESET = "RESET";

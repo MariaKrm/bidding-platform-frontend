@@ -1,0 +1,200 @@
+.newMedia, .newAdv
+	z-index: 150
+	width: 100%
+	.content
+		padding: $normal
+		display: flex
+		width: 100%
+		background: $background
+		position: relative
+		.left
+			position: relative
+			flex-basis: 50%
+			div
+				outline: 0
+				&:hover
+					cursor: pointer
+			.before-upload
+				display: flex
+				flex-direction: column
+				justify-content: center
+				align-items: center
+				div:first-of-type
+					cursor: pointer
+				.info-img
+					font-size: 12px
+					cursor: default
+		img
+			max-width: 100%
+			width: 100%
+			max-height: 100%
+			padding: 10px
+		img ~ i
+			position: absolute
+		.photoPlaceholder
+			flex-basis: 50%
+		.info-container
+			max-width: 50%
+			@media screen and (max-width: 1024px)
+				max-width: 100%
+		.info
+			display: flex
+			flex-basis: 50%
+			justify-content: space-evenly
+			width: 100%
+			align-items: center
+			flex-direction: column
+			input, textarea
+				border-color: transparentize($text-color, 0.8)
+				transition: 0.2s ease-in-out
+				&:focus
+					border-color: transparentize($text-color, 0.3)
+			div, textarea
+				width: 100%
+				font-family: 'Lato'
+				resize: none
+				padding: $tiny $small
+				outline: 0
+				font-size: 1rem
+				border-radius: $tiny
+			div span
+				text-transform: uppercase
+			.title
+				min-height: 2rem
+				textarea
+					margin-top: 5px
+			.caption
+				position: relative
+				min-height: 50%
+				border-radius: $tiny
+				textarea
+					margin-top: 5px
+					height: 30vh
+
+			.post-btn
+				font: 1.25rem "IBM Plex Sans"
+				color: $primary
+				border: 1px solid $primary
+				border-radius: $tiny
+				outline: none
+				background-color: transparent
+				border-color: $primary
+				transition: all 0.2s ease
+				position: absolute
+				bottom: $normal
+				&:hover
+					background: transparentize($primary, 0.25)
+					color: $background
+				&:disabled
+					background: $text-shadow
+					border-color: $text-color
+					color: transparentize($background, 0.5)
+					&:hover
+						cursor: not-allowed
+
+			.selectAudience
+				display: flex
+				flex-direction: row
+				.included, .excluded
+					padding: 0
+				.include, .exclude
+					padding-bottom: 0
+					padding-top: 0
+					.elements
+						border: 1px solid #ededed
+						border-right: 0
+						overflow-x: hidden
+						min-height: 50px
+						border-radius: 0
+					input
+						width: 100%
+				.include
+					padding-left: 0
+				.exclude
+					padding-right: 0
+		.close-btn
+			position: absolute
+			transition: 0.2s ease-in-out
+			line-height: 1
+			top: 0
+			right: 0
+			margin: $tiny
+			color: rgb(200, 0, 0)
+			opacity: 0.5
+			&:hover
+				opacity: 1
+				cursor: pointer
+			font-size: 1.5rem
+			cursor: pointer
+			&.fa-times
+				color: white
+
+#locationBar
+	position: relative
+	textarea
+		height: 2rem
+	&.loading
+		*
+			color: $box-shadow
+			border-color: $box-shadow
+		i.fa-cog
+			position: absolute
+			top: 50%
+			right: $normal
+			transform: translateX(-50%)
+			animation: 2s rotation linear infinite
+	&.selected *
+		color: $primary
+		border-color: $primary
+
+.popover-body
+	padding: 0
+	.location-result
+		display: flex
+		justify-content: space-between
+		padding: $tiny $small
+		transition: 0.2s ease-in-out
+		&:not(:last-of-type)
+			border-bottom: 1px solid $soft-edge
+		&:hover
+			font-weight: bold
+			background: transparentize($text-color, 0.95)
+			cursor: pointer
+		span:first-child
+			flex: 0 1 100%
+			display: flex
+			justify-content: flex-start
+			align-items: center
+			.icon
+				flex: 0 1 25px
+			i
+				margin-right: $small
+		span:last-child
+			flex: 0 1 30%
+			opacity: 0.5
+			text-align: right
+
+@media screen and (max-width: $tablet)
+	.newMedia .content
+		margin: $small
+		flex-direction: column
+		align-items: center
+		overflow: hidden
+		justify-content: center
+		.left
+			width: 100%
+		.info
+			padding: $small
+			align-content: flex-end
+			button
+				margin-top: $small
+				margin-bottom: 0
+		.info-container
+			max-width: 100%
+
+
+@keyframes rotation
+	0%
+		transform: rotate(0turn)
+	100%
+		transform: rotate(1turn)

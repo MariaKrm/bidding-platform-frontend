@@ -1,0 +1,167 @@
+/* The slider */
+a
+	cursor: pointer
+	&::before
+		width: 0 !important
+
+
+.slider
+	position: absolute
+	cursor: pointer
+	top: 0
+	left: 0
+	right: 0
+	bottom: 0
+	background-color: $text-color
+	transition: .4s
+
+.slider:before
+	position: absolute
+	content: ""
+	height: 20px
+	width: 20px
+	left: 2px
+	bottom: 2px
+	background-color: $background
+	transition: .4s
+input:checked + .slider
+	background-color: $primary
+
+input:checked + .slider:before
+	transform: translateX(24.5px)
+
+/* Rounded sliders */
+.slider.round
+	border-radius: 20px
+
+.slider.round:before
+	border-radius: 50%
+
+.settings
+	display: grid
+	grid-template-columns: 1fr 2fr
+	grid-template-areas: "left-side right-side"
+	@media screen and (max-width: $tablet)
+		grid-template-columns: 1fr
+		grid-template-areas: "right-side" "left-side"
+		.setting.bio
+			.bio-text
+				min-height: 20vh
+	grid-gap: $small
+	margin: $small
+	padding: 0
+	max-height: 20vh
+	.left-side
+		grid-area: left-side
+		width: 100%
+		.setting:not(:last-child)
+			border-bottom: 1px solid $soft-edge
+	.setting.bio
+		position: relative
+		grid-area: right-side
+	& > div
+		border: 1px solid $soft-edge
+		overflow: hidden
+		border-radius: $small
+	.setting
+		width: 100%
+		margin : 0
+		padding: 0
+		background: darken($background, 5%)
+		& > a
+			width: 100%
+			display: block
+		&.no-padding
+			padding: 0
+	a:hover, button:hover
+		cursor: pointer
+	.request-btn
+		width: 100%
+		&::after
+			position: relative
+			content: "\2714"
+			color: $green
+			opacity: 0
+			transition: 0.2s ease-in-out
+			right: $normal
+		&.success::after
+			opacity: 1
+			right: -$small
+	a
+		display: block
+		width: 100%
+	button
+		background: none
+		font-size: 1rem
+		font-family: 'Lato'
+		border: none
+		text-align: left
+		padding: $small
+		outline: none
+		width: 100%
+		transition: 0.2s ease-in-out
+		&:hover
+			color: $primary
+			background: #FAFAFA
+
+	.setting:last-child button
+		background: $text-shadow
+		color: $background
+		text-align: center
+		&:hover
+			color: $yellow
+			background: transparentize($text-shadow, 0.1)
+
+	.call-to-action
+		display: flex
+		justify-content: space-between
+
+	.biography
+		display: flex
+		flex-direction: column
+		height: 100%
+		& > div:first-of-type
+			display: flex
+			justify-content: space-between
+			margin: 5px 7px 5px
+			align-items: center
+		.chars-left
+			font-size: 0.8rem
+			&.error
+				color: $red
+		.bio-text
+			flex: 0 1 100%
+			background: $background
+			border-radius: 5px
+			padding: $tiny
+			margin: 5px
+			font-size: 0.8rem
+			outline: 0
+			border: 1px solid transparent
+			transition: 0.2s ease-in-out
+			height: 100%
+			max-width: 700px
+			max-height: 170px
+			overflow: scroll
+			&.error
+				border-color: transparentize($red, 0.5)
+	.visibility-profile
+		padding: 0 $small
+		display: flex
+		justify-content: space-between
+		flex-flow: row nowrap
+		align-items: center
+
+		.switch
+			margin-top: $small
+			margin-bottom: $small
+			position: relative
+			display: inline-block
+			width: 50px
+			height: 24px
+			border-radius: 18px
+			input
+				opacity: 0
+				width: 0
+				height: 0
+

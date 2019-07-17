@@ -1,0 +1,159 @@
+// TODO: almost all to be refactored,
+// this is just temporary to have an idea on the final product
+
+.stories h3
+	margin-bottom: 0
+
+.storiesPreview
+	min-height: 300px
+	max-height: 500px
+	width: 100%
+	display: flex
+	overflow-x: auto
+	flex-wrap: nowrap
+	margin-bottom: $small
+	border: 0
+	border-bottom: 1px solid $soft-edge
+
+.storyPreview
+	background-color: #000
+	overflow: hidden
+	min-width: 150px
+	height: 100%
+	border-radius: 5px
+	display: flex
+	flex-direction: column
+	justify-content: center
+	align-items: center
+	position: relative
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25)
+	transition: all 0.25s ease
+	&:hover
+		cursor: pointer
+		box-shadow: 0 4px 7px rgba(0, 0, 0, 0.5)
+	p
+		z-index: 3
+		text-shadow: 1px 1px 3px rgb(0, 0, 0)
+		color: white
+		margin-top: 10px
+
+.storyPreviewBlur
+	filter: blur(2px)
+	width: 100%
+	height: 100%
+	transform: scale(1.3)
+	position: absolute
+	top: 0
+	left: 0
+	overflow: hidden
+	background-size: cover
+	z-index: 1
+
+.storyProfileImage
+	background-color: #fff
+	width: 90px
+	height: 90px
+	border-radius: 50%
+	display: flex
+	justify-content: center
+	align-items: center
+	background-size: cover
+	z-index: 2
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5)
+
+.newStory-container, .storyPreview-container
+	display: flex
+	justify-content: center
+	align-items: center
+	padding: 10px
+	transition: all 0.25s ease
+	&:not(:first-child)
+		padding-left: 0
+	i
+		text-shadow: 0 0 10px rgba(255, 255, 255, 0.5)
+		color: white
+		font-size: 50px
+	&:hover
+		opacity: 0.9
+		transform: translateY(-3px)
+		cursor: pointer
+	&:active
+		opacity: 1
+
+.newStory
+	border-radius: 5px
+	background-color: #333
+	height: 100%
+	width: 150px
+	display: flex
+	justify-content: center
+	align-items: center
+	transition: all 0.25s ease
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5)
+	&:hover
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 1)
+
+#storiesModal
+	width: 432px
+	.modal-content
+		transform: scale(0.8)
+		transform-origin: top center
+	.modal-body
+		padding: 0
+
+.storiesModal-upload
+	.modal-content
+		transform: scale(1.1)
+	.info-container
+		label
+			margin-top: 10px
+			font-size: 1.25em
+			p
+				font-size: 0.75rem
+		.storyExpirationFields
+			display: flex
+			width: 80%
+			margin: auto
+			input
+				width: calc(50%)
+				margin-bottom: 2px
+				padding: 1px 3px
+				&:nth-child(1)
+					margin-right: 1px
+				&:nth-child(2)
+					margin-left: 1px
+		button
+			width: 80%
+			margin: auto
+			padding: 5px 0
+			text-transform: uppercase
+			font-size: 1em
+			border-color: initial
+			transition: all 0.2s ease
+			&:disabled
+				cursor: not-allowed
+			&:not(:disabled)
+				background-color: black
+				border-color: black
+				color: white
+				&:hover
+					opacity: 0.75
+				&:active
+					opacity: 1
+	.uploadStory
+		text-align: center
+	.modal-header
+		justify-content: center
+	.before-upload
+		& > div:first-child
+			margin: auto
+			width: fit-content
+			font-size: 1.4em
+			cursor: pointer
+			text-decoration: underline
+			margin-bottom: 5px
+			// transition: all 0.2s ease
+			&:hover
+				opacity: 0.5
+		.info-img
+			font-size: 0.75em

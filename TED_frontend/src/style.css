@@ -1,0 +1,42 @@
+body {
+	margin: 30px;
+	text-align: center;
+}
+
+.login-form {
+	background-color: grey;
+	color: #fff;
+	width: 210px;
+  	height: 150px;
+  	border: 1px solid blue; 
+  	padding: 20px;
+  	margin: auto;
+  	border-radius: 6px;
+}
+
+.signup-form {
+	background-color: grey;
+	color: #fff;
+	width: 300px;
+  	height: 400px;
+  	border: 1px solid blue; 
+  	padding: 20px;
+  	margin: auto;
+  	text-align: center;
+  	border-radius: 6px;
+  	
+}
+
+
+.form-link {
+	color: #003333;
+}
+
+.email-box {
+	width: 287px;
+}
+
+input {
+	margin: 2px;
+	border-radius: 3px;
+}

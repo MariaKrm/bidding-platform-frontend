@@ -1,0 +1,299 @@
+.signup.verify-email
+	.header, form
+		height: initial
+		background-image: none
+	form
+		min-height: initial
+		padding: 0
+		background-color: white
+		color: black
+		&:hover
+			box-shadow: 0 0 0
+
+.signup, .login, .reset
+	p
+		margin: $normal
+		text-align: center
+
+	.header
+		background-image: url("./icons/usi-logo.png")
+		background-repeat: repeat
+		background-size: 50px
+		background-color: rgba(255, 255, 255, 0.98)
+		background-blend-mode: lighten
+
+	.header
+		position: relative
+		display: flex
+		justify-content: center
+		align-items: center
+		height: 50vh
+		a
+			opacity: 1 !important
+
+		#usi-logo
+			position: relative
+			height: 50%
+			svg
+				height: 100%
+			svg
+				filter: drop-shadow(0px 0 5px rgba(0, 0, 0, 0.5))
+		.circle-logo
+			&:hover
+				animation: fill 1.5s
+		.ill, .on
+			&:hover
+				animation: fill 1s
+
+	@keyframes fill
+		0%
+			fill: $text-color
+
+		100%
+			fill: $yellow
+
+
+
+	form
+		position: relative
+		width: 100%
+		// max-width: $tablet - 100px
+		min-height: 50vh
+		margin: 0
+		padding: $large*1.5 0
+		display: flex
+		flex-direction: column
+		justify-content: center
+		align-items: center
+		background-color: $invert-background
+		color: $inverted-text-color
+		transition: all 0.3s ease
+		caret-color: white
+		&:hover
+			box-shadow: 0 0 50px rgba(0, 0, 0, 0.4)
+		&.pin-submit input[type='text']
+			text-transform: uppercase
+
+		a:hover
+			color: mix($inverted-text-color, $primary, 50%)
+
+			&::before
+				background-color: mix($inverted-text-color, $primary, 50%)
+		.reset, .signup
+			color: hsl(0, 0%, 75%)
+		div.field
+			border: 1px solid #2d2d2d
+			border-radius: 10px
+			padding: 1rem
+			width: 100%
+			max-width: 400px
+			position: relative
+			transition: all 0.3s ease
+			&:hover
+				box-shadow: 0 0 10px rgba(255, 255, 255, 0.5)
+			&:hover, *:hover
+				cursor: pointer
+			&:not(:last-child)
+				margin-bottom: $normal
+			&.active input
+				&::placeholder
+					color: $background
+
+			&:hover div.input::before
+				width: 100%
+				background: transparentize($background, 0.5)
+
+			&.active div.input::before
+				width: 100%
+				background: $background
+		div.field.active
+			border-color: #fed940
+			box-shadow: 0 0 10px rgba(254, 217, 64, 1)
+		label
+			font-size: 0.875em
+			font-weight: 700
+			opacity: 0.5
+			text-transform: uppercase
+
+		div.input
+			position: relative
+			display: flex
+			flex-direction: column
+			&::before
+				content: ''
+				position: absolute
+				bottom: 0
+				width: 0
+				height: 3px
+				background: transparentize($background, 0.9)
+				border-radius: 2px
+				transition: cubic-bezier(.6,0,.0,1) 0.66s
+		.form-options
+			color: rgba(255, 255, 255, 0.5)
+			font-weight: bold
+			a
+				color: rgba(255, 255, 255, 0.5) !important
+				transition: all 0.15s ease !important
+				text-decoration: underline !important
+				&:hover, &:focus
+					color: #fed940 !important
+
+		input
+			background: none
+			position: relative
+			font-size: 0.875em
+			margin: 0 0 0.25rem 0
+			margin-left: 0
+			padding: 0
+			padding-bottom: 2px
+			outline: 0
+			border: 0px solid $background
+			transition: 0.1s ease
+			border-radius: 0
+			cursor: text !important
+			&::placeholder
+				transition: 0.2s ease-in-out
+			&:not([type='submit'])
+				font-size: 1rem
+				color: $background
+
+			&:hover, &:focus
+				border: 0
+
+			&:active, &:focus
+				border-color: $text-color
+
+			&:-webkit-autofill,
+			&:-webkit-autofill:hover,
+			&:-webkit-autofill:focus
+				-webkit-text-fill-color: $background
+				-webkit-box-shadow: 0 0 0px 1000px $text-color inset
+				transition: background-color 5000s ease-in-out 0s
+			&.error
+				border-color: $error
+				color: $error
+				&:-webkit-autofill,
+				&:-webkit-autofill:hover,
+				&:-webkit-autofill:focus
+					-webkit-text-fill-color: $error
+					-webkit-box-shadow: 0 0 0px 1000px $text-color inset
+					transition: background-color 5000s ease-in-out 0s
+
+			&.correct
+				border-color: $success
+				color: $success
+				&:-webkit-autofill,
+				&:-webkit-autofill:hover,
+				&:-webkit-autofill:focus
+					-webkit-text-fill-color: $success
+					-webkit-box-shadow: 0 0 0px 1000px $text-color inset
+					transition: background-color 5000s ease-in-out 0s
+
+			&[type='submit']
+				color: white
+				padding: $normal $large
+				margin: 0
+				margin-top: 1em
+				margin-bottom: 2em
+				background-color: black
+				border: 1px solid white
+				border-radius: 5px
+				width: 400px
+				text-transform: uppercase
+				transition: 0.25s ease
+				font-weight: bold
+				&:not(:disabled)
+					border-color: white
+					&:hover
+						color: #fed940
+						border-color: #fed940
+						cursor: pointer !important
+					&:active
+						border-color: white
+						color: white
+					&:focus
+						color: #fed940
+						border-color: #fed940
+						box-shadow: 0 0 10px #fed940
+
+		div.error
+			position: relative
+			top: 100%
+			width: 100%
+			left: 0
+			color: $error
+			margin-top: 5px
+
+	.header
+		display: flex
+		flex-direction: column
+		align-items: center
+		//min-height: 50vh
+		justify-content: center
+
+		h2
+			margin: 0
+
+		a
+			text-transform: uppercase
+			padding: $small $normal
+			opacity: 0.8
+			&:hover
+				cursor: pointer
+				font-weight: bolder
+				opacity: 1
+
+.signup, .reset
+	h2
+		font-weight: 700
+		font-size: 3em
+	a:link, a:visited
+		color: $yellow !important
+		&:hover
+			color: mix($text-color, $yellow, 50%) !important
+		&:before
+			background: mix($text-color, $yellow, 50%) !important
+
+.signup
+	.header
+		background-color: rgba(255, 255, 255, 0.98)
+	.header
+		height: 50vh
+		h2
+			font-size: 75px
+	form input[type="submit"]
+		&:hover
+			box-shadow: 0 0 10px #68ff68
+		&:disabled
+			border-color: tomato
+			color: tomato
+			cursor: not-allowed !important
+			&:hover, &:focus
+				box-shadow: 0 0 10px tomato
+		&:not(:disabled)
+			border-color: #68ff68 !important
+			color: #68ff68 !important
+			&:focus
+				box-shadow: 0 0 10px #68ff68
+.reset
+	.header
+		background-color: rgba(255, 255, 255, 0.98)
+	.header
+		height: 50vh
+		p
+			max-width: 80%
+
+	form > div.error
+		top: auto
+		width: auto
+		position: absolute
+		bottom: $large
+		background: transparentize($error, 0.75)
+		border: 1px solid $error
+		padding: $small $normal
+		border-radius: $large
+		color: $error
+		text-align: center
+
+.verification
+	text-align: center

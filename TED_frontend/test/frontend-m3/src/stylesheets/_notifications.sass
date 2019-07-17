@@ -1,0 +1,145 @@
+.nav
+	.notifications
+		background: $background
+		border-radius: 0 0 $tiny $tiny
+		width: 100%
+		border: 0
+		max-width: $mobileL
+		min-width: $mobileS
+		position: absolute
+		top: $navHeight
+		right: 0
+		box-shadow: 0 3px 5px 0 $soft-edge
+		transition: 0.2s ease-in-out
+		height: 0
+		overflow: hidden
+		transform: translateX(100%)
+		img
+			border-radius: 50%
+		.user-area-item.show .container
+			margin-left: 0
+			.activity .info
+				display: flex
+				align-items: center
+				a:last-of-type
+					margin-left: 0.25rem
+				span.full-name
+					margin-right: 0.25rem
+		&.show
+			transform: translateX(0)
+		ul
+			padding: 0
+			margin: 0
+			list-style: none
+		.header
+			padding: 0.25rem 0.5rem
+			text-align: center
+			font: 1.15rem "IBM Plex Sans"
+			border-bottom: 1px solid $soft-edge
+		.content
+			margin: 0
+			.activity, .notification, .follow-request
+				position: relative
+				display: flex
+				padding: $small $small $normal
+				align-items: center
+				min-height: 50px
+				transition: 0.15s ease-in-out
+				&:not(:last-child)
+					border-bottom: 1px solid $soft-edge
+				& > a
+					display: flex
+					align-items: center
+					justify-content: center
+				&:hover
+					background: transparentize($text-color, 0.975)
+		.time
+			font-size: 0.75rem
+			color: transparentize($text-color, 0.5)
+			text-align: right
+			position: absolute
+			right: 0.5rem
+			bottom: 0.5rem
+		.info
+			margin-left: $small
+	&.show .notifications
+		height: auto
+		border: 1px solid $soft-edge
+		border-top: 0
+
+.nav .notifications
+	ul
+		width: 100%
+		li
+			transition: 0.2s ease-in-out
+	li.notification, li.activity
+		position: relative
+		display: flex
+		align-items: center
+		padding: $tiny 0
+		border-bottom: 1px solid $soft-edge
+		&.new
+			background: transparentize($primary, 0.9)
+		&:hover
+			background: $soft-edge
+			&.new
+				background: mix($soft-edge, transparentize($primary, 0.9), 30%)
+
+	.header
+		position: relative
+		display: flex
+		align-items: center
+		&.empty
+			color: transparentize($text-color, 0.75)
+		&:hover
+			cursor: pointer
+			.counter
+				background: $primary
+	.container
+		height: 0
+		transition: 1s ease-in-out
+		overflow: scroll
+		&.show
+			height: 30vh
+	.counter
+		margin-left: $small
+		border-radius: $tiny
+		color: $background
+		height: 100%
+		width: 1rem
+		font-size: 0.6rem
+		background: transparentize($primary, 0.5)
+		line-height: 1rem
+		transition: 0.2s ease-in-out
+
+	.header.empty .counter
+		background: transparentize($text-color, 0.85)
+
+
+.nav .notifications .follow-request .choice
+	margin-top: $unit
+	display: flex
+	justify-content: flex-end
+	button
+		background: none
+		border: 0
+		outline: 0
+		text-transform: uppercase
+		border-radius: $tiny
+		transition: 0.2s ease-in-out
+		&:first-child
+			margin-right: $small
+			border: 1px solid $green
+			color: $green
+		&:last-child
+			margin-right: $small
+			border: 1px solid $red
+			color: $red
+		&:hover
+			cursor: pointer
+			&:first-child
+				background: $green
+				color: $background
+			&:last-child
+				background: $red
+				color: $background

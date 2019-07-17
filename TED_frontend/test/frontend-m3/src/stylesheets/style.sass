@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:600|Lato:300')
+
+// sass-lint:disable-all
+@import bootstrap/bootstrap
+// sass-lint:enable-all
+@import variables
+@import font
+
+
+*
+	box-sizing: border-box
+
+body
+	font: 1em "Lato", Futura, sans-serif !important
+	margin: 0
+	// min-width: 100vw
+	min-height: 100vh
+	color: $text-color
+	background: $background
+	overflow-x: hidden
+
+#root
+	min-height: 100vh
+
+// PLACEHOLDER STYLE
+.content a:not(.no-style)
+	&:link, &:visited
+		white-space: nowrap
+		display: inline-block
+		position: relative
+		text-decoration: none
+		color: $primary
+		font-weight: bolder
+		transition: 0.2s ease-in-out
+		&::before
+			position: absolute
+			content: ''
+			bottom: 0
+			left: 50%
+			transform: translateX(-50%)
+			height: 1px
+			width: 0
+			background: mix($text-color, $primary, 50%)
+			transition: 0.2s ease-in-out
+		&:hover
+			color: mix($text-color, $primary, 50%)
+			&::before
+				width: 100%
+
+.app
+	min-height: 100vh
+	position: relative
+	background: $background
+
+.feed
+	display: grid
+	grid-template-columns: 1fr
+	//@media screen and (min-width: $laptop)
+	//	grid-template-columns: 1fr $laptop 1fr
+	//	.posts
+	//		grid-column: 2 / 3
+	//		grid-row: 1 / 2
+	//	& > div
+	//		grid-column: 1 / 4
+	margin: 0
+
+
+.app > .content
+	min-height: 90vh
+	position: relative
+	display: grid
+	grid-template-columns: 1fr
+	@media screen and (min-width: $laptop)
+		grid-template-columns: 1fr $laptop 1fr
+		.profile, .settings, .friend-lists, .hashtags, .locations, .blocked-lists, .admin-page, .statistics-page, .home
+			grid-column: 2 / 3
+			grid-row: 1 / 2
+		& > div
+			grid-column: 1 / 4
+	margin: 0
+	// min-height: 100vh
+
+
+.navbar ~ .content
+	padding-top: 70px
+
+	& > h1
+		margin: 0
+		text-align: center
+
+.modal-backdrop
+	z-index: 1000
+
+.jumbotron h1
+	font-weight: 600
+
+.popover-body::-webkit-scrollbar
+	overflow-x: hidden
+	width: 0 !important
+	background: transparent
+
+@import animations
+@import start
+@import feed
+@import settings
+@import profile
+@import navbar
+@import modal
+@import post
+@import password
+@import search
+@import newMedia
+@import notifications
+@import uploadAndEdit
+@import newProPic
+@import requesterror
+@import map
+@import friendlist
+@import hashtags
+@import blocked
+@import selectAudience
+@import chat
+@import userStories
+@import friendSuggestions
+@import shortestPath
+@import admin
+@import newAdv

@@ -1,0 +1,19 @@
+image: node:latest
+
+cache:
+    paths:
+        - node_modules/
+        - .yarn
+
+stages:
+    - build
+
+build:
+    stage: build
+    script:
+        - yarn install --pure-lockfile --cache-folder .yarn
+        - yarn run build
+    artifacts:
+      paths:
+        - build/
+      expire_in: 1 week

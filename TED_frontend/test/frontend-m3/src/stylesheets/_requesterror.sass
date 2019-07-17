@@ -1,0 +1,17 @@
+.request-error
+	position: fixed
+	left: 50%
+	top: $large
+	z-index: 1000
+	background: transparentize($error, 0.5)
+	transform: translate(-50%, -200%)
+	padding: $tiny $normal
+	color: $red
+	border: 1px solid $red
+	border-radius: $small
+	font-size: 1.5rem
+	transition: 0.25s ease-in-out
+	.status-code
+		font-family: "IBM Plex Sans"
+	&.show
+		transform: translate(-50%, 0)

@@ -18,13 +18,25 @@ body {
 	background-color: grey;
 	color: #fff;
 	width: 300px;
-  	height: 400px;
+  	height: 800px;
   	border: 1px solid blue; 
   	padding: 20px;
   	margin: auto;
   	text-align: center;
   	border-radius: 6px;
   	
+}
+
+.address-form {
+	background-color: #3b3b3b;
+	color: #fff;
+	width: 200px;
+	height: 340px;
+	border: 1px black;
+	padding: 20px;
+  	margin: auto;
+  	text-align: center;
+  	border-radius: 6px;
 }
 
 

@@ -13,13 +13,14 @@ class Signup extends React.Component {
 			lastname: "",
 			email: "",
 			phoneNumber: "",
-			country: "",
-			city: "",
 			tin: "",
+			coords: null,
 
 		}
 
 		this.handleChange = this.handleChange.bind(this)
+		this.handleSubmit = this.handleSubmit.bind(this)
+		this.handleAddressSubmit = this.handleAddressSubmit.bind(this)
 	}
 
 	handleChange(event) {
@@ -30,7 +31,25 @@ class Signup extends React.Component {
 
     handleSubmit(event) {
     	event.preventDefault()
-    	alert("You signed up. Good Job!")
+    	if(this.state.password !== this.state.repeatPassword) {
+    		alert("Passwords don't match.")
+    		return false
+    	}
+    	else if(this.state.coords === null) {
+    		alert("You have to enter a valid address.")
+    		return false
+    	}
+    	else {
+    		alert("You signed up. Good Job!\nYour coords are: " + this.state.coords.lat + ", " + this.state.coords.lon)
+    		return true
+    	}
+    	
+    }
+
+    handleAddressSubmit(addressCoords) {
+    	this.setState({
+    		coords: addressCoords
+    	})
     }
 
 	render() {
@@ -120,7 +139,7 @@ class Signup extends React.Component {
 				    <br />
 				    <br />
 
-				    <AddressForm />
+				    <AddressForm onAddressSubmit={this.handleAddressSubmit} />
 
 				    <br />
 				    <br />

@@ -1,11 +1,11 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { Link, BrowserRouter } from "react-router-dom"
-import { Router, Route, browserHistory, Redirect } from "react-router"
+import { BrowserRouter } from "react-router-dom"
+import { Route, Redirect } from "react-router"
 import Login from "./Login"
 import Signup from "./Signup/Signup"
 import VisitorPage from "./VisitorPage"
-import UserPage from "./UserPage"
+//import UserPage from "./UserPage"
 import "./style.css"
 
 

@@ -110,16 +110,20 @@ class AddressForm extends Component {
          				country: location.Address.Country
         			}
         		})
+
+      			console.log("lat: ", this.state.coords.lat)
+      			console.log("lon: ", this.state.coords.lon)
+
+      			this.props.onAddressSubmit(this.state.coords)
+
     		}
     		else {
       			this.setState({
-        			isChecked: true,
+        			isChecked: false,
         			coords: null
         		})
     		}
   			
-  			console.log("lat: ", this.state.coords.lat)
-  			console.log("lon: ", this.state.coords.lon)
   		})
 
 	}

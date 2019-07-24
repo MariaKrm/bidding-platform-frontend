@@ -1,7 +1,6 @@
 import React, {Component} from "react"
 import { Link } from "react-router-dom"
-import Signup from "./Signup/Signup"
-import VisitorPage from "./VisitorPage"
+import axios from "axios"
 
 
 
@@ -30,6 +29,15 @@ class Login extends Component {
         console.log("password: ", this.state.password)
         alert("Loging in as " + this.state.username + " with id " + id)
     //    this.props.history.push("/user/" + id)
+
+        axios.get('https://localhost/auth/login')
+            .then(response => {
+                console.log(response.data);
+            })
+            
+            .catch(error => {
+                console.log(error);
+            });
     }
     
     render() {
@@ -57,8 +65,8 @@ class Login extends Component {
                     <br />
                     <button>Log in</button>
                     <br />
-                    <p>Don't have an account? <Link to="./signup" className="form-link" type="link" component={Signup}>Sign Up</Link></p>
-                    <p>Or <Link to="./visitor" className="form-link" type="link" component={VisitorPage}>login as visitor</Link></p>
+                    <p>Don't have an account? <Link to="./signup" className="form-link" type="link">Sign Up</Link></p>
+                    <p>Or <Link to="./visitor" className="form-link" type="link">login as visitor</Link></p>
                     
                 </form>
             </div>

@@ -48,7 +48,7 @@ class Login extends Component {
             var config = {
                 headers: {'Access-Control-Allow-Origin': '*'}
             };
-            axios.get('https://localhost:8443/user/test',  { crossdomain: true })
+            axios.get('https://localhost:8443/user/test',  config)
                 .then(response => {
                     console.log("get returned:")
                     console.log("response ", response)

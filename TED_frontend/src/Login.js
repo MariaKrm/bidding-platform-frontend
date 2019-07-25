@@ -45,7 +45,10 @@ class Login extends Component {
                 console.log("POST ERROR")
                 console.log(error)
             });
-            axios.get('https://localhost:8443/user/test')
+            var config = {
+                headers: {'Access-Control-Allow-Origin': '*'}
+            };
+            axios.get('https://localhost:8443/user/test',  { crossdomain: true })
                 .then(response => {
                     console.log("get returned:")
                     console.log("response ", response)

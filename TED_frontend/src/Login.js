@@ -1,6 +1,7 @@
 import React, {Component} from "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
+import Header from "./Header"
 
 
 
@@ -23,27 +24,31 @@ class Login extends Component {
     }
 
     handleSubmit(event) {
-        const id = 123
         event.preventDefault()
         console.log("username: ", this.state.username)
         console.log("password: ", this.state.password)
-        alert("Loging in as " + this.state.username + " with id " + id)
+        //alert("Loging in as " + this.state.username + " with id " + id)
     //    this.props.history.push("/user/" + id)
 
-        axios.get('https://localhost/auth/login')
+        const user = {
+            username: this.state.username,
+            password: this.state.password
+        }
+        axios.post('https://localhost:8443/auth/login', {user})
             .then(response => {
-                console.log(response.data);
+                console.log(response)
+                console.log(response.data)
             })
             
             .catch(error => {
-                console.log(error);
+                console.log(error)
             });
     }
     
     render() {
         return (
             <div>
-
+                <Header />
                 <form className="login-form" onSubmit={this.handleSubmit}>
                     <input 
                     	type="text" 

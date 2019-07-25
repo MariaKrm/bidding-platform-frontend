@@ -38,13 +38,16 @@ class AddressForm extends Component {
 	}
 
 	onQuery(event) {
+		this.setState( {
+			coords: null
+		})
 		const query = event.target.value
 		if(!query.length > 0) {
 			const address = this.getEmptyAddress()
 			return this.setState({
         		address: address,
         		query: "",
-        		locationId: ""
+        		locationId: "",
        		})
 		}
 
@@ -68,7 +71,7 @@ class AddressForm extends Component {
 		})
 		console.log("query", this.state.query)
 		
-
+		this.props.onAddressSubmit(this.state.coords)
 	}
 
 

@@ -1,5 +1,6 @@
 import React from "react"
-import AddressForm from "./AddressForm"
+import Header from "../Header"
+import SignupForm from "./SignupForm"
 
 class Signup extends React.Component {
 
@@ -55,98 +56,8 @@ class Signup extends React.Component {
 	render() {
 		return (
 			<div>
-				<form className="signup-form" onSubmit={this.handleSubmit}>
-					<h1>Sign Up</h1>
-				    <input 
-				    	type="text" 
-				    	value={this.state.username} 
-				    	name="username" 
-				    	placeholder="Username" 
-				    	onChange={this.handleChange}
-				    	required
-				    />
-				    <br />
-				    <input 
-				    	type="password" 
-				    	value={this.state.password} 
-				    	name="password" 
-				    	placeholder="Password" 
-				    	onChange={this.handleChange}
-				    	required
-				    />
-				    <input 
-				    	type="password" 
-				    	value={this.state.repeatPassword} 
-				    	name="repeatPassword" 
-				    	placeholder="Repeat Password" 
-				    	onChange={this.handleChange}
-				    	required
-				    />
-
-				    <br />
-				    <br />
-
-				    <input 
-				    	type="text" 
-				    	value={this.state.firstname} 
-				    	name="firstname" 
-				    	placeholder="First Name" 
-				    	onChange={this.handleChange}
-				    	required
-				    />
-				    <input 
-				    	type="text" 
-				    	value={this.state.lastname} 
-				    	name="lastname" 
-				    	placeholder="Last Name" 
-				    	onChange={this.handleChange}
-				    	required
-				    />
-
-				    <br />
-				    <input 
-				    	type="text" 
-				    	value={this.state.email} 
-				    	name="email" 
-				    	placeholder="Email" 
-				    	className="email-box"
-				    	onChange={this.handleChange}
-				    	required
-				    />
-
-				    <br />
-				    <input 
-				    	type="text" 
-				    	value={this.state.phoneNumber} 
-				    	name="phoneNumber" 
-				    	placeholder="Phone Number" 
-				    	onChange={this.handleChange}
-				    	required
-				    />
-
-				    <br />
-				    <input 
-				    	type="text" 
-				    	value={this.state.tin} 
-				    	name="tin" 
-				    	placeholder="TIN" 
-				    	onChange={this.handleChange}
-				    	required
-				    />
-
-				    <br />
-				    <br />
-				    <br />
-				    <br />
-
-				    <AddressForm onAddressSubmit={this.handleAddressSubmit} />
-
-				    <br />
-				    <br />
-
-				    <button>Sign Up</button>
-				    
-				</form>
+				<Header />
+				<SignupForm data={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} handleAddressSubmit={this.handleAddressSubmit} />
 			</div>
 		)
 	}

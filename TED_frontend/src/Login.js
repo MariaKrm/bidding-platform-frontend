@@ -36,13 +36,35 @@ class Login extends Component {
         }
         axios.post('https://localhost:8443/auth/login', {user})
             .then(response => {
-                console.log(response)
-                console.log(response.data)
+                console.log("post returned:")
+                console.log("response ", response)
+                console.log("response.data ", response.data)
             })
             
             .catch(error => {
+                console.log("POST ERROR")
                 console.log(error)
             });
+            axios.get('https://localhost:8443/user/test')
+                .then(response => {
+                    console.log("get returned:")
+                    console.log("response ", response)
+                    console.log("response.data ", response.data)
+                })
+                
+                .catch(error => {
+                    console.log("GET ERROR")
+                    console.log(error)
+                });
+    /*    axios.get('https://jsonplaceholder.typicode.com/users')
+            .then(response => {
+                console.log("response ", response)
+                console.log("response.data ", response.data)
+            })
+            .catch(error => {
+                console.log("FOUND ERROR")
+                console.log(error)
+            });*/
     }
     
     render() {

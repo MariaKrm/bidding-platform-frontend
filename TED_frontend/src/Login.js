@@ -30,6 +30,7 @@ class Login extends Component {
         //alert("Loging in as " + this.state.username + " with id " + id)
     //    this.props.history.push("/user/" + id)
 
+
         const user = {
             username: this.state.username,
             password: this.state.password
@@ -39,35 +40,26 @@ class Login extends Component {
                 console.log("post returned:")
                 console.log("response ", response)
                 console.log("response.data ", response.data)
+                alert("POST https://localhost:8443/auth/login\nStatus: " + response.status + "\nStatus Text: " + response.statusText + "\nData: "+ response.data)
             })
             
             .catch(error => {
                 console.log("POST ERROR")
                 console.log(error)
             });
-            var config = {
-                headers: {'Access-Control-Allow-Origin': '*'}
-            };
-            axios.get('https://localhost:8443/user/test',  config)
+
+            axios.get('https://localhost:8443/user/test')
                 .then(response => {
                     console.log("get returned:")
                     console.log("response ", response)
                     console.log("response.data ", response.data)
+                    alert("GET https://localhost:8443/user/test\nStatus: " + response.status + "\nStatus Text: " + response.statusText + "\nData: "+ response.data)
                 })
                 
                 .catch(error => {
                     console.log("GET ERROR")
                     console.log(error)
                 });
-    /*    axios.get('https://jsonplaceholder.typicode.com/users')
-            .then(response => {
-                console.log("response ", response)
-                console.log("response.data ", response.data)
-            })
-            .catch(error => {
-                console.log("FOUND ERROR")
-                console.log(error)
-            });*/
     }
     
     render() {

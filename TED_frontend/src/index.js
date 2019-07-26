@@ -11,7 +11,7 @@ import "./style.css"
 
 function App() {
 	return (
-		<Redirect to='/auth/login' />
+		<Redirect to='/login' />
 	)
 }
 
@@ -20,9 +20,9 @@ function App() {
 ReactDOM.render(
 	<BrowserRouter> 
 		<Route exact path="/" component={App} />
-    	<Route path="/auth/login" component={Login} />
-    	<Route path="/auth/signup" component={Signup} />
-    	<Route path="/auth/visitor" component={VisitorPage} />
+    	<Route path="/login" component={Login} />
+    	<Route path="/signup" component={Signup} />
+    	<Route path="/visitor" component={VisitorPage} />
 {/*    	<Route path="/user/:id" component={UserPage} /> */}
   	</BrowserRouter>,
 	document.getElementById("root")

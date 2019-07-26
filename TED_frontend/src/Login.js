@@ -2,8 +2,8 @@ import React, {Component} from "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
 import Header from "./Header"
+import Swal from "sweetalert2";
 import "./style.css"
-
 
 
 class Login extends Component {
@@ -36,35 +36,58 @@ class Login extends Component {
             username: this.state.username,
             password: this.state.password
         }
-        axios.post('https://localhost:8443/auth/login', user)
+
+        const loginRoute = "https://localhost:8443/auth/login"
+        const testRoute = "https://localhost:8443/user/test/test"
+        axios.post(loginRoute, user)
             .then(response => {
                 console.log("post returned:")
                 console.log("response ", response)
                 console.log("response.data ", response.data)
-                alert("POST https://localhost:8443/auth/login\nStatus: " + response.status + "\nStatus Text: " + response.statusText + "\nData: "+ response.data)
-            })
-            
-            .catch(error => {
+                alert("POST " + loginRoute + "\nStatus: " + response.status + "\nStatus Text: " + response.statusText + "\nData: "+ response.data)
+            }).catch(err => {
                 console.log("POST ERROR")
-                console.log(error)
-                console.log(error.request.response)
-                alert("POST https://localhost:8443/auth/login\n" + error)
-            });
+                console.log(err)
+                var errText
+                if(err.response) {
+                    errText = err.response.status + ": " + err.response.data.text
+                }
+                else {
+                    errText = err
+                }
+                Swal.fire({
+                    type: "error",
+                    title: "Oops...",
+                    text: errText,
+                    footer: "<a href='/signup'>Don't have an account yet?</a>"
+                })
+            })
 
-        axios.get('https://localhost:8443/user/test')
+        axios.get(testRoute)
             .then(response => {
                 console.log("get returned:")
                 console.log("response ", response)
                 console.log("response.data ", response.data)
-                alert("GET https://localhost:8443/user/test\nStatus: " + response.status + "\nStatus Text: " + response.statusText + "\nData: "+ response.data)
+                alert("GET " + testRoute + "\nStatus: " + response.status + "\nStatus Text: " + response.statusText + "\nData: "+ response.data)
             })
                 
-            .catch(error => {
+            .catch(err => {
                 console.log("GET ERROR")
-                console.log(error)
-                console.log(error.request.response)
-                alert("GET https://localhost:8443/user/test\n" + error)
-             });
+                console.log(err)
+                var errText
+                if(err.response) {
+                    errText = err.response.status + ": " + err.response.data.text
+                }
+                else {
+                    errText = err
+                }
+                Swal.fire({
+                    type: "error",
+                    title: "Oops...",
+                    text: errText,
+                    footer: "<a href='/signup'>Don't have an account yet?</a>"
+                })
+             })
     }
     
     render() {

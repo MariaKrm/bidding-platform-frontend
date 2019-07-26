@@ -46,6 +46,7 @@ class Login extends Component {
             .catch(error => {
                 console.log("POST ERROR")
                 console.log(error)
+                alert("POST https://localhost:8443/auth/login\n" + error)
             });
 
             axios.get('https://localhost:8443/user/test')
@@ -59,6 +60,7 @@ class Login extends Component {
                 .catch(error => {
                     console.log("GET ERROR")
                     console.log(error)
+                    alert("GET https://localhost:8443/user/test\n" + error)
                 });
     }
     

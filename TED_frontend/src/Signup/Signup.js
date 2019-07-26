@@ -1,6 +1,7 @@
 import React from "react"
 import Header from "../Header"
 import SignupForm from "./SignupForm"
+import "../style.css"
 
 class Signup extends React.Component {
 

@@ -2,6 +2,7 @@ import React, {Component} from "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
 import Header from "./Header"
+import "./style.css"
 
 
 
@@ -35,7 +36,7 @@ class Login extends Component {
             username: this.state.username,
             password: this.state.password
         }
-        axios.post('https://localhost:8443/auth/login', {user})
+        axios.post('https://localhost:8443/auth/login', user)
             .then(response => {
                 console.log("post returned:")
                 console.log("response ", response)
@@ -46,22 +47,24 @@ class Login extends Component {
             .catch(error => {
                 console.log("POST ERROR")
                 console.log(error)
+                console.log(error.request.response)
                 alert("POST https://localhost:8443/auth/login\n" + error)
             });
 
-            axios.get('https://localhost:8443/user/test')
-                .then(response => {
-                    console.log("get returned:")
-                    console.log("response ", response)
-                    console.log("response.data ", response.data)
-                    alert("GET https://localhost:8443/user/test\nStatus: " + response.status + "\nStatus Text: " + response.statusText + "\nData: "+ response.data)
-                })
+        axios.get('https://localhost:8443/user/test')
+            .then(response => {
+                console.log("get returned:")
+                console.log("response ", response)
+                console.log("response.data ", response.data)
+                alert("GET https://localhost:8443/user/test\nStatus: " + response.status + "\nStatus Text: " + response.statusText + "\nData: "+ response.data)
+            })
                 
-                .catch(error => {
-                    console.log("GET ERROR")
-                    console.log(error)
-                    alert("GET https://localhost:8443/user/test\n" + error)
-                });
+            .catch(error => {
+                console.log("GET ERROR")
+                console.log(error)
+                console.log(error.request.response)
+                alert("GET https://localhost:8443/user/test\n" + error)
+             });
     }
     
     render() {

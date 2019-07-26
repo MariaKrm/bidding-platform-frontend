@@ -1,7 +1,13 @@
+
 body {
 	margin: 0;
 	text-align: center;
 	background-color: #e9f0e9;
+}
+
+input {
+	margin: 2px;
+	border-radius: 3px;
 }
 
 .title-header {
@@ -16,22 +22,21 @@ body {
 	background-color: grey;
 	color: #fff;
 	width: 210px;
-  	border: 1px solid black;
-  	padding: 20px;
-  	margin: 0 auto;
-  	border-radius: 6px;
+	border: 1px solid black;
+	padding: 20px;
+	margin: 0 auto;
+	border-radius: 6px;
 }
 
 .signup-form {
 	background-color: grey;
 	color: #fff;
 	width: 300px;
-  	border: 1px solid black;
-  	padding: 20px;
-  	margin: 0 auto 45px;
-  	text-align: center;
-  	border-radius: 6px;
-  	
+	border: 1px solid black;
+	padding: 20px;
+	margin: 0 auto 45px;
+	text-align: center;
+	border-radius: 6px;
 }
 
 .address-form {
@@ -39,11 +44,10 @@ body {
 	color: #fff;
 	width: 200px;
 	padding: 20px;
-  	margin: 0 auto;
-  	text-align: center;
-  	border-radius: 6px;
+	margin: 0 auto;
+	text-align: center;
+	border-radius: 6px;
 }
-
 
 .form-link {
 	color: #003333;
@@ -53,7 +57,4 @@ body {
 	width: 287px;
 }
 
-input {
-	margin: 2px;
-	border-radius: 3px;
-}
+

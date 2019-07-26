@@ -1,5 +1,6 @@
 import React from "react"
 import AddressForm from "./AddressForm"
+import "../style.css"
 
 function SignupForm(props) {
 	return (

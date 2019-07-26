@@ -1,5 +1,6 @@
 import React, {Component} from "react"
 import AddressItem from "./AddressItem"
+import "../style.css"
 
 
 class AddressSuggest extends Component {

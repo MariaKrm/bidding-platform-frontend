@@ -29,16 +29,13 @@ class Login extends Component {
         console.log("password: ", this.state.password)
         //alert("Loging in as " + this.state.username + " with id " + id)
     //    this.props.history.push("/user/" + id)
-        var config = {
-                headers: {'Access-Control-Allow-Origin': '*'}
-            };
 
 
         const user = {
             username: this.state.username,
             password: this.state.password
         }
-        axios.post('https://localhost:8443/auth/login', {user}, config)
+        axios.post('https://localhost:8443/auth/login', {user})
             .then(response => {
                 console.log("post returned:")
                 console.log("response ", response)
@@ -52,7 +49,7 @@ class Login extends Component {
                 alert("POST https://localhost:8443/auth/login\n" + error)
             });
 
-            axios.get('https://localhost:8443/user/test', config)
+            axios.get('https://localhost:8443/user/test')
                 .then(response => {
                     console.log("get returned:")
                     console.log("response ", response)

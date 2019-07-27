@@ -13,6 +13,7 @@ class AddressItem extends Component {
 						defaultValue={this.props.value}
 						onChange={this.props.onChange}
 						placeholder={this.props.placeholder}
+						readOnly={this.props.readOnly}
 					/>
 				</div>
 			</div>

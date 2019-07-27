@@ -5,7 +5,7 @@ import "../style.css"
 function SignupForm(props) {
 	return (
 		<form className="signup-form" onSubmit={props.handleSubmit}>
-			<h1>Sign Up</h1>
+			<h2>Sign Up</h2>
 		    <input 
 		    	type="text" 
 		    	value={props.data.username}
@@ -93,7 +93,7 @@ function SignupForm(props) {
 		    <br />
 		    <br />
 
-		    <button>Sign Up</button>
+		    <button className="submit-button">Sign Up</button>
 		    
 		</form>
 	)

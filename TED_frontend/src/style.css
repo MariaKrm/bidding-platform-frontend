@@ -15,8 +15,9 @@ input {
 	background-color: #1a1a1a;
 	color: #fff;
 	margin: 0 0 45px 0;
-	padding: 40px 150px;
+	padding: 3% 10%;
 	text-align: left;
+	word-wrap: break-word;
 }
 
 .login-form {

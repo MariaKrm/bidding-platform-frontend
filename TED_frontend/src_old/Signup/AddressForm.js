@@ -2,6 +2,7 @@ import React, {Component} from "react"
 import AddressInput from "./AddressInput"
 import AddressSuggest from "./AddressSuggest"
 import axios from "axios"
+import "../style.css"
 
 // https://developer.here.com/blog/street-address-validation-with-reactjs-and-here-geocoder-autocomplete
 

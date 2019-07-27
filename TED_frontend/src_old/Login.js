@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import axios from "axios"
 import Header from "./Header"
 import Swal from "sweetalert2";
-
+import "./style.css"
 
 
 class Login extends Component {
@@ -95,9 +95,6 @@ class Login extends Component {
             <div>
                 <Header />
                 <form className="login-form" onSubmit={this.handleSubmit}>
-                {/*    <img src={require("./images/hammer_icon_small.png")} alt="logo"/> */}
-                    <img src={require("./images/cow.png")} alt="logo"/>
-                    <br />
                     <input 
                     	type="text" 
                     	value={this.state.username} 
@@ -116,8 +113,7 @@ class Login extends Component {
 
                     <br />
                     <br />
-                    <button className="submit-button">Log in</button>
-                    <br />
+                    <button>Log in</button>
                     <br />
                     <p>Don't have an account? <Link to="./signup" className="form-link" type="link">Sign Up</Link></p>
                     <p>Or <Link to="./visitor" className="form-link" type="link">login as visitor</Link></p>

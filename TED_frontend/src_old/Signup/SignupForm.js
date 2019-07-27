@@ -1,11 +1,11 @@
 import React from "react"
 import AddressForm from "./AddressForm"
-
+import "../style.css"
 
 function SignupForm(props) {
 	return (
 		<form className="signup-form" onSubmit={props.handleSubmit}>
-			<h2>Sign Up</h2>
+			<h1>Sign Up</h1>
 		    <input 
 		    	type="text" 
 		    	value={props.data.username}
@@ -93,7 +93,7 @@ function SignupForm(props) {
 		    <br />
 		    <br />
 
-		    <button className="submit-button">Sign Up</button>
+		    <button>Sign Up</button>
 		    
 		</form>
 	)

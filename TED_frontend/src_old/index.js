@@ -6,8 +6,7 @@ import Login from "./Login"
 import Signup from "./Signup/Signup"
 import VisitorPage from "./VisitorPage"
 //import UserPage from "./UserPage"
-import "./styles/style.css"
-import "./styles/form_style.css"
+import "./style.css"
 
 
 function App() {

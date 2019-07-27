@@ -37,8 +37,8 @@ class Login extends Component {
             password: this.state.password
         }
 
-        const loginRoute = "https://192.168.178.119:8443/auth/login"
-        const testRoute = "https://192.168.178.119:8443/user/test/test"
+        const loginRoute = "https://localhost:8443/auth/login"
+        const testRoute = "https://localhost:8443/user/test/test"
         axios.post(loginRoute, user)
             .then(response => {
                 console.log("post returned:")

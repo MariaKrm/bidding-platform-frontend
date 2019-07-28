@@ -7,6 +7,8 @@ body, html {
 	background-color: #e9f0e9;
 	background-image: url("../images/clouds_light.png");  /* <-- not sure which */
 /*	background-image: linear-gradient(#e9f0e9, #b1bdb9);  /* <-- of the two */
+	background-image: url("../images/auction_hammer_background.png");
+	background-size: cover;
 }
 
 

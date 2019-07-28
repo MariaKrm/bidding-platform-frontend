@@ -6,7 +6,7 @@ body, html {
 	text-align: center;
 	background-color: #e9f0e9;
 	background-image: url("../images/clouds_light.png");  /* <-- not sure which */
-	background-image: linear-gradient(#e9f0e9, #b1bdb9);  /* <-- of the two */
+/*	background-image: linear-gradient(#e9f0e9, #b1bdb9);  /* <-- of the two */
 }
 
 
@@ -14,14 +14,14 @@ body, html {
 	background-color: #1a1a1a;
 	color: #fff;
 	margin: 0 0 45px 0;
-	padding: 3% 10%;
+	padding: 2% 10%;
 	text-align: left;
 	word-wrap: break-word;
 }
 
 .header-text {
 	font-size: 32px;
-	vertical-align: bottom;
+	vertical-align: middle;
 	margin: 20px;
 }
 

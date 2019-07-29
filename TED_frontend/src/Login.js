@@ -62,7 +62,7 @@ class Login extends Component {
                     footer: "<a href='/signup'>Don't have an account yet?</a>"
                 })
             })
-
+    /*
         axios.get(testRoute)
             .then(response => {
                 console.log("get returned:")
@@ -88,6 +88,7 @@ class Login extends Component {
                     footer: "<a href='/signup'>Don't have an account yet?</a>"
                 })
              })
+        */
     }
     
     render() {

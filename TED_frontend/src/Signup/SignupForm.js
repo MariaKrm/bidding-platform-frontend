@@ -1,35 +1,35 @@
 import React from "react"
 import AddressForm from "./AddressForm"
+import ValidatedInput from "../ValidatedInput"
 import "../styles/form_style.css"
 
 function SignupForm(props) {
 	return (
 		<div className="signup-form-group">
 			<form className="signup-form" onSubmit={props.handleSubmit}>
+				{props.data.error && props.data.error !== "" && <div className="form-error-message">{props.data.error} </div>}
 				<h2>Sign Up</h2>
-			    <input 
-			    	type="text" 
-			    	value={props.data.username}
+			    <ValidatedInput 
+			    	type="text"
 			    	name="username" 
 			    	placeholder="Username" 
-			    	onChange={props.handleChange}
+			    	passresult={props.passresult}
 			    	required
 			    />
 			    <br />
-			    <input 
+			    <ValidatedInput 
 			    	type="password" 
-			    	value={props.data.password} 
 			    	name="password" 
 			    	placeholder="Password" 
-			    	onChange={props.handleChange}
+			    	passresult={props.passresult}
 			    	required
 			    />
-			    <input 
-			    	type="password" 
-			    	value={props.data.repeatPassword} 
-			    	name="repeatPassword" 
-			    	placeholder="Repeat Password" 
-			    	onChange={props.handleChange}
+			    <ValidatedInput 
+			    	type="password"
+			    	name="confirmPassword" 
+			    	placeholder="Confirm Password" 
+			    	passresult={props.passresult}
+			    	password={props.data.password}
 			    	required
 			    />
 
@@ -54,13 +54,12 @@ function SignupForm(props) {
 			    />
 
 			    <br />
-			    <input 
+			    <ValidatedInput 
 			    	type="text" 
-			    	value={props.data.email} 
 			    	name="email" 
 			    	placeholder="Email" 
 			    	className="email-box"
-			    	onChange={props.handleChange}
+			    	passresult={props.passresult}
 			    	required
 			    />
 

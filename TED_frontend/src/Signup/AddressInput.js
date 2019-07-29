@@ -7,11 +7,11 @@ class AddressInput extends Component {
 		return (
 			<div>
 				<div>
-					<AddressItem label="Street" value={this.props.street} placeholder="" readOnly="true" />
-					<AddressItem label="City" value={this.props.city} placeholder="" readOnly="true" />
-					<AddressItem label="State" value={this.props.state} placeholder="" readOnly="true" />
-					<AddressItem label="Postal Code" value={this.props.code} placeholder="" readOnly="true" />
-					<AddressItem label="Country" value={this.props.country} placeholder="" readOnly="true" />
+					<AddressItem label="Street" value={this.props.street} placeholder="" readOnly={true} />
+					<AddressItem label="City" value={this.props.city} placeholder="" readOnly={true} />
+					<AddressItem label="State" value={this.props.state} placeholder="" readOnly={true} />
+					<AddressItem label="Postal Code" value={this.props.code} placeholder="" readOnly={true} />
+					<AddressItem label="Country" value={this.props.country} placeholder="" readOnly={true} />
 				</div>
 			</div>
 		)

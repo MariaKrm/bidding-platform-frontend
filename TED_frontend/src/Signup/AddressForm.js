@@ -141,6 +141,7 @@ class AddressForm extends Component {
 			query: "",
 			locationId: ""
 		})
+		this.props.onAddressSubmit(null)
 	}
 
 	render() {
@@ -159,8 +160,8 @@ class AddressForm extends Component {
             		country={this.state.address.country}
             	/>
             	<br />
-            	<button type="button" onClick={this.onCheck}>Check</button>
-          		<button type="button" onClick={this.onClear}>Clear</button>
+            	<button type="button" className="address-button" onClick={this.onCheck}>Check</button>
+          		<button type="button" className="address-button" onClick={this.onClear}>Clear</button>
           	</div>
 		)
 	}

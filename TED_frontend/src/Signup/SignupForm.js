@@ -1,6 +1,6 @@
 import React from "react"
 import AddressForm from "./AddressForm"
-import ValidatedInput from "../ValidatedInput"
+import ValidatedInput from "../Elements/ValidatedInput"
 import "../styles/form_style.css"
 
 function SignupForm(props) {
@@ -38,16 +38,16 @@ function SignupForm(props) {
 
 			    <input 
 			    	type="text" 
-			    	value={props.data.firstname} 
-			    	name="firstname" 
+			    	value={props.data.firstName} 
+			    	name="firstName" 
 			    	placeholder="First Name" 
 			    	onChange={props.handleChange}
 			    	required
 			    />
 			    <input 
 			    	type="text" 
-			    	value={props.data.lastname} 
-			    	name="lastname" 
+			    	value={props.data.lastName} 
+			    	name="lastName" 
 			    	placeholder="Last Name" 
 			    	onChange={props.handleChange}
 			    	required
@@ -66,8 +66,8 @@ function SignupForm(props) {
 			    <br />
 			    <input 
 			    	type="text" 
-			    	value={props.data.phoneNumber} 
-			    	name="phoneNumber" 
+			    	value={props.data.telNumber} 
+			    	name="telNumber" 
 			    	placeholder="Phone Number" 
 			    	onChange={props.handleChange}
 			    	required
@@ -76,8 +76,8 @@ function SignupForm(props) {
 			    <br />
 			    <input 
 			    	type="text" 
-			    	value={props.data.tin} 
-			    	name="tin" 
+			    	value={props.data.taxNumber} 
+			    	name="taxNumber" 
 			    	placeholder="TIN" 
 			    	onChange={props.handleChange}
 			    	required

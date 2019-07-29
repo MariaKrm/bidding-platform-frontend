@@ -1,5 +1,5 @@
 import React from "react"
-import Header from "../Header"
+import Header from "../Elements/Header"
 import SignupForm from "./SignupForm"
 import "../styles/form_style.css"
 
@@ -12,11 +12,11 @@ class Signup extends React.Component {
 			username: "",
 			password: "",
 			confirmPassword: "",
-			firstname: "",
-			lastname: "",
+			firstName: "",
+			lastName: "",
 			email: "",
-			phoneNumber: "",
-			tin: "",
+			telNumber: "",
+			taxNumber: "",
 			coords: null,
 			error: "",
 		}
@@ -43,22 +43,35 @@ class Signup extends React.Component {
 
     handleSubmit(event) {
     	event.preventDefault()
-    	const errors = this.state.username === null || this.state.password === null || this.state.confirmPassword === null || this.state.email === null
     	var errorMessage = ""
-    	if(errors) {
-    		errorMessage = "Please fix the mistakes first."
-    	}
-    	else if(this.state.coords === null) {
+
+    	if(this.state.coords === null) {
     		errorMessage = "You have to enter a valid address."
     	}
-    	else {
-    		alert("You signed up. Good Job " + this.state.username + "!\nYour coords are: " + this.state.coords.lat + ", " + this.state.coords.lon)
+
+    	const errors = this.state.username === null || this.state.password === null || this.state.confirmPassword === null || this.state.email === null
+    	if(errors) {
+    		errorMessage = "Please fix the mistakes first."
     	}
     	
     	this.setState({
     		error: errorMessage
     	})
-    	return (errorMessage === "")
+    	if (errorMessage !== "") return false
+
+    	const user = {
+    		username: this.state.username,
+    		password: this.state.password,
+    		firstName: this.state.firstName,
+    		lastName: this.state.lastName,
+    		email: this.state.email,
+    		telNumber: this.state.telNumber,
+    		taxNumber: this.state.taxNumber,
+    		coords: this.state.coords,
+    	}
+
+    	//TODO: signup
+
     }
 
     handleAddressSubmit(addressCoords) {

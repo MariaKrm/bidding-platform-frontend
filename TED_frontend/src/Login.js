@@ -1,8 +1,9 @@
 import React, {Component} from "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
-import Header from "./Header"
-import Swal from "sweetalert2";
+import Header from "./Elements/Header"
+import Swal from "sweetalert2"
+import * as Constants from "./Constants/Constants"
 
 
 
@@ -37,8 +38,7 @@ class Login extends Component {
             password: this.state.password
         }
 
-        const loginRoute = "https://localhost:8443/auth/login"
-        const testRoute = "https://localhost:8443/user/test/test"
+        const loginRoute = Constants.BASEURL + "/auth/login"
         axios.post(loginRoute, user)
             .then(response => {
                 console.log("post returned:")
@@ -62,33 +62,6 @@ class Login extends Component {
                     footer: "<a href='/signup'>Don't have an account yet?</a>"
                 })
             })
-    /*
-        axios.get(testRoute)
-            .then(response => {
-                console.log("get returned:")
-                console.log("response ", response)
-                console.log("response.data ", response.data)
-                alert("GET " + testRoute + "\nStatus: " + response.status + "\nStatus Text: " + response.statusText + "\nData: "+ response.data)
-            })
-                
-            .catch(err => {
-                console.log("GET ERROR")
-                console.log(err)
-                var errText
-                if(err.response) {
-                    errText = err.response.status + ": " + err.response.data.text
-                }
-                else {
-                    errText = err
-                }
-                Swal.fire({
-                    type: "error",
-                    title: "Oops...",
-                    text: errText,
-                    footer: "<a href='/signup'>Don't have an account yet?</a>"
-                })
-             })
-        */
     }
     
     render() {

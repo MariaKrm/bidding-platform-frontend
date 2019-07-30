@@ -57,8 +57,9 @@ class Signup extends React.Component {
     	this.setState({
     		error: errorMessage
     	})
-    	if (errorMessage !== "") return false
+    	if (errorMessage !== "" && errorMessage !== null) return false
 
+    	alert("Yay")
     	const user = {
     		username: this.state.username,
     		password: this.state.password,

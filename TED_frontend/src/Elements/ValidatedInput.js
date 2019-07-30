@@ -56,7 +56,9 @@ class ValidatedInput extends Component {
 		.catch(err => {
 			console.log(err)
 			if(err.response && err.response.status === 400) {
-				this.setState({ error: "Username is already taken" })
+				const error = "Username is already taken"
+				this.setState({ error: error })
+				this.props.passresult("username", value, error)
 			}
 			else {
 				Swal.fire({
@@ -73,7 +75,9 @@ class ValidatedInput extends Component {
 		.catch(err => {
 			console.log(err)
 			if(err.response && err.response.status === 400) {
-				this.setState({ error: "Email already in use" })
+				const error = "Email already in use"
+				this.setState({ error: error })
+				this.props.passresult("email", value, error)
 			}
 			else {
 				Swal.fire({
@@ -97,13 +101,24 @@ class ValidatedInput extends Component {
     }
 
     handleBlur(event) {
-		if (event.target.name === "username") {
-			this.checkUsernameAvail(event.target.value);
+    	const { name, value } = event.target
+		if(name === "username") {
+			this.checkUsernameAvail(value)
+			console.log("error: ", this.state.error)
+			this.props.passresult(name, value, this.state.error)
 		}
-		if (event.target.name === "email") {
-			this.checkEmailAvail(event.target.value);
+		if(name === "email") {
+			this.checkEmailAvail(value)
+			console.log("error: ", this.state.error)
+			this.props.passresult(name, value, this.state.error)
 		}
 		
+	}
+
+	handleKeyPress(event){
+   		if((event.target.name === "username" || event.target.name === "email") && event.keyCode === 13){
+    		event.target.blur()
+  		}
 	}
 
 
@@ -119,6 +134,7 @@ class ValidatedInput extends Component {
 					value={this.state.value}
 					onChange={this.handleChange}
 					onBlur={this.handleBlur}
+					onKeyDown={this.handleKeyPress}
 				/>
 				{this.state.error && this.state.error !== "" && <div className="field-error-message">{this.state.error} </div>} 
 			</div>

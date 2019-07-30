@@ -1,6 +1,9 @@
 import React from "react"
 import Header from "../Elements/Header"
 import SignupForm from "./SignupForm"
+import axios from "axios"
+import * as Constants from "../Constants/Constants"
+import Swal from "sweetalert2"
 import "../styles/form_style.css"
 
 
@@ -60,7 +63,7 @@ class Signup extends React.Component {
     	if (errorMessage !== "" && errorMessage !== null) return false
 
     	alert("Yay")
-    	const user = {
+    	const newUser = {
     		username: this.state.username,
     		password: this.state.password,
     		firstName: this.state.firstName,
@@ -68,10 +71,28 @@ class Signup extends React.Component {
     		email: this.state.email,
     		telNumber: this.state.telNumber,
     		taxNumber: this.state.taxNumber,
-    		coords: this.state.coords,
     	}
 
-    	//TODO: signup
+    	axios.post(Constants.BASEURL+"/auth/signup", newUser)
+    	.then(response => {
+    		console.log("response: ", response)
+    	})
+    	.catch(err => {
+    		console.log("error: ", err)
+    		var errText
+    		if(err.response) {
+    		    errText = err.response.status + ": " + err.response.data.text
+    		}
+    		else {
+    		    errText = err
+    		}
+    		Swal.fire({
+    		    type: "error",
+    		    title: "Oops...",
+    		    text: errText,
+    		    footer: "<a href='/signup'>Don't have an account yet?</a>"
+    		})
+    	})
 
     }
 

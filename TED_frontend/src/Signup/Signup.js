@@ -108,7 +108,7 @@ class Signup extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="background">
 				<Header />
 				<SignupForm data={this.state} handleChange={this.handleChange} passresult={this.passresult} handleSubmit={this.handleSubmit} handleAddressSubmit={this.handleAddressSubmit} />
 			</div>

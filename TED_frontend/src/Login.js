@@ -66,7 +66,7 @@ class Login extends Component {
     
     render() {
         return (
-            <div>
+            <div className="background">
                 <Header />
                 <form className="login-form" onSubmit={this.handleSubmit}>
                 {/*    <img src={require("./images/hammer_icon_small.png")} alt="logo"/> */}

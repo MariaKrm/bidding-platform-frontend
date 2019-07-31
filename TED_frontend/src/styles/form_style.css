@@ -35,6 +35,15 @@ input[type=text]:focus:read-write, input[type=password]:focus:read-write {
 	box-shadow: 0 0 8px 6px #ff6666;
 }
 
+.address-error-message {
+	margin-bottom: 5px;
+	font-size: 15px;
+	color: red;
+	background-color: #a8a8a8;
+	border-radius: 6px;
+	box-shadow: 0 0 8px 6px #a8a8a8;
+}
+
 
 .submit-button {
 	border: none;

@@ -23,6 +23,7 @@ class ValidatedInput extends Component {
 			case "email": return this.validateEmail(value)
 			case "password": return this.validatePassword(value)
 			case "confirmPassword": return this.validateConfirm(value)
+			case "telNumber" : return this.validateTelNumber(value)
 			default: return null
 		}
 	}
@@ -49,6 +50,11 @@ class ValidatedInput extends Component {
  
 	validateConfirm(value) {
 		return (this.props.password !== value) ? "Passwords do not match" : null
+	}
+
+	validateTelNumber(value) {
+		const regEx = /^[0-9]\d{9,11}$/
+		return (!regEx.test(value)) ? "Invalid number" : null
 	}
 
 	checkUsernameAvail(value) {

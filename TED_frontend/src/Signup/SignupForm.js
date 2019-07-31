@@ -64,12 +64,12 @@ function SignupForm(props) {
 			    />
 
 			    <br />
-			    <input 
+			    <ValidatedInput 
 			    	type="text" 
 			    	value={props.data.telNumber} 
 			    	name="telNumber" 
 			    	placeholder="Phone Number" 
-			    	onChange={props.handleChange}
+			    	passresult={props.passresult}
 			    	required
 			    />
 

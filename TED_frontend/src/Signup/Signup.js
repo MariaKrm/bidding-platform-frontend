@@ -21,6 +21,7 @@ class Signup extends React.Component {
 			telNumber: "",
 			taxNumber: "",
 			coords: null,
+			locationTitle: "",
 			error: "",
 		}
 
@@ -62,7 +63,6 @@ class Signup extends React.Component {
     	})
     	if (errorMessage !== "" && errorMessage !== null) return false
 
-    	alert("Yay")
     	const newUser = {
     		username: this.state.username,
     		password: this.state.password,
@@ -71,11 +71,14 @@ class Signup extends React.Component {
     		email: this.state.email,
     		telNumber: this.state.telNumber,
     		taxNumber: this.state.taxNumber,
+    		coords: this.state.coords,
+    		locationTitle: this.state.locationTitle,
     	}
 
-    	axios.post(Constants.BASEURL+"/auth/signup", newUser)
+    	axios.post(Constants.BASEURL + "/auth/signup", newUser)
     	.then(response => {
     		console.log("response: ", response)
+    		alert("Signed up")
     	})
     	.catch(err => {
     		console.log("error: ", err)
@@ -90,16 +93,17 @@ class Signup extends React.Component {
     		    type: "error",
     		    title: "Oops...",
     		    text: errText,
-    		    footer: "<a href='/signup'>Don't have an account yet?</a>"
     		})
     	})
 
     }
 
-    handleAddressSubmit(addressCoords) {
+    handleAddressSubmit(addressCoords, city, country) {
     	this.setState({
-    		coords: addressCoords
+    		coords: addressCoords,
+    		locationTitle: city + ", " + country
     	})
+    	console.log("Address: ", addressCoords, city, country)
     }
 
 	render() {

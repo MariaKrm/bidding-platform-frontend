@@ -18,7 +18,8 @@ class AddressForm extends Component {
       			lat: "",
       			lon: ""
       		},
-      		isChecked: false
+      		isChecked: false,
+      		error: "",
     	}
 
     	this.onQuery = this.onQuery.bind(this);
@@ -61,16 +62,15 @@ class AddressForm extends Component {
 		}).then(response => {
 			const address = response.data.suggestions[0].address;
 			const id = response.data.suggestions[0].locationId;
-			console.log("id", id);
 			this.setState({
           		address: address,
           		query: query,
           		locationId: id,
           	})
 		})
-		console.log("query", this.state.query)
-		
-		this.props.onAddressSubmit(this.state.coords)
+
+
+		this.props.onAddressSubmit(null, null, null)
 	}
 
 
@@ -95,8 +95,10 @@ class AddressForm extends Component {
     		{ params: params }
   		).then(response => {
     		const view = response.data.Response.View
-    		if(view.length > 0 && view[0].Result.length > 0) {
+    		if(view.length > 0 && view[0].Result.length > 0 && this.state.address.city && this.state.address.country) {
       			const location = view[0].Result[0].Location;
+      			const oldCity = this.state.address.city
+      			const oldCountry = this.state.address.country
 
       			this.setState({
         			isChecked: true,
@@ -110,19 +112,21 @@ class AddressForm extends Component {
           				state: location.Address.State,
           				postalCode: location.Address.PostalCode,
          				country: location.Address.Country
-        			}
+        			},
+        			error: ""
         		})
 
       			console.log("lat: ", this.state.coords.lat)
       			console.log("lon: ", this.state.coords.lon)
 
-      			this.props.onAddressSubmit(this.state.coords)
+      			this.props.onAddressSubmit(this.state.coords, oldCity, oldCountry)
 
     		}
     		else {
       			this.setState({
         			isChecked: false,
-        			coords: null
+        			coords: null,
+        			error: "Please enter a full address"
         		})
     		}
   			
@@ -139,14 +143,18 @@ class AddressForm extends Component {
 		this.setState({
 			address: address,
 			query: "",
-			locationId: ""
+			locationId: "",
+			coords: null,
+			isChecked: false,
+			error: "",
 		})
-		this.props.onAddressSubmit(null)
+		this.props.onAddressSubmit(null, null, null)
 	}
 
 	render() {
 		return (
 			<div className="address-form">
+				{this.state.error && this.state.error !== "" && <div className="address-error-message">{this.state.error} </div>}
 				<AddressSuggest 
 					query={this.state.query}
 					onChange={this.onQuery}

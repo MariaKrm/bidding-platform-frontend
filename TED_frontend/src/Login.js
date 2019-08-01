@@ -1,5 +1,6 @@
 import React, {Component} from "react"
 import { Link } from "react-router-dom"
+import { Redirect } from "react-router"
 import axios from "axios"
 import Header from "./Elements/Header"
 import Swal from "sweetalert2"
@@ -12,11 +13,13 @@ class Login extends Component {
         super()
         this.state = {
         	username: "",
-            password: ""
+            password: "",
+            redirect: false,
         }
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.redirectToHome = this.redirectToHome.bind(this)
     }
 
     handleChange(event) {
@@ -45,6 +48,9 @@ class Login extends Component {
                 console.log("response ", response)
                 console.log("response.data ", response.data)
                 alert("POST " + loginRoute + "\nStatus: " + response.status + "\nStatus Text: " + response.statusText + "\nData: "+ response.data)
+                this.setState({
+                    redirect: true
+                })
             }).catch(err => {
                 console.log("POST ERROR")
                 console.log(err)
@@ -63,10 +69,19 @@ class Login extends Component {
                 })
             })
     }
+
+
+    redirectToHome() {
+        if(this.state.redirect) {
+            return <Redirect to="./home" />
+        }
+    }
+
     
     render() {
         return (
             <div className="background">
+                {this.redirectToHome()}
                 <Header />
                 <form className="login-form" onSubmit={this.handleSubmit}>
                 {/*    <img src={require("./images/hammer_icon_small.png")} alt="logo"/> */}

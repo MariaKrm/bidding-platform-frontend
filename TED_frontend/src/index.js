@@ -5,9 +5,12 @@ import { Route, Redirect } from "react-router"
 import Login from "./Login"
 import Signup from "./Signup/Signup"
 import VisitorPage from "./VisitorPage"
+import HomePage from "./Home/HomePage"
 //import UserPage from "./UserPage"
 import "./styles/style.css"
 import "./styles/form_style.css"
+import "./styles/header_style.css"
+import "./styles/home_style.css"
 
 
 function App() {
@@ -24,6 +27,7 @@ ReactDOM.render(
     	<Route path="/login" component={Login} />
     	<Route path="/signup" component={Signup} />
     	<Route path="/visitor" component={VisitorPage} />
+    	<Route path="/home" component={HomePage} />
 {/*    	<Route path="/user/:id" component={UserPage} /> */}
   	</BrowserRouter>,
 	document.getElementById("root")

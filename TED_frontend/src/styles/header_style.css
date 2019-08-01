@@ -1,0 +1,42 @@
+.title-header {
+	background-color: #1a1a1a;
+	color: #fff;
+	margin: 0;
+	padding: 2% 10%;
+	text-align: left;
+}
+
+.header-text {
+	font-size: 32px;
+	vertical-align: middle;
+	margin: 20px;
+}
+
+
+.home-header {
+	margin: 0;
+	padding: 0;
+	background-color: #1a1a1a;
+	color: #fff;
+	display: flex;
+	justify-content: space-between;
+}
+
+
+.home-header-actions {
+	margin: 0 10px;
+	padding: 40px;
+}
+
+.header-button {
+	color: #fff;
+	background-color: #1a1a1a;
+	margin-left: 30px;
+	border: none;
+	padding: 10px 20px;
+	box-shadow: none;
+}
+
+.header-button:active {
+	color: #dedede;
+}

@@ -2,7 +2,7 @@
 	background-color: #1a1a1a;
 	color: #fff;
 	margin: 0;
-	padding: 1.5% 5%;
+	padding: 1.4% 5%;
 	text-align: left;
 }
 
@@ -24,12 +24,12 @@
 
 .home-header-search {
 	margin: 0 10px;
-	padding: 30px;
-	padding-right: 200px;
+	padding: 20px;
+	padding-right: 220px;
 }
 
 .search-bar {
-	width: 500px;
+	width: 550px;
 	display: inline-block;
 	-webkit-appearance: none;
 	margin-right: 0;
@@ -55,7 +55,7 @@
 
 .home-header-actions {
 	margin: 0;
-	padding: 30px;
+	padding: 20px 30px;
 }
 
 .header-button {

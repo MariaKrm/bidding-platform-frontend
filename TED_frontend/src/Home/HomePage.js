@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 import Header from "../Elements/Header"
+import Timer from "./Timer"
+import SearchBar from "../Search/SearchBar"
 
 
 class HomePage extends Component {
@@ -14,8 +16,10 @@ class HomePage extends Component {
 			<div>
 				<div className="home-header">
 					<Header />
+					<div className="home-header-search">
+						<SearchBar />
+					</div>
 					<div className="home-header-actions">
-						<input type="text" placeholder="Search" />
 						<button className="header-button">My Account</button>
 					</div>
 				</div>
@@ -26,6 +30,7 @@ class HomePage extends Component {
 					</div>
 					<div className="main-content">
 						<h3>Main Content</h3>
+						<Timer />				{/* This is to test the refresh with timer; changes the time every 3 seconds */}
 					</div>
 					<div className="suggestions">
 						<h3>Suggestions etc</h3>

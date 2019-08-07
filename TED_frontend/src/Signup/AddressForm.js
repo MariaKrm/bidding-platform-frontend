@@ -22,7 +22,7 @@ class AddressForm extends Component {
       		error: "",
     	}
 
-    	this.onQuery = this.onQuery.bind(this);
+    this.onQuery = this.onQuery.bind(this);
 		this.onCheck = this.onCheck.bind(this);
 		this.onClear = this.onClear.bind(this);
 	}

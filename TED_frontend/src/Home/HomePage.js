@@ -2,6 +2,8 @@ import React, { Component } from "react"
 import Header from "../Elements/Header"
 import Timer from "./Timer"
 import SearchBar from "../Search/SearchBar"
+import Swal from "sweetalert2"
+import AuthHelper, { request } from "../utils/AuthHelper"
 
 
 class HomePage extends Component {
@@ -11,7 +13,28 @@ class HomePage extends Component {
 			poop: ""
 		}
 	}
+
+	getAuctions() {
+		console.log("getAuctions")
+	//	axios.get(Constants.BASEURL + "/item/openAuctions", {headers: AuthHelper.getAuthHeader()} )
+		request("GET", "/item/openAuctions")
+		.then(response => {
+			console.log("response: ", response)
+			console.log("response.data: ", response.data)
+		}).catch(err => {
+            console.log(err)
+            var errText = err.response ? err.response.status + ":" + err.response.data.text : err
+            Swal.fire({
+                type: "error",
+                title: "Oops...",
+                text: errText,
+            })
+		})
+	}
+
+
 	render() {
+		this.getAuctions()
 		return (
 			<div>
 				<div className="home-header">

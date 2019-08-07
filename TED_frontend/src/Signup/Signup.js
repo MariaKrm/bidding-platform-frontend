@@ -79,16 +79,9 @@ class Signup extends React.Component {
     	.then(response => {
     		console.log("response: ", response)
     		alert("Signed up")
-    	})
-    	.catch(err => {
+    	}).catch(err => {
     		console.log("error: ", err)
-    		var errText
-    		if(err.response) {
-    		    errText = err.response.status + ": " + err.response.data.text
-    		}
-    		else {
-    		    errText = err
-    		}
+    		var errText = err.response ? err.response.status + ":" + err.response.data.text : err
     		Swal.fire({
     		    type: "error",
     		    title: "Oops...",

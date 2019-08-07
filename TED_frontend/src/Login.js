@@ -5,6 +5,7 @@ import axios from "axios"
 import Header from "./Elements/Header"
 import Swal from "sweetalert2"
 import * as Constants from "./Constants/Constants"
+import AuthHelper from "./utils/AuthHelper"
 
 
 
@@ -43,31 +44,26 @@ class Login extends Component {
 
         const loginRoute = Constants.BASEURL + "/auth/login"
         axios.post(loginRoute, user)
-            .then(response => {
-                console.log("post returned:")
-                console.log("response ", response)
-                console.log("response.data ", response.data)
-                alert("POST " + loginRoute + "\nStatus: " + response.status + "\nStatus Text: " + response.statusText + "\nData: "+ response.data)
-                this.setState({
-                    redirect: true
-                })
-            }).catch(err => {
-                console.log("POST ERROR")
-                console.log(err)
-                var errText
-                if(err.response) {
-                    errText = err.response.status + ": " + err.response.data.text
-                }
-                else {
-                    errText = err
-                }
-                Swal.fire({
-                    type: "error",
-                    title: "Oops...",
-                    text: errText,
-                    footer: "<a href='/signup'>Don't have an account yet?</a>"
-                })
+        .then(response => {
+            console.log("post returned:")
+            console.log("response ", response)
+            console.log("response.data ", response.data)
+            AuthHelper.setToken(response.data.token)
+            alert("POST " + loginRoute + "\nStatus: " + response.status + "\nStatus Text: " + response.statusText + "\nData: "+ response.data)
+            this.setState({
+                redirect: true
             })
+        }).catch(err => {
+            console.log("POST ERROR")
+            console.log(err)
+            var errText = err.response ? err.response.status + ":" + err.response.data.text : err
+            Swal.fire({
+                type: "error",
+                title: "Oops...",
+                text: errText,
+                footer: "<a href='/signup'>Don't have an account yet?</a>"
+            })
+        })
     }
 
 

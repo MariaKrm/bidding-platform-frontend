@@ -3,7 +3,9 @@ import Header from "../Elements/Header"
 import Timer from "./Timer"
 import SearchBar from "../Search/SearchBar"
 import Swal from "sweetalert2"
-import AuthHelper, { request } from "../utils/AuthHelper"
+import { request } from "../utils/AuthHelper"
+import AuctionPreview from "../Components/AuctionPreview"
+import auctionList from "./testItems.js"
 
 
 class HomePage extends Component {
@@ -34,7 +36,11 @@ class HomePage extends Component {
 
 
 	render() {
-		this.getAuctions()
+		const auctions = auctionList.map(item => {
+			return (
+				<AuctionPreview name={item.name} image={item.image} altImage={item.altImage} category={item.category} location={item.location} country={item.country} description={item.description} />
+			)
+		})
 		return (
 			<div>
 				<div className="home-header">
@@ -54,6 +60,7 @@ class HomePage extends Component {
 					<div className="main-content">
 						<h3>Main Content</h3>
 						<Timer />				{/* This is to test the refresh with timer; changes the time every 3 seconds */}
+						{auctions}
 					</div>
 					<div className="suggestions">
 						<h3>Suggestions etc</h3>

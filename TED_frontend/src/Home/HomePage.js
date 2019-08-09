@@ -14,6 +14,12 @@ class HomePage extends Component {
 		this.state = {
 			poop: ""
 		}
+
+		this.getAuctions = this.getAuctions.bind(this)
+		this.postTest = this.postTest.bind(this)
+		this.categoryTest = this.categoryTest.bind(this)
+		this.seeCategories = this.seeCategories.bind(this)
+		this.onClickTest = this.onClickTest.bind(this)
 	}
 
 	getAuctions() {
@@ -34,11 +40,100 @@ class HomePage extends Component {
 		})
 	}
 
+	postTest() {
+		const newItem = {
+			name: "Half Brick",
+			buyPrice: "20.0",
+			firstBid: "12.5",
+			categoriesId: "12530",
+			longitude: "23.4555",
+			latitude: "12.9090",
+			locationTitle: "Constaction Site",
+			endsAt: "2021-09-26T01:30:00.000-04:00",
+			description: "Once upon a time, a brick broke in half. This is the second half."
+		}
+		console.log("newItem: ", newItem)
+		console.log("JSON newItem: ", JSON.stringify(newItem))
+
+		const pathWithParams = `/item?name=${newItem.name}&buyPrice=${newItem.buyPrice}&firstBid=${newItem.firstBid}&categoriesId=${newItem.categoriesId}&longitude=${newItem.longitude}&latitude=${newItem.latitude}&locationTitle=${newItem.locationTitle}&endsAt=${newItem.endsAt}&description=${newItem.description}`
+		console.log("path: ", pathWithParams)
+		request("POST", pathWithParams, newItem)
+		//request("POST", "/item", newItem)
+		.then(response => {
+			console.log("response: ", response)
+			console.log("response.data: ", response.data)
+			this.getAuctions()
+		}).catch(err => {
+			console.log(err)
+			var errText = err.response ? err.response.status + ":" + err.response.data.text : err
+			Swal.fire({
+			    type: "error",
+			    title: "Oops...",
+			    text: errText,
+			})
+		})
+	}
+
+	categoryTest() {
+		const cat = {
+			name: "Things",
+			id: 12530
+		}
+		request("POST", "/admin/newCategory?name=Things")
+		.then(response => {
+			console.log("response: ", response)
+			console.log("response.data: ", response.data)
+		}).catch(err => {
+			console.log("cat")
+			console.log(err)
+			var errText = err.response ? err.response.status + ":" + err.response.data.text : err
+			Swal.fire({
+			    type: "error",
+			    title: "Oops...",
+			    text: errText,
+			})
+		})
+	}
+
+	seeCategories() {
+		request("GET", "/item/allCategories")
+		.then(response => {
+			console.log("seeCategories response: ", response)
+			console.log("response.data: ", response.data)
+		}).catch(err => {
+			console.log("cat")
+			console.log(err)
+			var errText = err.response ? err.response.status + ":" + err.response.data.text : err
+			Swal.fire({
+			    type: "error",
+			    title: "Oops...",
+			    text: errText,
+			})
+		})
+	}
+
+	onClickTest() {
+		//this.categoryTest()
+		this.seeCategories()
+		this.postTest()
+	}
+
 
 	render() {
 		const auctions = auctionList.map(item => {
 			return (
-				<AuctionPreview name={item.name} image={item.image} altImage={item.altImage} category={item.category} location={item.location} country={item.country} description={item.description} />
+				<AuctionPreview
+					name={item.name}
+					image={item.image} 
+					alt_image={item.alt_image}
+					buyPrice={item.buyPrice}
+					current_price={item.current_price}
+					endsAt={item.endsAt} 
+					category={item.category} 
+					location={item.location} 
+					country={item.country} 
+					description={item.description}
+				/>
 			)
 		})
 		return (
@@ -64,6 +159,7 @@ class HomePage extends Component {
 					</div>
 					<div className="suggestions">
 						<h3>Suggestions etc</h3>
+						<button onClick={this.onClickTest}>Test</button>
 					</div>
 				</div>
 			</div>

@@ -5,14 +5,14 @@ import SearchBar from "../Search/SearchBar"
 import Swal from "sweetalert2"
 import { request } from "../utils/AuthHelper"
 import AuctionPreview from "../Components/AuctionPreview"
-import auctionList from "./testItems.js"
+import testAuctions from "./testItems.js"
 
 
 class HomePage extends Component {
 	constructor() {
 		super()
 		this.state = {
-			poop: ""
+			openAuctions: null,
 		}
 
 		this.getAuctions = this.getAuctions.bind(this)
@@ -29,6 +29,9 @@ class HomePage extends Component {
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
+			this.setState({
+				openAuctions: response.data,
+			})
 		}).catch(err => {
             console.log(err)
             var errText = err.response ? err.response.status + ":" + err.response.data.text : err
@@ -43,12 +46,12 @@ class HomePage extends Component {
 	postTest() {
 		const newItem = {
 			name: "Half Brick",
-			buyPrice: "20.0",
+			buyPrice: "50.0",
 			firstBid: "12.5",
-			categoriesId: "12530",
+			categoriesId: "12530, 12598",
 			longitude: "23.4555",
 			latitude: "12.9090",
-			locationTitle: "Constaction Site",
+			locationTitle: "Trashcan",
 			endsAt: "2021-09-26T01:30:00.000-04:00",
 			description: "Once upon a time, a brick broke in half. This is the second half."
 		}
@@ -75,11 +78,7 @@ class HomePage extends Component {
 	}
 
 	categoryTest() {
-		const cat = {
-			name: "Things",
-			id: 12530
-		}
-		request("POST", "/admin/newCategory?name=Things")
+		request("POST", "/admin/newCategory?name=Debris")
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
@@ -120,6 +119,14 @@ class HomePage extends Component {
 
 
 	render() {
+		var auctionList
+		if(this.state.openAuctions) {
+			auctionList = testAuctions.concat(this.state.openAuctions)
+		}
+		else {
+			auctionList = testAuctions
+		}
+		
 		const auctions = auctionList.map(item => {
 			return (
 				<AuctionPreview
@@ -129,9 +136,8 @@ class HomePage extends Component {
 					buyPrice={item.buyPrice}
 					current_price={item.current_price}
 					endsAt={item.endsAt} 
-					category={item.category} 
+					categories={item.categories} 
 					location={item.location} 
-					country={item.country} 
 					description={item.description}
 				/>
 			)
@@ -159,7 +165,9 @@ class HomePage extends Component {
 					</div>
 					<div className="suggestions">
 						<h3>Suggestions etc</h3>
-						<button onClick={this.onClickTest}>Test</button>
+						<button onClick={this.categoryTest}>Add Test Category</button>
+						<br />
+						<button onClick={this.onClickTest}>Add Test Auction</button>
 					</div>
 				</div>
 			</div>

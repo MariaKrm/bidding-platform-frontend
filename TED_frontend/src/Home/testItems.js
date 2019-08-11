@@ -6,9 +6,15 @@ var auctionList = [
 		buyPrice: 20.0,
 		current_price: 12.5,
 		endsAt: null,
-		category: "Electronics",
-		location: "Table",
-		country: "Greece",
+		categories: [{
+			id: 123,
+			name: "Electronics",
+		}],
+		location: {
+			latitude: 123,
+			logitude: 234,
+			locationTitle: "Table"
+		},
 		description: "A battery on the table"
 	},
 	{
@@ -18,9 +24,19 @@ var auctionList = [
 		buyPrice: 50.0,
 		current_price: 3.45,
 		endsAt: null,
-		category: "Pets",
-		location: "Sea",
-		country: "Greece",
+		categories: [{
+			id: 12,
+			name: "Pets"
+		},
+		{
+			id: 90,
+			name: "Decoration"
+		}],
+		location: {
+			latitude: 123,
+			logitude: 234,
+			locationTitle: "Sea"
+		},
 		description: "A starfish long ago dried (RIP)"
 	},
 	{
@@ -30,9 +46,15 @@ var auctionList = [
 		buyPrice: 12.0,
 		current_price: 9.5,
 		endsAt: null,
-		category: "Constraction",
-		location: "Constraction Site",
-		country: "Greece",
+		categories: [{
+			id: 12530,
+			name: "Things"
+		}],
+		location: {
+			latitude: 123,
+			logitude: 234,
+			locationTitle: "Constraction Site"
+		},
 		description: "Once upon a time, a brick broke in half. This is the second half."
 	},
 	{
@@ -42,9 +64,15 @@ var auctionList = [
 		buyPrice: 100.0,
 		current_price: 0.5,
 		endsAt: null,
-		category: "Pets",
-		location: "Yard",
-		country: "Greece",
+		categories: [{
+			id: 89,
+			name: "Pets"
+		}],
+		location: {
+			latitude: 123,
+			logitude: 234,
+			locationTitle: "Yard"
+		},
 		description: "My cat killed a lizard. Does anybody want it?"
 	},
 

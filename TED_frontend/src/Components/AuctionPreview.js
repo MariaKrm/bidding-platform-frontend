@@ -3,6 +3,11 @@ import React, { Component } from "react"
 
 class AuctionPreview extends Component {
 	render() {
+		const categories = this.props.categories.map(category => {
+			return category.name
+		})
+		const categoryString = categories.join(", ")
+		console.log(categoryString, categories)
 		return (
 			<div className="auction-preview">
 				<img className="preview-image" src={this.props.image} alt={this.props.alt_image} />
@@ -10,8 +15,8 @@ class AuctionPreview extends Component {
 					<h3 className="preview-title">{this.props.name}</h3>
 					<div className="preview-details">
 						<div className="preview-details-left">
-							<p className="preview-category">{this.props.category}</p>
-							<p className="preview-location">From {this.props.location}, {this.props.country}</p>
+							<p className="preview-categories">{categoryString}</p>
+							<p className="preview-location">From {this.props.location.locationTitle}</p>
 						</div>
 						<div className="preview-details-right">
 							<p className="preview-current-price">Current Price: {this.props.current_price}€</p>

@@ -52,13 +52,18 @@ class HomePage extends Component {
 			longitude: "23.4555",
 			latitude: "12.9090",
 			locationTitle: "Trashcan",
+			media: require("../images/Items/brick150.png"),
 			endsAt: "2021-09-26T01:30:00.000-04:00",
 			description: "Once upon a time, a brick broke in half. This is the second half."
 		}
 		console.log("newItem: ", newItem)
-		console.log("JSON newItem: ", JSON.stringify(newItem))
 
-		const pathWithParams = `/item?name=${newItem.name}&buyPrice=${newItem.buyPrice}&firstBid=${newItem.firstBid}&categoriesId=${newItem.categoriesId}&longitude=${newItem.longitude}&latitude=${newItem.latitude}&locationTitle=${newItem.locationTitle}&endsAt=${newItem.endsAt}&description=${newItem.description}`
+		const formData = new FormData();
+   		formData.append('file', "../images/Items/brick150.png");
+		const pathWithParams = `/item?name=${newItem.name}&buyPrice=${newItem.buyPrice}&firstBid=${newItem.firstBid}
+			&categoriesId=${newItem.categoriesId}&longitude=${newItem.longitude}&latitude=${newItem.latitude}
+			&locationTitle=${newItem.locationTitle}&media=${newItem.fromData}
+			&endsAt=${newItem.endsAt}&description=${newItem.description}`
 		console.log("path: ", pathWithParams)
 		request("POST", pathWithParams, newItem)
 		//request("POST", "/item", newItem)
@@ -131,10 +136,10 @@ class HomePage extends Component {
 			return (
 				<AuctionPreview
 					name={item.name}
-					image={item.image} 
+					media={item.media} 
 					alt_image={item.alt_image}
 					buyPrice={item.buyPrice}
-					current_price={item.current_price}
+					currently={item.currently}
 					endsAt={item.endsAt} 
 					categories={item.categories} 
 					location={item.location} 

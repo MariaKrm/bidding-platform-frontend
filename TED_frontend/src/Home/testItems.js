@@ -1,10 +1,10 @@
 var auctionList = [
 	{
 		name: "Battery",
-		image: require("../images/Items/battery150.png"),
+		media: require("../images/Items/battery150.png"),
 		alt_image: "battery",
 		buyPrice: 20.0,
-		current_price: 12.5,
+		currently: 12.5,
 		endsAt: null,
 		categories: [{
 			id: 123,
@@ -19,10 +19,10 @@ var auctionList = [
 	},
 	{
 		name: "Dried Starfish",
-		image: require("../images/Items/starfish150.png"),
+		media: require("../images/Items/starfish150.png"),
 		alt_image: "starfish",
 		buyPrice: 50.0,
-		current_price: 3.45,
+		currently: 3.45,
 		endsAt: null,
 		categories: [{
 			id: 12,
@@ -41,10 +41,10 @@ var auctionList = [
 	},
 	{
 		name: "Half Brick",
-		image: require("../images/Items/brick150.png"),
+		media: require("../images/Items/brick150.png"),
 		alt_image: "brick",
 		buyPrice: 12.0,
-		current_price: 9.5,
+		currently: 9.5,
 		endsAt: null,
 		categories: [{
 			id: 12530,
@@ -59,10 +59,10 @@ var auctionList = [
 	},
 	{
 		name: "Dead Lizard",
-		image: require("../images/Items/lizard150.png"),
+		media: require("../images/Items/lizard150.png"),
 		alt_image: "lizard",
 		buyPrice: 100.0,
-		current_price: 0.5,
+		currently: 0.5,
 		endsAt: null,
 		categories: [{
 			id: 89,

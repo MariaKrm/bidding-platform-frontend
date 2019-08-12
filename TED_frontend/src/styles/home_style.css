@@ -23,3 +23,16 @@
 	border: 3px solid orange;
 	flex-grow: 1;
 }
+
+.refresh-button-container {
+	text-align: right;
+	margin: 10px;
+}
+
+.refresh-small {
+	border: none;
+	box-shadow: none;
+	background-color: white;
+	color: grey;
+	font-size: 14px;
+}

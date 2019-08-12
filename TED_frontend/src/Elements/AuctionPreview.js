@@ -7,9 +7,10 @@ class AuctionPreview extends Component {
 			return category.name
 		})
 		const categoryString = categories.join(", ")
+		const image = this.props.media ? this.props.media : require("../images/no_image.png")
 		return (
 			<div className="auction-preview">
-				<img className="preview-image" src={this.props.media} alt={this.props.alt_image} />
+				<img className="preview-image" src={image} alt={this.props.alt_image} />
 				<div className="preview-text">
 					<h3 className="preview-title">{this.props.name}</h3>
 					<div className="preview-details">
@@ -18,8 +19,8 @@ class AuctionPreview extends Component {
 							<p className="preview-location">From {this.props.location.locationTitle}</p>
 						</div>
 						<div className="preview-details-right">
-							<p className="preview-current-price">Current Price: {this.props.currently}€</p>
-							<p className="preview-buy-price">or Buy Price: {this.props.buyPrice}€</p>
+							<p className="preview-current-price">Currently {this.props.currently}€</p>
+							{this.props.buyPrice ? <p className="preview-buy-price">or buy immediately for {this.props.buyPrice}€</p> : null}
 							<p className="preview-ends-at">Ends at {this.props.endsAt}</p>
 						</div>
 					</div>

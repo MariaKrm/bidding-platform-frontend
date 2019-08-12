@@ -4,43 +4,18 @@ import Timer from "./Timer"
 import SearchBar from "../Search/SearchBar"
 import Swal from "sweetalert2"
 import { request } from "../utils/AuthHelper"
-import AuctionPreview from "../Components/AuctionPreview"
-import testAuctions from "./testItems.js"
+import AuctionsDisplay from "./AuctionsDisplay"
 
 
 class HomePage extends Component {
 	constructor() {
 		super()
-		this.state = {
-			openAuctions: null,
-		}
 
-		this.getAuctions = this.getAuctions.bind(this)
 		this.postTest = this.postTest.bind(this)
 		this.categoryTest = this.categoryTest.bind(this)
 		this.seeCategories = this.seeCategories.bind(this)
 		this.onClickTest = this.onClickTest.bind(this)
-	}
-
-	getAuctions() {
-		console.log("getAuctions")
-	//	axios.get(Constants.BASEURL + "/item/openAuctions", {headers: AuthHelper.getAuthHeader()} )
-		request("GET", "/item/openAuctions")
-		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
-			this.setState({
-				openAuctions: response.data,
-			})
-		}).catch(err => {
-            console.log(err)
-            var errText = err.response ? err.response.status + ":" + err.response.data.text : err
-            Swal.fire({
-                type: "error",
-                title: "Oops...",
-                text: errText,
-            })
-		})
+		this.newAuction = this.newAuction.bind(this)
 	}
 
 	postTest() {
@@ -70,7 +45,6 @@ class HomePage extends Component {
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
-			this.getAuctions()
 		}).catch(err => {
 			console.log(err)
 			var errText = err.response ? err.response.status + ":" + err.response.data.text : err
@@ -122,31 +96,12 @@ class HomePage extends Component {
 		this.postTest()
 	}
 
+	newAuction() {
+		this.props.history.push("/createAuction");
+	}
+
 
 	render() {
-		var auctionList
-		if(this.state.openAuctions) {
-			auctionList = testAuctions.concat(this.state.openAuctions)
-		}
-		else {
-			auctionList = testAuctions
-		}
-		
-		const auctions = auctionList.map(item => {
-			return (
-				<AuctionPreview
-					name={item.name}
-					media={item.media} 
-					alt_image={item.alt_image}
-					buyPrice={item.buyPrice}
-					currently={item.currently}
-					endsAt={item.endsAt} 
-					categories={item.categories} 
-					location={item.location} 
-					description={item.description}
-				/>
-			)
-		})
 		return (
 			<div>
 				<div className="home-header">
@@ -162,17 +117,20 @@ class HomePage extends Component {
 				<div className="home-content">
 					<div className="search-container">
 						<h3>Search</h3>
+						<button onClick={this.categoryTest}>Add Test Category</button>
+						<br />
+						<button onClick={this.onClickTest}>Add Test Auction</button>
 					</div>
 					<div className="main-content">
 						<h3>Main Content</h3>
 						<Timer />				{/* This is to test the refresh with timer; changes the time every 3 seconds */}
-						{auctions}
+						<AuctionsDisplay />
 					</div>
 					<div className="suggestions">
 						<h3>Suggestions etc</h3>
-						<button onClick={this.categoryTest}>Add Test Category</button>
-						<br />
-						<button onClick={this.onClickTest}>Add Test Auction</button>
+						<div className="right-action-buttons">
+							<button className="new-auction-button" onClick={this.newAuction}>New Auction</button>
+						</div>
 					</div>
 				</div>
 			</div>

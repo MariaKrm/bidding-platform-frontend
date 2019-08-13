@@ -8,6 +8,14 @@ class AuctionPreview extends Component {
 		})
 		const categoryString = categories.join(", ")
 		const image = this.props.media ? this.props.media : require("../images/no_image.png")
+		var description, fading_description = ""
+		if(this.props.description.length <= 400) {
+			description = this.props.description
+		}
+		else {
+			description = this.props.description.substring(0,310)
+			fading_description = this.props.description.substring(310,400) + "..."
+		}
 		return (
 			<div className="auction-preview">
 				<img className="preview-image" src={image} alt={this.props.alt_image} />
@@ -26,7 +34,7 @@ class AuctionPreview extends Component {
 					</div>
 
 					<h3 className="preview-description-title">Description:</h3>
-					<p className="preview-description">{this.props.description}</p>
+					<p className="preview-description">{description}<span className="preview-description-fading">{fading_description}</span></p>
 				</div>
 			</div>
 		)

@@ -63,6 +63,7 @@
 }
 
 .preview-description-title {
+	/*border: 2px solid yellow;*/
 	font-size: 18px;
 	margin: 0;
 	margin-top: 10px;
@@ -71,4 +72,11 @@
 .preview-description {
 	margin: 0;
 	font-size: 16px;
+	/*border: 2px solid red;*/
+}
+.preview-description-fading {
+	margin: 0;
+	font-size: 16px;
+	color: grey;
+	/*border: 2px solid red;*/
 }

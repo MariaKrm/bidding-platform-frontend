@@ -120,6 +120,10 @@ class HomePage extends Component {
 						<button onClick={this.categoryTest}>Add Test Category</button>
 						<br />
 						<button onClick={this.onClickTest}>Add Test Auction</button>
+						<br />
+						<br />
+						<br />
+						<img src={require("../images/no_image.png")} alt="no-image" />
 					</div>
 					<div className="main-content">
 						<h3>Main Content</h3>
@@ -131,6 +135,8 @@ class HomePage extends Component {
 						<div className="right-action-buttons">
 							<button className="new-auction-button" onClick={this.newAuction}>New Auction</button>
 						</div>
+						<br />
+						<img src={require("../images/no_image.png")} alt="no-image" />
 					</div>
 				</div>
 			</div>

@@ -1,5 +1,21 @@
 var auctionList = [
 	{
+		name: "Lorem ipsum",
+		buyPrice: 10000.0,
+		currently: 2000.0,
+		endsAt: null,
+		categories: [{
+			id: 123,
+			name: "Electronics"
+		}],
+		location: {
+			latitude: 67.0,
+			longitude: 90.89,
+			locationTitle: "Somewhere Around Here"
+		},
+		description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut sagittis elit, vel dignissim tellus. Vestibulum semper posuere tincidunt. Aenean est arcu, commodo id rhoncus at, consequat eget velit. Sed lectus tellus, pulvinar non augue hendrerit, ultrices efficitur orci. Maecenas lobortis tincidunt placerat. Integer convallis ultricies pretium. Vestibulum aliquet eu urna sed ullamcorper. Nunc quis ligula eget lectus consequat aliquam sed vitae lectus. Mauris hendrerit tempus venenatis. Nunc a felis vitae eros consequat blandit a sed nisi. Nulla ultricies, lectus at facilisis tincidunt, ipsum lorem rhoncus lectus, non sagittis risus metus vel mi. Nam in laoreet quam. Nulla rutrum quam eget nunc venenatis, volutpat iaculis metus auctor. Pellentesque nisi ligula, ornare eu orci nec, fringilla sollicitudin leo. "
+	},
+	{
 		name: "Battery",
 		media: require("../images/Items/battery150.png"),
 		alt_image: "battery",
@@ -12,7 +28,7 @@ var auctionList = [
 		}],
 		location: {
 			latitude: 123,
-			logitude: 234,
+			longitude: 234,
 			locationTitle: "Table"
 		},
 		description: "A battery on the table"
@@ -34,7 +50,7 @@ var auctionList = [
 		}],
 		location: {
 			latitude: 123,
-			logitude: 234,
+			longitude: 234,
 			locationTitle: "Sea"
 		},
 		description: "A starfish long ago dried (RIP)"
@@ -52,7 +68,7 @@ var auctionList = [
 		}],
 		location: {
 			latitude: 123,
-			logitude: 234,
+			longitude: 234,
 			locationTitle: "Constraction Site"
 		},
 		description: "Once upon a time, a brick broke in half. This is the second half."
@@ -70,7 +86,7 @@ var auctionList = [
 		}],
 		location: {
 			latitude: 123,
-			logitude: 234,
+			longitude: 234,
 			locationTitle: "Yard"
 		},
 		description: "My cat killed a lizard. Does anybody want it?"

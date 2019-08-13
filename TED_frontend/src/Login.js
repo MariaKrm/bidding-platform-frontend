@@ -33,8 +33,6 @@ class Login extends Component {
         event.preventDefault()
         console.log("username: ", this.state.username)
         console.log("password: ", this.state.password)
-        //alert("Loging in as " + this.state.username + " with id " + id)
-    //    this.props.history.push("/user/" + id)
 
 
         const user = {
@@ -49,7 +47,6 @@ class Login extends Component {
             console.log("response ", response)
             console.log("response.data ", response.data)
             AuthHelper.setToken(response.data.token)
-            alert("POST " + loginRoute + "\nStatus: " + response.status + "\nStatus Text: " + response.statusText + "\nData: "+ response.data)
             this.setState({
                 redirect: true
             })

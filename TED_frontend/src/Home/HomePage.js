@@ -123,7 +123,7 @@ class HomePage extends Component {
 						<br />
 						<br />
 						<br />
-						<img src={require("../images/no_image.png")} alt="no-image" />
+						<img src={require("../images/no_image.png")} alt="no image available" />
 					</div>
 					<div className="main-content">
 						<h3>Main Content</h3>
@@ -136,7 +136,7 @@ class HomePage extends Component {
 							<button className="new-auction-button" onClick={this.newAuction}>New Auction</button>
 						</div>
 						<br />
-						<img src={require("../images/no_image.png")} alt="no-image" />
+						<img src={require("../images/no_image.png")} alt="no image available" />
 					</div>
 				</div>
 			</div>

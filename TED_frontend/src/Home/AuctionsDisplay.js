@@ -54,13 +54,11 @@ class AuctionsDisplay extends Component {
 				<AuctionPreview
 					name={item.name}
 					media={item.media} 
-					alt_image={item.alt_image}
 					buyPrice={item.buyPrice}
 					currently={item.currently}
 					endsAt={item.endsAt} 
 					categories={item.categories} 
-					location={item.location} 
-					description={item.description}
+					location={item.location}
 				/>
 			)
 		})

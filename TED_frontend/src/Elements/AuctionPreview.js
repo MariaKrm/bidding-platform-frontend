@@ -8,17 +8,11 @@ class AuctionPreview extends Component {
 		})
 		const categoryString = categories.join(", ")
 		const image = this.props.media ? this.props.media : require("../images/no_image.png")
-		var description, fading_description = ""
-		if(this.props.description.length <= 400) {
-			description = this.props.description
-		}
-		else {
-			description = this.props.description.substring(0,310)
-			fading_description = this.props.description.substring(310,400) + "..."
-		}
+		const alt = this.props.media ? this.props.name : "no image available"
+		const endDate = new Date(this.props.endsAt)
 		return (
 			<div className="auction-preview">
-				<img className="preview-image" src={image} alt={this.props.alt_image} />
+				<img className="preview-image" src={image} alt={alt}/>
 				<div className="preview-text">
 					<h3 className="preview-title">{this.props.name}</h3>
 					<div className="preview-details">
@@ -29,12 +23,9 @@ class AuctionPreview extends Component {
 						<div className="preview-details-right">
 							<p className="preview-current-price">Currently {this.props.currently}€</p>
 							{this.props.buyPrice ? <p className="preview-buy-price">or buy immediately for {this.props.buyPrice}€</p> : null}
-							<p className="preview-ends-at">Ends at {this.props.endsAt}</p>
+							<p className="preview-ends-at">Ends at {endDate.toString()}</p>
 						</div>
 					</div>
-
-					<h3 className="preview-description-title">Description:</h3>
-					<p className="preview-description">{description}<span className="preview-description-fading">{fading_description}</span></p>
 				</div>
 			</div>
 		)

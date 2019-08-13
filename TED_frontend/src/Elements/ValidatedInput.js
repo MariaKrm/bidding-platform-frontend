@@ -24,6 +24,8 @@ class ValidatedInput extends Component {
 			case "password": return this.validatePassword(value)
 			case "confirmPassword": return this.validateConfirm(value)
 			case "telNumber" : return this.validateTelNumber(value)
+			case "buyPrice" : return this.validatePrice(value)
+			case "firstBid" : return this.validatePrice(value)
 			default: return null
 		}
 	}
@@ -55,6 +57,11 @@ class ValidatedInput extends Component {
 	validateTelNumber(value) {
 		const regEx = /^[0-9]\d{9,11}$/
 		return (!regEx.test(value)) ? "Invalid number" : null
+	}
+
+	validatePrice(value) {
+		const regEx = /^\d+\.\d{1,2}$/
+		return (!regEx.test(value)) ? "Invalid price" : null
 	}
 
 	checkUsernameAvail(value) {

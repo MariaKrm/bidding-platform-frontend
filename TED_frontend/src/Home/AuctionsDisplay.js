@@ -8,7 +8,7 @@ class AuctionsDisplay extends Component {
 	constructor() {
 		super()
 		this.state = {
-			openAuctions: null,
+			auctions: null,
 		}
 
 		this.getAuctions = this.getAuctions.bind(this)
@@ -17,13 +17,13 @@ class AuctionsDisplay extends Component {
 
 	getAuctions() {
 		console.log("getAuctions")
-	//	axios.get(Constants.BASEURL + "/item/openAuctions", {headers: AuthHelper.getAuthHeader()} )
+	//	axios.get(Constants.BASEURL + "/item/auctions", {headers: AuthHelper.getAuthHeader()} )
 		request("GET", "/item/openAuctions")
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
 			this.setState({
-				openAuctions: response.data,
+				auctions: response.data,
 			})
 		}).catch(err => {
             console.log(err)
@@ -42,8 +42,8 @@ class AuctionsDisplay extends Component {
 
 	render() {
 		var auctionList
-		if(this.state.openAuctions) {
-			auctionList = testAuctions.concat(this.state.openAuctions)
+		if(this.state.auctions) {
+			auctionList = testAuctions.concat(this.state.auctions)
 		}
 		else {
 			auctionList = testAuctions

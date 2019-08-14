@@ -14,6 +14,8 @@ import "./styles/header_style.css"
 import "./styles/home_style.css"
 import "./styles/auction_style.css"
 
+import "react-datepicker/dist/react-datepicker.css";
+
 
 function App() {
 	return (

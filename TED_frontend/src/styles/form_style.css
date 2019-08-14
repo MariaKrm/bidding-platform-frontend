@@ -20,6 +20,15 @@ input[type=text]:focus:read-write, input[type=password]:focus:read-write {
 	width: 287px;
 }
 
+.field-label {
+	font-size: 16px;
+	margin: 0;
+}
+
+.date-picker-field {
+	width: 170px;
+}
+
 .field-error-message {
 	color: red;
 	font-size: 14px;
@@ -27,6 +36,7 @@ input[type=text]:focus:read-write, input[type=password]:focus:read-write {
 
 .form-error-message {
 	margin: 0;
+	margin-bottom: 10px;
 	background-color: #ff6666;
 	color: #fff;
 	font-size: 18px;
@@ -148,21 +158,50 @@ input[type=text]:focus:read-write, input[type=password]:focus:read-write {
 }
 
 
+.new-auction-form-group {
+	margin: 45px auto 50px;
+	padding: 0;
+	width: 800px;
+	display: flex;
+	border-radius: 8px;
+	box-shadow: 0 4px 20px 6px grey;
+}
+
 .new-auction-form {
 	background-color: white;
 	color: #000;
-	width: 450px;
+	width: 600px;
 	padding: 20px;
-	margin: 45px auto 100px;
-	border-radius: 8px;
-	box-shadow: 0 4px 20px 6px grey;
+	margin: 45px 60px 100px;
+	border-top-left-radius: 8px;
+	border-bottom-left-radius: 8px;
 	overflow: hidden;
+	text-align: center;
 }
 
 .add-image-picture {
 	float: left;
+	border: 0.5px solid #d9d9d9;
 	cursor: pointer;
 }
 
 .new-auction-fields {
 }
+
+
+.category-selector-container {
+	margin: 50px 0 25px;
+}
+
+.category-selector {
+	margin: 5px;
+}
+
+.date-picker-container {
+	margin-top: 20px;
+}
+
+.description-container {
+	margin: 25px 0;
+}
+

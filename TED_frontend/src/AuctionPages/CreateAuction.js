@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import Header from "../Elements/Header"
-import DatePicker from "react-datepicker";
+import { Redirect } from "react-router"
+import DatePicker from "react-datepicker"
 import Swal from "sweetalert2"
 import { request } from "../utils/AuthHelper"
 import ValidatedInput from "../Elements/ValidatedInput"
@@ -25,6 +26,7 @@ class CreateAuction extends Component {
 			error: "",
 			categories: array,
 			categoryList: [],
+			redirect: false,
 		}
 		this.handleChange = this.handleChange.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
@@ -34,6 +36,7 @@ class CreateAuction extends Component {
 		this.passresult = this.passresult.bind(this)
 		this.getAllCategories = this.getAllCategories.bind(this)
 		this.handleAddressSubmit = this.handleAddressSubmit.bind(this)
+		this.cancel = this.cancel.bind(this)
 	}
 
 	handleChange(event) {
@@ -117,9 +120,10 @@ class CreateAuction extends Component {
     	}
 
     	const selectedCategories = this.state.categories.filter(cat => cat !== undefined)
-    	console.log("final cat: ", selectedCategories)
+    	const uniqueCategories = [...new Set(selectedCategories)]
+    	console.log("final cat: ", uniqueCategories)
 
-    	if(!selectedCategories || selectedCategories.length < 1) {
+    	if(!uniqueCategories || uniqueCategories.length < 1) {
     		errorMessage = "Pick at least one category."
     	}
 
@@ -135,14 +139,18 @@ class CreateAuction extends Component {
     	console.log("error: ", errorMessage)
     	if(errorMessage !== "" && errorMessage !== null) return false
 
+    	const javaDate = this.state.endsAt.toISOString()
+    	console.log("javaDate: ", javaDate)
+
+
     	const newAuction = {
     		name: this.state.name,
     		buyPrice: this.state.buyPrice,
     		firstBid: this.state.firstBid,
-    		endsAt: this.state.endsAt,			//haha yeah right
+    		endsAt: javaDate,			//haha yeah right
     		coords: this.state.coords,
     		locationTitle: this.state.locationTitle,
-    		categoriesId: selectedCategories.join(", "),
+    		categoriesId: uniqueCategories.join(", "),
     		description: this.state.description
     	}
 
@@ -171,6 +179,19 @@ class CreateAuction extends Component {
     }
 
 
+    cancel() {
+    	this.setState({
+    		redirect: true
+    	})
+    }
+
+
+    redirectToHome() {
+        if(this.state.redirect) {
+            return <Redirect to="./home" />
+        }
+    }
+
     componentWillMount() {
     	this.getAllCategories()
     }
@@ -184,6 +205,7 @@ class CreateAuction extends Component {
 		})
 		return (
 			<div>
+				{this.redirectToHome()}
 				<Header />
 				<div className="new-auction-form-group">
 					<form className="new-auction-form" onSubmit={this.handleSubmit}>
@@ -231,23 +253,23 @@ class CreateAuction extends Component {
 							<div className="category-selector-container">
 								<h3 className="info-title">Pick up to 5 categories</h3>
 								<select className="category-selector" name={0} value={this.state.categories[0]} onChange={this.handleSelectChange}>
-									<option defaultValue="">-- Category 1 --</option>
+									<option defaultValue="" value="">-- Category 1 --</option>
 									{availableCategories}
 								</select>
 								<select className="category-selector" name={1} value={this.state.categories[1]} onChange={this.handleSelectChange}>
-									<option defaultValue="">-- Category 2 --</option>
+									<option defaultValue="" value="">-- Category 2 --</option>
 									{availableCategories}
 								</select>
 								<select className="category-selector" name={2} value={this.state.categories[2]} onChange={this.handleSelectChange}>
-									<option defaultValue="">-- Category 3 --</option>
+									<option defaultValue="" value="">-- Category 3 --</option>
 									{availableCategories}
 								</select>
 								<select className="category-selector" name={3} value={this.state.categories[3]} onChange={this.handleSelectChange}>
-									<option defaultValue="">-- Category 4 --</option>
+									<option defaultValue="" value="">-- Category 4 --</option>
 									{availableCategories}
 								</select>
 								<select className="category-selector" name={4} value={this.state.categories[4]} onChange={this.handleSelectChange}>
-									<option defaultValue="">-- Category 5 --</option>
+									<option defaultValue="" value="">-- Category 5 --</option>
 									{availableCategories}
 								</select>
 							</div>
@@ -258,6 +280,7 @@ class CreateAuction extends Component {
 							</div>
 						</div>
 						<button type="submit" className="submit-button">Submit</button>
+						<button type="button" className="cancel-button" onClick={this.cancel}>Cancel</button>
 					</form>
 					<AddressForm onAddressSubmit={this.handleAddressSubmit} />
 				</div>

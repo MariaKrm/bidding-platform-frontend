@@ -25,6 +25,10 @@ input[type=text]:focus:read-write, input[type=password]:focus:read-write {
 	margin: 0;
 }
 
+.info-title {
+	margin: 5px 0;
+}
+
 .date-picker-field {
 	width: 170px;
 }
@@ -57,6 +61,7 @@ input[type=text]:focus:read-write, input[type=password]:focus:read-write {
 
 .submit-button {
 	border: none;
+	margin: 0 20px;
 	/*background-color: #b5ebeb;*/
 	background-color: #d9d9d9;
 	border-radius: 6px;
@@ -69,14 +74,36 @@ input[type=text]:focus:read-write, input[type=password]:focus:read-write {
 .submit-button:hover {
 	/*background-color: #9cd9d9;*/
 	background-color: #cfcfcf;
-	box-shadow: 1px 5px #969696;
 }
 
 .submit-button:active {
-	background-color: #cfcfcf;
 	box-shadow: 1px 3px #969696;
 	transform: translateY(2px);
 }
+
+
+.cancel-button {
+	border: none;
+	margin: 0 20px;
+	/*background-color: #b5ebeb;*/
+	background-color: #ff6f63;
+	border-radius: 6px;
+	padding: 10px 30px;
+	width: 160px;
+	box-shadow: 1px 5px #b54c43;
+	/*box-shadow: 1px 5px #8ebfbf;*/
+}
+
+.cancel-button:hover {
+	/*background-color: #9cd9d9;*/
+	background-color: #f0665b;
+}
+
+.cancel-button:active {
+	box-shadow: 1px 3px #b54c43;
+	transform: translateY(2px);
+}
+
 
 .address-button {
 	border: none;
@@ -202,6 +229,6 @@ input[type=text]:focus:read-write, input[type=password]:focus:read-write {
 }
 
 .description-container {
-	margin: 25px 0;
+	margin: 40px 0;
 }
 

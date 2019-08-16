@@ -9,6 +9,7 @@ function SignupForm(props) {
 			<form className="signup-form" onSubmit={props.handleSubmit}>
 				{props.data.error && props.data.error !== "" && <div className="form-error-message">{props.data.error} </div>}
 				<h2>Sign Up</h2>
+				<br />
 			    <ValidatedInput 
 			    	type="text"
 			    	name="username" 
@@ -33,7 +34,6 @@ function SignupForm(props) {
 			    	required
 			    />
 
-			    <br />
 			    <br />
 
 			    <input 
@@ -73,7 +73,6 @@ function SignupForm(props) {
 			    	required
 			    />
 
-			    <br />
 			    <input 
 			    	type="text" 
 			    	value={props.data.taxNumber} 

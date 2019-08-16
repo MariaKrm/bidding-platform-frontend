@@ -27,6 +27,7 @@ class CreateAuction extends Component {
 			categories: array,
 			categoryList: [],
 			redirect: false,
+			success: false,
 		}
 		this.handleChange = this.handleChange.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
@@ -37,6 +38,7 @@ class CreateAuction extends Component {
 		this.getAllCategories = this.getAllCategories.bind(this)
 		this.handleAddressSubmit = this.handleAddressSubmit.bind(this)
 		this.cancel = this.cancel.bind(this)
+		this.success = this.success.bind(this)
 	}
 
 	handleChange(event) {
@@ -167,6 +169,10 @@ class CreateAuction extends Component {
     	.then(response => {
     		console.log("response: ", response)
     		console.log("response.data: ", response.data)
+    		this.setState({
+    			success: true,
+    		})
+    		setTimeout(() => this.setState({ redirect: true }), 3000)
     	}).catch(err => {
     		console.log(err)
     		var errText = err.response ? err.response.status + ":" + err.response.data.text : err
@@ -192,6 +198,16 @@ class CreateAuction extends Component {
         }
     }
 
+    success() {
+    	if(this.state.success) {
+    		return (
+    			<div class="alert alert-success">
+    			  <strong>Success!</strong> Auction Created. Redirecting to Home.
+    			</div>
+    		)
+    	}
+    }
+
     componentWillMount() {
     	this.getAllCategories()
     }
@@ -207,6 +223,7 @@ class CreateAuction extends Component {
 			<div>
 				{this.redirectToHome()}
 				<Header />
+				{this.success()}
 				<div className="new-auction-form-group">
 					<form className="new-auction-form" onSubmit={this.handleSubmit}>
 						{this.state.error && this.state.error !== "" && <div className="form-error-message">{this.state.error} </div>}
@@ -237,6 +254,7 @@ class CreateAuction extends Component {
 								required
 							/>
 
+							<br />
 							<div className="date-picker-container">
 								<h4 className="field-label">Auction will end at:</h4>
 								<DatePicker

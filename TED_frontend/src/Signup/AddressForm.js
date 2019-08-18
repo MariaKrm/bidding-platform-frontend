@@ -12,7 +12,7 @@ class AddressForm extends Component {
 		const address = this.getEmptyAddress();
     	this.state = {
       		address: address,
-      		query: "",
+      	 	query: "",
       		locationId: "",
       		coords: {
       			lat: "",
@@ -151,26 +151,26 @@ class AddressForm extends Component {
 		this.props.onAddressSubmit(null, null, null)
 	}
 
-	render() {
-		return (
-			<div className="address-form">
-				{this.state.error && this.state.error !== "" && <div className="address-error-message">{this.state.error} </div>}
-				<AddressSuggest 
-					query={this.state.query}
+  render() {
+    return (
+      <div className="address-form">
+        {this.state.error && this.state.error !== "" && <div className="alert-danger">{this.state.error} </div>}
+        <AddressSuggest 
+          query={this.state.query}
 					onChange={this.onQuery}
 				/>
 				<br />
 				<AddressInput
 					street={this.state.address.street}
-            		city={this.state.address.city}
-            		state={this.state.address.state}
-            		code={this.state.address.postalCode}
-            		country={this.state.address.country}
-            	/>
-            	<br />
-            	<button type="button" className="address-button" onClick={this.onCheck}>Check</button>
-          		<button type="button" className="address-button" onClick={this.onClear}>Clear</button>
-          	</div>
+          city={this.state.address.city}
+          state={this.state.address.state}
+          code={this.state.address.postalCode}
+          country={this.state.address.country}
+        />
+        <br />
+        <button type="button" className="address-button" onClick={this.onCheck}>Check</button>
+        <button type="button" className="address-button" onClick={this.onClear}>Clear</button>
+    </div>
 		)
 	}
 }

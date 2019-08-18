@@ -121,7 +121,7 @@ class CreateAuction extends Component {
     		errorMessage = "You have to enter a valid address."
     	}
 
-    	const selectedCategories = this.state.categories.filter(cat => cat !== undefined)
+    	const selectedCategories = this.state.categories.filter(cat => cat !== undefined && cat !== "")
     	const uniqueCategories = [...new Set(selectedCategories)]
     	console.log("final cat: ", uniqueCategories)
 
@@ -129,7 +129,7 @@ class CreateAuction extends Component {
     		errorMessage = "Pick at least one category."
     	}
 
-    	const errors = this.state.name === "" || this.state.buyPrice === "" || this.state.firstBid === ""
+    	const errors = this.state.name === null || this.state.buyPrice === null || this.state.firstBid === null
     	if(errors) {
     		errorMessage = "Please fix the mistakes first."
     	}
@@ -226,7 +226,8 @@ class CreateAuction extends Component {
 				{this.success()}
 				<div className="new-auction-form-group">
 					<form className="new-auction-form" onSubmit={this.handleSubmit}>
-						{this.state.error && this.state.error !== "" && <div className="form-error-message">{this.state.error} </div>}
+						{this.state.error && this.state.error !== "" && <div className="alert-danger"><strong>{this.state.error}</strong> </div>}
+						{/*eslint-disable-next-line*/}
 						<img className="add-image-picture" src={require("../images/add_image.png")} alt="Add image" onClick={this.handleImageClick} />
 						<div className="new-auction-fields">
 							<input 
@@ -294,7 +295,7 @@ class CreateAuction extends Component {
 
 							<div className="description-container">
 								<h4 className="field-label">Write a short description of the item</h4>
-								<textarea name="description" value={this.state.description} onChange={this.handleChange} cols={40} rows={3} />
+								<textarea name="description" value={this.state.description} onChange={this.handleChange} cols={40} rows={3} required />
 							</div>
 						</div>
 						<button type="submit" className="submit-button">Submit</button>

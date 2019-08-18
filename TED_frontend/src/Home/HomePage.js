@@ -3,7 +3,7 @@ import Header from "../Elements/Header"
 import Timer from "./Timer"
 import SearchBar from "../Search/SearchBar"
 import Swal from "sweetalert2"
-import { request } from "../utils/AuthHelper"
+import AuthHelper, { request } from "../utils/AuthHelper"
 import AuctionsDisplay from "./AuctionsDisplay"
 
 
@@ -16,7 +16,10 @@ class HomePage extends Component {
 		this.seeCategories = this.seeCategories.bind(this)
 		this.onClickTest = this.onClickTest.bind(this)
 		this.newAuction = this.newAuction.bind(this)
+		this.redirectToLogin = this.redirectToLogin.bind(this)
+		
 	}
+
 
 	postTest() {
 		const newItem = {
@@ -101,6 +104,41 @@ class HomePage extends Component {
 	}
 
 
+	redirectToLogin() {
+		this.props.history.push("/login")
+	}
+
+	displayVisitorSign() {
+		if(!AuthHelper.loggedIn()) {
+			return (
+				<div class="alert alert-info">
+    				You are logged in as a visitor. Sign up to access all features.
+    			</div>
+			)
+		}
+		else {
+			return null
+		}
+	}
+
+	displayAccountButton() {
+		if(AuthHelper.loggedIn()) {
+			return (
+				<div className="home-header-actions">
+					<button className="header-button">My Account</button>
+				</div>
+			)
+		}
+		else {
+			return (
+				<div className="home-header-actions">
+					<button className="header-button" onClick={this.redirectToLogin}>Log In/Sign Up</button>
+				</div>
+			)
+		}
+	}
+
+
 	render() {
 		return (
 			<div>
@@ -109,10 +147,9 @@ class HomePage extends Component {
 					<div className="home-header-search">
 						<SearchBar />
 					</div>
-					<div className="home-header-actions">
-						<button className="header-button">My Account</button>
-					</div>
+					{this.displayAccountButton()}
 				</div>
+				{this.displayVisitorSign()}
 
 				<div className="home-content">
 					<div className="search-container">
@@ -123,6 +160,7 @@ class HomePage extends Component {
 						<br />
 						<br />
 						<br />
+					{/*eslint-disable-next-line*/}
 						<img src={require("../images/no_image.png")} alt="no image available" />
 					</div>
 					<div className="main-content">
@@ -133,9 +171,15 @@ class HomePage extends Component {
 					<div className="suggestions">
 						<h3>Suggestions etc</h3>
 						<div className="right-action-buttons">
-							<button className="new-auction-button" onClick={this.newAuction}>New Auction</button>
+							{AuthHelper.loggedIn() ? 
+								<button className="new-auction-button" onClick={this.newAuction}>New Auction</button>
+								: <button className="new-auction-button" onClick={this.newAuction} disabled>New Auction</button>
+							}
+							
+							
 						</div>
 						<br />
+						{/*eslint-disable-next-line*/}
 						<img src={require("../images/no_image.png")} alt="no image available" />
 					</div>
 				</div>

@@ -71,9 +71,12 @@ class Signup extends React.Component {
     		email: this.state.email,
     		telNumber: this.state.telNumber,
     		taxNumber: this.state.taxNumber,
-    		coords: this.state.coords,
+    		latitude: this.state.coords.lat,
+    		longitude: this.state.coords.lon,
     		locationTitle: this.state.locationTitle,
     	}
+
+    	console.log("Signing up with: ", newUser)
 
     	axios.post(Constants.BASEURL + "/auth/signup", newUser)
     	.then(response => {

@@ -206,6 +206,16 @@ input[type=text]:focus:read-write, input[type=password]:focus:read-write {
 	text-align: center;
 }
 
+.new-category-form {
+	background-color: white;
+	color: #000;
+	width: 500px;
+	padding: 20px;
+	margin: 45px auto 100px;
+	border-radius: 8px;
+	box-shadow: 0 4px 20px 6px grey;
+}
+
 .add-image-picture {
 	float: left;
 	border: 0.5px solid #d9d9d9;
@@ -230,5 +240,9 @@ input[type=text]:focus:read-write, input[type=password]:focus:read-write {
 
 .description-container {
 	margin: 40px 0;
+}
+
+.description-input {
+	box-shadow: none;
 }
 

@@ -10,6 +10,7 @@ class AuctionPreview extends Component {
 		const image = this.props.media ? this.props.media : require("../images/no_image.png")
 		const alt = this.props.media ? this.props.name : "no image available"
 		const endDate = new Date(this.props.endsAt)
+		const ended = endDate < Date.now()
 		return (
 			<div className="auction-preview">
 				<img className="preview-image" src={image} alt={alt}/>
@@ -23,7 +24,7 @@ class AuctionPreview extends Component {
 						<div className="preview-details-right">
 							<p className="preview-current-price">Currently {this.props.currently}€</p>
 							{this.props.buyPrice ? <p className="preview-buy-price">or buy immediately for {this.props.buyPrice}€</p> : null}
-							<p className="preview-ends-at">Ends at {endDate.toDateString()}</p>
+							<p className="preview-ends-at">{ended ? "Ended on" : "Ends on"} {endDate.toDateString()}, {endDate.toLocaleTimeString()}</p>
 						</div>
 					</div>
 				</div>

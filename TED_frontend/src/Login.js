@@ -47,6 +47,8 @@ class Login extends Component {
             console.log("response ", response)
             console.log("response.data ", response.data)
             AuthHelper.setToken(response.data.token)
+            AuthHelper.setUser(response.data.user)
+            console.log("isAdmin: ", response.data.user.admin)
             this.setState({
                 redirect: true
             })

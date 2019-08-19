@@ -2,6 +2,7 @@ import React from "react"
 import Header from "../Elements/Header"
 import SignupForm from "./SignupForm"
 import axios from "axios"
+import { Redirect } from "react-router"
 import * as Constants from "../Constants/Constants"
 import Swal from "sweetalert2"
 import "../styles/form_style.css"
@@ -23,12 +24,15 @@ class Signup extends React.Component {
 			coords: null,
 			locationTitle: "",
 			error: "",
+			redirect: false,
+			success: false,
 		}
 
 		this.handleChange = this.handleChange.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.handleAddressSubmit = this.handleAddressSubmit.bind(this)
 		this.passresult = this.passresult.bind(this)
+		this.success = this.success.bind(this)
 	}
 
 	handleChange(event) {
@@ -81,7 +85,10 @@ class Signup extends React.Component {
     	axios.post(Constants.BASEURL + "/auth/signup", newUser)
     	.then(response => {
     		console.log("response: ", response)
-    		alert("Signed up")
+    		this.setState({
+    			success: true,
+    		})
+    		setTimeout(() => this.setState({ redirect: true }), 3000)
     	}).catch(err => {
     		console.log("error: ", err)
     		var errText = err.response ? err.response.status + ":" + err.response.data.text : err
@@ -102,10 +109,28 @@ class Signup extends React.Component {
     	console.log("Address: ", addressCoords, city, country)
     }
 
+    redirectToLogin() {
+        if(this.state.redirect) {
+            return <Redirect to="./login" />
+        }
+    }
+
+    success() {
+    	if(this.state.success) {
+    		return (
+    			<div class="alert alert-success">
+    			  <strong>Success!</strong> Auction Created. Redirecting to Login.
+    			</div>
+    		)
+    	}
+    }
+
 	render() {
 		return (
 			<div className="background">
+				{this.redirectToLogin()}
 				<Header />
+				{this.success()}
 				<SignupForm data={this.state} handleChange={this.handleChange} passresult={this.passresult} handleSubmit={this.handleSubmit} handleAddressSubmit={this.handleAddressSubmit} />
 			</div>
 		)

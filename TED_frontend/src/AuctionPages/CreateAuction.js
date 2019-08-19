@@ -3,7 +3,7 @@ import Header from "../Elements/Header"
 import { Redirect } from "react-router"
 import DatePicker from "react-datepicker"
 import Swal from "sweetalert2"
-import { request } from "../utils/AuthHelper"
+import { customRequest } from "../utils/AuthHelper"
 import ValidatedInput from "../Elements/ValidatedInput"
 import AddressForm from "../Signup/AddressForm"
 
@@ -38,7 +38,6 @@ class CreateAuction extends Component {
 		this.getAllCategories = this.getAllCategories.bind(this)
 		this.handleAddressSubmit = this.handleAddressSubmit.bind(this)
 		this.cancel = this.cancel.bind(this)
-		this.success = this.success.bind(this)
 	}
 
 	handleChange(event) {
@@ -88,7 +87,7 @@ class CreateAuction extends Component {
 
 
     getAllCategories() {
-    	request("GET", "/item/allCategories")
+    	customRequest("GET", "/item/allCategories")
     	.then(response => {
     		console.log("seeCategories response: ", response)
     		console.log("response.data: ", response.data)
@@ -165,7 +164,7 @@ class CreateAuction extends Component {
     	console.log("path: ", pathWithParams)
 
 
-    	request("POST", pathWithParams, newAuction)
+    	customRequest("POST", pathWithParams, newAuction)
     	.then(response => {
     		console.log("response: ", response)
     		console.log("response.data: ", response.data)
@@ -295,7 +294,7 @@ class CreateAuction extends Component {
 
 							<div className="description-container">
 								<h4 className="field-label">Write a short description of the item</h4>
-								<textarea name="description" value={this.state.description} onChange={this.handleChange} cols={40} rows={3} required />
+								<textarea name="description" className="description-input" value={this.state.description} onChange={this.handleChange} cols={40} rows={3} required />
 							</div>
 						</div>
 						<button type="submit" className="submit-button">Submit</button>

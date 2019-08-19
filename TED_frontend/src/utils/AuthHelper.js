@@ -10,6 +10,13 @@ class AuthHelper {
     return !!token && !AuthHelper.isTokenExpired(token) // handwaiving here
   }
 
+  static isAdmin() {
+    const user = JSON.parse(sessionStorage.getItem("user"))
+    console.log("user: ", user)
+    console.log("isAdmin: ", user.admin)
+    return user.admin
+  }
+
   static isTokenExpired(token) {
     try {
       const decoded = decode(token)
@@ -21,6 +28,10 @@ class AuthHelper {
       console.log("Expired check failed!")
       return false
     }
+  }
+
+  static setUser(user) {
+    sessionStorage.setItem("user", JSON.stringify(user))
   }
 
   static setToken(idToken) {
@@ -54,7 +65,7 @@ class AuthHelper {
 
 }
 
-export function request(method, url, data) {
+export function customRequest(method, url, data) {
     // performs api calls sending the required authentication headers
     const headers = {
       Accept: "application/json",

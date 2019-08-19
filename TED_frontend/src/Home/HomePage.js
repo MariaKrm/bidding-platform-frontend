@@ -3,7 +3,7 @@ import Header from "../Elements/Header"
 import Timer from "./Timer"
 import SearchBar from "../Search/SearchBar"
 import Swal from "sweetalert2"
-import AuthHelper, { request } from "../utils/AuthHelper"
+import AuthHelper, { customRequest } from "../utils/AuthHelper"
 import AuctionsDisplay from "./AuctionsDisplay"
 
 
@@ -16,6 +16,7 @@ class HomePage extends Component {
 		this.seeCategories = this.seeCategories.bind(this)
 		this.onClickTest = this.onClickTest.bind(this)
 		this.newAuction = this.newAuction.bind(this)
+		this.newCategory = this.newCategory.bind(this)
 		this.redirectToLogin = this.redirectToLogin.bind(this)
 		
 	}
@@ -43,8 +44,8 @@ class HomePage extends Component {
 			&locationTitle=${newItem.locationTitle}&media=${newItem.fromData}
 			&endsAt=${newItem.endsAt}&description=${newItem.description}`
 		console.log("path: ", pathWithParams)
-		request("POST", pathWithParams, newItem)
-		//request("POST", "/item", newItem)
+		customRequest("POST", pathWithParams, newItem)
+		//customRequest("POST", "/item", newItem)
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
@@ -60,7 +61,7 @@ class HomePage extends Component {
 	}
 
 	categoryTest() {
-		request("POST", "/admin/newCategory?name=Debris")
+		customRequest("POST", "/admin/newCategory?name=Things")
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
@@ -77,7 +78,7 @@ class HomePage extends Component {
 	}
 
 	seeCategories() {
-		request("GET", "/item/allCategories")
+		customRequest("GET", "/item/allCategories")
 		.then(response => {
 			console.log("seeCategories response: ", response)
 			console.log("response.data: ", response.data)
@@ -101,6 +102,10 @@ class HomePage extends Component {
 
 	newAuction() {
 		this.props.history.push("/createAuction");
+	}
+
+	newCategory() {
+		this.props.history.push("/createCategory")
 	}
 
 
@@ -172,11 +177,16 @@ class HomePage extends Component {
 						<h3>Suggestions etc</h3>
 						<div className="right-action-buttons">
 							{AuthHelper.loggedIn() ? 
-								<button className="new-auction-button" onClick={this.newAuction}>New Auction</button>
-								: <button className="new-auction-button" onClick={this.newAuction} disabled>New Auction</button>
+								<button type="button" className="btn btn-success" onClick={this.newAuction}>New Auction</button>
+								: <button className="btn btn-success disabled" onClick={this.newAuction} disabled>New Auction</button>
 							}
-							
-							
+
+							<br />
+							<br />
+							{AuthHelper.isAdmin() ?
+								<button type="button" className="btn btn-success" onClick={this.newCategory}>New Category</button>
+								: null
+							}
 						</div>
 						<br />
 						{/*eslint-disable-next-line*/}

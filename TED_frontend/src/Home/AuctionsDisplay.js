@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import Swal from "sweetalert2"
-import { request } from "../utils/AuthHelper"
+import { customRequest } from "../utils/AuthHelper"
 import AuctionPreview from "../Elements/AuctionPreview"
 import testAuctions from "./testItems.js"
 
@@ -18,7 +18,8 @@ class AuctionsDisplay extends Component {
 	getAuctions() {
 		console.log("getAuctions")
 	//	axios.get(Constants.BASEURL + "/item/auctions", {headers: AuthHelper.getAuthHeader()} )
-		request("GET", "/item/openAuctions")
+	//	customRequest("GET", "/item/openAuctions")
+		customRequest("GET", "/item/allAuctions")
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)

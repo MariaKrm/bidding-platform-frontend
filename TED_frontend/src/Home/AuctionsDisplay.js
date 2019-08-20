@@ -1,6 +1,6 @@
 import React, { Component } from "react"
-import Swal from "sweetalert2"
 import { customRequest } from "../utils/AuthHelper"
+import { displayError } from "../utils/ErrorHelper"
 import AuctionPreview from "../Elements/AuctionPreview"
 import testAuctions from "./testItems.js"
 
@@ -27,13 +27,7 @@ class AuctionsDisplay extends Component {
 				auctions: response.data,
 			})
 		}).catch(err => {
-            console.log(err)
-            var errText = err.response ? err.response.status + ":" + err.response.data.text : err
-            Swal.fire({
-                type: "error",
-                title: "Oops...",
-                text: errText,
-            })
+            displayError(err)
 		})
 	}
 

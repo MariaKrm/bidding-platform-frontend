@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import Header from "../Elements/Header"
 import { Redirect } from "react-router"
 import { customRequest } from "../utils/AuthHelper"
-import Swal from "sweetalert2"
+import { displayError } from "../utils/ErrorHelper"
 
 
 class CreateCategory extends Component {
@@ -35,14 +35,7 @@ class CreateCategory extends Component {
     		})
     		setTimeout(() => this.setState({ redirect: true }), 3000)
     	}).catch(err => {
-    		console.log("cat")
-    		console.log(err)
-    		var errText = err.response ? err.response.status + ":" + err.response.data.text : err
-    		Swal.fire({
-    		    type: "error",
-    		    title: "Oops...",
-    		    text: errText,
-    		})
+    		displayError(err)
     	})
     }
 

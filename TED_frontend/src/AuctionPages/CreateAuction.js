@@ -2,8 +2,8 @@ import React, { Component } from "react"
 import Header from "../Elements/Header"
 import { Redirect } from "react-router"
 import DatePicker from "react-datepicker"
-import Swal from "sweetalert2"
 import { customRequest } from "../utils/AuthHelper"
+import { displayError } from "../utils/ErrorHelper"
 import ValidatedInput from "../Elements/ValidatedInput"
 import AddressForm from "../Signup/AddressForm"
 
@@ -97,14 +97,7 @@ class CreateAuction extends Component {
     			categoryList: categories
     		})
     	}).catch(err => {
-    		console.log("cat")
-    		console.log(err)
-    		var errText = err.response ? err.response.status + ":" + err.response.data.text : err
-    		Swal.fire({
-    		    type: "error",
-    		    title: "Oops...",
-    		    text: errText,
-    		})
+    		displayError(err)
     	})
     }
 
@@ -173,13 +166,7 @@ class CreateAuction extends Component {
     		})
     		setTimeout(() => this.setState({ redirect: true }), 3000)
     	}).catch(err => {
-    		console.log(err)
-    		var errText = err.response ? err.response.status + ":" + err.response.data.text : err
-    		Swal.fire({
-    		    type: "error",
-    		    title: "Oops...",
-    		    text: errText,
-    		})
+    		displayError(err)
     	})
     }
 

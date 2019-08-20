@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import axios from "axios"
-import Swal from "sweetalert2"
+import { displayError } from "../utils/ErrorHelper"
 import * as Constants from "../Constants/Constants"
 
 class ValidatedInput extends Component {
@@ -74,11 +74,7 @@ class ValidatedInput extends Component {
 				this.props.passresult("username", value, error)
 			}
 			else {
-				Swal.fire({
-				    type: "error",
-				    title: "Oops...",
-				    text: err,
-				})
+				displayError(err)
 			}
 		})
 	}
@@ -93,11 +89,7 @@ class ValidatedInput extends Component {
 				this.props.passresult("email", value, error)
 			}
 			else {
-				Swal.fire({
-				    type: "error",
-				    title: "Oops...",
-				    text: err,
-				})
+				displayError(err)
 			}
 		})
 	}

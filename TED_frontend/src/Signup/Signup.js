@@ -4,7 +4,7 @@ import SignupForm from "./SignupForm"
 import axios from "axios"
 import { Redirect } from "react-router"
 import * as Constants from "../Constants/Constants"
-import Swal from "sweetalert2"
+import { displayError } from "../utils/ErrorHelper"
 import "../styles/form_style.css"
 
 
@@ -90,13 +90,7 @@ class Signup extends React.Component {
     		})
     		setTimeout(() => this.setState({ redirect: true }), 3000)
     	}).catch(err => {
-    		console.log("error: ", err)
-    		var errText = err.response ? err.response.status + ":" + err.response.data.text : err
-    		Swal.fire({
-    		    type: "error",
-    		    title: "Oops...",
-    		    text: errText,
-    		})
+    		displayError(err)
     	})
 
     }

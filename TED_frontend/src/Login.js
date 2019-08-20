@@ -3,9 +3,9 @@ import { Link } from "react-router-dom"
 import { Redirect } from "react-router"
 import axios from "axios"
 import Header from "./Elements/Header"
-import Swal from "sweetalert2"
 import * as Constants from "./Constants/Constants"
 import AuthHelper from "./utils/AuthHelper"
+import { displayError } from "./utils/ErrorHelper"
 
 
 
@@ -54,14 +54,7 @@ class Login extends Component {
             })
         }).catch(err => {
             console.log("POST ERROR")
-            console.log(err)
-            var errText = err.response ? err.response.status + ":" + err.response.data.text : err
-            Swal.fire({
-                type: "error",
-                title: "Oops...",
-                text: errText,
-                footer: "<a href='/signup'>Don't have an account yet?</a>"
-            })
+            displayError(err)
         })
     }
 

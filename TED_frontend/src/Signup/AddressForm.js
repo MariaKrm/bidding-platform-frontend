@@ -1,6 +1,7 @@
 import React, {Component} from "react"
 import AddressInput from "./AddressInput"
 import AddressSuggest from "./AddressSuggest"
+import { displayError } from "../utils/ErrorHelper"
 import axios from "axios"
 
 // https://developer.here.com/blog/street-address-validation-with-reactjs-and-here-geocoder-autocomplete
@@ -45,10 +46,10 @@ class AddressForm extends Component {
 		if(!query.length > 0) {
 			const address = this.getEmptyAddress()
 			return this.setState({
-        		address: address,
-        		query: "",
-        		locationId: "",
-       		})
+      		address: address,
+      		query: "",
+      		locationId: "",
+     		})
 		}
 
 
@@ -63,11 +64,13 @@ class AddressForm extends Component {
 			const address = response.data.suggestions[0].address;
 			const id = response.data.suggestions[0].locationId;
 			this.setState({
-          		address: address,
-          		query: query,
-          		locationId: id,
-          	})
-		})
+      		address: address,
+      		query: query,
+      		locationId: id,
+      	})
+		}).catch(err => {
+      displayError(err)
+    })
 
 
 		this.props.onAddressSubmit(null, null, null)
@@ -130,7 +133,9 @@ class AddressForm extends Component {
         		})
     		}
   			
-  		})
+  		}).catch(err => {
+        displayError(err)
+      })
 
 	}
 

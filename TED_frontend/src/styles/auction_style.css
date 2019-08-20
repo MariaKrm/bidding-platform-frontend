@@ -35,8 +35,15 @@
 }
 
 .preview-title {
+	color: #000;
+	font-weight: bold;
 	font-size: 24px;
 	margin: 0;
+}
+
+.preview-title:hover {
+	color: #000;
+	text-decoration: underline;
 }
 
 .preview-categories {
@@ -60,4 +67,60 @@
 .preview-buy-price, .preview-ends-at {
 	font-size: 16px;
 	margin: 0;
+}
+
+
+.auction-info {
+	border: 2px solid orange;
+	margin: 50px 100px;
+	padding: 10px;
+	overflow: hidden;
+}
+
+.auction-info-top {
+	border: 2px solid purple;
+	overflow: hidden;
+}
+
+.auction-info-bottom {
+	border: 2px solid magenta;
+	text-align: left;
+}
+
+
+.auction-text {
+	border: 2px solid hotpink;
+	text-align: left;
+	margin-left: 200px;
+	padding-left: 10px;
+}
+
+
+.auction-details {
+	border: 2px solid green;
+	display: flex;
+	justify-content: space-between;
+}
+
+.auction-details-left {
+	border: 1px solid red;
+}
+
+.auction-details-right {
+	border: 1px solid blue;
+	margin-right: 50px;
+}
+
+
+.auction-description-title {
+	margin: 10px;
+}
+
+.auction-description {
+	margin: 10px;
+}
+
+.auction-bids {
+	border: 2px solid green;
+	margin: 50px 100px;
 }

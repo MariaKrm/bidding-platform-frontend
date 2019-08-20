@@ -53,6 +53,8 @@ class AuctionsDisplay extends Component {
 		const auctions = auctionList.map(item => {
 			return (
 				<AuctionPreview
+					key={item.id}
+					id={item.id}
 					name={item.name}
 					media={item.media} 
 					buyPrice={item.buyPrice}

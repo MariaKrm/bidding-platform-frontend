@@ -69,6 +69,7 @@ input[type=text]:focus:read-write, input[type=password]:focus:read-write {
 	width: 160px;
 	box-shadow: 1px 5px #969696;
 	/*box-shadow: 1px 5px #8ebfbf;*/
+	cursor: pointer;
 }
 
 .submit-button:hover {
@@ -92,6 +93,7 @@ input[type=text]:focus:read-write, input[type=password]:focus:read-write {
 	width: 160px;
 	box-shadow: 1px 5px #b54c43;
 	/*box-shadow: 1px 5px #8ebfbf;*/
+	cursor: pointer;
 }
 
 .cancel-button:hover {

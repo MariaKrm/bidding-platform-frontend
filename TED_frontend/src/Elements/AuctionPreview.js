@@ -2,6 +2,7 @@ import React, { Component } from "react"
 
 
 class AuctionPreview extends Component {
+
 	render() {
 		const categories = this.props.categories.map(category => {
 			return category.name
@@ -15,7 +16,7 @@ class AuctionPreview extends Component {
 			<div className="auction-preview">
 				<img className="preview-image" src={image} alt={alt}/>
 				<div className="preview-text">
-					<h3 className="preview-title">{this.props.name}</h3>
+					<a href={`/auctions/${this.props.id}`} className="preview-title">{this.props.name}</a>
 					<div className="preview-details">
 						<div className="preview-details-left">
 							<p className="preview-categories">{categoryString}</p>

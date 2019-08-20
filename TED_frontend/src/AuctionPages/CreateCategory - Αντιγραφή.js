@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import Header from "../Elements/Header"
 import { Redirect } from "react-router"
-import { customRequest } from "../utils/AuthHelper"
+import AuthHelper, { customRequest } from "../utils/AuthHelper"
 import Swal from "sweetalert2"
 
 

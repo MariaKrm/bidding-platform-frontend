@@ -131,6 +131,10 @@ input[type=text]:focus:read-write, input[type=password]:focus:read-write {
 	transform: translateY(2px);
 }
 
+.btn-margin {
+	margin: 5px !important;
+}
+
 
 .login-form {
 	background-color: white;

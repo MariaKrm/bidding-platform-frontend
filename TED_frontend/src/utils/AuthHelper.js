@@ -12,9 +12,13 @@ class AuthHelper {
 
   static isAdmin() {
     const user = JSON.parse(sessionStorage.getItem("user"))
-    console.log("user: ", user)
-    console.log("isAdmin: ", user.admin)
-    return user.admin
+    if(user) {
+      console.log("user: ", user)
+      return user.admin
+    }
+    else {
+      return false
+    }
   }
 
   static isTokenExpired(token) {

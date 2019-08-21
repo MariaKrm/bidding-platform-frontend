@@ -17,6 +17,7 @@ class HomePage extends Component {
 		this.onClickTest = this.onClickTest.bind(this)
 		this.newAuction = this.newAuction.bind(this)
 		this.newCategory = this.newCategory.bind(this)
+		this.logout = this.logout.bind(this)
 		this.redirectToLogin = this.redirectToLogin.bind(this)
 		
 	}
@@ -88,6 +89,11 @@ class HomePage extends Component {
 		this.props.history.push("/createCategory")
 	}
 
+	logout() {
+		AuthHelper.logout()
+		this.redirectToLogin()
+	}
+
 
 	redirectToLogin() {
 		this.props.history.push("/login")
@@ -106,11 +112,12 @@ class HomePage extends Component {
 		}
 	}
 
-	displayAccountButton() {
+	displayAccountButtons() {
 		if(AuthHelper.loggedIn()) {
 			return (
 				<div className="home-header-actions">
 					<button className="header-button">My Account</button>
+					<button className="header-button" onClick={this.logout}>Logout</button>
 				</div>
 			)
 		}
@@ -132,24 +139,18 @@ class HomePage extends Component {
 					<div className="home-header-search">
 						<SearchBar />
 					</div>
-					{this.displayAccountButton()}
+					{this.displayAccountButtons()}
 				</div>
 				{this.displayVisitorSign()}
 
 				<div className="home-content">
 					<div className="search-container">
 						<h3>Search</h3>
-						<button onClick={this.categoryTest}>Add Test Category</button>
-						<br />
-						<button onClick={this.onClickTest}>Add Test Auction</button>
-						<br />
-						<br />
-						<br />
 					{/*eslint-disable-next-line*/}
 						<img src={require("../images/no_image.png")} alt="no image available" />
 					</div>
 					<div className="main-content">
-						<h3>Main Content</h3>
+{/*						<h3>Main Content</h3>
 						<Timer />				{/* This is to test the refresh with timer; changes the time every 3 seconds */}
 						<AuctionsDisplay />
 					</div>
@@ -157,14 +158,13 @@ class HomePage extends Component {
 						<h3>Suggestions etc</h3>
 						<div className="right-action-buttons">
 							{AuthHelper.loggedIn() ? 
-								<button type="button" className="btn btn-success" onClick={this.newAuction}>New Auction</button>
-								: <button className="btn btn-success disabled" onClick={this.newAuction} disabled>New Auction</button>
+								<button type="button" className="btn btn-success btn-margin" onClick={this.newAuction}>New Auction</button>
+								: <button className="btn btn-success disabled btn-margin" onClick={this.newAuction} disabled>New Auction</button>
 							}
 
 							<br />
-							<br />
 							{AuthHelper.isAdmin() ?
-								<button type="button" className="btn btn-success" onClick={this.newCategory}>New Category</button>
+								<button type="button" className="btn btn-success btn-margin" onClick={this.newCategory}>New Category</button>
 								: null
 							}
 						</div>

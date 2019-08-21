@@ -109,11 +109,14 @@
 .auction-details-right {
 	border: 1px solid blue;
 	margin-right: 50px;
+	text-align: center;
 }
 
 
 .auction-description-title {
 	margin: 10px;
+	font-size: 20px;
+	font-weight: bold;
 }
 
 .auction-description {

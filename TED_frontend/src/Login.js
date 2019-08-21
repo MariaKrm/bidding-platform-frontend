@@ -98,7 +98,7 @@ class Login extends Component {
                     <br />
                     <br />
                     <p>Don't have an account? <Link to="./signup" className="form-link" type="link">Sign Up</Link></p>
-                    <p>Or <Link to="./visitor" className="form-link" type="link">login as visitor</Link></p>
+                    <p>Or <Link to="./home" className="form-link" type="link">login as visitor</Link></p>
                     
                 </form>
             </div>

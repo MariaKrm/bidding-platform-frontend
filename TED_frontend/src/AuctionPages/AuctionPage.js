@@ -63,11 +63,14 @@ class AuctionPage extends Component {
 								<div className="auction-details-left">
 									<p className="preview-categories">{categoryString}</p>
 									<p className="preview-location">From {this.state.data.location.locationTitle}</p>
+									<br />
+									<p className="preview-ends-at">{ended ? "Ended on" : "Ends on"} {endDate.toDateString()}, {endDate.toLocaleTimeString()}</p>
 								</div>
 								<div className="auction-details-right">
 									<p className="preview-current-price">Currently {this.state.data.currently}€</p>
-									{this.state.data.buyPrice ? <p className="preview-buy-price">or buy immediately for {this.state.data.buyPrice}€</p> : null}
-									<p className="preview-ends-at">{ended ? "Ended on" : "Ends on"} {endDate.toDateString()}, {endDate.toLocaleTimeString()}</p>
+									<button className="btn btn-success btn-margin">Submit Bid</button>
+									<br />
+									{this.state.data.buyPrice ? <button className="btn btn-success btn-margin">Buy Now for {this.state.data.buyPrice}€</button> : null}
 								</div>
 							</div>
 						</div>

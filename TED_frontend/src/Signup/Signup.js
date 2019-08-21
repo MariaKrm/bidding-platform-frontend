@@ -113,7 +113,7 @@ class Signup extends React.Component {
     	if(this.state.success) {
     		return (
     			<div class="alert alert-success">
-    			  <strong>Success!</strong> Auction Created. Redirecting to Login.
+    			  <strong>Success!</strong> Account Created. Redirecting to Login.
     			</div>
     		)
     	}

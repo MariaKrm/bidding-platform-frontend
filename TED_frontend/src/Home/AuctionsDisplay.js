@@ -43,7 +43,7 @@ class AuctionsDisplay extends Component {
 		else {
 			auctionList = testAuctions
 		}
-		
+
 		const auctions = auctionList.map(item => {
 			return (
 				<AuctionPreview

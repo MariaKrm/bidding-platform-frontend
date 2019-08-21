@@ -135,6 +135,10 @@ input[type=text]:focus:read-write, input[type=password]:focus:read-write {
 	margin: 5px !important;
 }
 
+.btn-set-size {
+	width: 180px;
+}
+
 
 .login-form {
 	background-color: white;

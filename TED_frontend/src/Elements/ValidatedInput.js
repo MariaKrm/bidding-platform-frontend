@@ -26,6 +26,7 @@ class ValidatedInput extends Component {
 			case "telNumber" : return this.validateTelNumber(value)
 			case "buyPrice" : return this.validatePrice(value)
 			case "firstBid" : return this.validatePrice(value)
+			case "itemName" : return this.validateItemName(value)
 			default: return null
 		}
 	}
@@ -62,6 +63,10 @@ class ValidatedInput extends Component {
 	validatePrice(value) {
 		const regEx = /^\d+\.\d{1,2}$/
 		return (!regEx.test(value)) ? "Invalid price" : null
+	}
+
+	validateItemName(value) {
+		return value.length > 50 ? "Item name too long" : null
 	}
 
 	checkUsernameAvail(value) {

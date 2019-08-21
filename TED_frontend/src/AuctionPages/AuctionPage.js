@@ -74,9 +74,9 @@ class AuctionPage extends Component {
 								</div>
 								<div className="auction-details-right">
 									<p className="preview-current-price">Currently {this.state.data.currently}€</p>
-									<button className="btn btn-success btn-margin">Submit Bid</button>
+									<button className="btn btn-success btn-margin btn-set-size">Submit Bid</button>
 									<br />
-									{this.state.data.buyPrice ? <button className="btn btn-success btn-margin">Buy Now for {this.state.data.buyPrice}€</button> : null}
+									{this.state.data.buyPrice ? <button className="btn btn-success btn-margin btn-set-size">Buy Now for {this.state.data.buyPrice}€</button> : null}
 								</div>
 							</div>
 						</div>

@@ -16,7 +16,7 @@ class CreateAuction extends Component {
 		const now = new Date()
 		const after30mins =  new Date(now.getTime() + 30*60000);
 		this.state = {
-			name: "",
+			itemName: "",
 			buyPrice: "",
 			firstBid: "",
 			endsAt: after30mins,
@@ -138,10 +138,10 @@ class CreateAuction extends Component {
 
 
     	const newAuction = {
-    		name: this.state.name,
+    		name: this.state.itemName,
     		buyPrice: this.state.buyPrice,
     		firstBid: this.state.firstBid,
-    		endsAt: javaDate,			//haha yeah right
+    		endsAt: javaDate,
     		coords: this.state.coords,
     		locationTitle: this.state.locationTitle,
     		categoriesId: uniqueCategories.join(", "),
@@ -216,12 +216,12 @@ class CreateAuction extends Component {
 						{/*eslint-disable-next-line*/}
 						<img className="add-image-picture" src={require("../images/add_image.png")} alt="Add image" onClick={this.handleImageClick} />
 						<div className="new-auction-fields">
-							<input 
+							<ValidatedInput 
 								type="text" 
 								value={this.state.name} 
-								name="name" 
+								name="itemName"
 								placeholder="Item Name"
-								onChange={this.handleChange}
+								passresult={this.passresult}
 								required
 							/>
 							<ValidatedInput
@@ -230,7 +230,6 @@ class CreateAuction extends Component {
 								name="buyPrice" 
 								placeholder="Buy Price (ex. 12.00) €"
 								passresult={this.passresult}
-								required
 							/>
 							<ValidatedInput
 								type="text" 

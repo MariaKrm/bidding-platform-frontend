@@ -158,13 +158,13 @@ class HomePage extends Component {
 						<h3>Suggestions etc</h3>
 						<div className="right-action-buttons">
 							{AuthHelper.loggedIn() ? 
-								<button type="button" className="btn btn-success btn-margin" onClick={this.newAuction}>New Auction</button>
-								: <button className="btn btn-success disabled btn-margin" onClick={this.newAuction} disabled>New Auction</button>
+								<button type="button" className="btn btn-success btn-margin btn-set-size" onClick={this.newAuction}>New Auction</button>
+								: <button className="btn btn-success disabled btn-margin btn-set-size" onClick={this.newAuction} disabled>New Auction</button>
 							}
 
 							<br />
 							{AuthHelper.isAdmin() ?
-								<button type="button" className="btn btn-success btn-margin" onClick={this.newCategory}>New Category</button>
+								<button type="button" className="btn btn-success btn-margin btn-set-size" onClick={this.newCategory}>New Category</button>
 								: null
 							}
 						</div>

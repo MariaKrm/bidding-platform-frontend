@@ -1,7 +1,8 @@
 import React, { Component } from "react"
 import { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
-
+import testBids from "../testData/testBids.js"
+import Bid from "../Bid/Bid"
 
 
 class AuctionPage extends Component {
@@ -52,6 +53,11 @@ class AuctionPage extends Component {
 		const alt = this.state.data.media ? this.state.data.name : "no image available"
 		const endDate = new Date(this.state.data.endsAt)
 		const ended = endDate < Date.now()
+
+		var bids = testBids.map(bid => {
+			return <Bid amount={bid.amount} time={bid.time} bidder={bid.bidder} />
+		})
+
 		return (
 			<div className="auction-page">
 				<div className="auction-info">
@@ -78,11 +84,17 @@ class AuctionPage extends Component {
 					<div className="auction-info-bottom">
 						<h3 className="auction-description-title">Description:</h3>
 						<p className="auction-description">{this.state.data.description}</p>
+						<div className="auction-pictures">
+							Pic thumbs here
+						</div>
 					</div>
 				</div>
 
 				<div className="auction-bids">
-					<h3>Bids go here</h3>
+					<h3 className="auction-bids-title">Current Bids</h3>
+					<ul className="auction-bids-list">
+						{bids}
+					</ul>
 				</div>
 			</div>
 		)

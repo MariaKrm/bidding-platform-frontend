@@ -15,6 +15,7 @@ import "./styles/form_style.css"
 import "./styles/header_style.css"
 import "./styles/home_style.css"
 import "./styles/auction_style.css"
+import "./styles/bid_style.css"
 
 import "react-datepicker/dist/react-datepicker.css";
 

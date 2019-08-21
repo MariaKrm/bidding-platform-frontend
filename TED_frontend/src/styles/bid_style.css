@@ -1,0 +1,56 @@
+
+.bidder {
+	/*border: 2px solid red;*/
+	padding: 5px;
+}
+
+.bidder-username {
+	font-size: 18px;
+	margin: 0;
+}
+
+.bidder-rating {
+	font-size: 16px;
+	color: green;
+	margin: 0;
+}
+
+.bidder-location {
+	font-size: 14px;
+	margin: 0;
+	color: grey;
+}
+
+
+
+
+
+
+.bid {
+	border-bottom: 2px solid #d9d9d9;
+	padding: 10px;
+	display: flex;
+	align-items: center;
+}
+
+.bid-details {
+	/*border: 2px solid yellow;*/
+	flex: 1;
+}
+
+.bid-amount {
+	font-size: 18px;
+	font-weight: bold;
+	margin: 0;
+}
+
+.bid-time {
+	font-size: 14px;
+	margin: 0;
+	color: grey;
+}
+
+.bid-bidder {
+	flex: 1;
+	/*border: 2px solid orange;*/
+}

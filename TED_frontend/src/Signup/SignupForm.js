@@ -1,5 +1,5 @@
 import React from "react"
-import AddressForm from "./AddressForm"
+import AddressForm from "../Address/AddressForm"
 import ValidatedInput from "../Elements/ValidatedInput"
 import "../styles/form_style.css"
 

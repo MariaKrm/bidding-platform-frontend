@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import Swal from "sweetalert2"
 import { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
 import testBids from "../testData/testBids.js"
@@ -13,7 +14,52 @@ class AuctionPage extends Component {
 			data: null,
 		}
 
+		this.sendBid = this.sendBid.bind(this)
+		this.buyNow = this.buyNow.bind(this)
 		this.getAuctionData = this.getAuctionData.bind(this)
+	}
+
+	sendBid(bid) {
+
+		const offer = {
+			offer: bid
+		}
+
+		const pathWithParams = `/bid/makeBid/${this.state.data.id}?offer=${bid}`
+		customRequest("POST", pathWithParams)
+		.then(response => {
+			console.log("response: ", response)
+			console.log("response.data: ", response.data)
+			if(response.data.auctionCompleted) {
+				var newData = this.state.data
+				newData.auctionCompleted = response.data.auctionCompleted
+				this.setState({
+					data: newData
+				})
+			}
+		}).catch(err => {
+			displayError(err)
+		})
+	}
+
+	buyNow() {
+		Swal.fire({
+			title: 'Are you sure?',
+			text: `Buy item for ${this.state.data.buyPrice}`,
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+		 	cancelButtonColor: '#d33',
+			confirmButtonText: 'Buy it'
+		}).then(result => {
+			if(result.value) {
+				Swal.fire(
+					'Request Sent!'
+				)
+
+				this.sendBid(this.state.data.buyPrice)
+			}
+		})
 	}
 
 	getAuctionData(id) {
@@ -59,6 +105,16 @@ class AuctionPage extends Component {
 			return <Bid key={bid.id} amount={bid.amount} time={bid.time} bidder={bid.bidder} />
 		})
 
+		var bidButton, buyNowButton
+		if(this.state.data.auctionCompleted) {
+			bidButton = <button className="btn btn-success disabled btn-margin btn-set-size" disabled>Submit Bid</button>
+			buyNowButton = this.state.data.buyPrice ? <button className="btn btn-success disabled btn-margin btn-set-size" disabled>Buy Now for {this.state.data.buyPrice}€</button> : null
+		}
+		else {
+			bidButton = <button className="btn btn-success btn-margin btn-set-size">Submit Bid</button>
+			buyNowButton = this.state.data.buyPrice ? <button className="btn btn-success btn-margin btn-set-size" onClick={this.buyNow}>Buy Now for {this.state.data.buyPrice}€</button> : null
+		}
+
 		return (
 			<div>
 				<Header />
@@ -74,12 +130,13 @@ class AuctionPage extends Component {
 										<p className="preview-location">From {this.state.data.location.locationTitle}</p>
 										<br />
 										<p className="preview-ends-at">{ended ? "Ended on" : "Ends on"} {endDate.toDateString()}, {endDate.toLocaleTimeString()}</p>
+										{this.state.data.auctionCompleted ? <p className="preview-completed">Completed</p> : null}
 									</div>
 									<div className="auction-details-right">
 										<p className="preview-current-price">Currently {this.state.data.currently}€</p>
-										<button className="btn btn-success btn-margin btn-set-size">Submit Bid</button>
+										{bidButton}
 										<br />
-										{this.state.data.buyPrice ? <button className="btn btn-success btn-margin btn-set-size">Buy Now for {this.state.data.buyPrice}€</button> : null}
+										{buyNowButton}
 									</div>
 								</div>
 							</div>

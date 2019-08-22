@@ -88,7 +88,8 @@ class Signup extends React.Component {
     		this.setState({
     			success: true,
     		})
-    		setTimeout(() => this.setState({ redirect: true }), 3000)
+            window.scrollTo(0, 0)
+    		setTimeout(() => this.setState({ redirect: true }), 2000)
     	}).catch(err => {
     		displayError(err)
     	})

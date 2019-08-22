@@ -26,6 +26,7 @@ class AuctionPreview extends Component {
 							<p className="preview-current-price">Currently {this.props.currently}€</p>
 							{this.props.buyPrice ? <p className="preview-buy-price">or buy immediately for {this.props.buyPrice}€</p> : null}
 							<p className="preview-ends-at">{ended ? "Ended on" : "Ends on"} {endDate.toDateString()}, {endDate.toLocaleTimeString()}</p>
+							{this.props.auctionCompleted ? <p className="preview-completed">Completed</p> : null}
 						</div>
 					</div>
 				</div>

@@ -33,7 +33,8 @@ class CreateCategory extends Component {
     		this.setState({
     			success: true
     		})
-    		setTimeout(() => this.setState({ redirect: true }), 3000)
+    		window.scrollTo(0, 0)
+    		setTimeout(() => this.setState({ redirect: true }), 2000)
     	}).catch(err => {
     		displayError(err)
     	})
@@ -56,7 +57,7 @@ class CreateCategory extends Component {
     	if(this.state.success) {
     		return (
     			<div class="alert alert-success">
-    			  <strong>Success!</strong> Auction Created. Redirecting to Home.
+    			  <strong>Success!</strong> Category Added. Redirecting to Home.
     			</div>
     		)
     	}

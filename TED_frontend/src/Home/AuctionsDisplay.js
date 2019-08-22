@@ -56,6 +56,7 @@ class AuctionsDisplay extends Component {
 					endsAt={item.endsAt} 
 					categories={item.categories} 
 					location={item.location}
+					auctionCompleted={item.auctionCompleted}
 				/>
 			)
 		})

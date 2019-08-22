@@ -159,7 +159,7 @@ class HomePage extends Component {
 						<div className="right-action-buttons">
 							{AuthHelper.loggedIn() ? 
 								<button type="button" className="btn btn-success btn-margin btn-set-size" onClick={this.newAuction}>New Auction</button>
-								: <button className="btn btn-success disabled btn-margin btn-set-size" onClick={this.newAuction} disabled>New Auction</button>
+								: <button className="btn btn-success disabled btn-margin btn-set-size" disabled>New Auction</button>
 							}
 
 							<br />

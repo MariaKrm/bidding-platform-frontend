@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker"
 import { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
 import ValidatedInput from "../Elements/ValidatedInput"
-import AddressForm from "../Signup/AddressForm"
+import AddressForm from "../Address/AddressForm"
 
 import "react-datepicker/dist/react-datepicker.css"
 
@@ -164,7 +164,8 @@ class CreateAuction extends Component {
     		this.setState({
     			success: true,
     		})
-    		setTimeout(() => this.setState({ redirect: true }), 3000)
+    		window.scrollTo(0, 0)
+    		setTimeout(() => this.setState({ redirect: true }), 2000)
     	}).catch(err => {
     		displayError(err)
     	})

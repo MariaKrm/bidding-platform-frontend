@@ -148,11 +148,16 @@ class CreateAuction extends Component {
     		description: this.state.description
     	}
 
+
+    	const whitespace = newAuction.description.replace(/\n/g, '\\n').replace(/\r/, '\\r')
+    	console.log("desc: ", newAuction.description)
+    	console.log("white: ", whitespace)
+
+
     	const pathWithParams = `/item?name=${newAuction.name}&buyPrice=${newAuction.buyPrice}&firstBid=${newAuction.firstBid}
     		&categoriesId=${newAuction.categoriesId}&longitude=${newAuction.coords.lon}&latitude=${newAuction.coords.lat}
     		&locationTitle=${newAuction.locationTitle}&media=${newAuction.fromData}
     		&endsAt=${newAuction.endsAt}&description=${newAuction.description}`
-
 
     	console.log("path: ", pathWithParams)
 
@@ -187,7 +192,7 @@ class CreateAuction extends Component {
     success() {
     	if(this.state.success) {
     		return (
-    			<div class="alert alert-success">
+    			<div className="alert alert-success">
     			  <strong>Success!</strong> Auction Created. Redirecting to Home.
     			</div>
     		)

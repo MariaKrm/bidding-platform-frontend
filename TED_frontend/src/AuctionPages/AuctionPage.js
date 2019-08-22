@@ -54,8 +54,12 @@ class AuctionPage extends Component {
 		const endDate = new Date(this.state.data.endsAt)
 		const ended = endDate < Date.now()
 
+		const whitespace = this.state.data.description.replace(/\n/g, '\\n').replace(/\r/, '\\r')
+		console.log("desc: ", this.state.data.description)
+		console.log("white: ", whitespace)
+
 		var bids = testBids.map(bid => {
-			return <Bid amount={bid.amount} time={bid.time} bidder={bid.bidder} />
+			return <Bid key={bid.id} amount={bid.amount} time={bid.time} bidder={bid.bidder} />
 		})
 
 		return (

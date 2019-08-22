@@ -126,6 +126,7 @@
 
 .auction-description {
 	margin: 10px;
+	white-space: pre-wrap;
 }
 
 .auction-pictures {

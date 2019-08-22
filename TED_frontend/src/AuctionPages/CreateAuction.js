@@ -149,11 +149,6 @@ class CreateAuction extends Component {
     	}
 
 
-    	const whitespace = newAuction.description.replace(/\n/g, '\\n').replace(/\r/, '\\r')
-    	console.log("desc: ", newAuction.description)
-    	console.log("white: ", whitespace)
-
-
     	const pathWithParams = `/item?name=${newAuction.name}&buyPrice=${newAuction.buyPrice}&firstBid=${newAuction.firstBid}
     		&categoriesId=${newAuction.categoriesId}&longitude=${newAuction.coords.lon}&latitude=${newAuction.coords.lat}
     		&locationTitle=${newAuction.locationTitle}&media=${newAuction.fromData}

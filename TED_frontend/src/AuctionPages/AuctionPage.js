@@ -3,6 +3,7 @@ import { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
 import testBids from "../testData/testBids.js"
 import Bid from "../Bid/Bid"
+import Header from "../Elements/Header"
 
 
 class AuctionPage extends Component {
@@ -54,51 +55,50 @@ class AuctionPage extends Component {
 		const endDate = new Date(this.state.data.endsAt)
 		const ended = endDate < Date.now()
 
-		const whitespace = this.state.data.description.replace(/\n/g, '\\n').replace(/\r/, '\\r')
-		console.log("desc: ", this.state.data.description)
-		console.log("white: ", whitespace)
-
 		var bids = testBids.map(bid => {
 			return <Bid key={bid.id} amount={bid.amount} time={bid.time} bidder={bid.bidder} />
 		})
 
 		return (
-			<div className="auction-page">
-				<div className="auction-info">
-					<div className="auction-info-top">
-						<img className="preview-image" src={image} alt={alt}/>
-						<div className="auction-text">
-							<a href={`/auctions/${this.state.data.id}`} className="preview-title">{this.state.data.name}</a>
-							<div className="auction-details">
-								<div className="auction-details-left">
-									<p className="preview-categories">{categoryString}</p>
-									<p className="preview-location">From {this.state.data.location.locationTitle}</p>
-									<br />
-									<p className="preview-ends-at">{ended ? "Ended on" : "Ends on"} {endDate.toDateString()}, {endDate.toLocaleTimeString()}</p>
-								</div>
-								<div className="auction-details-right">
-									<p className="preview-current-price">Currently {this.state.data.currently}€</p>
-									<button className="btn btn-success btn-margin btn-set-size">Submit Bid</button>
-									<br />
-									{this.state.data.buyPrice ? <button className="btn btn-success btn-margin btn-set-size">Buy Now for {this.state.data.buyPrice}€</button> : null}
+			<div>
+				<Header />
+				<div className="auction-page">
+					<div className="auction-info">
+						<div className="auction-info-top">
+							<img className="preview-image" src={image} alt={alt}/>
+							<div className="auction-text">
+								<a href={`/auctions/${this.state.data.id}`} className="preview-title">{this.state.data.name}</a>
+								<div className="auction-details">
+									<div className="auction-details-left">
+										<p className="preview-categories">{categoryString}</p>
+										<p className="preview-location">From {this.state.data.location.locationTitle}</p>
+										<br />
+										<p className="preview-ends-at">{ended ? "Ended on" : "Ends on"} {endDate.toDateString()}, {endDate.toLocaleTimeString()}</p>
+									</div>
+									<div className="auction-details-right">
+										<p className="preview-current-price">Currently {this.state.data.currently}€</p>
+										<button className="btn btn-success btn-margin btn-set-size">Submit Bid</button>
+										<br />
+										{this.state.data.buyPrice ? <button className="btn btn-success btn-margin btn-set-size">Buy Now for {this.state.data.buyPrice}€</button> : null}
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div className="auction-info-bottom">
-						<h3 className="auction-description-title">Description:</h3>
-						<p className="auction-description">{this.state.data.description}</p>
-						<div className="auction-pictures">
-							Pic thumbs here
+						<div className="auction-info-bottom">
+							<h3 className="auction-description-title">Description:</h3>
+							<p className="auction-description">{this.state.data.description}</p>
+							<div className="auction-pictures">
+								Pic thumbs here
+							</div>
 						</div>
 					</div>
-				</div>
 
-				<div className="auction-bids">
-					<h3 className="auction-bids-title">Current Bids</h3>
-					<ul className="auction-bids-list">
-						{bids}
-					</ul>
+					<div className="auction-bids">
+						<h3 className="auction-bids-title">Current Bids</h3>
+						<ul className="auction-bids-list">
+							{bids}
+						</ul>
+					</div>
 				</div>
 			</div>
 		)

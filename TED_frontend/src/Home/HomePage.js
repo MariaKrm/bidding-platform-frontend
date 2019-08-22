@@ -5,6 +5,7 @@ import SearchBar from "../Search/SearchBar"
 import AuthHelper, { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
 import AuctionsDisplay from "./AuctionsDisplay"
+import AccountButtons from "../Elements/AccountButtons"
 
 
 class HomePage extends Component {
@@ -17,8 +18,6 @@ class HomePage extends Component {
 		this.onClickTest = this.onClickTest.bind(this)
 		this.newAuction = this.newAuction.bind(this)
 		this.newCategory = this.newCategory.bind(this)
-		this.logout = this.logout.bind(this)
-		this.redirectToLogin = this.redirectToLogin.bind(this)
 		
 	}
 
@@ -89,47 +88,6 @@ class HomePage extends Component {
 		this.props.history.push("/createCategory")
 	}
 
-	logout() {
-		AuthHelper.logout()
-		this.redirectToLogin()
-	}
-
-
-	redirectToLogin() {
-		this.props.history.push("/login")
-	}
-
-	displayVisitorSign() {
-		if(!AuthHelper.loggedIn()) {
-			return (
-				<div class="alert alert-info">
-    				You are logged in as a visitor. Sign up to access all features.
-    			</div>
-			)
-		}
-		else {
-			return null
-		}
-	}
-
-	displayAccountButtons() {
-		if(AuthHelper.loggedIn()) {
-			return (
-				<div className="home-header-actions">
-					<button className="header-button">My Account</button>
-					<button className="header-button" onClick={this.logout}>Logout</button>
-				</div>
-			)
-		}
-		else {
-			return (
-				<div className="home-header-actions">
-					<button className="header-button" onClick={this.redirectToLogin}>Log In/Sign Up</button>
-				</div>
-			)
-		}
-	}
-
 
 	render() {
 		return (
@@ -139,9 +97,9 @@ class HomePage extends Component {
 					<div className="home-header-search">
 						<SearchBar />
 					</div>
-					{this.displayAccountButtons()}
+					<AccountButtons history={this.props.history} />
 				</div>
-				{this.displayVisitorSign()}
+				{AuthHelper.displayVisitorSign()}
 
 				<div className="home-content">
 					<div className="search-container">

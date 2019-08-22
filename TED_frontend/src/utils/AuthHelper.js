@@ -1,3 +1,4 @@
+import React from "react"
 import decode from "jwt-decode"
 import * as Constants from "../Constants/Constants"
 import axios from "axios"
@@ -51,6 +52,7 @@ class AuthHelper {
   static logout() {
     // Clear user token and profile data from localStorage
     sessionStorage.removeItem("id_token")
+    sessionStorage.removeItem("user")
   }
 
   static getConfirm() {
@@ -65,6 +67,19 @@ class AuthHelper {
       "Authorization": "Bearer " + AuthHelper.getToken()
     }
     return header
+  }
+
+  static displayVisitorSign() {
+    if(!AuthHelper.loggedIn()) {
+      return (
+        <div class="alert alert-info">
+          You are logged in as a visitor. Sign up to access all features.
+        </div>
+      )
+    }
+    else {
+      return null
+    }
   }
 
 }

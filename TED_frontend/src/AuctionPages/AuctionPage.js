@@ -1,10 +1,11 @@
 import React, { Component } from "react"
 import Swal from "sweetalert2"
-import { customRequest } from "../utils/AuthHelper"
+import AuthHelper, { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
 import testBids from "../testData/testBids.js"
 import Bid from "../Bid/Bid"
 import Header from "../Elements/Header"
+import AccountButtons from "../Elements/AccountButtons"
 
 
 class AuctionPage extends Component {
@@ -12,6 +13,7 @@ class AuctionPage extends Component {
 		super()
 		this.state = {
 			data: null,
+			success: false,
 		}
 
 		this.sendBid = this.sendBid.bind(this)
@@ -20,19 +22,17 @@ class AuctionPage extends Component {
 	}
 
 	sendBid(bid) {
-
 		const pathWithParams = `/bid/makeBid/${this.state.data.id}?offer=${bid}`
 		customRequest("POST", pathWithParams)
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
-			if(response.data.auctionCompleted) {
-				var newData = this.state.data
-				newData.auctionCompleted = response.data.auctionCompleted
-				this.setState({
-					data: newData
-				})
-			}
+			var newData = this.state.data
+			newData.auctionCompleted = response.data.auctionCompleted
+			this.setState({
+				data: newData,
+				success: true,
+			})
 		}).catch(err => {
 			displayError(err)
 		})
@@ -49,10 +49,6 @@ class AuctionPage extends Component {
 			confirmButtonText: 'Buy it'
 		}).then(result => {
 			if(result.value) {
-				Swal.fire(
-					'Request Sent!'
-				)
-
 				this.sendBid(this.state.data.buyPrice)
 			}
 		})
@@ -80,6 +76,16 @@ class AuctionPage extends Component {
 		this.getAuctionData(id)
 	}
 
+	success() {
+    	if(this.state.success) {
+    		return (
+    			<div class="alert alert-success">
+    			 	Bid submited.
+    			</div>
+    		)
+    	}
+    }
+
 	render() {
 		if(this.state.data === null) {
 			return (
@@ -102,7 +108,7 @@ class AuctionPage extends Component {
 		})
 
 		var bidButton, buyNowButton
-		if(this.state.data.auctionCompleted) {
+		if(this.state.data.auctionCompleted || !AuthHelper.loggedIn()) {
 			bidButton = <button className="btn btn-success disabled btn-margin btn-set-size" disabled>Submit Bid</button>
 			buyNowButton = this.state.data.buyPrice ? <button className="btn btn-success disabled btn-margin btn-set-size" disabled>Buy Now for {this.state.data.buyPrice}€</button> : null
 		}
@@ -113,7 +119,12 @@ class AuctionPage extends Component {
 
 		return (
 			<div>
-				<Header />
+				<div className="home-header">
+					<Header />
+					<AccountButtons history={this.props.history} />
+				</div>
+				{AuthHelper.displayVisitorSign()}
+				{this.success()}
 				<div className="auction-page">
 					<div className="auction-info">
 						<div className="auction-info-top">

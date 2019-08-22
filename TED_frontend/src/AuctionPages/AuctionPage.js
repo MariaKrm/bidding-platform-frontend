@@ -21,10 +21,6 @@ class AuctionPage extends Component {
 
 	sendBid(bid) {
 
-		const offer = {
-			offer: bid
-		}
-
 		const pathWithParams = `/bid/makeBid/${this.state.data.id}?offer=${bid}`
 		customRequest("POST", pathWithParams)
 		.then(response => {

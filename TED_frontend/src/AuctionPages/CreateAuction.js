@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import Header from "../Elements/Header"
 import { Redirect } from "react-router"
+import Swal from "sweetalert2"
 import DatePicker from "react-datepicker"
 import { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
@@ -38,6 +39,8 @@ class CreateAuction extends Component {
 		this.getAllCategories = this.getAllCategories.bind(this)
 		this.handleAddressSubmit = this.handleAddressSubmit.bind(this)
 		this.cancel = this.cancel.bind(this)
+		this.verifySubmit = this.verifySubmit.bind(this)
+		this.submitAuction = this.submitAuction.bind(this)
 	}
 
 	handleChange(event) {
@@ -51,7 +54,6 @@ class CreateAuction extends Component {
     	this.setState(oldState => {
     		const newCategories = [...oldState.categories]
     		newCategories[i] = value
-    		console.log("categories: ", newCategories)
     		return {
     			categories: newCategories
     		}
@@ -89,10 +91,7 @@ class CreateAuction extends Component {
     getAllCategories() {
     	customRequest("GET", "/item/allCategories")
     	.then(response => {
-    		console.log("seeCategories response: ", response)
-    		console.log("response.data: ", response.data)
     		const categories = response.data
-    		console.log("categories: ", categories)
     		this.setState({
     			categoryList: categories
     		})
@@ -105,8 +104,6 @@ class CreateAuction extends Component {
     handleSubmit(event) {
     	event.preventDefault()
     	var errorMessage = ""
-    	console.log("Submited")
-    	console.log("Final state: ", this.state)
 
 
     	if(this.state.coords === null) {
@@ -115,7 +112,6 @@ class CreateAuction extends Component {
 
     	const selectedCategories = this.state.categories.filter(cat => cat !== undefined && cat !== "")
     	const uniqueCategories = [...new Set(selectedCategories)]
-    	console.log("final cat: ", uniqueCategories)
 
     	if(!uniqueCategories || uniqueCategories.length < 1) {
     		errorMessage = "Pick at least one category."
@@ -134,7 +130,6 @@ class CreateAuction extends Component {
     	if(errorMessage !== "" && errorMessage !== null) return false
 
     	const javaDate = this.state.endsAt.toISOString()
-    	console.log("javaDate: ", javaDate)
 
 
     	const newAuction = {
@@ -148,14 +143,34 @@ class CreateAuction extends Component {
     		description: this.state.description
     	}
 
+    	this.verifySubmit(newAuction)
+    }
 
+
+    verifySubmit(newAuction) {
+    	Swal.fire({
+    		title: 'Are you sure?',
+    		text: "Publish New Auction?",
+    		type: 'warning',
+    		showCancelButton: true,
+    		confirmButtonColor: '#3085d6',
+    	 	cancelButtonColor: '#d33',
+    		confirmButtonText: 'Start Auction'
+    	}).then(result => {
+    		if(result.value) {
+    			setTimeout(() => this.submitAuction(newAuction), 300)
+    		}
+    	})
+    }
+
+
+    submitAuction(newAuction) {
     	const pathWithParams = `/item?name=${newAuction.name}&buyPrice=${newAuction.buyPrice}&firstBid=${newAuction.firstBid}
     		&categoriesId=${newAuction.categoriesId}&longitude=${newAuction.coords.lon}&latitude=${newAuction.coords.lat}
     		&locationTitle=${newAuction.locationTitle}&media=${newAuction.fromData}
     		&endsAt=${newAuction.endsAt}&description=${newAuction.description}`
 
     	console.log("path: ", pathWithParams)
-
 
     	customRequest("POST", pathWithParams, newAuction)
     	.then(response => {

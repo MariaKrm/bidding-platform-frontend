@@ -16,9 +16,6 @@ class AuctionsDisplay extends Component {
 
 
 	getAuctions() {
-		console.log("getAuctions")
-	//	axios.get(Constants.BASEURL + "/item/auctions", {headers: AuthHelper.getAuthHeader()} )
-	//	customRequest("GET", "/item/openAuctions")
 		customRequest("GET", "/item/allAuctions")
 		.then(response => {
 			console.log("response: ", response)

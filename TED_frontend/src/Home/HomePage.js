@@ -12,73 +12,10 @@ class HomePage extends Component {
 	constructor() {
 		super()
 
-		this.postTest = this.postTest.bind(this)
-		this.categoryTest = this.categoryTest.bind(this)
-		this.seeCategories = this.seeCategories.bind(this)
-		this.onClickTest = this.onClickTest.bind(this)
 		this.newAuction = this.newAuction.bind(this)
 		this.newCategory = this.newCategory.bind(this)
-		
 	}
 
-
-	postTest() {
-		const newItem = {
-			name: "Half Brick",
-			buyPrice: "50.0",
-			firstBid: "12.5",
-			categoriesId: "12530, 12598",
-			longitude: "23.4555",
-			latitude: "12.9090",
-			locationTitle: "Trashcan",
-			media: require("../images/Items/brick150.png"),
-			endsAt: "2021-09-26T01:30:00.000-04:00",
-			description: "Once upon a time, a brick broke in half. This is the second half."
-		}
-		console.log("newItem: ", newItem)
-
-		const formData = new FormData();
-   		formData.append('file', "../images/Items/brick150.png");
-		const pathWithParams = `/item?name=${newItem.name}&buyPrice=${newItem.buyPrice}&firstBid=${newItem.firstBid}
-			&categoriesId=${newItem.categoriesId}&longitude=${newItem.longitude}&latitude=${newItem.latitude}
-			&locationTitle=${newItem.locationTitle}&media=${newItem.fromData}
-			&endsAt=${newItem.endsAt}&description=${newItem.description}`
-		console.log("path: ", pathWithParams)
-		customRequest("POST", pathWithParams, newItem)
-		//customRequest("POST", "/item", newItem)
-		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
-		}).catch(err => {
-			displayError(err)
-		})
-	}
-
-	categoryTest() {
-		customRequest("POST", "/admin/newCategory?name=Things")
-		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
-		}).catch(err => {
-			displayError(err)
-		})
-	}
-
-	seeCategories() {
-		customRequest("GET", "/item/allCategories")
-		.then(response => {
-			console.log("seeCategories response: ", response)
-			console.log("response.data: ", response.data)
-		}).catch(err => {
-			displayError(err)
-		})
-	}
-
-	onClickTest() {
-		//this.categoryTest()
-		this.seeCategories()
-		this.postTest()
-	}
 
 	newAuction() {
 		this.props.history.push("/createAuction");

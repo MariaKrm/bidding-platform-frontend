@@ -97,7 +97,7 @@ class AuctionPage extends Component {
 	success() {
     	if(this.state.success) {
     		return (
-    			<div class="alert alert-success">
+    			<div className="alert alert-success">
     			 	Bid submited.
     			</div>
     		)
@@ -206,7 +206,7 @@ class AuctionPage extends Component {
 					</div>
 
 					<div className="auction-bids">
-						<h3 className="auction-bids-title">Current Bids</h3>
+						<h3 className="auction-bids-title">Bids on the Item</h3>
 						<ul className="auction-bids-list">
 							{bids}
 						</ul>

@@ -90,6 +90,9 @@ class AuctionPage extends Component {
 		const pos = path.lastIndexOf("/")
 		const id = path.slice(pos+1)
 		this.getAuctionData(id)
+		setInterval(() => {
+			this.getAuctionData(id)
+		}, 5000)
 	}
 
 	success() {

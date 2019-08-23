@@ -61,7 +61,7 @@ class ValidatedInput extends Component {
 	}
 
 	validatePrice(value) {
-		const regEx = /^\d+\.\d{1,2}$/
+		const regEx = /(^[1-9]\d*$)|(^\d+\.\d{1,2}$)/
 		return (!regEx.test(value)) ? "Invalid price" : null
 	}
 

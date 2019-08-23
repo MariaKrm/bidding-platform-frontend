@@ -3,6 +3,7 @@ import Header from "../Elements/Header"
 import { Redirect } from "react-router"
 import Swal from "sweetalert2"
 import DatePicker from "react-datepicker"
+import addMinutes from "date-fns/addMinutes"
 import { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
 import ValidatedInput from "../Elements/ValidatedInput"
@@ -266,6 +267,7 @@ class CreateAuction extends Component {
 									showTimeSelect
 									timeFormat="HH:mm"
 									timeIntervals={15}
+									minDate={addMinutes(new Date(), 10)}
 									dateFormat="MMMM d, yyyy h:mm aa"
 								/>
 							</div>

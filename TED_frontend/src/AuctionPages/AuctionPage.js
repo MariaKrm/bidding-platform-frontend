@@ -6,7 +6,6 @@ import testBids from "../testData/testBids.js"
 import Bid from "../Bid/Bid"
 import Header from "../Elements/Header"
 import AccountButtons from "../Elements/AccountButtons"
-import BidPopup from "./BidPopup"
 
 
 class AuctionPage extends Component {

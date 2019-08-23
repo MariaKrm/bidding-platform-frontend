@@ -10,6 +10,7 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
+    "react-tooltip": "^3.10.0",
     "sweetalert2": "^8.14.0"
   },
   "scripts": {

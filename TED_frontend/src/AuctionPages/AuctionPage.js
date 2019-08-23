@@ -2,7 +2,6 @@ import React, { Component } from "react"
 import Swal from "sweetalert2"
 import AuthHelper, { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
-import testBids from "../testData/testBids.js"
 import Bid from "../Bid/Bid"
 import Header from "../Elements/Header"
 import AccountButtons from "../Elements/AccountButtons"
@@ -122,8 +121,8 @@ class AuctionPage extends Component {
 		const endDate = new Date(this.state.data.endsAt)
 		const ended = endDate < Date.now()
 
-		var bids = testBids.map(bid => {
-			return <Bid key={bid.id} amount={bid.amount} time={bid.time} bidder={bid.bidder} />
+		var bids = this.state.data.bids.map(bid => {
+			return <Bid key={bid.id} amount={bid.offer} time={bid.createdAt} bidder={bid.bidder} />
 		})
 
 		var bidGroup, buyNowButton

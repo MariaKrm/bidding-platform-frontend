@@ -9,8 +9,14 @@
 	margin: 0;
 }
 
+.seller-rating {
+	font-size: 14px;
+	color: orange;
+	margin: 0;
+}
+
 .bidder-rating {
-	font-size: 16px;
+	font-size: 14px;
 	color: green;
 	margin: 0;
 }

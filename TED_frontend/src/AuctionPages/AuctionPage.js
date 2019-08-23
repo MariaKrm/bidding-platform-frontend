@@ -6,6 +6,7 @@ import testBids from "../testData/testBids.js"
 import Bid from "../Bid/Bid"
 import Header from "../Elements/Header"
 import AccountButtons from "../Elements/AccountButtons"
+import BidPopup from "./BidPopup"
 
 
 class AuctionPage extends Component {
@@ -14,11 +15,20 @@ class AuctionPage extends Component {
 		this.state = {
 			data: null,
 			success: false,
+			bid: "",
 		}
 
+		this.handleChange = this.handleChange.bind(this)
 		this.sendBid = this.sendBid.bind(this)
+		this.makeBid = this.makeBid.bind(this)
 		this.buyNow = this.buyNow.bind(this)
 		this.getAuctionData = this.getAuctionData.bind(this)
+	}
+
+
+	handleChange(event) {
+		const {name, value} = event.target
+    	this.setState({ [name]: value })
 	}
 
 	sendBid(bid) {
@@ -36,6 +46,12 @@ class AuctionPage extends Component {
 		}).catch(err => {
 			displayError(err)
 		})
+	}
+
+	makeBid() {
+		if(this.state.bid) {
+			this.sendBid(this.state.bid)
+		}
 	}
 
 	buyNow() {
@@ -61,7 +77,8 @@ class AuctionPage extends Component {
 			console.log("response.data: ", response.data)
 
 			this.setState({
-				data: response.data
+				data: response.data,
+				bid : response.data.currently + 0.01,
 			})
 		}).catch(err => {
 			displayError(err)
@@ -107,13 +124,41 @@ class AuctionPage extends Component {
 			return <Bid key={bid.id} amount={bid.amount} time={bid.time} bidder={bid.bidder} />
 		})
 
-		var bidButton, buyNowButton
+		var bidGroup, buyNowButton
 		if(this.state.data.auctionCompleted || !AuthHelper.loggedIn()) {
-			bidButton = <button className="btn btn-success disabled btn-margin btn-set-size" disabled>Submit Bid</button>
+			bidGroup = 
+				<div className="auction-bid-group">
+					<input
+						className="auction-bid-field diesabled"
+						type="number"
+						name="bid"
+						value={this.state.bid}
+						data-decimals="2"
+						disabled
+					/>
+					<br />
+					<button className="btn btn-success disabled btn-margin btn-set-size" disabled>Make Bid</button>
+				</div>
+
 			buyNowButton = this.state.data.buyPrice ? <button className="btn btn-success disabled btn-margin btn-set-size" disabled>Buy Now for {this.state.data.buyPrice}€</button> : null
 		}
 		else {
-			bidButton = <button className="btn btn-success btn-margin btn-set-size">Submit Bid</button>
+			bidGroup =
+				<div className="auction-bid-group">
+					<input
+						className="auction-bid-field"
+						type="number"
+						name="bid"
+						value={this.state.bid}
+						data-decimals="2"
+						min={this.state.data.currently + 0.01}
+						step="0.01"
+						onChange={this.handleChange}
+					/>
+					<br />
+					<button className="btn btn-success btn-margin btn-set-size" onClick={this.makeBid}>Make Bid</button>
+				</div>	
+
 			buyNowButton = this.state.data.buyPrice ? <button className="btn btn-success btn-margin btn-set-size" onClick={this.buyNow}>Buy Now for {this.state.data.buyPrice}€</button> : null
 		}
 
@@ -141,8 +186,10 @@ class AuctionPage extends Component {
 									</div>
 									<div className="auction-details-right">
 										<p className="preview-current-price">Currently {this.state.data.currently}€</p>
-										{bidButton}
-										<br />
+										{bidGroup}
+										{/*this.state.bidPopup ?
+											<BidPopup currently={this.state.data.currently} value={this.state.bidValue} onChange={this.handleBidChange} />
+											: null*/}
 										{buyNowButton}
 									</div>
 								</div>

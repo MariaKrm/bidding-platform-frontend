@@ -4,7 +4,6 @@ import AuthHelper, { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
 import Bid from "../Bid/Bid"
 import Header from "../Elements/Header"
-import Banner from "../Elements/Banner"
 import AccountButtons from "../Elements/AccountButtons"
 
 
@@ -170,7 +169,7 @@ class AuctionPage extends Component {
 					<Header />
 					<AccountButtons history={this.props.history} />
 				</div>
-				<Banner />
+				{AuthHelper.displayVisitorSign()}
 				{this.success()}
 				<div className="auction-page">
 					<div className="auction-info">

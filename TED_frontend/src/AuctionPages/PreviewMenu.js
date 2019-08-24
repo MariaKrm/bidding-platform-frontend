@@ -24,6 +24,13 @@ class PreviewMenu extends Component {
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
+			Swal.fire({
+				title: "Success",
+				text: "Auction Deleted",
+				type: 'success',
+			}).then(result => {
+				window.location.reload()
+			})
 		}).catch(err => {
 			displayError(err)
 		})
@@ -41,7 +48,6 @@ class PreviewMenu extends Component {
     	}).then(result => {
     		if(result.value) {
     			this.submitDelete()
-    			window.location.reload()
     		}
     	})
     }

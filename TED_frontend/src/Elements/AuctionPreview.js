@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import PreviewMenu from "../AuctionPages/PreviewMenu"
 
 
 class AuctionPreview extends Component {
@@ -16,7 +17,10 @@ class AuctionPreview extends Component {
 			<div className="auction-preview">
 				<img className="preview-image" src={image} alt={alt}/>
 				<div className="preview-text">
-					<a href={`/auctions/${this.props.id}`} className="preview-title">{this.props.name}</a>
+					<div className="preview-title-group">
+						<a href={`/auctions/${this.props.id}`} className="preview-title">{this.props.name}</a>
+						<PreviewMenu className="preview-menu"/>
+					</div>
 					<div className="preview-details">
 						<div className="preview-details-left">
 							<p className="preview-categories">{categoryString}</p>

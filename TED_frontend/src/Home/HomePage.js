@@ -5,11 +5,16 @@ import SearchBar from "../Search/SearchBar"
 import AuthHelper from "../utils/AuthHelper"
 import AuctionsDisplay from "./AuctionsDisplay"
 import AccountButtons from "../Elements/AccountButtons"
+import Banner from "../Elements/Banner"
 
 
 class HomePage extends Component {
 	constructor() {
 		super()
+		this.state = {
+			bannerMessage: "",
+			bannerType: ""
+		}
 
 		this.newAuction = this.newAuction.bind(this)
 		this.newCategory = this.newCategory.bind(this)
@@ -17,11 +22,18 @@ class HomePage extends Component {
 
 
 	newAuction() {
-		this.props.history.push("/createAuction");
+		this.props.history.push("/createAuction")
 	}
 
 	newCategory() {
 		this.props.history.push("/createCategory")
+	}
+
+	passMessage(message, type) {
+		this.setState({
+			bannerMessage: message,
+			bannerType: type,
+		})
 	}
 
 
@@ -35,7 +47,7 @@ class HomePage extends Component {
 					</div>
 					<AccountButtons history={this.props.history} />
 				</div>
-				{AuthHelper.displayVisitorSign()}
+				<Banner message={this.state.bannerMessage} type={this.state.bannerType} />
 
 				<div className="home-content">
 					<div className="search-container">

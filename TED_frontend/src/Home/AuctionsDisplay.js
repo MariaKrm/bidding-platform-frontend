@@ -45,15 +45,7 @@ class AuctionsDisplay extends Component {
 			return (
 				<AuctionPreview
 					key={item.id}
-					id={item.id}
-					name={item.name}
-					media={item.media} 
-					buyPrice={item.buyPrice}
-					currently={item.currently}
-					endsAt={item.endsAt} 
-					categories={item.categories} 
-					location={item.location}
-					auctionCompleted={item.auctionCompleted}
+					auction={item}
 				/>
 			)
 		})

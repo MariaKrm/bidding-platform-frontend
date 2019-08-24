@@ -22,6 +22,10 @@ class AuthHelper {
     }
   }
 
+  static me() {
+    return JSON.parse(sessionStorage.getItem("user"))
+  }
+
   static isTokenExpired(token) {
     try {
       const decoded = decode(token)

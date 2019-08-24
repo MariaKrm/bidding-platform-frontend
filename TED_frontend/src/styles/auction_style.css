@@ -39,7 +39,6 @@
 	font-weight: bold;
 	font-size: 24px;
 	margin: 0;
-	flex: 1;
 }
 
 .preview-title:hover {
@@ -79,12 +78,12 @@
 }
 
 .preview-menu {
-	flex: 1;
 	float: right;
 }
 
 .preview-title-group {
 	display: flex;
+	justify-content: space-between;
 }
 
 .auction-page {

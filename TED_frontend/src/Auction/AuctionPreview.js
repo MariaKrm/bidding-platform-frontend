@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import PreviewMenu from "../AuctionPages/PreviewMenu"
+import PreviewMenu from "../Auction/PreviewMenu"
 
 
 class AuctionPreview extends Component {

@@ -41,12 +41,18 @@ class AuctionPage extends Component {
 				data: newData,
 				success: true,
 			})
+			setTimeout(() => {
+				this.setState({
+					success: false,
+				})
+			}, 2000)
 		}).catch(err => {
 			displayError(err)
 		})
 	}
 
-	makeBid() {
+	makeBid(event) {
+		event.preventDefault()
 		if(this.state.bid) {
 			this.sendBid(this.state.bid)
 		}
@@ -128,7 +134,7 @@ class AuctionPage extends Component {
 		var bidGroup, buyNowButton
 		if(this.state.data.auctionCompleted || !AuthHelper.loggedIn()) {
 			bidGroup = 
-				<div className="auction-bid-group">
+				<form className="auction-bid-group">
 					<input
 						className="auction-bid-field diesabled"
 						type="number"
@@ -139,13 +145,13 @@ class AuctionPage extends Component {
 					/>
 					<br />
 					<button className="btn btn-success disabled btn-margin btn-set-size" disabled>Make Bid</button>
-				</div>
+				</form>
 
 			buyNowButton = this.state.data.buyPrice ? <button className="btn btn-success disabled btn-margin btn-set-size" disabled>Buy Now for {this.state.data.buyPrice}€</button> : null
 		}
 		else {
 			bidGroup =
-				<div className="auction-bid-group">
+				<form className="auction-bid-group">
 					<input
 						className="auction-bid-field"
 						type="number"
@@ -158,7 +164,7 @@ class AuctionPage extends Component {
 					/>
 					<br />
 					<button className="btn btn-success btn-margin btn-set-size" onClick={this.makeBid}>Make Bid</button>
-				</div>	
+				</form>	
 
 			buyNowButton = this.state.data.buyPrice ? <button className="btn btn-success btn-margin btn-set-size" onClick={this.buyNow}>Buy Now for {this.state.data.buyPrice}€</button> : null
 		}

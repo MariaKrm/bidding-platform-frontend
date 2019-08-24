@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
-import AuctionPreview from "../Elements/AuctionPreview"
+import AuctionPreview from "../Auction/AuctionPreview"
 import testAuctions from "../testData/testItems.js"
 
 class AuctionsDisplay extends Component {

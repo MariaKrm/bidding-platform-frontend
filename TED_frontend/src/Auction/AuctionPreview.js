@@ -3,6 +3,9 @@ import PreviewMenu from "../Auction/PreviewMenu"
 
 
 class AuctionPreview extends Component {
+	reloadPage() {
+		window.location.reload()
+	}
 
 	render() {
 		const categories = this.props.auction.categories.map(category => {
@@ -19,7 +22,7 @@ class AuctionPreview extends Component {
 				<div className="preview-text">
 					<div className="preview-title-group">
 						<a href={`/auctions/${this.props.auction.id}`} className="preview-title">{this.props.auction.name}</a>
-						<PreviewMenu auction={this.props.auction} className="preview-menu" />
+						<PreviewMenu auction={this.props.auction} className="preview-menu" then={this.reloadPage} />
 					</div>
 					<div className="preview-details">
 						<div className="preview-details-left">

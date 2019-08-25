@@ -5,6 +5,7 @@ import { displayError } from "../utils/ErrorHelper"
 import Bid from "../Bid/Bid"
 import Header from "../Elements/Header"
 import AccountButtons from "../Elements/AccountButtons"
+import PreviewMenu from "./PreviewMenu"
 
 
 class AuctionPage extends Component {
@@ -21,6 +22,7 @@ class AuctionPage extends Component {
 		this.makeBid = this.makeBid.bind(this)
 		this.buyNow = this.buyNow.bind(this)
 		this.getAuctionData = this.getAuctionData.bind(this)
+		this.toPreviousPage = this.toPreviousPage.bind(this)
 	}
 
 
@@ -74,6 +76,11 @@ class AuctionPage extends Component {
 		})
 	}
 
+	toPreviousPage() {
+		clearInterval(this.intervalId)
+		this.props.history.goBack()
+	}
+
 	getAuctionData(id) {
 		customRequest("GET", `/item/${id}`)
 		.then(response => {
@@ -90,14 +97,18 @@ class AuctionPage extends Component {
 	}
 
 
-	componentWillMount() {
+	componentDidMount() {
 		const path = this.props.location.pathname
 		const pos = path.lastIndexOf("/")
 		const id = path.slice(pos+1)
 		this.getAuctionData(id)
-		setInterval(() => {
+		this.intervalId = setInterval(() => {
 			this.getAuctionData(id)
 		}, 5000)
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.intervalId)
 	}
 
 	success() {
@@ -182,7 +193,10 @@ class AuctionPage extends Component {
 						<div className="auction-info-top">
 							<img className="preview-image" src={image} alt={alt}/>
 							<div className="auction-text">
-								<a href={`/auctions/${this.state.data.id}`} className="preview-title">{this.state.data.name}</a>
+								<div className="preview-title-group">
+									<a href={`/auctions/${this.state.data.id}`} className="preview-title">{this.state.data.name}</a>
+									<PreviewMenu auction={this.state.data} className="preview-menu" then={this.toPreviousPage}/>
+								</div>
 								<div className="auction-details">
 									<div className="auction-details-left">
 										<p className="preview-categories">{categoryString}</p>

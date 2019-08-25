@@ -29,7 +29,7 @@ class PreviewMenu extends Component {
 				text: "Auction Deleted",
 				type: 'success',
 			}).then(result => {
-				window.location.reload()
+				this.props.then()
 			})
 		}).catch(err => {
 			displayError(err)

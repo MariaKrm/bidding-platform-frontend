@@ -94,7 +94,7 @@ class Login extends Component {
 
                     <br />
                     <br />
-                    <button className="submit-button">Log in</button>
+                    <button className="submit-button btn-set-size">Log in</button>
                     <br />
                     <br />
                     <p>Don't have an account? <Link to="./signup" className="form-link" type="link">Sign Up</Link></p>

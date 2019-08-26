@@ -66,21 +66,13 @@ input[type=text]:focus:read-write, input[type=password]:focus:read-write {
 	background-color: #d9d9d9;
 	border-radius: 6px;
 	padding: 10px 30px;
-	width: 160px;
-	box-shadow: 1px 5px #969696;
-	/*box-shadow: 1px 5px #8ebfbf;*/
 	cursor: pointer;
 }
 
 .submit-button:hover {
-	/*background-color: #9cd9d9;*/
 	background-color: #cfcfcf;
 }
 
-.submit-button:active {
-	box-shadow: 1px 3px #969696;
-	transform: translateY(2px);
-}
 
 
 .cancel-button {
@@ -90,46 +82,30 @@ input[type=text]:focus:read-write, input[type=password]:focus:read-write {
 	background-color: #ff6f63;
 	border-radius: 6px;
 	padding: 10px 30px;
-	width: 160px;
-	box-shadow: 1px 5px #b54c43;
-	/*box-shadow: 1px 5px #8ebfbf;*/
 	cursor: pointer;
 }
 
 .cancel-button:hover {
-	/*background-color: #9cd9d9;*/
 	background-color: #f0665b;
 }
 
-.cancel-button:active {
-	box-shadow: 1px 3px #b54c43;
-	transform: translateY(2px);
-}
 
 
 .address-button {
 	border: none;
-	margin: 3px;
+	margin: 5px 8px;
 	/*background-color: #b5ebeb;*/
 	background-color: #d9d9d9;
 	border-radius: 6px;
 	padding: 6px;
-	width: 60px;
-	box-shadow: 1px 5px #969696;
-	/*box-shadow: 1px 5px #8ebfbf;*/
+	width: 80px;
+	cursor: pointer;
 }
 
 .address-button:hover {
-	/*background-color: #9cd9d9;*/
 	background-color: #cfcfcf;
-	box-shadow: 1px 5px #969696;
 }
 
-.address-button:active {
-	background-color: #cfcfcf;
-	box-shadow: 1px 3px #969696;
-	transform: translateY(2px);
-}
 
 .btn-margin {
 	margin: 5px !important;

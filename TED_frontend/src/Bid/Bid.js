@@ -13,7 +13,7 @@ class Bid extends Component {
 					<p className="bid-time">{time.toDateString()}, {time.toLocaleTimeString()}</p>
 				</div>
 				<div className="bid-bidder">
-					<Bidder user={this.props.bidder} />
+					<Bidder user={this.props.bidder} size="big" />
 				</div>
 			</div>
 		)

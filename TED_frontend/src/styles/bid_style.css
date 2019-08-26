@@ -4,30 +4,51 @@
 	padding: 5px;
 }
 
-.bidder-username {
+.bidder-username-big {
 	font-size: 18px;
 	margin: 0;
 }
 
-.seller-rating {
+.seller-rating-big {
 	font-size: 14px;
 	color: orange;
 	margin: 0;
 }
 
-.bidder-rating {
+.bidder-rating-big {
 	font-size: 14px;
 	color: green;
 	margin: 0;
 }
 
-.bidder-location {
+.bidder-location-big {
 	font-size: 14px;
 	margin: 0;
 	color: grey;
 }
 
+.bidder-username-small {
+	font-size: 14px;
+	margin: 0;
+}
 
+.seller-rating-small {
+	font-size: 12px;
+	color: orange;
+	margin: 0;
+}
+
+.bidder-rating-small {
+	font-size: 12px;
+	color: green;
+	margin: 0;
+}
+
+.bidder-location-small {
+	font-size: 12px;
+	margin: 0;
+	color: grey;
+}
 
 
 

@@ -6,6 +6,7 @@ import Bid from "../Bid/Bid"
 import Header from "../Elements/Header"
 import AccountButtons from "../Elements/AccountButtons"
 import AuctionOptions from "./AuctionOptions"
+import Bidder from "../Bid/Bidder"
 
 
 class AuctionPage extends Component {
@@ -201,6 +202,9 @@ class AuctionPage extends Component {
 									<div className="auction-details-left">
 										<p className="preview-categories">{categoryString}</p>
 										<p className="preview-location">From {this.state.data.location.locationTitle}</p>
+										<div className="auction-seller">
+											<span>by&nbsp;&nbsp;</span> <Bidder user={this.state.data.seller} size="small" />
+										</div>
 										<br />
 										<p className="preview-ends-at">{ended ? "Ended on" : "Ends on"} {endDate.toDateString()}, {endDate.toLocaleTimeString()}</p>
 										{this.state.data.auctionCompleted ? <p className="preview-completed">Completed</p> : null}

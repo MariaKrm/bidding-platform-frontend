@@ -90,6 +90,12 @@
 	margin: 0 50px;
 }
 
+.auction-seller {
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+}
+
 .auction-info {
 	/*border: 2px solid orange;*/
 	margin: 50px 100px 0;

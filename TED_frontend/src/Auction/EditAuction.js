@@ -206,7 +206,7 @@ class EditAuction extends Component {
     		return category.id
     	})
 		const javascriptDate = new Date(data.endsAt)    	
-		console.log(data)
+		console.log("data: ", data)
 		console.log(data.name)
 
     	this.setState({
@@ -215,10 +215,10 @@ class EditAuction extends Component {
     		firstBid: data.firstBid,
     		endsAt: javascriptDate,
     		coords: {
-    			lon: data.longitude,
-    			lat: data.latitude,
+    			lon: data.location.longitude,
+    			lat: data.location.latitude,
     		},
-    		locationTitle: data.locationTitle,
+    		locationTitle: data.location.locationTitle,
     		categories: categories,
     		description: data.description,
     		loading: false,
@@ -365,7 +365,7 @@ class EditAuction extends Component {
 						<button type="submit" className="submit-button">Submit</button>
 						<button type="button" className="cancel-button" onClick={this.cancel}>Cancel</button>
 					</form>
-					<AddressForm onAddressSubmit={this.handleAddressSubmit} />
+					<AddressForm onAddressSubmit={this.handleAddressSubmit} address={this.state.locationTitle} />
 				</div>
 			</div>
 		)

@@ -3,6 +3,7 @@ import AddressInput from "./AddressInput"
 import AddressSuggest from "./AddressSuggest"
 import { displayError } from "../utils/ErrorHelper"
 import axios from "axios"
+import * as Constants from "../Constants/Constants"
 
 // https://developer.here.com/blog/street-address-validation-with-reactjs-and-here-geocoder-autocomplete
 
@@ -55,13 +56,14 @@ class AddressForm extends Component {
 
 		axios.get("https://autocomplete.geocoder.api.here.com/6.2/suggest.json", {
 			params: {
-				app_id: "eI2RzAYqFejuc1XpDqZX",
-        		app_code: "bgmyQQmzbygBLLs4erk7dQ",
-        		query: query,
-        		maxresults: 1,
+				app_id: Constants.GEOCODER_ID,
+        app_code: Constants.GEOCODER_CODE,
+        query: query,
+        maxresults: 1,
 			}
 		}).then(response => {
 			const address = response.data.suggestions[0].address;
+      console.log("address: ", address)
 			const id = response.data.suggestions[0].locationId;
 			this.setState({
       		address: address,
@@ -69,7 +71,7 @@ class AddressForm extends Component {
       		locationId: id,
       	})
 		}).catch(err => {
-      displayError(err)
+      console.error("Address Error: ", err)
     })
 
 
@@ -79,8 +81,8 @@ class AddressForm extends Component {
 
 	onCheck(evt) {
 		let params = {
-    		app_id: "eI2RzAYqFejuc1XpDqZX",
-    		app_code: "bgmyQQmzbygBLLs4erk7dQ"
+    		app_id: Constants.GEOCODER_ID,
+    		app_code: Constants.GEOCODER_CODE
   		}
 
   		if(this.state.locationId.length > 0) {
@@ -142,9 +144,6 @@ class AddressForm extends Component {
 
 	onClear() {
 		const address = this.getEmptyAddress();
-		console.log("coords was: ", this.state.coords)
-		console.log("and address was: ", this.state.address)
-		console.log("and isChecked: ", this.state.isChecked)
 		this.setState({
 			address: address,
 			query: "",
@@ -155,6 +154,22 @@ class AddressForm extends Component {
 		})
 		this.props.onAddressSubmit(null, null, null)
 	}
+
+  componentDidMount() {
+    if(this.props.address) {
+      const addressArray = this.props.address.split(", ")
+      const address = {
+        city: addressArray[0],
+        country: addressArray[1],
+      }
+
+      this.setState({
+        query: this.props.address,
+        address: address,
+      })
+
+    }
+  }
 
   render() {
     return (

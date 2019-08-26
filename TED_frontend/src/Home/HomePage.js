@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import Header from "../Elements/Header"
-import Timer from "./Timer"
 import SearchBar from "../Search/SearchBar"
 import AuthHelper from "../utils/AuthHelper"
 import AuctionsDisplay from "./AuctionsDisplay"

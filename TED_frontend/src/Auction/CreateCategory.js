@@ -1,8 +1,9 @@
 import React, { Component } from "react"
 import Header from "../Elements/Header"
 import { Redirect } from "react-router"
-import { customRequest } from "../utils/AuthHelper"
+import AuthHelper, { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
+import NotAvailable from "../Elements/NotAvailable"
 
 
 class CreateCategory extends Component {
@@ -64,6 +65,10 @@ class CreateCategory extends Component {
     }
 
 	render() {
+        if(!AuthHelper.loggedIn()) {
+            return <NotAvailable />
+        }
+
 		return (
 			<div>
 				{this.redirectToHome()}

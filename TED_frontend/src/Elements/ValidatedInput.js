@@ -7,7 +7,7 @@ class ValidatedInput extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			value: "",
+			value: props.value,
 			error: "",
 		}
 		this.handleChange = this.handleChange.bind(this)

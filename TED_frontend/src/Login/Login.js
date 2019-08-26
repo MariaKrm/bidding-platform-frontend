@@ -2,10 +2,10 @@ import React, {Component} from "react"
 import { Link } from "react-router-dom"
 import { Redirect } from "react-router"
 import axios from "axios"
-import Header from "./Elements/Header"
-import * as Constants from "./Constants/Constants"
-import AuthHelper from "./utils/AuthHelper"
-import { displayError } from "./utils/ErrorHelper"
+import Header from "../Elements/Header"
+import * as Constants from "../Constants/Constants"
+import AuthHelper from "../utils/AuthHelper"
+import { displayError } from "../utils/ErrorHelper"
 
 
 

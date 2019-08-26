@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import PreviewMenu from "../Auction/PreviewMenu"
+import AuctionOptions from "../Auction/AuctionOptions"
 
 
 class AuctionPreview extends Component {
@@ -22,7 +22,7 @@ class AuctionPreview extends Component {
 				<div className="preview-text">
 					<div className="preview-title-group">
 						<a href={`/auctions/${this.props.auction.id}`} className="preview-title">{this.props.auction.name}</a>
-						<PreviewMenu auction={this.props.auction} className="preview-menu" then={this.reloadPage} />
+						<AuctionOptions auction={this.props.auction} className="preview-menu" then={this.reloadPage} history={this.props.history} />
 					</div>
 					<div className="preview-details">
 						<div className="preview-details-left">

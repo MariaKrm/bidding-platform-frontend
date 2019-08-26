@@ -46,7 +46,7 @@ class HomePage extends Component {
 					<div className="main-content">
 {/*						<h3>Main Content</h3>
 						<Timer />				{/* This is to test the refresh with timer; changes the time every 3 seconds */}
-						<AuctionsDisplay />
+						<AuctionsDisplay history={this.props.history}/>
 					</div>
 					<div className="suggestions">
 						<h3>Suggestions etc</h3>

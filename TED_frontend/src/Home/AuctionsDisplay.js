@@ -46,6 +46,7 @@ class AuctionsDisplay extends Component {
 				<AuctionPreview
 					key={item.id}
 					auction={item}
+					history={this.props.history}
 				/>
 			)
 		})

@@ -4,7 +4,7 @@ import AuthHelper, { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
 
 
-class PreviewMenu extends Component {
+class AuctionOptions extends Component {
 	constructor() {
 		super()
 
@@ -15,7 +15,7 @@ class PreviewMenu extends Component {
 	}
 
 	editAuction() {
-		console.log("edit")
+		this.props.history.push(`/editAuction/${this.props.auction.id}`)
 	}
 
 	submitDelete() {
@@ -90,4 +90,4 @@ class PreviewMenu extends Component {
 	}
 }
 
-export default PreviewMenu
+export default AuctionOptions

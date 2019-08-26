@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import Header from "../Elements/Header"
-import { Redirect } from "react-router"
 import Swal from "sweetalert2"
 import DatePicker from "react-datepicker"
 import addMinutes from "date-fns/addMinutes"
@@ -12,17 +11,17 @@ import NotAvailable from "../Elements/NotAvailable"
 
 import "react-datepicker/dist/react-datepicker.css"
 
-class CreateAuction extends Component {
+class EditAuction extends Component {
 	constructor() {
 		super()
 		const array = new Array(5)
-		const now = new Date()
-		const after30mins =  new Date(now.getTime() + 30*60000);
 		this.state = {
+			loading: true,
+			data: null,
 			itemName: "",
 			buyPrice: "",
 			firstBid: "",
-			endsAt: after30mins,
+			endsAt: "",
 			coords: null,
 			locationTitle: "",
 			description: "",
@@ -43,6 +42,10 @@ class CreateAuction extends Component {
 		this.cancel = this.cancel.bind(this)
 		this.verifySubmit = this.verifySubmit.bind(this)
 		this.submitAuction = this.submitAuction.bind(this)
+		this.convertData = this.convertData.bind(this)
+		this.convertCategories = this.convertCategories.bind(this)
+		this.getAuctionData = this.getAuctionData.bind(this)
+		this.componentDidMount = this.componentDidMount.bind(this)
 	}
 
 	handleChange(event) {
@@ -90,19 +93,6 @@ class CreateAuction extends Component {
     }
 
 
-    getAllCategories() {
-    	customRequest("GET", "/item/allCategories")
-    	.then(response => {
-    		const categories = response.data
-    		this.setState({
-    			categoryList: categories
-    		})
-    	}).catch(err => {
-    		displayError(err)
-    	})
-    }
-
-
     handleSubmit(event) {
     	event.preventDefault()
     	var errorMessage = ""
@@ -134,7 +124,7 @@ class CreateAuction extends Component {
     	const javaDate = this.state.endsAt.toISOString()
 
 
-    	const newAuction = {
+    	const editedAuction = {
     		name: this.state.itemName,
     		buyPrice: this.state.buyPrice,
     		firstBid: this.state.firstBid,
@@ -145,14 +135,14 @@ class CreateAuction extends Component {
     		description: this.state.description
     	}
 
-    	this.verifySubmit(newAuction)
+    	this.verifySubmit(editedAuction)
     }
 
 
-    verifySubmit(newAuction) {
+    verifySubmit(editedAuction) {
     	Swal.fire({
     		title: 'Are you sure?',
-    		text: "Publish New Auction?",
+    		text: "Publish Edited Auction?",
     		type: 'warning',
     		showCancelButton: true,
     		confirmButtonColor: '#3085d6',
@@ -160,21 +150,21 @@ class CreateAuction extends Component {
     		confirmButtonText: 'Start Auction'
     	}).then(result => {
     		if(result.value) {
-    			setTimeout(() => this.submitAuction(newAuction), 300)
+    			setTimeout(() => this.submitAuction(editedAuction), 300)
     		}
     	})
     }
 
 
-    submitAuction(newAuction) {
-    	const pathWithParams = `/item?name=${newAuction.name}&buyPrice=${newAuction.buyPrice}&firstBid=${newAuction.firstBid}
-    		&categoriesId=${newAuction.categoriesId}&longitude=${newAuction.coords.lon}&latitude=${newAuction.coords.lat}
-    		&locationTitle=${newAuction.locationTitle}&media=${newAuction.fromData}
-    		&endsAt=${newAuction.endsAt}&description=${newAuction.description}`
+    submitAuction(editedAuction) {
+    	const pathWithParams = `/item/${this.state.data.id}?name=${editedAuction.name}&buyPrice=${editedAuction.buyPrice}&firstBid=${editedAuction.firstBid}
+    		&categoriesId=${editedAuction.categoriesId}&longitude=${editedAuction.coords.lon}&latitude=${editedAuction.coords.lat}
+    		&locationTitle=${editedAuction.locationTitle}&media=${editedAuction.fromData}
+    		&endsAt=${editedAuction.endsAt}&description=${editedAuction.description}`
 
     	console.log("path: ", pathWithParams)
 
-    	customRequest("POST", pathWithParams, newAuction)
+    	customRequest("PATCH", pathWithParams, editedAuction)
     	.then(response => {
     		console.log("response: ", response)
     		console.log("response.data: ", response.data)
@@ -182,7 +172,7 @@ class CreateAuction extends Component {
     			success: true,
     		})
     		window.scrollTo(0, 0)
-    		setTimeout(() => this.setState({ redirect: true }), 2000)
+    		setTimeout(() => this.props.history.goBack(), 2000)
     	}).catch(err => {
     		displayError(err)
     	})
@@ -195,25 +185,93 @@ class CreateAuction extends Component {
     	})
     }
 
-
-    redirectToHome() {
+    redirectBack() {
         if(this.state.redirect) {
-            return <Redirect to="./home" />
+            this.props.history.goBack()
         }
     }
+
 
     success() {
     	if(this.state.success) {
     		return (
     			<div className="alert alert-success">
-    			  <strong>Success!</strong> Auction Created. Redirecting to Home.
+    			  <strong>Success!</strong> Auction Edited. Redirecting...
     			</div>
     		)
     	}
     }
 
-    componentDidMount() {
+    convertData(data) {
+    	var categories = this.convertCategories(data.categories)
+		const javascriptDate = new Date(data.endsAt)    	
+		console.log(data)
+		console.log(data.name)
+
+    	this.setState({
+    		itemName: data.name,
+    		buyPrice: data.buyPrice,
+    		firstBid: data.firstBid,
+    		endsAt: javascriptDate,
+    		coords: {
+    			lon: data.longitude,
+    			lat: data.latitude,
+    		},
+    		locationTitle: data.locationTitle,
+    		categories: categories,
+    		description: data.description,
+    		loading: false,
+    	})
+    }
+
+    convertCategories(categoryIds) {
+    	return categoryIds.map(id => {
+    		for(var i=0; i<this.state.categoryList.length; i++) {
+    			if(this.state.categoryList[i].id === id) {
+    				return this.state.categoryList[i].name
+    			}
+    		}
+    		return undefined
+    	})
+    }
+
+    getAllCategories() {
+    	customRequest("GET", "/item/allCategories")
+    	.then(response => {
+    		const categories = response.data
+    		this.setState({
+    			categoryList: categories
+    		})
+    	}).catch(err => {
+    		displayError(err)
+    	})
+    }
+
+    getAuctionData(id) {
+		customRequest("GET", `/item/${id}`)
+		.then(response => {
+			console.log("response: ", response)
+			console.log("response.data: ", response.data)
+
+			this.setState({
+				data: response.data,
+			})
+
+			this.convertData(response.data)
+		}).catch(err => {
+			displayError(err)
+		})
+	}
+
+	componentDidMount() {
     	this.getAllCategories()
+
+    	const path = this.props.location.pathname
+		const pos = path.lastIndexOf("/")
+		const id = path.slice(pos+1)
+    	this.getAuctionData(id)
+
+    	console.log("state: ", this.state)
     }
 
 
@@ -222,14 +280,21 @@ class CreateAuction extends Component {
             return <NotAvailable />
         }
 
+        if(this.state.loading) {
+        	return <div>Loading...</div>
+        }
+
+        console.log("render, state: ", this.state)
+
 		const availableCategories = this.state.categoryList.map(item => {
 			return (
 				<option key={item.id} value={item.id}>{item.name}</option>
 			)
 		})
+
 		return (
 			<div>
-				{this.redirectToHome()}
+				{this.redirectBack()}
 				<Header />
 				{this.success()}
 				<div className="new-auction-form-group">
@@ -240,7 +305,7 @@ class CreateAuction extends Component {
 						<div className="new-auction-fields">
 							<ValidatedInput 
 								type="text" 
-								value={this.state.name} 
+								value={this.state.itemName}
 								name="itemName"
 								placeholder="Item Name"
 								passresult={this.passresult}
@@ -317,4 +382,5 @@ class CreateAuction extends Component {
 }
 
 
-export default CreateAuction
+export default EditAuction
+

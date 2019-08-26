@@ -5,7 +5,7 @@ import { displayError } from "../utils/ErrorHelper"
 import Bid from "../Bid/Bid"
 import Header from "../Elements/Header"
 import AccountButtons from "../Elements/AccountButtons"
-import PreviewMenu from "./PreviewMenu"
+import AuctionOptions from "./AuctionOptions"
 
 
 class AuctionPage extends Component {
@@ -195,7 +195,7 @@ class AuctionPage extends Component {
 							<div className="auction-text">
 								<div className="preview-title-group">
 									<a href={`/auctions/${this.state.data.id}`} className="preview-title">{this.state.data.name}</a>
-									<PreviewMenu auction={this.state.data} className="preview-menu" then={this.toPreviousPage}/>
+									<AuctionOptions auction={this.state.data} className="preview-menu" then={this.toPreviousPage} history={this.props.history} />
 								</div>
 								<div className="auction-details">
 									<div className="auction-details-left">
@@ -208,9 +208,6 @@ class AuctionPage extends Component {
 									<div className="auction-details-right">
 										<p className="preview-current-price">Currently {this.state.data.currently}€</p>
 										{bidGroup}
-										{/*this.state.bidPopup ?
-											<BidPopup currently={this.state.data.currently} value={this.state.bidValue} onChange={this.handleBidChange} />
-											: null*/}
 										{buyNowButton}
 									</div>
 								</div>

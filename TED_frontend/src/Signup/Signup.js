@@ -101,7 +101,6 @@ class Signup extends React.Component {
     		coords: addressCoords,
     		locationTitle: city + ", " + country
     	})
-    	console.log("Address: ", addressCoords, city, country)
     }
 
     redirectToLogin() {
@@ -113,7 +112,7 @@ class Signup extends React.Component {
     success() {
     	if(this.state.success) {
     		return (
-    			<div class="alert alert-success">
+    			<div className="alert alert-success">
     			  <strong>Success!</strong> Account Created. Redirecting to Login.
     			</div>
     		)

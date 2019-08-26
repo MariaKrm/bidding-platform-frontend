@@ -15,6 +15,7 @@ class AuctionOptions extends Component {
 	}
 
 	editAuction() {
+		console.log("Edit Auction")
 		this.props.history.push(`/editAuction/${this.props.auction.id}`)
 	}
 

@@ -63,7 +63,6 @@ class AddressForm extends Component {
 			}
 		}).then(response => {
 			const address = response.data.suggestions[0].address;
-      console.log("address: ", address)
 			const id = response.data.suggestions[0].locationId;
 			this.setState({
       		address: address,

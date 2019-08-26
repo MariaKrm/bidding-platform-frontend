@@ -86,7 +86,6 @@ class CreateAuction extends Component {
     		coords: addressCoords,
     		locationTitle: city + ", " + country
     	})
-    	console.log("Address: ", addressCoords, city, country)
     }
 
 
@@ -172,8 +171,6 @@ class CreateAuction extends Component {
     		&locationTitle=${newAuction.locationTitle}&media=${newAuction.fromData}
     		&endsAt=${newAuction.endsAt}&description=${newAuction.description}`
 
-    	console.log("path: ", pathWithParams)
-
     	customRequest("POST", pathWithParams, newAuction)
     	.then(response => {
     		console.log("response: ", response)
@@ -240,7 +237,7 @@ class CreateAuction extends Component {
 						<div className="new-auction-fields">
 							<ValidatedInput 
 								type="text" 
-								value={this.state.name} 
+								value={this.state.itemName} 
 								name="itemName"
 								placeholder="Item Name"
 								passresult={this.passresult}

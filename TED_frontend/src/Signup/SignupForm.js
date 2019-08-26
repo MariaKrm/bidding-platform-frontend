@@ -12,6 +12,7 @@ function SignupForm(props) {
 				<br />
 			    <ValidatedInput 
 			    	type="text"
+			    	value={props.data.username}
 			    	name="username" 
 			    	placeholder="Username" 
 			    	passresult={props.passresult}
@@ -20,6 +21,7 @@ function SignupForm(props) {
 			    <br />
 			    <ValidatedInput 
 			    	type="password" 
+			    	value={props.data.password}
 			    	name="password" 
 			    	placeholder="Password" 
 			    	passresult={props.passresult}
@@ -27,6 +29,7 @@ function SignupForm(props) {
 			    />
 			    <ValidatedInput 
 			    	type="password"
+			    	value={props.data.confirmPassword}
 			    	name="confirmPassword" 
 			    	placeholder="Confirm Password" 
 			    	passresult={props.passresult}
@@ -55,7 +58,8 @@ function SignupForm(props) {
 
 			    <br />
 			    <ValidatedInput 
-			    	type="text" 
+			    	type="text"
+			    	value={props.data.email}
 			    	name="email" 
 			    	placeholder="Email" 
 			    	className="email-box"

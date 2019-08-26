@@ -88,7 +88,6 @@ class EditAuction extends Component {
     		coords: addressCoords,
     		locationTitle: city + ", " + country
     	})
-    	console.log("Address: ", addressCoords, city, country)
     }
 
 
@@ -160,8 +159,6 @@ class EditAuction extends Component {
     		&categoriesId=${editedAuction.categoriesId}&longitude=${editedAuction.coords.lon}&latitude=${editedAuction.coords.lat}
     		&locationTitle=${editedAuction.locationTitle}&media=${editedAuction.fromData}
     		&endsAt=${editedAuction.endsAt}&description=${editedAuction.description}`
-
-    	console.log("path: ", pathWithParams)
 
     	customRequest("PATCH", pathWithParams, editedAuction)
     	.then(response => {
@@ -274,9 +271,6 @@ class EditAuction extends Component {
         	return <div>Loading...</div>
         }
 
-        console.log("render, state: ", this.state)
-        console.log("this.state.categories[0]: ", this.state.categories[0])
-
 		const availableCategories = this.state.categoryList.map(item => {
 			return (
 				<option key={item.id} value={item.id}>{item.name}</option>
@@ -336,11 +330,11 @@ class EditAuction extends Component {
 							<div className="category-selector-container">
 								<h3 className="info-title">Pick up to 5 categories</h3>
 								<select className="category-selector" name={0} value={this.state.categories[0]} onChange={this.handleSelectChange}>
-									<option value="">-- Category 1 --</option>
+									<option defaultValue="">-- Category 1 --</option>
 									{availableCategories}
 								</select>
 								<select className="category-selector" name={1} value={this.state.categories[1]} onChange={this.handleSelectChange}>
-									<option value="">-- Category 2 --</option>
+									<option defaultValue="">-- Category 2 --</option>
 									{availableCategories}
 								</select>
 								<select className="category-selector" name={2} value={this.state.categories[2]} onChange={this.handleSelectChange}>

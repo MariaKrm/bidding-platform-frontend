@@ -14,7 +14,6 @@ class AuthHelper {
   static isAdmin() {
     const user = JSON.parse(sessionStorage.getItem("user"))
     if(user) {
-      console.log("user: ", user)
       return user.admin
     }
     else {
@@ -62,7 +61,6 @@ class AuthHelper {
   static getConfirm() {
     // Using jwt-decode npm package to decode the token
     let answer = decode(AuthHelper.getToken())
-    console.log("Recieved answer!")
     return answer
   }
 
@@ -76,7 +74,7 @@ class AuthHelper {
   static displayVisitorSign() {
     if(!AuthHelper.loggedIn()) {
       return (
-        <div class="alert alert-info">
+        <div className="alert alert-info">
           You are logged in as a visitor. Sign up to access all features.
         </div>
       )

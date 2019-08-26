@@ -303,8 +303,8 @@ class CreateAuction extends Component {
 								<textarea name="description" className="description-input" value={this.state.description} onChange={this.handleChange} cols={40} rows={3} required />
 							</div>
 						</div>
-						<button type="submit" className="submit-button btn-set-size">Submit</button>
-						<button type="button" className="cancel-button btn-set-size" onClick={this.cancel}>Cancel</button>
+						<button type="submit" className="btn btn-dark btn-margin btn-set-size">Submit</button>
+						<button type="button" className="btn btn-danger btn-margin btn-set-size" onClick={this.cancel}>Cancel</button>
 					</form>
 					<AddressForm onAddressSubmit={this.handleAddressSubmit} />
 				</div>

@@ -43,7 +43,6 @@ class EditAuction extends Component {
 		this.verifySubmit = this.verifySubmit.bind(this)
 		this.submitAuction = this.submitAuction.bind(this)
 		this.convertData = this.convertData.bind(this)
-		this.convertCategories = this.convertCategories.bind(this)
 		this.getAuctionData = this.getAuctionData.bind(this)
 		this.componentDidMount = this.componentDidMount.bind(this)
 	}
@@ -203,7 +202,9 @@ class EditAuction extends Component {
     }
 
     convertData(data) {
-    	var categories = this.convertCategories(data.categories)
+    	var categories = data.categories.map(category => {
+    		return category.id
+    	})
 		const javascriptDate = new Date(data.endsAt)    	
 		console.log(data)
 		console.log(data.name)
@@ -224,16 +225,6 @@ class EditAuction extends Component {
     	})
     }
 
-    convertCategories(categoryIds) {
-    	return categoryIds.map(id => {
-    		for(var i=0; i<this.state.categoryList.length; i++) {
-    			if(this.state.categoryList[i].id === id) {
-    				return this.state.categoryList[i].name
-    			}
-    		}
-    		return undefined
-    	})
-    }
 
     getAllCategories() {
     	customRequest("GET", "/item/allCategories")
@@ -271,7 +262,6 @@ class EditAuction extends Component {
 		const id = path.slice(pos+1)
     	this.getAuctionData(id)
 
-    	console.log("state: ", this.state)
     }
 
 
@@ -285,6 +275,7 @@ class EditAuction extends Component {
         }
 
         console.log("render, state: ", this.state)
+        console.log("this.state.categories[0]: ", this.state.categories[0])
 
 		const availableCategories = this.state.categoryList.map(item => {
 			return (
@@ -345,11 +336,11 @@ class EditAuction extends Component {
 							<div className="category-selector-container">
 								<h3 className="info-title">Pick up to 5 categories</h3>
 								<select className="category-selector" name={0} value={this.state.categories[0]} onChange={this.handleSelectChange}>
-									<option defaultValue="" value="">-- Category 1 --</option>
+									<option value="">-- Category 1 --</option>
 									{availableCategories}
 								</select>
 								<select className="category-selector" name={1} value={this.state.categories[1]} onChange={this.handleSelectChange}>
-									<option defaultValue="" value="">-- Category 2 --</option>
+									<option value="">-- Category 2 --</option>
 									{availableCategories}
 								</select>
 								<select className="category-selector" name={2} value={this.state.categories[2]} onChange={this.handleSelectChange}>

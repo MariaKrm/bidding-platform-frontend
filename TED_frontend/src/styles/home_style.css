@@ -44,6 +44,18 @@
 	flex-grow: 1;
 }
 
+.home-tabs {
+	margin: 10px 0 0;
+}
+
+.home-tabs-header {
+	cursor: pointer;
+}
+
+.nav-tabs .home-tabs-active.active {
+    color: green;
+}
+
 .right-action-buttons {
 	margin-top: 20px;
 }

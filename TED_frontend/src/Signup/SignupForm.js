@@ -89,7 +89,7 @@ function SignupForm(props) {
 			    <br />
 			    <br />
 
-			    <button className="submit-button btn-set-size">Sign Up</button>
+			    <button className="btn btn-dark btn-margin btn-set-size">Sign Up</button>
 			    
 			</form>
 

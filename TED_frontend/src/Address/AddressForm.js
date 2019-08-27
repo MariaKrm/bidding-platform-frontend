@@ -187,8 +187,8 @@ class AddressForm extends Component {
           country={this.state.address.country}
         />
         <br />
-        <button type="button" className="address-button" onClick={this.onCheck}>Check</button>
-        <button type="button" className="address-button" onClick={this.onClear}>Clear</button>
+        <button type="button" className="btn btn-light btn-margin" onClick={this.onCheck}>Check</button>
+        <button type="button" className="btn btn-light btn-margin" onClick={this.onClear}>Clear</button>
     </div>
 		)
 	}

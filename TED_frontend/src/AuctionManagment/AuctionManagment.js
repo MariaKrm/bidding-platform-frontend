@@ -1,6 +1,6 @@
 import React, { Component } from "react"
-import MyAuctions from "../Account/MyAuctions"
-import MyBids from "../Account/MyBids"
+import MyAuctions from "./MyAuctions"
+import MyBids from "./MyBids"
 import AuthHelper from "../utils/AuthHelper"
 import HomeHeader from "../Elements/HomeHeader"
 import Navbar from "../Elements/Navbar"

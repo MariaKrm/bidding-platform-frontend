@@ -17,12 +17,12 @@ class AccountButtons extends Component {
 		if(AuthHelper.loggedIn()) {
 			return (
 				<div className="home-header-actions">
-					<div class="dropdown">
-						<button class="btn btn-secondary dropdown-toggle header-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<div className="dropdown">
+						<button className="btn btn-secondary dropdown-toggle header-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							{this.state.username}
 						</button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<button class="dropdown-item" onClick={this.logout}>Logout</button>
+						<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<button className="dropdown-item" onClick={this.logout}>Logout</button>
 						</div>
 					</div>
 				</div>

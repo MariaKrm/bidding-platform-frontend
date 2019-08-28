@@ -9,7 +9,8 @@ class AuctionManagment extends Component {
 	constructor() {
 		super()
 		this.state = {
-			choice: "auctions",
+			choice: "open_auctions",
+
 		}
 
 		this.newAuction = this.newAuction.bind(this)
@@ -22,6 +23,8 @@ class AuctionManagment extends Component {
 	}
 
 	handleTabChange(tab) {
+		console.log("tab: ", tab)
+
 		this.setState({
 			choice: tab
 		})
@@ -29,6 +32,30 @@ class AuctionManagment extends Component {
 
 
 	render() {
+		let choiceDisplay
+		if(this.state.choice === "open_auctions") {
+			console.log("open")
+			choiceDisplay = <div className="auction-managment-myactivity">
+								<h2 className="auction-managment-myactivity-title">My Open Auctions</h2>
+								<MyAuctions key={"open"} completed={false} history={this.props.history} />
+							</div>
+		}
+		else if(this.state.choice === "closed_auctions") {
+			console.log("closed")
+			choiceDisplay = <div className="auction-managment-myactivity">
+								<h2 className="auction-managment-myactivity-title">My Closed Auctions</h2>
+								<MyAuctions key={"closed"} completed={true} history={this.props.history} />
+							</div>
+		}
+		else {
+			console.log("bids")
+			choiceDisplay = <div className="auction-managment-myactivity">
+								<h2 className="auction-managment-myactivity-title">My Bids</h2>
+								<MyBids history={this.props.history} />
+							</div>
+		}
+
+
 		return (
 			<div>
 				<HomeHeader history={this.props.history} />
@@ -45,9 +72,12 @@ class AuctionManagment extends Component {
 						<br />
 
 						<nav className="navbar navbar-expand-sm bg-light navbar-light">
-							<ul className="nav flex-column ml-auto">
+							<ul className="nav flex-column ml-auto text-right">
 								<li className="nav-item">
-									<a className="nav-link active" href="#my-auctions" onClick={() => this.handleTabChange("auctions")}>My Auctions</a>
+									<a className="nav-link active" href="#my-open-auctions" onClick={() => this.handleTabChange("open_auctions")}>My Open Auctions</a>
+								</li>
+								<li className="nav-item">
+									<a className="nav-link active" href="#my-closed-auctions" onClick={() => this.handleTabChange("closed_auctions")}>My Closed Auctions</a>
 								</li>
 								<li className="nav-item">
 									<a className="nav-link" href="#my-bids" onClick={() => this.handleTabChange("bids")}>My Bids</a>
@@ -56,18 +86,7 @@ class AuctionManagment extends Component {
 						</nav>
 
 					</div>
-					{this.state.choice === "auctions" ?
-						<div className="auction-managment-myactivity">
-							<h2 className="auction-managment-myactivity-title">My Auctions</h2>
-							<MyAuctions history={this.props.history} />
-						</div>
-						:
-						<div className="auction-managment-myactivity">
-							<h2 className="auction-managment-myactivity-title">My Bids</h2>
-							<MyBids history={this.props.history} />
-						</div>
-					}
-					
+					{choiceDisplay}
 				</div>
 			</div>
 		)

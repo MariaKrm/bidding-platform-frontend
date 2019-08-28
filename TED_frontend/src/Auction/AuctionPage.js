@@ -102,7 +102,6 @@ class AuctionPage extends Component {
 
 			this.setState({
 				data: response.data,
-				bid : response.data.currently + 0.01,
 			})
 		}).catch(err => {
 			displayError(err)

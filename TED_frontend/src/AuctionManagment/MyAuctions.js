@@ -12,8 +12,8 @@ class MyAuction extends Component {
 
 	}
 
-	componentDidMount() {
-		customRequest("GET", "/user/myAuctions")
+	getOpenAuctions() {
+		customRequest("GET", "/user/myCompletedAuctions")
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
@@ -25,7 +25,33 @@ class MyAuction extends Component {
 		})
 	}
 
+	getClosedAuctions() {
+		customRequest("GET", "/user/myOpenAuctions")
+		.then(response => {
+			console.log("response: ", response)
+			console.log("response.data: ", response.data)
+			this.setState({
+				auctions: response.data
+			})
+		}).catch(err => {
+			displayError(err)
+		})
+	}
+
+
+	componentDidMount() {
+		console.log("this.props.completed: ", this.props.completed)
+		if(this.props.completed) {
+			this.getOpenAuctions()
+		}
+		else {
+			this.getClosedAuctions()
+		}
+		
+	}
+
 	render() {
+		console.log("Im here!")
 		let myAuctions
 		if(this.state.auctions) {
 			myAuctions = this.state.auctions.map(item => {

@@ -12,20 +12,21 @@ class AuctionManagment extends Component {
 			choice: "auctions",
 		}
 
-		this.handleRadioChange = this.handleRadioChange.bind(this)
 		this.newAuction = this.newAuction.bind(this)
+		this.handleTabChange = this.handleTabChange.bind(this)
 	}
 
-	handleRadioChange(event) {
-		const { value } = event.target
-		this.setState({
-			choice: value
-		})
-	}
 
 	newAuction() {
 		this.props.history.push("/createAuction")
 	}
+
+	handleTabChange(tab) {
+		this.setState({
+			choice: tab
+		})
+	}
+
 
 	render() {
 		return (
@@ -42,28 +43,18 @@ class AuctionManagment extends Component {
 						}
 						<br />
 						<br />
-						<div className="radio">
-							<label>
-								<input
-									type="radio"
-									name="opt1"
-									value="auctions"
-									checked={this.state.choice === "auctions"}
-									onChange={this.handleRadioChange}
-								/> My Auctions
-							</label>
-						</div>
-						<div className="radio">
-							<label>
-								<input 
-									type="radio"
-									name="opt2"
-									value="bids"
-									checked={this.state.choice === "bids"}
-									onChange={this.handleRadioChange}
-								/> My Bids
-							</label>
-						</div>
+
+						<nav className="navbar navbar-expand-sm bg-light navbar-light">
+							<ul className="nav flex-column ml-auto">
+								<li className="nav-item">
+									<a className="nav-link active" href="#my-auctions" onClick={() => this.handleTabChange("auctions")}>My Auctions</a>
+								</li>
+								<li className="nav-item">
+									<a className="nav-link" href="#my-bids" onClick={() => this.handleTabChange("bids")}>My Bids</a>
+								</li>
+							</ul>
+						</nav>
+
 					</div>
 					{this.state.choice === "auctions" ?
 						<div className="auction-managment-myactivity">

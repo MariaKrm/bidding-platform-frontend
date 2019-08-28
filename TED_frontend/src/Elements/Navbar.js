@@ -11,7 +11,7 @@ class Navbar extends Component {
 					
 					{AuthHelper.loggedIn() ?
 						<li className={"nav-item " + this.props.auctionTab}><a className="nav-link" href="/auction-managment">Auction Managment</a></li>
-						: <li className="nav-item disabled"><a className="nav-link" href="/auction-managment" disabled>Auction Managment</a></li>
+						: <li className="nav-item disabled"><a className="nav-link" href="#" disabled>Auction Managment</a></li>
 					}
 
 					{AuthHelper.isAdmin() ?

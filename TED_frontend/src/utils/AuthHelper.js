@@ -74,7 +74,7 @@ class AuthHelper {
   static displayVisitorSign() {
     if(!AuthHelper.loggedIn()) {
       return (
-        <div className="alert alert-info">
+        <div className="alert alert-info" style={{margin: 0}}>
           You are logged in as a visitor. Sign up to access all features.
         </div>
       )

@@ -76,14 +76,16 @@
 
 .auction-managment {
 	display: flex;
+
 }
 
 .auction-managment-control {
 	flex: 1;
+	padding-right: 10px;
 }
 
 .auction-managment-myactivity {
-	flex: 4;
+	flex: 5;
 }
 
 .auction-managment-myactivity-title {
@@ -95,8 +97,4 @@
 
 .auction-managment-radio-group {
 	vertical-align: middle;
-}
-
-.borderclass {
-	border: 2px solid red;
 }

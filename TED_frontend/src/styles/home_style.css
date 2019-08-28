@@ -96,3 +96,7 @@
 .auction-managment-radio-group {
 	vertical-align: middle;
 }
+
+.borderclass {
+	border: 2px solid red;
+}

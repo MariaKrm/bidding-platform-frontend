@@ -57,7 +57,19 @@ class AuctionPage extends Component {
 	makeBid(event) {
 		event.preventDefault()
 		if(this.state.bid) {
-			this.sendBid(this.state.bid)
+			Swal.fire({
+				title: 'Are you sure?',
+				text: `Bid ${this.state.bid}€ for the item?`,
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+			 	cancelButtonColor: '#d33',
+				confirmButtonText: 'Make Bid'
+			}).then(result => {
+				if(result.value) {
+					this.sendBid(this.state.bid)
+				}
+			})
 		}
 	}
 

@@ -1,9 +1,7 @@
 import React, { Component } from "react"
-import Header from "../Elements/Header"
-import SearchBar from "../Search/SearchBar"
-import AccountButtons from "../Elements/AccountButtons"
-import AuthHelper from "../utils/AuthHelper"
-import HomeTabs from "./HomeTabs"
+import HomeHeader from "../Elements/HomeHeader"
+import Navbar from "../Elements/Navbar"
+import Feed from "./Feed"
 
 
 class HomePage extends Component {
@@ -11,16 +9,9 @@ class HomePage extends Component {
 	render() {
 		return (
 			<div>
-				<div className="home-header">
-					<Header />
-					<div className="home-header-search">
-						<SearchBar />
-					</div>
-					<AccountButtons history={this.props.history} />
-				</div>
-				{AuthHelper.displayVisitorSign()}
-
-				<HomeTabs history={this.props.history} />
+				<HomeHeader history={this.props.history} />
+				<Navbar homeTab="active" />
+				<Feed history={this.props.history} />
 			</div>
 		)
 	}

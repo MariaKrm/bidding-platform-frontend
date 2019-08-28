@@ -15,7 +15,7 @@ class Bidder extends Component {
 				<ReactTooltip id="bidder-rating" place="top" type="success" effect="solid">
 					<span>Bidder Rating</span>
 				</ReactTooltip>
-				<p className={"bidder-location-" + this.props.size}>{user.address.locationTitle}</p>
+				{user.address ? <p className={"bidder-location-" + this.props.size}>{user.address.locationTitle}</p> : null}
 			</div>
 		)
 	}

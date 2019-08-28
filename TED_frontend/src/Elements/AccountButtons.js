@@ -4,6 +4,10 @@ import AuthHelper from "../utils/AuthHelper"
 class AccountButtons extends Component {
 	constructor() {
 		super()
+		this.state = {
+			username: "",
+		}
+
 		this.displayAccountButtons = this.displayAccountButtons.bind(this)
 		this.logout = this.logout.bind(this)
 		this.redirectToLogin = this.redirectToLogin.bind(this)
@@ -13,8 +17,14 @@ class AccountButtons extends Component {
 		if(AuthHelper.loggedIn()) {
 			return (
 				<div className="home-header-actions">
-					<button className="header-button">My Account</button>
-					<button className="header-button" onClick={this.logout}>Logout</button>
+					<div class="dropdown">
+						<button class="btn btn-secondary dropdown-toggle header-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							{this.state.username}
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<button class="dropdown-item" onClick={this.logout}>Logout</button>
+						</div>
+					</div>
 				</div>
 			)
 		}
@@ -35,6 +45,15 @@ class AccountButtons extends Component {
 
 	redirectToLogin() {
 		this.props.history.push("/login")
+	}
+
+	componentDidMount() {
+		const me = AuthHelper.me()
+		if(me !== null) {
+			this.setState({
+				username: me.username,
+			})
+		}
 	}
 
 	render() {

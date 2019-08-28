@@ -9,6 +9,7 @@ import CreateAuction from "./Auction/CreateAuction"
 import CreateCategory from "./Auction/CreateCategory"
 import AuctionPage from "./Auction/AuctionPage"
 import EditAuction from "./Auction/EditAuction"
+import AuctionManagment from "./AuctionManagment/AuctionManagment"
 //import UserPage from "./UserPage"
 import "./styles/style.css"
 import "./styles/form_style.css"
@@ -36,6 +37,8 @@ ReactDOM.render(
     	<Route path="/login" component={Login} />
     	<Route path="/signup" component={Signup} />
     	<Route path="/home" component={HomePage} />
+    	<Route path="/auction-managment" component={AuctionManagment} />
+    {/*}	<Route path="/account-managment" component={AccountManagment} /> */}
     	<Route path="/createAuction" component={CreateAuction} />
     	<Route path="/createCategory" component={CreateCategory} />
     	<Route path="/auctions/:id" component={AuctionPage} />

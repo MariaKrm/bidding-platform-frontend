@@ -52,6 +52,10 @@
 	cursor: pointer;
 }
 
+.header-button:hover {
+	background-color: #1a1a1a;
+}
+
 .header-button:active {
-	color: #dedede;
+	background-color: #1a1a1a;
 }

@@ -15,7 +15,7 @@ class Navbar extends Component {
 					}
 
 					{AuthHelper.isAdmin() ?
-						<li className={"nav-item " + this.props.accountTab}><a className="nav-link" href="/account-managment">Account Managment</a></li>
+						<li className={"nav-item " + this.props.accountTab}><a className="nav-link" href="/account-managment/pending-registers">Account Managment</a></li>
 						: null
 					}
 					

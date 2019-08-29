@@ -12,6 +12,8 @@ import EditAuction from "./Auction/EditAuction"
 import AccountManagment from "./AccountManagment/AccountManagment"
 import MyAuctions from "./AuctionManagment/MyAuctions"
 import MyBids from "./AuctionManagment/MyBids"
+import PendingRegisters from "./AccountManagment/PendingRegisters"
+import AllAccounts from "./AccountManagment/AllAccounts"
 import PageNotFound from "./utils/PageNotFound"
 
 import "./styles/style.css"
@@ -44,7 +46,8 @@ ReactDOM.render(
 	    	<Route path="/auction-managment/my-open-auctions" render={(props) => <MyAuctions completed={false} {...props} />} />
 	    	<Route path="/auction-managment/my-closed-auctions" render={(props) => <MyAuctions completed={true} {...props} />} />
 	    	<Route path="/auction-managment/my-bids" component={MyBids} />
-	    	<Route path="/account-managment" component={AccountManagment} />
+	    	<Route path="/account-managment/pending-registers" component={PendingRegisters} />
+	    	<Route path="/account-managment/all-accounts" component={AllAccounts} />
 	    	<Route path="/createAuction" component={CreateAuction} />
 	    	<Route path="/createCategory" component={CreateCategory} />
 	    	<Route path="/auctions/:id" component={AuctionPage} />

@@ -1,6 +1,10 @@
 import React, { Component } from "react"
-import { customRequest } from "../utils/AuthHelper"
+import AuthHelper, { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
+import NotAvailable from "../utils/NotAvailable"
+import HomeHeader from "../Elements/HomeHeader"
+import Navbar from "../Elements/Navbar"
+import AuctionManagmentControl from "./AuctionManagmentControl"
 import AuctionPreview from "../Auction/AuctionPreview"
 
 class MyAuction extends Component {
@@ -8,6 +12,7 @@ class MyAuction extends Component {
 		super()
 		this.state = {
 			auctions: null,
+			openClosed: "Open",
 		}
 
 	}
@@ -40,17 +45,32 @@ class MyAuction extends Component {
 
 
 	componentDidMount() {
-		console.log("this.props.activePage: ", this.props.activePage)
+		if(!AuthHelper.loggedIn()) {
+			return false
+		}
+
 		if(this.props.completed) {
+			this.setState({
+				openClosed: "Closed",
+			})
 			this.getOpenAuctions()
 		}
 		else {
+			this.setState({
+				openClosed: "Open",
+			})
 			this.getClosedAuctions()
 		}
 		
 	}
 
 	render() {
+		if(!AuthHelper.loggedIn()) {
+			return (
+				<NotAvailable />
+			)
+		}
+
 		let myAuctions
 		if(this.state.auctions) {
 			myAuctions = this.state.auctions.map(item => {
@@ -69,7 +89,17 @@ class MyAuction extends Component {
 
 		return (
 			<div>
-				{myAuctions}
+				<HomeHeader history={this.props.history} />
+				<Navbar auctionTab="active" />
+				<div className="auction-managment">
+					<AuctionManagmentControl history={this.props.history} />
+					<div className="auction-managment-myactivity">
+						<h2 className="auction-managment-myactivity-title">My {this.state.openClosed} Auctions</h2>
+						<div>
+							{myAuctions}
+						</div>
+					</div>
+				</div>
 			</div>
 		)
 	}

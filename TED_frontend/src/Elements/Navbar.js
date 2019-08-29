@@ -10,7 +10,7 @@ class Navbar extends Component {
 					<li className={"nav-item " + this.props.homeTab}><a className="nav-link" href="/home">Home</a></li>
 					
 					{AuthHelper.loggedIn() ?
-						<li className={"nav-item " + this.props.auctionTab}><a className="nav-link" href="/auction-managment">Auction Managment</a></li>
+						<li className={"nav-item " + this.props.auctionTab}><a className="nav-link" href="/auction-managment/my-open-auctions">Auction Managment</a></li>
 						: <li className="nav-item disabled"><a className="nav-link" href="#" disabled>Auction Managment</a></li>
 					}
 

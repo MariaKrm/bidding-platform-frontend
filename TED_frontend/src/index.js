@@ -1,6 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { BrowserRouter } from "react-router-dom"
+import { BrowserRouter, Switch } from "react-router-dom"
 import { Route, Redirect } from "react-router"
 import Login from "./Login/Login"
 import Signup from "./Signup/Signup"
@@ -9,9 +9,11 @@ import CreateAuction from "./Auction/CreateAuction"
 import CreateCategory from "./Auction/CreateCategory"
 import AuctionPage from "./Auction/AuctionPage"
 import EditAuction from "./Auction/EditAuction"
-import AuctionManagment from "./AuctionManagment/AuctionManagment"
 import AccountManagment from "./AccountManagment/AccountManagment"
-//import UserPage from "./UserPage"
+import MyAuctions from "./AuctionManagment/MyAuctions"
+import MyBids from "./AuctionManagment/MyBids"
+import PageNotFound from "./utils/PageNotFound"
+
 import "./styles/style.css"
 import "./styles/form_style.css"
 import "./styles/header_style.css"
@@ -34,17 +36,21 @@ function App() {
 
 ReactDOM.render(
 	<BrowserRouter> 
-		<Route exact path="/" component={App} />
-    	<Route path="/login" component={Login} />
-    	<Route path="/signup" component={Signup} />
-    	<Route path="/home" component={HomePage} />
-    	<Route path="/auction-managment" component={AuctionManagment} />
-    	<Route path="/account-managment" component={AccountManagment} />
-    	<Route path="/createAuction" component={CreateAuction} />
-    	<Route path="/createCategory" component={CreateCategory} />
-    	<Route path="/auctions/:id" component={AuctionPage} />
-    	<Route path="/editAuction/:id" component={EditAuction} />
-{/*    	<Route path="/user/:id" component={UserPage} /> */}
+		<Switch>
+			<Route exact path="/" component={App} />
+	    	<Route path="/login" component={Login} />
+	    	<Route path="/signup" component={Signup} />
+	    	<Route path="/home" component={HomePage} />
+	    	<Route path="/auction-managment/my-open-auctions" render={(props) => <MyAuctions completed={false} {...props} />} />
+	    	<Route path="/auction-managment/my-closed-auctions" render={(props) => <MyAuctions completed={true} {...props} />} />
+	    	<Route path="/auction-managment/my-bids" component={MyBids} />
+	    	<Route path="/account-managment" component={AccountManagment} />
+	    	<Route path="/createAuction" component={CreateAuction} />
+	    	<Route path="/createCategory" component={CreateCategory} />
+	    	<Route path="/auctions/:id" component={AuctionPage} />
+	    	<Route path="/editAuction/:id" component={EditAuction} />
+	    	<Route component={PageNotFound} />
+		</Switch>
   	</BrowserRouter>,
 	document.getElementById("root")
 )

@@ -7,7 +7,7 @@ import AuthHelper, { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
 import ValidatedInput from "../Elements/ValidatedInput"
 import AddressForm from "../Address/AddressForm"
-import NotAvailable from "../Elements/NotAvailable"
+import NotAvailable from "../utils/NotAvailable"
 
 import "react-datepicker/dist/react-datepicker.css"
 

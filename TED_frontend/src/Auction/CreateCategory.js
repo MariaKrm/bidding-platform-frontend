@@ -3,7 +3,7 @@ import Header from "../Elements/Header"
 import { Redirect } from "react-router"
 import AuthHelper, { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
-import NotAvailable from "../Elements/NotAvailable"
+import AdminOnly from "../utils/AdminOnly"
 
 
 class CreateCategory extends Component {
@@ -65,8 +65,10 @@ class CreateCategory extends Component {
     }
 
 	render() {
-        if(!AuthHelper.loggedIn()) {
-            return <NotAvailable />
+        if(!AuthHelper.isAdmin()) {
+            return (
+                <AdminOnly />
+            )
         }
 
 		return (

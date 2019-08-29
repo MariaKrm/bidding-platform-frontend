@@ -40,7 +40,7 @@ class MyAuction extends Component {
 
 
 	componentDidMount() {
-		console.log("this.props.completed: ", this.props.completed)
+		console.log("this.props.activePage: ", this.props.activePage)
 		if(this.props.completed) {
 			this.getOpenAuctions()
 		}
@@ -51,7 +51,6 @@ class MyAuction extends Component {
 	}
 
 	render() {
-		console.log("Im here!")
 		let myAuctions
 		if(this.state.auctions) {
 			myAuctions = this.state.auctions.map(item => {

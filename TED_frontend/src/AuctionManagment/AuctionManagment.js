@@ -4,6 +4,7 @@ import MyBids from "./MyBids"
 import AuthHelper from "../utils/AuthHelper"
 import HomeHeader from "../Elements/HomeHeader"
 import Navbar from "../Elements/Navbar"
+import NotAvailable from "../Elements/NotAvailable"
 
 class AuctionManagment extends Component {
 	constructor() {
@@ -32,10 +33,15 @@ class AuctionManagment extends Component {
 
 
 	render() {
+
+		if(!AuthHelper.loggedIn()) {
+		    return <NotAvailable />
+		}
+
 		let choiceDisplay
 		if(this.state.choice === "open_auctions") {
 			console.log("open")
-			choiceDisplay = <div className="auction-managment-myactivity">
+			choiceDisplay = <div>
 								<h2 className="auction-managment-myactivity-title">My Open Auctions</h2>
 								<MyAuctions key={"open"} completed={false} history={this.props.history} />
 							</div>
@@ -64,29 +70,28 @@ class AuctionManagment extends Component {
 					<div className="auction-managment-control">
 						<br />
 						<br />
-						{AuthHelper.loggedIn() ? 
-							<button type="button" className="btn btn-success btn-margin btn-set-size" onClick={this.newAuction}>New Auction</button>
-							: <button className="btn btn-success disabled btn-margin btn-set-size" disabled>New Auction</button>
-						}
+						<button type="button" className="btn btn-success btn-margin btn-set-size" onClick={this.newAuction}>New Auction</button>
 						<br />
 						<br />
 
 						<nav className="navbar navbar-expand-sm bg-light navbar-light">
 							<ul className="nav flex-column ml-auto text-right">
 								<li className="nav-item">
-									<a className="nav-link active" href="#my-open-auctions" onClick={() => this.handleTabChange("open_auctions")}>My Open Auctions</a>
+									<button className="nav-link active btn btn-link d-inline" onClick={() => this.handleTabChange("open_auctions")}>My Open Auctions</button>
 								</li>
 								<li className="nav-item">
-									<a className="nav-link active" href="#my-closed-auctions" onClick={() => this.handleTabChange("closed_auctions")}>My Closed Auctions</a>
+									<button className="nav-link active btn btn-link d-inline" onClick={() => this.handleTabChange("closed_auctions")}>My Closed Auctions</button>
 								</li>
 								<li className="nav-item">
-									<a className="nav-link" href="#my-bids" onClick={() => this.handleTabChange("bids")}>My Bids</a>
+									<button className="nav-link btn btn-link d-inline" onClick={() => this.handleTabChange("bids")}>My Bids</button>
 								</li>
 							</ul>
 						</nav>
 
 					</div>
-					{choiceDisplay}
+					<div className="auction-managment-myactivity">
+						{choiceDisplay}
+					</div>
 				</div>
 			</div>
 		)

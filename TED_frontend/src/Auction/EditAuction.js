@@ -28,7 +28,6 @@ class EditAuction extends Component {
 			error: "",
 			categories: array,
 			categoryList: [],
-			redirect: false,
 			success: false,
 		}
 		this.handleChange = this.handleChange.bind(this)
@@ -176,15 +175,7 @@ class EditAuction extends Component {
 
 
     cancel() {
-    	this.setState({
-    		redirect: true
-    	})
-    }
-
-    redirectBack() {
-        if(this.state.redirect) {
-            this.props.history.goBack()
-        }
+    	this.props.history.goBack()
     }
 
 
@@ -279,7 +270,6 @@ class EditAuction extends Component {
 
 		return (
 			<div>
-				{this.redirectBack()}
 				<Header />
 				{this.success()}
 				<div className="new-auction-form-group">
@@ -356,8 +346,8 @@ class EditAuction extends Component {
 								<textarea name="description" className="description-input" value={this.state.description} onChange={this.handleChange} cols={40} rows={3} required />
 							</div>
 						</div>
-						<button type="submit" className="submit-button btn-set-size">Submit</button>
-						<button type="button" className="cancel-button btn-set-size" onClick={this.cancel}>Cancel</button>
+						<button type="submit" className="btn btn-dark btn-margin btn-set-size">Submit</button>
+						<button type="button" className="btn btn-danger btn-margin btn-set-size" onClick={this.cancel}>Cancel</button>
 					</form>
 					<AddressForm onAddressSubmit={this.handleAddressSubmit} address={this.state.locationTitle} />
 				</div>

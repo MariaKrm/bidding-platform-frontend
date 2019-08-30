@@ -150,9 +150,14 @@ class AuctionPage extends Component {
 		const endDate = new Date(this.state.data.endsAt)
 		const ended = endDate < Date.now()
 
-		var bids = this.state.data.bids.map(bid => {
-			return <Bid key={bid.id} amount={bid.offer} time={bid.createdAt} bidder={bid.bidder} />
-		})
+
+		let bids = null
+		if(this.state.data.bids) {
+			bids = this.state.data.bids.map(bid => {
+				return <Bid key={bid.id} amount={bid.offer} time={bid.createdAt} bidder={bid.bidder} />
+			})
+		}
+		
 
 		var bidGroup, buyNowButton
 		if(this.state.data.auctionCompleted || !AuthHelper.loggedIn()) {

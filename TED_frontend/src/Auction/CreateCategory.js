@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import Header from "../Elements/Header"
-import { Redirect } from "react-router"
 import AuthHelper, { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
 import AdminOnly from "../utils/AdminOnly"
@@ -11,7 +10,6 @@ class CreateCategory extends Component {
 		super()
 		this.state = {
 			categoryName: "",
-			redirect: false,
 			success: false,
 		}
 
@@ -35,30 +33,22 @@ class CreateCategory extends Component {
     			success: true
     		})
     		window.scrollTo(0, 0)
-    		setTimeout(() => this.setState({ redirect: true }), 2000)
+    		setTimeout(() => this.props.history.goBack(), 2000)
     	}).catch(err => {
     		displayError(err)
     	})
     }
 
     cancel() {
-    	this.setState({
-    		redirect: true
-    	})
+    	this.props.history.goBack()
     }
 
-
-    redirectToHome() {
-        if(this.state.redirect) {
-            return <Redirect to="./home" />
-        }
-    }
 
     success() {
     	if(this.state.success) {
     		return (
     			<div class="alert alert-success">
-    			  <strong>Success!</strong> Category Added. Redirecting to Home.
+    			  <strong>Success!</strong> Category Added. Redirecting...
     			</div>
     		)
     	}
@@ -73,7 +63,6 @@ class CreateCategory extends Component {
 
 		return (
 			<div>
-				{this.redirectToHome()}
 				<Header />
 				{this.success()}
 				<form className="new-category-form" onSubmit={this.handleSubmit}>

@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import Header from "../Elements/Header"
-import { Redirect } from "react-router"
 import Swal from "sweetalert2"
 import DatePicker from "react-datepicker"
 import addMinutes from "date-fns/addMinutes"
@@ -29,7 +28,6 @@ class CreateAuction extends Component {
 			error: "",
 			categories: array,
 			categoryList: [],
-			redirect: false,
 			success: false,
 		}
 		this.handleChange = this.handleChange.bind(this)
@@ -179,7 +177,7 @@ class CreateAuction extends Component {
     			success: true,
     		})
     		window.scrollTo(0, 0)
-    		setTimeout(() => this.setState({ redirect: true }), 2000)
+    		setTimeout(() => this.props.history.goBack(), 2000)
     	}).catch(err => {
     		displayError(err)
     	})
@@ -187,23 +185,15 @@ class CreateAuction extends Component {
 
 
     cancel() {
-    	this.setState({
-    		redirect: true
-    	})
+    	this.props.history.goBack()
     }
 
-
-    redirectToHome() {
-        if(this.state.redirect) {
-            return <Redirect to="./home" />
-        }
-    }
 
     success() {
     	if(this.state.success) {
     		return (
     			<div className="alert alert-success">
-    			  <strong>Success!</strong> Auction Created. Redirecting to Home.
+    			  <strong>Success!</strong> Auction Created. Redirecting...
     			</div>
     		)
     	}
@@ -226,7 +216,6 @@ class CreateAuction extends Component {
 		})
 		return (
 			<div>
-				{this.redirectToHome()}
 				<Header />
 				{this.success()}
 				<div className="new-auction-form-group">

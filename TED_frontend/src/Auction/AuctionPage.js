@@ -7,6 +7,8 @@ import Header from "../Elements/Header"
 import AccountButtons from "../Elements/AccountButtons"
 import AuctionOptions from "./AuctionOptions"
 import Bidder from "../Bid/Bidder"
+import Map from "../Elements/Map"
+
 
 
 class AuctionPage extends Component {
@@ -151,8 +153,8 @@ class AuctionPage extends Component {
 		const ended = endDate < Date.now()
 
 
-		let bids = null
-		if(this.state.data.bids) {
+		let bids = <div> -- No bids yet -- <br /></div>
+		if(this.state.data.bids && this.state.data.bids.lenght > 0) {
 			bids = this.state.data.bids.map(bid => {
 				return <Bid key={bid.id} amount={bid.offer} time={bid.createdAt} bidder={bid.bidder} />
 			})
@@ -239,6 +241,7 @@ class AuctionPage extends Component {
 							<div className="auction-pictures">
 								Pic thumbs here
 							</div>
+							<Map lat={this.state.data.location.latitude} lon={this.state.data.location.longitude} />
 						</div>
 					</div>
 

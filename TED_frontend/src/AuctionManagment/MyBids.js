@@ -5,7 +5,7 @@ import NotAvailable from "../utils/NotAvailable"
 import HomeHeader from "../Elements/HomeHeader"
 import Navbar from "../Elements/Navbar"
 import AuctionManagmentControl from "./AuctionManagmentControl"
-import Bid from "../Bid/Bid"
+import BidPreview from "../Bid/BidPreview"
 
 
 class MyBids extends Component {
@@ -46,11 +46,9 @@ class MyBids extends Component {
 		if(this.state.bids) {
 			myBids = this.state.bids.map(item => {
 				return (
-					<Bid
+					<BidPreview
 						key={item.id}
-						amount={item.offer}
-						time={item.createdAt}
-						bidder={item.bidder}
+						bid={item}
 					/>
 				)
 			})

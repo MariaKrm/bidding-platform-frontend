@@ -154,7 +154,7 @@ class AuctionPage extends Component {
 
 
 		let bids = <div> -- No bids yet -- <br /></div>
-		if(this.state.data.bids && this.state.data.bids.lenght > 0) {
+		if(this.state.data.bids && this.state.data.bids.length > 0) {
 			bids = this.state.data.bids.map(bid => {
 				return <Bid key={bid.id} amount={bid.offer} time={bid.createdAt} bidder={bid.bidder} />
 			})

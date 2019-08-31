@@ -41,6 +41,7 @@ class AllAccounts extends Component {
 
 
 	render() {
+		console.log("hi")
 		if(!AuthHelper.isAdmin()) {
 			return (
 				<AdminOnly />
@@ -62,7 +63,7 @@ class AllAccounts extends Component {
 		return (
 			<div>
 				<HomeHeader history={this.props.history} />
-				<Navbar auctionTab="active" />
+				<Navbar accountTab="active" />
 				<div className="auction-managment">
 					<AccountManagmentControl history={this.props.history} />
 					<div className="auction-managment-myactivity">

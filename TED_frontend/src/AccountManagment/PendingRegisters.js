@@ -62,7 +62,7 @@ class PendingRegisters extends Component {
 		return (
 			<div>
 				<HomeHeader history={this.props.history} />
-				<Navbar auctionTab="active" />
+				<Navbar accountTab="active" />
 				<div className="auction-managment">
 					<AccountManagmentControl history={this.props.history} />
 					<div className="auction-managment-myactivity">

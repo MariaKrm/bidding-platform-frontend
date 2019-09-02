@@ -18,7 +18,7 @@ class MyAuction extends Component {
 	}
 
 	getOpenAuctions() {
-		customRequest("GET", "/user/myCompletedAuctions")
+		customRequest("GET", "/user/myOpenAuctions")
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
@@ -31,7 +31,7 @@ class MyAuction extends Component {
 	}
 
 	getClosedAuctions() {
-		customRequest("GET", "/user/myOpenAuctions")
+		customRequest("GET", "/user/myCompletedAuctions")
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
@@ -53,13 +53,13 @@ class MyAuction extends Component {
 			this.setState({
 				openClosed: "Closed",
 			})
-			this.getOpenAuctions()
+			this.getClosedAuctions()
 		}
 		else {
 			this.setState({
 				openClosed: "Open",
 			})
-			this.getClosedAuctions()
+			this.getOpenAuctions()
 		}
 		
 	}

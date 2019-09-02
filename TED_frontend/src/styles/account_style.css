@@ -1,0 +1,77 @@
+.account-preview {
+	/*border: 2px solid orange;*/
+	overflow-y: hidden;
+	margin: 10px;
+	padding: 10px;
+	border-bottom: 2px solid #d9d9d9;
+}
+
+
+.preview-text {
+	/*border: 2px solid hotpink;*/
+	text-align: left;
+	margin-left: 150px;
+	padding-left: 10px;
+}
+
+.preview-details {
+	/*border: 2px solid green;*/
+	display: flex;
+	justify-content: space-between;
+}
+
+.preview-details-left {
+	/*border: 1px solid red;*/
+}
+
+.preview-details-right {
+	/*border: 1px solid blue;*/
+	margin-right: 50px;
+}
+
+.account-name {
+	color: #000;
+	font-weight: bold;
+	font-size: 24px;
+	margin: 0;
+}
+
+
+.preview-categories {
+	margin: 0;
+	font-size: 16px;
+}
+
+.preview-location {
+	margin: 0;
+	font-size: 16px;
+	color: grey;
+}
+
+.preview-current-price {
+	font-size: 20px;
+	margin: 0;
+	font-style: italic;
+	font-weight: bold;
+}
+
+.preview-buy-price, .preview-ends-at {
+	font-size: 16px;
+	margin: 0;
+}
+
+.preview-completed {
+	margin: 12px 0 0;
+	font-size: 18px;
+	font-style: italic;
+	color: red;
+}
+
+.preview-menu {
+	float: right;
+}
+
+.preview-title-group {
+	display: flex;
+	justify-content: space-between;
+}

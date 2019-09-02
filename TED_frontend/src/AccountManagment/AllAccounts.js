@@ -18,12 +18,12 @@ class AllAccounts extends Component {
 	}
 
 	getAccounts() {
-		customRequest("GET", "/user/myCompletedAuctions")
+		customRequest("GET", "/admin/allUsers")
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
 			this.setState({
-				auctions: response.data
+				accounts: response.data.content
 			})
 		}).catch(err => {
 			displayError(err)
@@ -35,13 +35,12 @@ class AllAccounts extends Component {
 			return false
 		}
 
-	//	this.getAccounts()
+		this.getAccounts()
 		
 	}
 
 
 	render() {
-		console.log("hi")
 		if(!AuthHelper.isAdmin()) {
 			return (
 				<AdminOnly />
@@ -52,7 +51,7 @@ class AllAccounts extends Component {
 		if(this.state.accounts) {
 			allAccounts = this.state.accounts.map(item => {
 				return (
-					<AccountPreview />
+					<AccountPreview key={item.id} account={item} history={this.props.history} />
 				)
 			})
 		}

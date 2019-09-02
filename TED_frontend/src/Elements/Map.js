@@ -21,7 +21,7 @@ class Map extends React.Component {
           />
           <Marker position={position}>
             <Popup>
-              A pretty CSS3 popup. <br/> Easily customizable.
+              {this.props.lat}, {this.props.lon}
             </Popup>
           </Marker>
         </LeafletMap>

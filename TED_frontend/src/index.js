@@ -13,6 +13,7 @@ import MyAuctions from "./AuctionManagment/MyAuctions"
 import MyBids from "./AuctionManagment/MyBids"
 import PendingRegisters from "./AccountManagment/PendingRegisters"
 import AllAccounts from "./AccountManagment/AllAccounts"
+import AccountPage from "./Account/AccountPage"
 import PageNotFound from "./utils/PageNotFound"
 
 import "./styles/style.css"
@@ -52,6 +53,7 @@ ReactDOM.render(
 	    	<Route path="/createCategory" component={CreateCategory} />
 	    	<Route path="/auctions/:id" component={AuctionPage} />
 	    	<Route path="/editAuction/:id" component={EditAuction} />
+	    	<Route path="/accounts/:username" component={AccountPage} />
 	    	<Route component={PageNotFound} />
 		</Switch>
   	</BrowserRouter>,

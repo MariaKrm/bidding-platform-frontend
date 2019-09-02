@@ -6,29 +6,6 @@
 	border-bottom: 2px solid #d9d9d9;
 }
 
-
-.preview-text {
-	/*border: 2px solid hotpink;*/
-	text-align: left;
-	margin-left: 150px;
-	padding-left: 10px;
-}
-
-.preview-details {
-	/*border: 2px solid green;*/
-	display: flex;
-	justify-content: space-between;
-}
-
-.preview-details-left {
-	/*border: 1px solid red;*/
-}
-
-.preview-details-right {
-	/*border: 1px solid blue;*/
-	margin-right: 50px;
-}
-
 .account-name {
 	color: #000;
 	font-weight: bold;
@@ -36,42 +13,43 @@
 	margin: 0;
 }
 
-
-.preview-categories {
-	margin: 0;
-	font-size: 16px;
+.account-title {
+	margin: 50px;
+	border-bottom: 2px solid green;
 }
 
-.preview-location {
-	margin: 0;
-	font-size: 16px;
-	color: grey;
-}
-
-.preview-current-price {
-	font-size: 20px;
-	margin: 0;
-	font-style: italic;
-	font-weight: bold;
-}
-
-.preview-buy-price, .preview-ends-at {
-	font-size: 16px;
-	margin: 0;
-}
-
-.preview-completed {
-	margin: 12px 0 0;
-	font-size: 18px;
-	font-style: italic;
-	color: red;
-}
-
-.preview-menu {
-	float: right;
-}
-
-.preview-title-group {
+.account-page {
 	display: flex;
-	justify-content: space-between;
+}
+
+.account-page-info {
+	flex: 1;
+	margin: 0 100px 100px;
+	text-align: left;
+	font-size: 22px;
+}
+
+.account-page-buttons {
+	flex: 1;
+}
+
+.account-field {
+	margin: 0;
+}
+
+.account-field-label {
+	font-weight: bold;
+	margin: 0;
+}
+
+.account-info-flex {
+	display: flex;
+}
+
+.account-info-left {
+	flex: 1;
+}
+
+.account-info-right {
+	flex: 1;
 }

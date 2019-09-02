@@ -11,7 +11,7 @@ class AccountPreview extends Component {
 					<div className="preview-title-group">
 						<div className="bidder">
 							<span>
-								<a href={`/accounts/${this.props.account.id}`} className="account-name">{this.props.account.username}</a>
+								<a href={`/accounts/${this.props.account.username}`} className="account-name">{this.props.account.username}</a>
 							</span>
 							<span className="seller-rating-big" data-tip data-for="seller-rating">&nbsp;&nbsp;&#9733;{this.props.account.sellerRating}</span>
 							<ReactTooltip id="seller-rating" place="top" type="warning" effect="solid">

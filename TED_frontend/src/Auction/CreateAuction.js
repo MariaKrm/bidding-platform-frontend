@@ -9,6 +9,9 @@ import ValidatedInput from "../Elements/ValidatedInput"
 import AddressForm from "../Address/AddressForm"
 import NotAvailable from "../utils/NotAvailable"
 
+import DropdownTreeSelect from 'react-dropdown-tree-select'
+import 'react-dropdown-tree-select/dist/styles.css'
+
 import "react-datepicker/dist/react-datepicker.css"
 
 class CreateAuction extends Component {
@@ -90,6 +93,8 @@ class CreateAuction extends Component {
     getAllCategories() {
     	customRequest("GET", "/item/allCategories")
     	.then(response => {
+            console.log("response: ", response)
+            console.log("response.data: ", response.data)
     		const categories = response.data
     		this.setState({
     			categoryList: categories
@@ -209,11 +214,31 @@ class CreateAuction extends Component {
             return <NotAvailable />
         }
 
-		const availableCategories = this.state.categoryList.map(item => {
+	/*	const availableCategories = this.state.categoryList.map(item => {
 			return (
 				<option key={item.id} value={item.id}>{item.name}</option>
 			)
-		})
+		})*/
+        const availableCategories = null
+
+        const data = {
+          label: 'search me',
+          value: 'searchme',
+          children: [
+            {
+              label: 'search me too',
+              value: 'searchmetoo',
+              children: [
+                {
+                  label: 'No one can get me',
+                  value: 'anonymous',
+                },
+              ],
+            },
+          ],
+        }
+
+
 		return (
 			<div>
 				<Header />
@@ -262,7 +287,7 @@ class CreateAuction extends Component {
 									dateFormat="MMMM d, yyyy h:mm aa"
 								/>
 							</div>
-
+{/*
 							<div className="category-selector-container">
 								<h3 className="info-title">Pick up to 5 categories</h3>
 								<select className="category-selector" name={0} value={this.state.categories[0]} onChange={this.handleSelectChange}>
@@ -285,7 +310,12 @@ class CreateAuction extends Component {
 									<option defaultValue="" value="">-- Category 5 --</option>
 									{availableCategories}
 								</select>
+
 							</div>
+*/}
+                            <div style={{textAlign: "left"}}>
+                                <DropdownTreeSelect data={data} mode="radioSelect" />
+                            </div>
 
 							<div className="description-container">
 								<h4 className="field-label">Write a short description of the item</h4>

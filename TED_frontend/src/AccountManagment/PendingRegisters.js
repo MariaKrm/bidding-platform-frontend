@@ -18,12 +18,12 @@ class PendingRegisters extends Component {
 	}
 
 	getAccounts() {
-		customRequest("GET", "/user/myCompletedAuctions")
+		customRequest("GET", "/admin/pendingRegisters")
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
 			this.setState({
-				auctions: response.data
+				accounts: response.data.content
 			})
 		}).catch(err => {
 			displayError(err)
@@ -35,7 +35,7 @@ class PendingRegisters extends Component {
 			return false
 		}
 
-	//	this.getAccounts()
+		this.getAccounts()
 		
 	}
 
@@ -51,7 +51,7 @@ class PendingRegisters extends Component {
 		if(this.state.accounts) {
 			pendingAccounts = this.state.accounts.map(item => {
 				return (
-					<AccountPreview />
+					<AccountPreview key={item.id} account={item} history={this.props.history} />
 				)
 			})
 		}

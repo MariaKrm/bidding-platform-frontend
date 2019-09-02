@@ -23,6 +23,7 @@ class AccountPreview extends Component {
 							</ReactTooltip>
 							{this.props.account.address ? <p className="bidder-location-big">{this.props.account.address.locationTitle}</p> : null}
 						</div>
+						{!this.props.account.verified ? <p style={{color: "red"}}>Not Verified</p> : null}
 						<AccountOptions account={this.props.account} className="preview-menu" history={this.props.history} />
 					</div>
 				</div>

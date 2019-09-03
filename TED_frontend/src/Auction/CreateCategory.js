@@ -13,6 +13,7 @@ class CreateCategory extends Component {
 			categoryName: "",
             parentCategory: "",
             transformedCategories: null,
+            error: "",
 			success: false,
 		}
 
@@ -75,6 +76,18 @@ class CreateCategory extends Component {
 
     handleSubmit(event) {
     	event.preventDefault()
+        let errorMessage = ""
+        if(this.state.parentCategory === "") {
+            errorMessage = "Please choose a parent category."
+        }
+
+        this.setState({
+            error: errorMessage,
+        })
+
+        console.log("error: ", errorMessage)
+        if(errorMessage !== "" && errorMessage !== null) return false
+
     	customRequest("POST", `/admin/newCategory/${this.state.parentCategory}?name=${this.state.categoryName}`)
     	.then(response => {
     		console.log("response: ", response)

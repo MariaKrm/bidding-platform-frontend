@@ -124,7 +124,7 @@ class CreateAuction extends Component {
 
     handleSubmit(event) {
     	event.preventDefault()
-    	var errorMessage = ""
+    	let errorMessage = ""
 
 
     	if(this.state.coords === null) {

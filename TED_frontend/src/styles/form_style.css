@@ -192,6 +192,11 @@ input[type=text]:focus:read-write, input[type=password]:focus:read-write {
 	text-align: center;
 }
 
+.new-auction-select {
+	border: 2px solid red;
+	text-align: center;
+}
+
 .new-category-form {
 	background-color: white;
 	color: #000;
@@ -206,9 +211,6 @@ input[type=text]:focus:read-write, input[type=password]:focus:read-write {
 	float: left;
 	border: 0.5px solid #d9d9d9;
 	cursor: pointer;
-}
-
-.new-auction-fields {
 }
 
 

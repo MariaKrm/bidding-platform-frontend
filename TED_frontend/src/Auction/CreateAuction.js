@@ -8,16 +8,13 @@ import { displayError } from "../utils/ErrorHelper"
 import ValidatedInput from "../Elements/ValidatedInput"
 import AddressForm from "../Address/AddressForm"
 import NotAvailable from "../utils/NotAvailable"
-
-import DropdownTreeSelect from 'react-dropdown-tree-select'
-import 'react-dropdown-tree-select/dist/styles.css'
+import DropdownContainer from "../Elements/DropdownContainer"
 
 import "react-datepicker/dist/react-datepicker.css"
 
 class CreateAuction extends Component {
 	constructor() {
 		super()
-		const array = new Array(5)
 		const now = new Date()
 		const after30mins =  new Date(now.getTime() + 30*60000);
 		this.state = {
@@ -29,8 +26,9 @@ class CreateAuction extends Component {
 			locationTitle: "",
 			description: "",
 			error: "",
-			categories: array,
-			categoryList: [],
+			category: "",
+			initialCategories: [],
+            transformedCategories: null,
 			success: false,
 		}
 		this.handleChange = this.handleChange.bind(this)
@@ -39,6 +37,7 @@ class CreateAuction extends Component {
 		this.handleDateChange = this.handleDateChange.bind(this)
 		this.handleImageClick = this.handleImageClick.bind(this)
 		this.passresult = this.passresult.bind(this)
+        this.tranformCategoriesToTreeSelect = this.tranformCategoriesToTreeSelect.bind(this)
 		this.getAllCategories = this.getAllCategories.bind(this)
 		this.handleAddressSubmit = this.handleAddressSubmit.bind(this)
 		this.cancel = this.cancel.bind(this)
@@ -48,19 +47,20 @@ class CreateAuction extends Component {
 
 	handleChange(event) {
     	const {name, value} = event.target
-    	this.setState({ [name]: value })	
+    	this.setState({ [name]: value })
     }
 
-    handleSelectChange(event) {
-    	const {name, value} = event.target
-    	const i = parseInt(name)
-    	this.setState(oldState => {
-    		const newCategories = [...oldState.categories]
-    		newCategories[i] = value
-    		return {
-    			categories: newCategories
-    		}
-    	})
+    handleSelectChange(currentNode, selectedNodes) {
+        if(selectedNodes[0]) {
+            this.setState({
+                category: selectedNodes[0].value,
+            })
+        }
+        else {
+            this.setState({
+                category: "",
+            })
+        }
     }
 
     handleDateChange(date) {
@@ -90,6 +90,19 @@ class CreateAuction extends Component {
     }
 
 
+    tranformCategoriesToTreeSelect(categories) {
+        let transCategories = categories.map(cat => {
+            return ({
+                label: cat.name,
+                value: cat.id,
+                children: this.tranformCategoriesToTreeSelect(cat.subcategories)
+            })
+        })
+
+        return transCategories
+    }
+
+
     getAllCategories() {
     	customRequest("GET", "/item/allCategories")
     	.then(response => {
@@ -97,8 +110,12 @@ class CreateAuction extends Component {
             console.log("response.data: ", response.data)
     		const categories = response.data
     		this.setState({
-    			categoryList: categories
+    			initialCategories: categories,
     		})
+            let transCat = this.tranformCategoriesToTreeSelect([categories])
+            this.setState({
+                transformedCategories: transCat,
+            })
     	}).catch(err => {
     		displayError(err)
     	})
@@ -114,12 +131,9 @@ class CreateAuction extends Component {
     		errorMessage = "You have to enter a valid address."
     	}
 
-    	const selectedCategories = this.state.categories.filter(cat => cat !== undefined && cat !== "")
-    	const uniqueCategories = [...new Set(selectedCategories)]
-
-    	if(!uniqueCategories || uniqueCategories.length < 1) {
-    		errorMessage = "Pick at least one category."
-    	}
+        if(this.state.category === "") {
+            errorMessage = "Please choose a category."
+        }
 
     	const errors = this.state.name === null || this.state.buyPrice === null || this.state.firstBid === null
     	if(errors) {
@@ -143,7 +157,7 @@ class CreateAuction extends Component {
     		endsAt: javaDate,
     		coords: this.state.coords,
     		locationTitle: this.state.locationTitle,
-    		categoriesId: uniqueCategories.join(", "),
+    		categoryId: this.state.category,
     		description: this.state.description
     	}
 
@@ -170,7 +184,7 @@ class CreateAuction extends Component {
 
     submitAuction(newAuction) {
     	const pathWithParams = `/item?name=${newAuction.name}&buyPrice=${newAuction.buyPrice}&firstBid=${newAuction.firstBid}
-    		&categoriesId=${newAuction.categoriesId}&longitude=${newAuction.coords.lon}&latitude=${newAuction.coords.lat}
+    		&categoryId=${newAuction.categoryId}&longitude=${newAuction.coords.lon}&latitude=${newAuction.coords.lat}
     		&locationTitle=${newAuction.locationTitle}&media=${newAuction.fromData}
     		&endsAt=${newAuction.endsAt}&description=${newAuction.description}`
 
@@ -214,28 +228,10 @@ class CreateAuction extends Component {
             return <NotAvailable />
         }
 
-	/*	const availableCategories = this.state.categoryList.map(item => {
-			return (
-				<option key={item.id} value={item.id}>{item.name}</option>
-			)
-		})*/
-        const availableCategories = null
-
-        const data = {
-          label: 'search me',
-          value: 'searchme',
-          children: [
-            {
-              label: 'search me too',
-              value: 'searchmetoo',
-              children: [
-                {
-                  label: 'No one can get me',
-                  value: 'anonymous',
-                },
-              ],
-            },
-          ],
+        if(this.state.transformedCategories === null) {
+            return (
+                <div>Loading...</div>
+            )
         }
 
 
@@ -287,34 +283,10 @@ class CreateAuction extends Component {
 									dateFormat="MMMM d, yyyy h:mm aa"
 								/>
 							</div>
-{/*
-							<div className="category-selector-container">
-								<h3 className="info-title">Pick up to 5 categories</h3>
-								<select className="category-selector" name={0} value={this.state.categories[0]} onChange={this.handleSelectChange}>
-									<option defaultValue="" value="">-- Category 1 --</option>
-									{availableCategories}
-								</select>
-								<select className="category-selector" name={1} value={this.state.categories[1]} onChange={this.handleSelectChange}>
-									<option defaultValue="" value="">-- Category 2 --</option>
-									{availableCategories}
-								</select>
-								<select className="category-selector" name={2} value={this.state.categories[2]} onChange={this.handleSelectChange}>
-									<option defaultValue="" value="">-- Category 3 --</option>
-									{availableCategories}
-								</select>
-								<select className="category-selector" name={3} value={this.state.categories[3]} onChange={this.handleSelectChange}>
-									<option defaultValue="" value="">-- Category 4 --</option>
-									{availableCategories}
-								</select>
-								<select className="category-selector" name={4} value={this.state.categories[4]} onChange={this.handleSelectChange}>
-									<option defaultValue="" value="">-- Category 5 --</option>
-									{availableCategories}
-								</select>
-
-							</div>
-*/}
-                            <div style={{textAlign: "left"}}>
-                                <DropdownTreeSelect data={data} mode="radioSelect" />
+                            <br />
+                            <div>
+                                <h4 className="field-label">Pick a category</h4>
+                                <DropdownContainer data={this.state.transformedCategories[0]} mode="radioSelect" onChange={this.handleSelectChange} required />
                             </div>
 
 							<div className="description-container">

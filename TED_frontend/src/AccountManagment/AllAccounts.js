@@ -6,6 +6,7 @@ import Navbar from "../Elements/Navbar"
 import AdminOnly from "../utils/AdminOnly"
 import AccountManagmentControl from "./AccountManagmentControl"
 import AccountPreview from "../Account/AccountPreview"
+import PageWheel from "../Elements/PageWheel"
 
 
 class AllAccounts extends Component {
@@ -13,17 +14,28 @@ class AllAccounts extends Component {
 		super()
 		this.state = {
 			accounts: null,
+			itemsPerPage: 5,
+			currentPage: -1,
+			lastPage: "",
 		}
-
 	}
 
-	getAccounts() {
-		customRequest("GET", "/admin/allUsers")
+
+	getAccounts(currPage) {
+		customRequest("GET", `/admin/allUsers?page=${currPage-1}&size=${this.state.itemsPerPage}`)
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
+			if(!this.state.lastPage) {
+				const lastPage = Math.ceil(response.data.totalElements / this.state.itemsPerPage)
+				this.setState({
+					lastPage: lastPage,
+				})
+
+			}
 			this.setState({
-				accounts: response.data.content
+				currentPage: currPage,
+				accounts: response.data.content,
 			})
 		}).catch(err => {
 			displayError(err)
@@ -34,9 +46,16 @@ class AllAccounts extends Component {
 		if(!AuthHelper.isAdmin()) {
 			return false
 		}
-
-		this.getAccounts()
 		
+		const query = new URLSearchParams(window.location.search)
+		let currPage = query.get('page')
+
+		if(currPage === null) {
+			this.props.history.push("?page=1")
+			currPage = 1
+		}
+
+		this.getAccounts(currPage)
 	}
 
 
@@ -48,7 +67,7 @@ class AllAccounts extends Component {
 		}
 
 		let allAccounts
-		if(this.state.accounts) {
+		if(this.state.accounts && this.state.currentPage) {
 			allAccounts = this.state.accounts.map(item => {
 				return (
 					<AccountPreview key={item.id} account={item} history={this.props.history} />
@@ -56,7 +75,7 @@ class AllAccounts extends Component {
 			})
 		}
 		else {
-			allAccounts = []
+			allAccounts = <div>Loading...</div>
 		}
 
 		return (
@@ -68,6 +87,7 @@ class AllAccounts extends Component {
 					<div className="auction-managment-myactivity">
 						<h2 className="auction-managment-myactivity-title">All Accounts</h2>
 						<div>
+							<PageWheel activePage={this.state.currentPage} lastPage={this.state.lastPage} />
 							{allAccounts}
 						</div>
 					</div>

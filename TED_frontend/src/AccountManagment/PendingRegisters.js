@@ -6,24 +6,36 @@ import Navbar from "../Elements/Navbar"
 import AdminOnly from "../utils/AdminOnly"
 import AccountManagmentControl from "./AccountManagmentControl"
 import AccountPreview from "../Account/AccountPreview"
+import PageWheel from "../Elements/PageWheel"
 
 
 class PendingRegisters extends Component {
 	constructor() {
 		super()
 		this.state = {
-			accounts: null,
+			accounts: "",
+			itemsPerPage: 5,
+			currentPage: -1,
+			lastPage: "",
 		}
 
 	}
 
-	getAccounts() {
-		customRequest("GET", "/admin/pendingRegisters")
+	getAccounts(currPage) {
+		customRequest("GET", `/admin/pendingRegisters?page=${currPage-1}&size=${this.state.itemsPerPage}`)
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
+			if(!this.state.lastPage) {
+				const lastPage = Math.ceil(response.data.totalElements / this.state.itemsPerPage)
+				this.setState({
+					lastPage: lastPage,
+				})
+
+			}
 			this.setState({
-				accounts: response.data.content
+				currentPage: currPage,
+				accounts: response.data.content,
 			})
 		}).catch(err => {
 			displayError(err)
@@ -35,8 +47,15 @@ class PendingRegisters extends Component {
 			return false
 		}
 
-		this.getAccounts()
-		
+		const query = new URLSearchParams(window.location.search)
+		let currPage = query.get('page')
+
+		if(currPage === null) {
+			this.props.history.push("?page=1")
+			currPage = 1
+		}
+
+		this.getAccounts(currPage)
 	}
 
 
@@ -46,17 +65,21 @@ class PendingRegisters extends Component {
 				<AdminOnly />
 			)
 		}
+		console.log("this.state.accounts: ", this.state.accounts)
 
 		let pendingAccounts
-		if(this.state.accounts) {
+		if(this.state.accounts && this.state.lastPage) {
 			pendingAccounts = this.state.accounts.map(item => {
 				return (
 					<AccountPreview key={item.id} account={item} history={this.props.history} />
 				)
 			})
 		}
+		else if(this.state.accounts === ""){
+			pendingAccounts = <div>Loading...</div>
+		}
 		else {
-			pendingAccounts = []
+			pendingAccounts = <div>No Accounts</div>
 		}
 
 		return (
@@ -68,6 +91,7 @@ class PendingRegisters extends Component {
 					<div className="auction-managment-myactivity">
 						<h2 className="auction-managment-myactivity-title">Pending Registers</h2>
 						<div>
+							<PageWheel activePage={this.state.currentPage} lastPage={this.state.lastPage} />
 							{pendingAccounts}
 						</div>
 					</div>

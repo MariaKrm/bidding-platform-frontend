@@ -119,7 +119,7 @@ class AccountPage extends Component {
 		const pos = path.lastIndexOf("/")
 		const username = path.slice(pos+1)
 		const me = AuthHelper.me()
-		if(!AuthHelper.isAdmin() && me.username !== username) {
+		if(!me || (!AuthHelper.isAdmin() && me.username !== username)) {
 			return false
 		}
 		this.getAccountData(username)
@@ -130,7 +130,7 @@ class AccountPage extends Component {
 		const pos = path.lastIndexOf("/")
 		const username = path.slice(pos+1)
 		const me = AuthHelper.me()
-		if(!AuthHelper.isAdmin() && me.username !== username) {
+		if(!me || (!AuthHelper.isAdmin() && me.username !== username)) {
 			return (
 				<Unauthorized />
 			)

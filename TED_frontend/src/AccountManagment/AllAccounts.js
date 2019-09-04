@@ -46,7 +46,7 @@ class AllAccounts extends Component {
 		if(!AuthHelper.isAdmin()) {
 			return false
 		}
-		
+
 		const query = new URLSearchParams(window.location.search)
 		let currPage = query.get('page')
 

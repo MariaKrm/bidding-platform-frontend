@@ -31,8 +31,6 @@ class Login extends Component {
 
     handleSubmit(event) {
         event.preventDefault()
-        console.log("username: ", this.state.username)
-        console.log("password: ", this.state.password)
 
 
         const user = {
@@ -43,7 +41,6 @@ class Login extends Component {
         const loginRoute = Constants.BASEURL + "/auth/login"
         axios.post(loginRoute, user)
         .then(response => {
-            console.log("post returned:")
             console.log("response ", response)
             console.log("response.data ", response.data)
             AuthHelper.setToken(response.data.token)

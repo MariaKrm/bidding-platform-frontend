@@ -12,6 +12,7 @@ class Feed extends Component {
 		this.newAuction = this.newAuction.bind(this)
 		this.newCategory = this.newCategory.bind(this)
 		this.exportXML = this.exportXML.bind(this)
+		this.exportJSON = this.exportJSON.bind(this)
 	}
 
 
@@ -28,7 +29,7 @@ class Feed extends Component {
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
-			
+
 			const xmls = response.data.map(item => {
 				let itemXML = jsonxml(item, {prettyPrint: true})
 				itemXML = "<item>" + itemXML + "</item>"
@@ -38,9 +39,35 @@ class Feed extends Component {
 			const xml = "<items>\n" + xmls.join("\n") + "\n</items>"
 
 			const element = document.createElement("a");
-			const file = new Blob([xml], {type: 'text/plain'});
+			const file = new Blob([xml], {type: 'application/xml'});
 			element.href = URL.createObjectURL(file);
 			element.download = "auctions.xml";
+			document.body.appendChild(element); // Required for this to work in FireFox
+			element.click();
+
+		}).catch(err => {
+            displayError(err)
+		})
+	}
+
+	exportJSON() {
+		customRequest("GET", "/item/allAuctions")
+		.then(response => {
+			console.log("response: ", response)
+			console.log("response.data: ", response.data)
+
+			const jsons = response.data.map(item => {
+				let itemJSON = JSON.stringify(item)
+				console.log("itemJSON:\n", itemJSON)
+				return itemJSON
+			})
+			const json = jsons.join("\n")
+			console.log("json:\n", json)
+
+			const element = document.createElement("a");
+			const file = new Blob([json], {type: "application/json"});
+			element.href = URL.createObjectURL(file);
+			element.download = "auctions.json";
 			document.body.appendChild(element); // Required for this to work in FireFox
 			element.click();
 
@@ -76,6 +103,8 @@ class Feed extends Component {
 								<button type="button" className="btn btn-success btn-margin btn-set-size" onClick={this.newCategory}>New Category</button>
 								<br />
 								<button type="button" className="btn btn-success btn-margin btn-set-size" onClick={this.exportXML}>Export All to XML</button>
+								<br />
+								<button type="button" className="btn btn-success btn-margin btn-set-size" onClick={this.exportJSON}>Export All to JSON</button>
 							</div>
 							: null
 						}

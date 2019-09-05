@@ -58,7 +58,7 @@ class AuctionOptions extends Component {
 	}
 
 	enableButtons() { 
-		var buttons
+		let buttons
 		const me = AuthHelper.me()
 		if(me !== null && me.id === this.props.auction.seller.id) {
 			buttons = 

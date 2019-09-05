@@ -69,9 +69,6 @@ class Login extends Component {
                 {this.redirectToHome()}
                 <Header />
                 <form className="login-form" onSubmit={this.handleSubmit}>
-                {/*    <img src={require("./images/hammer_icon_small.png")} alt="logo"/> */}
-                {/*    <img src={require("./images/cow.png")} alt="logo"/> */}
-                {/*    <img src={require("./images/cow_logo1_150.png")} alt="cow_logo" />*/}
                     <br />
                     <input 
                     	type="text" 

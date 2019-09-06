@@ -5,13 +5,14 @@ import AccountOptions from "./AccountOptions"
 
 class AccountPreview extends Component {
 	render() {
+		const adminBadge = this.props.account.admin ? <sup className="admin-badge">[A] </sup> : null
 		return (
 			<div className="account-preview">
 				<div className="preview-text">
 					<div className="preview-title-group">
 						<div className="bidder">
 							<span>
-								<a href={`/accounts/${this.props.account.username}`} className="account-name">{this.props.account.username}</a>
+								<a href={`/accounts/${this.props.account.username}`} className="account-name">{adminBadge}{this.props.account.username}</a>
 							</span>
 							<span className="seller-rating-big" data-tip data-for="seller-rating">&nbsp;&nbsp;&#9733;{this.props.account.sellerRating}</span>
 							<ReactTooltip id="seller-rating" place="top" type="warning" effect="solid">
@@ -23,7 +24,7 @@ class AccountPreview extends Component {
 							</ReactTooltip>
 							{this.props.account.address ? <p className="bidder-location-big">{this.props.account.address.locationTitle}</p> : null}
 						</div>
-						{!this.props.account.verified ? <p style={{color: "red"}}>Not Verified</p> : null}
+						{this.props.account.verified ? <p style={{color: "green"}}>Verified</p> : <p style={{color: "red"}}>Not Verified</p>}
 						<AccountOptions account={this.props.account} className="preview-menu" history={this.props.history} />
 					</div>
 				</div>

@@ -12,7 +12,6 @@ class Map extends React.Component {
 
   render() {
     const position = [this.props.lat, this.props.lon]
-    console.log("position: ", position)
     return (
         <LeafletMap center={position} zoom={this.state.zoom}>
           <TileLayer

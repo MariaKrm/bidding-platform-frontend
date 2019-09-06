@@ -100,8 +100,15 @@ class AccountOptions extends Component {
 			<div>
 				<button className="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
 				<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<button className="dropdown-item" onClick={this.verifyAccount}>Verify Account</button>
-					<button className="dropdown-item" onClick={this.deleteAccount}>Delete Account</button>
+					{this.props.account.verified ?
+						<button className="dropdown-item disabled" disabled>Verify Account</button>
+						: <button className="dropdown-item" onClick={this.verifyAccount}>Verify Account</button>
+					}
+					{this.props.account.admin ?
+						<button className="dropdown-item disabled" disabled>Delete Account</button>
+						: <button className="dropdown-item" onClick={this.deleteAccount}>Delete Account</button>
+					}
+					
 				</div>
 			</div>
 		)

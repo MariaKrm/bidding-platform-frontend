@@ -53,3 +53,7 @@
 .account-info-right {
 	flex: 1;
 }
+
+.admin-badge {
+	color: red;
+}

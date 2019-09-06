@@ -298,7 +298,7 @@ class EditAuction extends Component {
 								type="text" 
 								value={this.state.buyPrice} 
 								name="buyPrice" 
-								placeholder="Buy Price (ex. 12.00) €"
+								placeholder="Buy Price (ex. 12.00) $"
 								passresult={this.passresult}
 							/>
 							<ValidatedInput

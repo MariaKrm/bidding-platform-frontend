@@ -61,7 +61,7 @@ class AuctionPage extends Component {
 		if(this.state.bid) {
 			Swal.fire({
 				title: 'Are you sure?',
-				text: `Bid ${this.state.bid}€ for the item?`,
+				text: `Bid ${this.state.bid}$ for the item?`,
 				type: 'warning',
 				showCancelButton: true,
 				confirmButtonColor: '#3085d6',
@@ -177,7 +177,7 @@ class AuctionPage extends Component {
 					<button className="btn btn-success disabled btn-margin btn-set-size" disabled>Make Bid</button>
 				</form>
 
-			buyNowButton = this.state.data.buyPrice ? <button className="btn btn-success disabled btn-margin btn-set-size" disabled>Buy Now for {this.state.data.buyPrice}€</button> : null
+			buyNowButton = this.state.data.buyPrice ? <button className="btn btn-success disabled btn-margin btn-set-size" disabled>Buy Now for {this.state.data.buyPrice}$</button> : null
 		}
 		else {
 			bidGroup =
@@ -196,7 +196,7 @@ class AuctionPage extends Component {
 					<button className="btn btn-success btn-margin btn-set-size" onClick={this.makeBid}>Make Bid</button>
 				</form>	
 
-			buyNowButton = this.state.data.buyPrice ? <button className="btn btn-success btn-margin btn-set-size" onClick={this.buyNow}>Buy Now for {this.state.data.buyPrice}€</button> : null
+			buyNowButton = this.state.data.buyPrice ? <button className="btn btn-success btn-margin btn-set-size" onClick={this.buyNow}>Buy Now for {this.state.data.buyPrice}$</button> : null
 		}
 
 		return (
@@ -228,7 +228,7 @@ class AuctionPage extends Component {
 										{this.state.data.auctionCompleted ? <p className="preview-completed">Completed</p> : null}
 									</div>
 									<div className="auction-details-right">
-										<p className="preview-current-price">Currently {this.state.data.currently}€</p>
+										<p className="preview-current-price">Currently {this.state.data.currently}$</p>
 										{bidGroup}
 										{buyNowButton}
 									</div>

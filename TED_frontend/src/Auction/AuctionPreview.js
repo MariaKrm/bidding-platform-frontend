@@ -30,8 +30,8 @@ class AuctionPreview extends Component {
 							<p className="preview-location">From {this.props.auction.location.locationTitle}</p>
 						</div>
 						<div className="preview-details-right">
-							<p className="preview-current-price">Currently {this.props.auction.currently}€</p>
-							{this.props.auction.buyPrice ? <p className="preview-buy-price">or buy immediately for {this.props.auction.buyPrice}€</p> : null}
+							<p className="preview-current-price">Currently {this.props.auction.currently}$</p>
+							{this.props.auction.buyPrice ? <p className="preview-buy-price">or buy immediately for {this.props.auction.buyPrice}$</p> : null}
 							<p className="preview-ends-at">{ended ? "Ended on" : "Ends on"} {endDate.toDateString()}, {endDate.toLocaleTimeString()}</p>
 							{this.props.auction.auctionCompleted ? <p className="preview-completed">Completed</p> : null}
 						</div>

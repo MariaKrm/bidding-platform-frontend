@@ -241,7 +241,11 @@ class AuctionPage extends Component {
 							<div className="auction-pictures">
 								Pic thumbs here
 							</div>
-							<Map lat={this.state.data.location.latitude} lon={this.state.data.location.longitude} />
+							{this.state.data.location && this.state.data.location.latitude !== 0 && this.state.data.location.longitude !== 0 ?
+								<Map lat={this.state.data.location.latitude} lon={this.state.data.location.longitude} />
+								: null
+							}
+							
 						</div>
 					</div>
 

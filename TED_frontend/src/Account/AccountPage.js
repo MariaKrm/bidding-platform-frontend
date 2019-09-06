@@ -172,14 +172,15 @@ class AccountPage extends Component {
 						</div>
 						
 						<br />
-						{this.state.data.location ? 
+						{this.state.data.location && this.state.data.location.latitude !== 0 && this.state.data.location.longitude !== 0 ? 
 							<div>
 								<p className="account-field"><label className="account-field-label">City:</label> {city}</p>
 								<p className="account-field"><label className="account-field-label">Country:</label> {country}</p>
 								<label className="account-field-label">Exact location:</label>
 								<Map lat={this.state.data.location.latitude} lon={this.state.data.location.longitude} />
 							</div>
-						: null}
+							: <div>No known address</div>
+						}
 					</div>
 					<div className="account-page-buttons">
 						<button className="btn btn-success btn-margin btn-set-size" onClick={this.verifyAccount}>Verify Account</button>

@@ -51,7 +51,7 @@ class Feed extends Component {
 	}
 
 	exportJSON() {
-		customRequest("GET", "/item/allAuctions")
+		customRequest("GET", "/admin/allAuctions")
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)

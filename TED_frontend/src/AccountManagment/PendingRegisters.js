@@ -65,7 +65,6 @@ class PendingRegisters extends Component {
 				<AdminOnly />
 			)
 		}
-		console.log("this.state.accounts: ", this.state.accounts)
 
 		let pendingAccounts
 		if(this.state.accounts && this.state.lastPage) {
@@ -79,7 +78,7 @@ class PendingRegisters extends Component {
 			pendingAccounts = <div>Loading...</div>
 		}
 		else {
-			pendingAccounts = <div>No Accounts</div>
+			pendingAccounts = <div><br />No Accounts</div>
 		}
 
 		return (
@@ -91,8 +90,8 @@ class PendingRegisters extends Component {
 					<div className="auction-managment-myactivity">
 						<h2 className="auction-managment-myactivity-title">Pending Registers</h2>
 						<div>
-							<PageWheel activePage={this.state.currentPage} lastPage={this.state.lastPage} />
 							{pendingAccounts}
+							<PageWheel activePage={this.state.currentPage} lastPage={this.state.lastPage} />
 						</div>
 					</div>
 				</div>

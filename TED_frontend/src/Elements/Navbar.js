@@ -11,6 +11,7 @@ class Navbar extends Component {
 					
 					{AuthHelper.loggedIn() ?
 						<li className={"nav-item " + this.props.auctionTab}><a className="nav-link" href="/auction-managment/my-open-auctions">Auction Managment</a></li>
+						// eslint-disable-next-line
 						: <li className="nav-item disabled"><a className="nav-link" href="#" disabled>Auction Managment</a></li>
 					}
 

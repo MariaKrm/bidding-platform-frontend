@@ -87,8 +87,8 @@ class AllAccounts extends Component {
 					<div className="auction-managment-myactivity">
 						<h2 className="auction-managment-myactivity-title">All Accounts</h2>
 						<div>
-							<PageWheel activePage={this.state.currentPage} lastPage={this.state.lastPage} />
 							{allAccounts}
+							<PageWheel activePage={this.state.currentPage} lastPage={this.state.lastPage} />
 						</div>
 					</div>
 				</div>

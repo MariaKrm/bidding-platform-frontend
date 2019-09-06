@@ -104,7 +104,7 @@ class AccountOptions extends Component {
 						<button className="dropdown-item disabled" disabled>Verify Account</button>
 						: <button className="dropdown-item" onClick={this.verifyAccount}>Verify Account</button>
 					}
-					{this.props.account.admin ?
+					{this.props.account.admin || this.props.account.verified ?
 						<button className="dropdown-item disabled" disabled>Delete Account</button>
 						: <button className="dropdown-item" onClick={this.deleteAccount}>Delete Account</button>
 					}

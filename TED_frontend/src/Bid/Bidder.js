@@ -4,7 +4,7 @@ import ReactTooltip from "react-tooltip"
 class Bidder extends Component {
 	render() {
 		const user = this.props.user
-		const adminBadge = user.admin ? <sup className="admin-badge">[A] </sup> : null
+		const adminBadge = user.admin ? <sup className="admin-badge" data-toggle="tooltip" title="Site Admin">[A] </sup> : null
 		return (
 			<div className="bidder">
 				<span className={"bidder-username-" + this.props.size}>{adminBadge}{user.username}</span>

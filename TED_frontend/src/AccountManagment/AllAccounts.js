@@ -55,6 +55,7 @@ class AllAccounts extends Component {
 			currPage = 1
 		}
 
+		currPage = Number(currPage)
 		this.getAccounts(currPage)
 	}
 

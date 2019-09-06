@@ -179,13 +179,19 @@ class AccountPage extends Component {
 								<label className="account-field-label">Exact location:</label>
 								<Map lat={this.state.data.location.latitude} lon={this.state.data.location.longitude} />
 							</div>
-							: <div>No known address</div>
+							: <div>{this.state.data.location}</div>
 						}
 					</div>
 					<div className="account-page-buttons">
-						<button className="btn btn-success btn-margin btn-set-size" onClick={this.verifyAccount}>Verify Account</button>
+						{this.state.data.verified ?
+							<button className="btn btn-success btn-margin btn-set-size disabled" disabled>Verify Account</button>
+							: <button className="btn btn-success btn-margin btn-set-size" onClick={this.verifyAccount}>Verify Account</button>
+						}
 						<br />
-						<button className="btn btn-success btn-margin btn-set-size" onClick={this.deleteAccount}>Delete Account</button>
+						{this.state.data.admin || this.state.data.verified ?
+							<button className="btn btn-success btn-margin btn-set-size disabled" disabled>Delete Account</button>
+							: <button className="btn btn-success btn-margin btn-set-size" onClick={this.deleteAccount}>Delete Account</button>
+						}
 					</div>
 				</div>
 			</div>

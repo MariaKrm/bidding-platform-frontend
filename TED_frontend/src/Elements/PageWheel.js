@@ -16,7 +16,7 @@ class PageWheel extends Component {
 					:	<li className="page-item" key={num}><a href={"?page=" + num} className="page-link" id={num}>{num}</a></li>
 				)
 			}
-			else if(num === 2 || num === this.props.lastPage - 1){
+			else if(num === 2 || num === this.props.lastPage - 1) {
 				return <div key={num}>...</div>
 			}
 			else {

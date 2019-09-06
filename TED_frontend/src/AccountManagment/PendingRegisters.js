@@ -54,7 +54,8 @@ class PendingRegisters extends Component {
 			this.props.history.push("?page=1")
 			currPage = 1
 		}
-
+		
+		currPage = Number(currPage)
 		this.getAccounts(currPage)
 	}
 

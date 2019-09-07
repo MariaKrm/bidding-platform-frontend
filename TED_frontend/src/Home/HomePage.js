@@ -11,7 +11,7 @@ class HomePage extends Component {
 			<div>
 				<HomeHeader history={this.props.history} />
 				<Navbar homeTab="active" />
-				<Feed history={this.props.history} />
+				<Feed {...this.props} />
 			</div>
 		)
 	}

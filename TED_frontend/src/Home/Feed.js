@@ -1,8 +1,9 @@
 import React, { Component } from "react"
+import jsonxml from "jsontoxml"
 import AuthHelper, { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
 import AuctionsDisplay from "./AuctionsDisplay"
-import jsonxml from "jsontoxml"
+import Filters from "../Search/Filters"
 
 
 class Feed extends Component {
@@ -80,14 +81,13 @@ class Feed extends Component {
 		return (
 			<div className="home-content">
 				<div className="search-container">
-					<h3>Search</h3>
-				{/*eslint-disable-next-line*/}
-					<img src={require("../images/no_image.png")} alt="no image available" />
+					<h3>Filters</h3>
+					<Filters history={this.props.history} />
 				</div>
 				<div className="main-content">
 {/*							<h3>Main Content</h3>
 					<Timer />				{/* This is to test the refresh with timer; changes the time every 3 seconds */}
-					<AuctionsDisplay history={this.props.history}/>
+					<AuctionsDisplay {...this.props} />
 				</div>
 				<div className="suggestions">
 					<h3>Suggestions etc</h3>

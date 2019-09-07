@@ -1,5 +1,5 @@
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=number] {
 	margin: 4px;
 	padding: 5px;
 	/*width: 150px;*/
@@ -10,7 +10,7 @@ input[type=text], input[type=password] {
 /*	box-sizing: border-box;*/
 }
 
-input[type=text]:focus:read-write, input[type=password]:focus:read-write {
+input[type=text]:focus:read-write, input[type=password]:focus:read-write, input[type=number]:focus:read-write {
 	border: 1px solid;
 	border-color: #00d6cb;
 	box-shadow: 0 1px 5px 1px #ccc;

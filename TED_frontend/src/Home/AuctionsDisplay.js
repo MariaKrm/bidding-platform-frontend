@@ -52,7 +52,7 @@ class AuctionsDisplay extends Component {
 			filterRoute = filterRoute + "description=" + description + "&"
 		}
 		if(category) {
-			filterRoute = filterRoute + "?categoriesId=" + category + "&"
+			filterRoute = filterRoute + "categoriesId=" + category + "&"
 		}
 
 		customRequest("GET", `${filterRoute}page=${currPage-1}&size=${this.state.itemsPerPage}`)
@@ -82,7 +82,7 @@ class AuctionsDisplay extends Component {
 
 		const params = query.toString()
 		const pagePos = params.lastIndexOf("&")
-		const keepParams = "?" + params.slice(0, pagePos+1)
+		const keepParams = params.slice(0, pagePos+1)
 		this.setState({
 			keepParams: keepParams,
 		})

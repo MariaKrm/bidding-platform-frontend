@@ -86,7 +86,7 @@ class PendingRegisters extends Component {
 						<h2 className="auction-managment-myactivity-title">Pending Registers</h2>
 						<div>
 							{pendingAccounts}
-							<PageWheel activePage={this.state.currentPage} lastPage={this.state.lastPage} params="?" />
+							<PageWheel activePage={this.state.currentPage} lastPage={this.state.lastPage} />
 						</div>
 					</div>
 				</div>

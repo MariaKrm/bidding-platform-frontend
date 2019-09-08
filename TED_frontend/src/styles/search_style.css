@@ -38,6 +38,10 @@
 	background-color: #dedede;
 }
 
+.filters {
+	padding: 10px;
+}
+
 .filter-price {
 	width: 70px;
 }

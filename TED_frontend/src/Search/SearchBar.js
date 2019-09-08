@@ -82,7 +82,9 @@ class SearchBar extends Component {
 
 	handleSubmit(event) {
 		event.preventDefault()
-		console.log("poopoop")
+		const path = "/home/search?searchText=" + this.state.text +"&page=1"
+		console.log("searching for: ", this.state.text)
+		this.props.history.push(path)
 	}
 
 	render() {

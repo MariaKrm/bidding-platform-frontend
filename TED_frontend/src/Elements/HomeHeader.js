@@ -11,7 +11,7 @@ class HomeHeader extends Component {
 				<div className="home-header">
 					<Header />
 					<div className="home-header-search">
-						<SearchBar />
+						<SearchBar history={this.props.history} />
 					</div>
 					<AccountButtons history={this.props.history} />
 				</div>

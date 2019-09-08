@@ -18,6 +18,7 @@ class AuctionsDisplay extends Component {
 		this.getAuctions = this.getAuctions.bind(this)
 		this.getOpenAuctions = this.getOpenAuctions.bind(this)
 		this.getFilteredAuctions = this.getFilteredAuctions.bind(this)
+		this.getSearchAuctions = this.getSearchAuctions.bind(this)
 	}
 
 
@@ -69,6 +70,22 @@ class AuctionsDisplay extends Component {
 		})
 	}
 
+	getSearchAuctions(currPage, searchText) {
+		console.log("currPage: ", currPage)
+		console.log("searchText: ", searchText)
+		customRequest("GET", `/search/searchBar?text=${searchText}&lower=0&upper=10`)
+		.then(response => {
+			console.log("response: ", response)
+			console.log("response.data: ", response.data)
+			this.setState({
+				lastPage: 0,
+				auctions: response.data,
+			})
+		}).catch(err => {
+			displayError(err)
+		})
+	}
+
 
 	getAuctions() {
 		const query = new URLSearchParams(window.location.search)
@@ -90,6 +107,7 @@ class AuctionsDisplay extends Component {
 		const path = this.props.location.pathname
 		const pos = path.lastIndexOf("/")
 		const type = path.slice(pos+1)
+		console.log("type: ", type)
 
 		if(type === "filters") {
 			const lowerPrice = query.get("lowerPrice")
@@ -98,6 +116,10 @@ class AuctionsDisplay extends Component {
 			const description = query.get("description")
 			const category = query.get("category")
 			this.getFilteredAuctions(currPage, lowerPrice, higherPrice, locationTitle, description, category)
+		}
+		else if(type === "search") {
+			const searchText = query.get("searchText")
+			this.getSearchAuctions(currPage, searchText)
 		}
 		else {
 			this.getOpenAuctions(currPage)

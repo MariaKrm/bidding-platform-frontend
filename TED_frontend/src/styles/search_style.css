@@ -1,5 +1,41 @@
 .search-bar {
-	
+	width: 550px;
+	display: inline-block;
+	-webkit-appearance: none;
+	margin-right: 0;
+	vertical-align: middle;
+}
+
+.search-suggestion-container {
+	width: 550px;
+	text-align: left;
+	position: absolute;
+	z-index: 100;
+}
+
+.search-suggestion-list {
+	background-color: #fff;
+	padding: 1px;
+	margin-left: 8px;
+	border-radius: 5px;
+	box-shadow: 0 1px 10px 1px grey;
+}
+
+.search-suggestion {
+	background-color: #fff;
+	color: #000;
+	padding: 5px;
+	padding-left: 10px;
+	border-bottom: 1px solid grey;
+	cursor: pointer;
+}
+
+.search-suggestion:hover {
+	background-color: #ebebeb;
+}
+
+.search-suggestion:active {
+	background-color: #dedede;
 }
 
 .filter-price {

@@ -26,14 +26,8 @@ class PendingRegisters extends Component {
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
-			if(!this.state.lastPage) {
-				const lastPage = Math.ceil(response.data.totalElements / this.state.itemsPerPage)
-				this.setState({
-					lastPage: lastPage,
-				})
-
-			}
 			this.setState({
+				lastPage: response.data.totalPages,
 				currentPage: currPage,
 				accounts: response.data.content,
 			})
@@ -92,7 +86,7 @@ class PendingRegisters extends Component {
 						<h2 className="auction-managment-myactivity-title">Pending Registers</h2>
 						<div>
 							{pendingAccounts}
-							<PageWheel activePage={this.state.currentPage} lastPage={this.state.lastPage} />
+							<PageWheel activePage={this.state.currentPage} lastPage={this.state.lastPage} params="?" />
 						</div>
 					</div>
 				</div>

@@ -179,7 +179,7 @@ class AccountPage extends Component {
 								<label className="account-field-label">Exact location:</label>
 								<Map lat={this.state.data.location.latitude} lon={this.state.data.location.longitude} />
 							</div>
-							: <div>{this.state.data.location}</div>
+							: <div>{this.state.data.location.locationTitle}</div>
 						}
 					</div>
 					<div className="account-page-buttons">

@@ -90,7 +90,6 @@ class Feed extends Component {
 					<AuctionsDisplay {...this.props} />
 				</div>
 				<div className="suggestions">
-					<h3>Suggestions etc</h3>
 					<div className="right-action-buttons">
 						{AuthHelper.loggedIn() ? 
 							<button type="button" className="btn btn-success btn-margin btn-set-size" onClick={this.newAuction}>New Auction</button>

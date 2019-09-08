@@ -234,3 +234,12 @@ input[type=text]:focus:read-write, input[type=password]:focus:read-write, input[
 	box-shadow: none;
 }
 
+.dropdown-tree-container {
+	text-align: left;
+}
+
+.dropdown-content {
+	max-height: 250px;
+	overflow-y: scroll;
+}
+

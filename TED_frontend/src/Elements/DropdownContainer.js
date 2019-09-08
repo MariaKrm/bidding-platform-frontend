@@ -21,7 +21,9 @@ class DropdownContainer extends Component {
   render() {
     const { data, ...rest } = this.props
     return (
-      <DropdownTreeSelect data={this.state.data} {...rest} />
+      <div className="dropdown-tree-container">
+        <DropdownTreeSelect data={this.state.data} {...rest} />
+      </div>
     )
   }
 }

@@ -12,6 +12,7 @@ class AuctionsDisplay extends Component {
 			itemsPerPage: 5,
 			currentPage: -1,
 			lastPage: "",
+			keepParams: "?",
 		}
 
 		this.getAuctions = this.getAuctions.bind(this)
@@ -25,13 +26,8 @@ class AuctionsDisplay extends Component {
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
-			if(!this.state.lastPage) {
-				const lastPage = Math.ceil(response.data.totalElements / this.state.itemsPerPage)
-				this.setState({
-					lastPage: lastPage,
-				})
-			}
 			this.setState({
+				lastPage: response.data.totalPages,
 				currentPage: currPage,
 				auctions: response.data.content,
 			})
@@ -55,25 +51,18 @@ class AuctionsDisplay extends Component {
 		if(description) {
 			filterRoute = filterRoute + "description=" + description + "&"
 		}
-	/*
 		if(category) {
-			filterRoute = filterRoute + "?categoriesId=" + category
+			filterRoute = filterRoute + "?categoriesId=" + category + "&"
 		}
-	*/
 
 		customRequest("GET", `${filterRoute}page=${currPage-1}&size=${this.state.itemsPerPage}`)
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
-			if(!this.state.lastPage) {
-				const lastPage = Math.ceil(response.data.totalElements / this.state.itemsPerPage)
-				this.setState({
-					lastPage: lastPage,
-				})
-			}
 			this.setState({
+				lastPage: response.data.totalPages,
 				currentPage: currPage,
-				auctions: response.data,
+				auctions: response.data.content,
 			})
 		}).catch(err => {
             displayError(err)
@@ -82,9 +71,6 @@ class AuctionsDisplay extends Component {
 
 
 	getAuctions() {
-		console.log("AuctionsDisplay getAuctions")
-		
-
 		const query = new URLSearchParams(window.location.search)
 		let currPage = query.get("page")
 
@@ -93,6 +79,13 @@ class AuctionsDisplay extends Component {
 			currPage = 1
 		}
 		currPage = Number(currPage)
+
+		const params = query.toString()
+		const pagePos = params.lastIndexOf("&")
+		const keepParams = "?" + params.slice(0, pagePos+1)
+		this.setState({
+			keepParams: keepParams,
+		})
 
 		const path = this.props.location.pathname
 		const pos = path.lastIndexOf("/")
@@ -112,7 +105,7 @@ class AuctionsDisplay extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-        if(this.props.location.pathname !== prevProps.location.pathname) {
+        if(this.props.location.pathname !== prevProps.location.pathname || this.props.location.search !== prevProps.location.search) {
             this.getAuctions()
         }
     }
@@ -134,6 +127,10 @@ class AuctionsDisplay extends Component {
 					/>
 				)
 			})
+
+			if(auctions.length === 0) {
+				auctions = <div><br />No Auctions</div>
+			}
 		}
 		else if(this.state.auctions === "") {
 			auctions = <div>Loading...</div>
@@ -141,6 +138,8 @@ class AuctionsDisplay extends Component {
 		else {
 			auctions = <div><br />No Auctions</div>
 		}
+
+		
 		
 
 		return (
@@ -149,7 +148,7 @@ class AuctionsDisplay extends Component {
 					<button className="refresh-small" onClick={this.getOpenAuctions}>Refresh</button>
 				</div>
 				{auctions}
-		{/*		<PageWheel activePage={this.state.currentPage} lastPage={this.state.lastPage} />*/}
+				<PageWheel activePage={this.state.currentPage} lastPage={this.state.lastPage} params={this.state.keepParams} />
 			</div>
 		)
 	}

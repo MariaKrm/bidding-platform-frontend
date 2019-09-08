@@ -26,14 +26,8 @@ class AllAccounts extends Component {
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
-			if(!this.state.lastPage) {
-				const lastPage = Math.ceil(response.data.totalElements / this.state.itemsPerPage)
-				this.setState({
-					lastPage: lastPage,
-				})
-
-			}
 			this.setState({
+				lastPage: response.data.totalPages,
 				currentPage: currPage,
 				accounts: response.data.content,
 			})
@@ -89,7 +83,7 @@ class AllAccounts extends Component {
 						<h2 className="auction-managment-myactivity-title">All Accounts</h2>
 						<div>
 							{allAccounts}
-							<PageWheel activePage={this.state.currentPage} lastPage={this.state.lastPage} />
+							<PageWheel activePage={this.state.currentPage} lastPage={this.state.lastPage} params="?" />
 						</div>
 					</div>
 				</div>

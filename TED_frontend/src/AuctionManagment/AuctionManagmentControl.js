@@ -12,7 +12,6 @@ class AuctionManagmentControl extends Component {
 
 	render() {
 		
-		
 		return (
 			<div className="auction-managment-control">
 				<br />

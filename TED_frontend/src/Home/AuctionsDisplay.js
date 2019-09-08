@@ -145,7 +145,7 @@ class AuctionsDisplay extends Component {
 		return (
 			<div>
 				<div className="refresh-button-container">
-					<button className="refresh-small" onClick={this.getOpenAuctions}>Refresh</button>
+					<button className="refresh-small" onClick={this.getAuctions}>Refresh</button>
 				</div>
 				{auctions}
 				<PageWheel activePage={this.state.currentPage} lastPage={this.state.lastPage} params={this.state.keepParams} />

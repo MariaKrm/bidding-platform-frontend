@@ -86,7 +86,7 @@ class SearchBar extends Component {
 		event.preventDefault()
 		let path = "/home?page=1"
 		if(this.state.text) {
-			const encodedText = btoa(this.state.text)
+			const encodedText = this.state.text.replace(/%/g, "%25").replace(/&/g, "%26").replace(/#/g, "%23")
 			console.log("encodedText: ", encodedText)
 			path = "/home/search?searchText=" + encodedText +"&page=1"
 			console.log("searching for: ", this.state.text)

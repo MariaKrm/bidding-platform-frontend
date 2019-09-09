@@ -73,7 +73,8 @@ class AuctionsDisplay extends Component {
 	getSearchAuctions(currPage, searchText) {
 		console.log("currPage: ", currPage)
 		console.log("searchText: ", searchText)
-		customRequest("GET", `/search/searchBar?text=${searchText}&lower=0&upper=10`)
+		const decodedText = searchText.replace(/%23/g, "#").replace(/%26/g, "&").replace(/%25/g, "%")
+		customRequest("PUT", `/search/searchBar?lower=0&upper=10`, decodedText)
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)

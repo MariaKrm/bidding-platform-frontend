@@ -98,12 +98,13 @@ export function customRequest(method, url, data) {
       headers["Authorization"] = "Bearer " + AuthHelper.getToken()
     }
 
+    console.log("data: ", data)
     return axios.request({
-      url,
-      method,
+      url: url,
+      method: method,
       baseURL: Constants.BASEURL,
-      headers,
-      data,
+      headers: headers,
+      data: data,
     }).then(res => {
       console.log("\nReceived the following response from "+res.request.responseURL+":", res, "\n")
       return res;
@@ -113,5 +114,6 @@ export function customRequest(method, url, data) {
       throw err;
     });
   }
+
 
 export default AuthHelper

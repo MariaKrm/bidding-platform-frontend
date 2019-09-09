@@ -88,6 +88,7 @@ class AuctionsDisplay extends Component {
 
 
 	getAuctions() {
+		console.log("getAuctions")
 		const query = new URLSearchParams(window.location.search)
 		let currPage = query.get("page")
 

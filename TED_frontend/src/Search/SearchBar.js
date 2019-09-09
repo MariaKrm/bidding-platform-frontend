@@ -47,8 +47,10 @@ class SearchBar extends Component {
 			keyPresses: keyPresses,
 		})
 
-		if(lastWord.length > 2 && keyPresses % 2 === 0) {
-			this.getSuggestions(lastWord)
+		if(lastWord.length > 2) {
+			if(keyPresses % 2 === 0) {
+				this.getSuggestions(lastWord)
+			}
 		}
 		else {
 			this.setState({
@@ -68,12 +70,12 @@ class SearchBar extends Component {
 			this.setState({
 				displaySuggestions: false,
 			})
-		}, 100)
+		}, 300)
 		
 	}
 
 	handleSuggestSelect(event) {
-		const { id, textContent } = event.target
+		const { textContent } = event.target
 		console.log("textContent: ", textContent)
 		this.setState({
 			text: textContent,
@@ -82,8 +84,14 @@ class SearchBar extends Component {
 
 	handleSubmit(event) {
 		event.preventDefault()
-		const path = "/home/search?searchText=" + this.state.text +"&page=1"
-		console.log("searching for: ", this.state.text)
+		let path = "/home?page=1"
+		if(this.state.text) {
+			const encodedText = btoa(this.state.text)
+			console.log("encodedText: ", encodedText)
+			path = "/home/search?searchText=" + encodedText +"&page=1"
+			console.log("searching for: ", this.state.text)
+		}
+		
 		this.props.history.push(path)
 	}
 
@@ -103,13 +111,15 @@ class SearchBar extends Component {
 		}
 
 		return (
-			<form onSubmit={this.handleSubmit} onBlur={this.handleBlur} onFocus={this.handleFocus}>
+			<form onSubmit={this.handleSubmit}>
 				<input
 					type="text"
 					className="search-bar"
 					placeholder="Search"
 					value={this.state.text}
 					onChange={this.handleChange}
+					onBlur={this.handleBlur}
+					onFocus={this.handleFocus}
 				 />
 				 <button className="main-button" type="submit">Search</button>
 				 <div className="search-suggestion-container">

@@ -81,7 +81,6 @@ class Feed extends Component {
 		return (
 			<div className="home-content">
 				<div className="search-container">
-					<h3>Filters</h3>
 					<Filters history={this.props.history} />
 				</div>
 				<div className="main-content">

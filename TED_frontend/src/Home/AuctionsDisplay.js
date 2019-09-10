@@ -53,7 +53,7 @@ class AuctionsDisplay extends Component {
 			filterRoute = filterRoute + "description=" + description + "&"
 		}
 		if(category) {
-			filterRoute = filterRoute + "categoriesId=" + category + "&"
+			filterRoute = filterRoute + "categoryId=" + category + "&"
 		}
 
 		customRequest("GET", `${filterRoute}page=${currPage-1}&size=${this.state.itemsPerPage}`)

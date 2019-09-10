@@ -130,6 +130,7 @@ class Filters extends Component {
 
 		return (
 			<form className="filters">
+				<h3>Filters</h3>
 				{this.state.error && this.state.error !== "" && <div className="alert-danger"><strong>{this.state.error}</strong> </div>}
 				<br />
 				<h5>Price Range</h5>

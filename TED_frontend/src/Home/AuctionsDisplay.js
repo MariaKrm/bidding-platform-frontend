@@ -71,8 +71,6 @@ class AuctionsDisplay extends Component {
 	}
 
 	getSearchAuctions(currPage, searchText) {
-		console.log("currPage: ", currPage)
-		console.log("searchText: ", searchText)
 		const decodedText = searchText.replace(/%23/g, "#").replace(/%26/g, "&").replace(/%25/g, "%")
 		customRequest("PUT", `/search/searchBar?lower=0&upper=10`, decodedText)
 		.then(response => {
@@ -89,7 +87,6 @@ class AuctionsDisplay extends Component {
 
 
 	getAuctions() {
-		console.log("getAuctions")
 		const query = new URLSearchParams(window.location.search)
 		let currPage = query.get("page")
 
@@ -109,7 +106,6 @@ class AuctionsDisplay extends Component {
 		const path = this.props.location.pathname
 		const pos = path.lastIndexOf("/")
 		const type = path.slice(pos+1)
-		console.log("type: ", type)
 
 		if(type === "filters") {
 			const lowerPrice = query.get("lowerPrice")

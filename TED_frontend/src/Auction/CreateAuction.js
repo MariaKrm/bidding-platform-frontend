@@ -9,6 +9,7 @@ import ValidatedInput from "../Elements/ValidatedInput"
 import AddressForm from "../Address/AddressForm"
 import NotAvailable from "../utils/NotAvailable"
 import DropdownContainer from "../Elements/DropdownContainer"
+import ImageThumb from "../Elements/ImageThumb"
 
 import "react-datepicker/dist/react-datepicker.css"
 
@@ -36,8 +37,8 @@ class CreateAuction extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.handleSelectChange = this.handleSelectChange.bind(this)
 		this.handleDateChange = this.handleDateChange.bind(this)
-		this.handleImageClick = this.handleImageClick.bind(this)
         this.handleImageUpload = this.handleImageUpload.bind(this)
+        this.removeImage = this.removeImage.bind(this)
 		this.passresult = this.passresult.bind(this)
         this.tranformCategoriesToTreeSelect = this.tranformCategoriesToTreeSelect.bind(this)
 		this.getAllCategories = this.getAllCategories.bind(this)
@@ -71,16 +72,23 @@ class CreateAuction extends Component {
     	})
     }
 
-    handleImageClick() {
-    	alert("Yay!")
-    }
-
     handleImageUpload(event) {
+        if(!event.target.files[0].type.includes("image")) {
+            return false
+        }
         const image = URL.createObjectURL(event.target.files[0])
-        console.log("image: ", image)
         this.setState({
             images: this.state.images.concat(image)
         })
+    }
+
+    removeImage(id) {
+        let images = this.state.images
+        images.splice(id, 1)
+        this.setState({
+            images: images,
+        })
+
     }
 
     passresult(name, value, error) {
@@ -159,9 +167,7 @@ class CreateAuction extends Component {
 
     	const javaDate = this.state.endsAt.toISOString()
 
-        console.log("image: ", this.state.image)
-       // const formData = new FormData()
-       // formData.append("media", this.state.image)
+        console.log("images: ", this.state.images)
 
 
     	const newAuction = {
@@ -205,11 +211,6 @@ class CreateAuction extends Component {
 
 
     submitAuction(newAuction) {
-    //	const pathWithParams = `/item?name=${newAuction.name}&buyPrice=${newAuction.buyPrice}&firstBid=${newAuction.firstBid}
-    //		&categoryId=${newAuction.categoryId}&longitude=${newAuction.coords.lon}&latitude=${newAuction.coords.lat}
-    //		&locationTitle=${newAuction.locationTitle}
-    //		&endsAt=${newAuction.endsAt}&description=${newAuction.description}`
-
     	customRequest("POST", "/item", newAuction)
     	.then(response => {
     		console.log("response: ", response)
@@ -256,9 +257,9 @@ class CreateAuction extends Component {
             )
         }
 
-        const images = this.state.images.map(img => {
+        const images = this.state.images.map((img, index) => {
             return (
-                <img className="image-thumb" src={img} alt={this.state.name} />
+                <ImageThumb key={index} id={index} src={img} alt={this.state.name} removeImage={this.removeImage} />
             )
         })
 
@@ -317,10 +318,8 @@ class CreateAuction extends Component {
                             </div>
 
                             <br />
-                            <label>Add pictures &nbsp;&nbsp;</label> <input type="file" onChange={this.handleImageUpload}/>
-                            <div>
-                                {images}
-                            </div>
+                            <label>Add pictures &nbsp;&nbsp;</label> <input type="file" accept="image/*" onChange={this.handleImageUpload}/>
+                            {images}
                             <br />
                             
                             

@@ -1,6 +1,24 @@
-.image-thumb {
-	width: 50px;
-	height: 50px;
-	border: none;
+
+.image-thumb-container {
+	position: relative;
+	display: inline-block;
 	margin: 5px;
+	padding: 0;
+}
+
+.image-thumb {
+	width: 70px;
+	height: 70px;
+	border: none;
+}
+
+.remove-image-icon {
+   position: absolute;
+   right: 3px;
+   font-size: 20px;
+   color: red;
+}
+
+.remove-image-icon:hover {
+	cursor: pointer;
 }

@@ -98,7 +98,6 @@ export function customRequest(method, url, data) {
       headers["Authorization"] = "Bearer " + AuthHelper.getToken()
     }
 
-    console.log("data: ", data)
     return axios.request({
       url: url,
       method: method,

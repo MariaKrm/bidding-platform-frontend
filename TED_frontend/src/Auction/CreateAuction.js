@@ -77,6 +77,7 @@ class CreateAuction extends Component {
 
     handleImageUpload(event) {
         const image = URL.createObjectURL(event.target.files[0])
+        console.log("image: ", image)
         this.setState({
             images: this.state.images.concat(image)
         })

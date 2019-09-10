@@ -25,6 +25,7 @@ class CreateAuction extends Component {
 			coords: null,
 			locationTitle: "",
 			description: "",
+            image: null,
 			error: "",
 			category: "",
 			initialCategories: [],
@@ -36,6 +37,7 @@ class CreateAuction extends Component {
 		this.handleSelectChange = this.handleSelectChange.bind(this)
 		this.handleDateChange = this.handleDateChange.bind(this)
 		this.handleImageClick = this.handleImageClick.bind(this)
+        this.handleImageUpload = this.handleImageUpload.bind(this)
 		this.passresult = this.passresult.bind(this)
         this.tranformCategoriesToTreeSelect = this.tranformCategoriesToTreeSelect.bind(this)
 		this.getAllCategories = this.getAllCategories.bind(this)
@@ -71,6 +73,12 @@ class CreateAuction extends Component {
 
     handleImageClick() {
     	alert("Yay!")
+    }
+
+    handleImageUpload(event) {
+        this.setState({
+            image: URL.createObjectURL(event.target.files[0])
+        })
     }
 
     passresult(name, value, error) {
@@ -149,6 +157,10 @@ class CreateAuction extends Component {
 
     	const javaDate = this.state.endsAt.toISOString()
 
+        console.log("image: ", this.state.image)
+        const formData = new FormData()
+        formData.append(0, this.state.image)
+
 
     	const newAuction = {
     		name: this.state.itemName,
@@ -158,7 +170,8 @@ class CreateAuction extends Component {
     		coords: this.state.coords,
     		locationTitle: this.state.locationTitle,
     		categoryId: this.state.category,
-    		description: this.state.description
+    		description: this.state.description,
+            media: formData,
     	}
 
     	this.verifySubmit(newAuction)
@@ -185,7 +198,7 @@ class CreateAuction extends Component {
     submitAuction(newAuction) {
     	const pathWithParams = `/item?name=${newAuction.name}&buyPrice=${newAuction.buyPrice}&firstBid=${newAuction.firstBid}
     		&categoryId=${newAuction.categoryId}&longitude=${newAuction.coords.lon}&latitude=${newAuction.coords.lat}
-    		&locationTitle=${newAuction.locationTitle}&media=${newAuction.fromData}
+    		&locationTitle=${newAuction.locationTitle}&media=${newAuction.media}
     		&endsAt=${newAuction.endsAt}&description=${newAuction.description}`
 
     	customRequest("POST", pathWithParams, newAuction)
@@ -288,7 +301,10 @@ class CreateAuction extends Component {
                                 <h4 className="field-label">Pick a category</h4>
                                 <DropdownContainer data={this.state.transformedCategories[0]} mode="radioSelect" onChange={this.handleSelectChange} required />
                             </div>
-
+{/*}
+                            <input type="file" onChange={this.handleImageUpload}/>
+                            <img src={this.state.image}/>
+*/}
 							<div className="description-container">
 								<h4 className="field-label">Write a short description of the item</h4>
 								<textarea name="description" className="description-input" value={this.state.description} onChange={this.handleChange} cols={40} rows={3} required />

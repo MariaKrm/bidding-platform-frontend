@@ -22,6 +22,7 @@ class Filters extends Component {
 		this.handleChange = this.handleChange.bind(this)
 		this.handleSelectChange = this.handleSelectChange.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
+		this.clearFilters = this.clearFilters.bind(this)
 	}
 
 	tranformCategoriesToTreeSelect(categories) {
@@ -79,7 +80,7 @@ class Filters extends Component {
 		event.preventDefault()
 		let errorMessage = ""
 
-		if(Number(this.state.lowerPrice) > Number(this.state.higherPrice)) {
+		if(this.state.lowerPrice && this.state.higherPrice && Number(this.state.lowerPrice) > Number(this.state.higherPrice)) {
 			errorMessage = "Please enter a valid price range."
 		}
 
@@ -115,6 +116,16 @@ class Filters extends Component {
     	redirectURL = redirectURL + "page=1"
     	this.props.history.push(redirectURL)
 
+	}
+
+	clearFilters() {
+		this.setState({
+			lowerPrice: "",
+			higherPrice: "",
+			location: "",
+			description: "",
+			category: "",
+		})
 	}
 
 	componentDidMount() {
@@ -171,7 +182,7 @@ class Filters extends Component {
 				<br />
 				<br />
 
-				<DropdownContainer data={this.state.transformedCategories[0]} mode="radioSelect" onChange={this.handleSelectChange} required />
+				<DropdownContainer data={this.state.transformedCategories[0]} mode="radioSelect" onChange={this.handleSelectChange} />
 
 				<br />
 				<br />
@@ -186,7 +197,8 @@ class Filters extends Component {
 
 				<br />
 				<br />
-				<button type="submit" className="btn btn-success" onClick={this.handleSubmit}>Find Auctions</button>
+				<button type="button" className="btn btn-success btn-margin" onClick={this.clearFilters}>Clear</button>
+				<button type="submit" className="btn btn-success btn-margin" onClick={this.handleSubmit}>Find Auctions</button>
 			</form>
 		)
 	}

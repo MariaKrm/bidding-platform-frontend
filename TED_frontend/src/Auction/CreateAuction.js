@@ -25,7 +25,7 @@ class CreateAuction extends Component {
 			coords: null,
 			locationTitle: "",
 			description: "",
-            image: null,
+            images: [],
 			error: "",
 			category: "",
 			initialCategories: [],
@@ -76,8 +76,9 @@ class CreateAuction extends Component {
     }
 
     handleImageUpload(event) {
+        const image = URL.createObjectURL(event.target.files[0])
         this.setState({
-            image: URL.createObjectURL(event.target.files[0])
+            images: this.state.images.concat(image)
         })
     }
 
@@ -158,8 +159,8 @@ class CreateAuction extends Component {
     	const javaDate = this.state.endsAt.toISOString()
 
         console.log("image: ", this.state.image)
-        const formData = new FormData()
-        formData.append(0, this.state.image)
+       // const formData = new FormData()
+       // formData.append("media", this.state.image)
 
 
     	const newAuction = {
@@ -167,14 +168,21 @@ class CreateAuction extends Component {
     		buyPrice: this.state.buyPrice,
     		firstBid: this.state.firstBid,
     		endsAt: javaDate,
-    		coords: this.state.coords,
+    		longitude: this.state.coords.lon,
+            latitude: this.state.coords.lat,
     		locationTitle: this.state.locationTitle,
     		categoryId: this.state.category,
     		description: this.state.description,
-            media: formData,
+            media: this.state.images[0],
     	}
 
-    	this.verifySubmit(newAuction)
+
+        const formData = new FormData();
+        Object.keys(newAuction).forEach(key => {
+            formData.append(key, newAuction[key]);
+        });
+
+    	this.verifySubmit(formData)
     }
 
 
@@ -196,12 +204,12 @@ class CreateAuction extends Component {
 
 
     submitAuction(newAuction) {
-    	const pathWithParams = `/item?name=${newAuction.name}&buyPrice=${newAuction.buyPrice}&firstBid=${newAuction.firstBid}
-    		&categoryId=${newAuction.categoryId}&longitude=${newAuction.coords.lon}&latitude=${newAuction.coords.lat}
-    		&locationTitle=${newAuction.locationTitle}&media=${newAuction.media}
-    		&endsAt=${newAuction.endsAt}&description=${newAuction.description}`
+    //	const pathWithParams = `/item?name=${newAuction.name}&buyPrice=${newAuction.buyPrice}&firstBid=${newAuction.firstBid}
+    //		&categoryId=${newAuction.categoryId}&longitude=${newAuction.coords.lon}&latitude=${newAuction.coords.lat}
+    //		&locationTitle=${newAuction.locationTitle}
+    //		&endsAt=${newAuction.endsAt}&description=${newAuction.description}`
 
-    	customRequest("POST", pathWithParams, newAuction)
+    	customRequest("POST", "/item", newAuction)
     	.then(response => {
     		console.log("response: ", response)
     		console.log("response.data: ", response.data)
@@ -247,6 +255,11 @@ class CreateAuction extends Component {
             )
         }
 
+        const images = this.state.images.map(img => {
+            return (
+                <img className="image-thumb" src={img} alt={this.state.name} />
+            )
+        })
 
 		return (
 			<div>
@@ -256,7 +269,7 @@ class CreateAuction extends Component {
 					<form className="new-auction-form" onSubmit={this.handleSubmit}>
 						{this.state.error && this.state.error !== "" && <div className="alert-danger"><strong>{this.state.error}</strong> </div>}
 						{/*eslint-disable-next-line*/}
-						<img className="add-image-picture" src={require("../images/add_image.png")} alt="Add image" onClick={this.handleImageClick} />
+					{/*}	<img className="add-image-picture" src={require("../images/add_image.png")} alt="Add image" onClick={this.handleImageClick} /> */}
 						<div className="new-auction-fields">
 							<ValidatedInput 
 								type="text" 
@@ -301,10 +314,16 @@ class CreateAuction extends Component {
                                 <h4 className="field-label">Pick a category</h4>
                                 <DropdownContainer data={this.state.transformedCategories[0]} mode="radioSelect" onChange={this.handleSelectChange} required />
                             </div>
-{/*}
-                            <input type="file" onChange={this.handleImageUpload}/>
-                            <img src={this.state.image}/>
-*/}
+
+                            <br />
+                            <label>Add pictures &nbsp;&nbsp;</label> <input type="file" onChange={this.handleImageUpload}/>
+                            <div>
+                                {images}
+                            </div>
+                            <br />
+                            
+                            
+
 							<div className="description-container">
 								<h4 className="field-label">Write a short description of the item</h4>
 								<textarea name="description" className="description-input" value={this.state.description} onChange={this.handleChange} cols={40} rows={3} required />

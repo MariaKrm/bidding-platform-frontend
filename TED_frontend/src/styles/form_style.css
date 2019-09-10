@@ -242,4 +242,3 @@ input[type=text]:focus:read-write, input[type=password]:focus:read-write, input[
 	max-height: 250px;
 	overflow-y: scroll;
 }
-

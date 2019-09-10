@@ -24,6 +24,7 @@ import "./styles/auction_style.css"
 import "./styles/bid_style.css"
 import "./styles/account_style.css"
 import "./styles/search_style.css"
+import "./styles/image_style.css"
 
 import "react-datepicker/dist/react-datepicker.css"
 

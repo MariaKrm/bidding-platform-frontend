@@ -139,7 +139,6 @@ class AuctionsDisplay extends Component {
 	}
 
 	render() {
-		
 		let auctions
 		if(this.state.auctions) {
 			auctions = this.state.auctions.map(item => {
@@ -162,9 +161,6 @@ class AuctionsDisplay extends Component {
 		else {
 			auctions = <div><br />No Auctions</div>
 		}
-
-		
-		
 
 		return (
 			<div>

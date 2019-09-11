@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import AuctionOptions from "../Auction/AuctionOptions"
+import * as Constants from "../Constants/Constants"
 
 
 class AuctionPreview extends Component {
@@ -12,8 +13,8 @@ class AuctionPreview extends Component {
 			return category.name
 		})
 		const categoryString = categories.join(", ")
-		const image = this.props.auction.media ? this.props.auction.media : require("../images/no_image.png")
-		const alt = this.props.auction.media ? this.props.auction.name : "no image available"
+		const image = this.props.auction.getMediaPath.length > 0 ? Constants.BASEURL + "/media" + this.props.auction.getMediaPath[0] : require("../images/no_image.png")
+		const alt = this.props.auction.getMediaPath.length > 0 ? this.props.auction.name : "no image available"
 		const endDate = new Date(this.props.auction.endsAt)
 		const ended = endDate < Date.now()
 		return (

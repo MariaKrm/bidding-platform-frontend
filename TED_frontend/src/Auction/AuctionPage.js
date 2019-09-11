@@ -8,6 +8,8 @@ import AccountButtons from "../Elements/AccountButtons"
 import AuctionOptions from "./AuctionOptions"
 import Bidder from "../Bid/Bidder"
 import Map from "../Elements/Map"
+import ImageThumb from "../Elements/ImageThumb"
+import * as Constants from "../Constants/Constants"
 
 
 
@@ -16,6 +18,9 @@ class AuctionPage extends Component {
 		super()
 		this.state = {
 			data: null,
+			pics: [],
+			picURLs: [],
+			picsDone: false,
 			success: false,
 			bid: "",
 		}
@@ -24,6 +29,7 @@ class AuctionPage extends Component {
 		this.sendBid = this.sendBid.bind(this)
 		this.makeBid = this.makeBid.bind(this)
 		this.buyNow = this.buyNow.bind(this)
+		this.getPics = this.getPics.bind(this)
 		this.getAuctionData = this.getAuctionData.bind(this)
 		this.toPreviousPage = this.toPreviousPage.bind(this)
 	}
@@ -91,6 +97,29 @@ class AuctionPage extends Component {
 		})
 	}
 
+	getPics(mediaPaths) {
+		mediaPaths.forEach(path => {
+			customRequest("GET", `/media${path}`)
+			.then(response => {
+				console.log("response: ", response)
+				console.log("response.data: ", response.data)
+				const url = URL.createObjectURL(response.data)
+				const pics = this.state.pics
+				const picURLs = this.state.picURLs
+				this.setState({
+					pics: pics.concat(response.data),
+					picURLs: picURLs.concat(url),
+				})
+			}).catch(err => {
+				displayError(err)
+			})
+		})
+
+		this.setState({
+			picsDone: true,
+		})
+	}
+
 	toPreviousPage() {
 		clearInterval(this.intervalId)
 		this.props.history.goBack()
@@ -105,6 +134,10 @@ class AuctionPage extends Component {
 			this.setState({
 				data: response.data,
 			})
+
+		//	if(!this.state.picsDone) {
+			//	this.getPics(response.data.getMediaPath)
+		//	}
 		}).catch(err => {
 			displayError(err)
 		})
@@ -147,8 +180,8 @@ class AuctionPage extends Component {
 			return category.name
 		})
 		const categoryString = categories.join(", ")
-		const image = this.state.data.media ? this.state.data.media : require("../images/no_image.png")
-		const alt = this.state.data.media ? this.state.data.name : "no image available"
+		const image = this.state.data.getMediaPath.length > 0 ? Constants.BASEURL + "/media" + this.state.data.getMediaPath[0] : require("../images/no_image.png")
+		const alt = this.state.data.getMediaPath.length > 0 ? this.state.data.name : "no image available"
 		const endDate = new Date(this.state.data.endsAt)
 		const ended = endDate < Date.now()
 
@@ -159,6 +192,14 @@ class AuctionPage extends Component {
 				return <Bid key={bid.id} amount={bid.offer} time={bid.createdAt} bidder={bid.bidder} />
 			})
 		}
+
+		let pics = null
+		pics = this.state.data.getMediaPath.map((pic, index) => {
+			return (
+				<ImageThumb id={index} image={Constants.BASEURL + "/media" + pic} alt={this.state.name} noX />
+			)
+		})
+
 		
 
 		var bidGroup, buyNowButton
@@ -198,6 +239,7 @@ class AuctionPage extends Component {
 
 			buyNowButton = this.state.data.buyPrice ? <button className="btn btn-success btn-margin btn-set-size" onClick={this.buyNow}>Buy Now for {this.state.data.buyPrice}$</button> : null
 		}
+
 
 		return (
 			<div>
@@ -239,7 +281,7 @@ class AuctionPage extends Component {
 							<h3 className="auction-description-title">Description:</h3>
 							<p className="auction-description">{this.state.data.description}</p>
 							<div className="auction-pictures">
-								Pic thumbs here
+								{pics}
 							</div>
 							{this.state.data.location && this.state.data.location.latitude !== 0 && this.state.data.location.longitude !== 0 ?
 								<Map lat={this.state.data.location.latitude} lon={this.state.data.location.longitude} />

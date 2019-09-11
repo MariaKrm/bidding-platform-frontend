@@ -15,6 +15,7 @@ import PendingRegisters from "./AccountManagment/PendingRegisters"
 import AllAccounts from "./AccountManagment/AllAccounts"
 import AccountPage from "./Account/AccountPage"
 import PageNotFound from "./utils/PageNotFound"
+import DisplayImage from "./utils/DisplayImage"
 
 import "./styles/style.css"
 import "./styles/form_style.css"
@@ -53,6 +54,7 @@ ReactDOM.render(
 	    	<Route path="/account-managment/all-accounts" component={AllAccounts} />
 	    	<Route path="/createAuction" component={CreateAuction} />
 	    	<Route path="/createCategory" component={CreateCategory} />
+	    	<Route path="/image" component={DisplayImage} />
 	    	<Route path="/auctions/:id" component={AuctionPage} />
 	    	<Route path="/editAuction/:id" component={EditAuction} />
 	    	<Route path="/accounts/:username" component={AccountPage} />

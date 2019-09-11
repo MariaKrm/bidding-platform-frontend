@@ -6,62 +6,45 @@ import HomeHeader from "../Elements/HomeHeader"
 import Navbar from "../Elements/Navbar"
 import AuctionManagmentControl from "./AuctionManagmentControl"
 import AuctionPreview from "../Auction/AuctionPreview"
+import PageWheel from "../Elements/PageWheel"
 
-class MyAuctions extends Component {
+class ViewedAuctions extends Component {
 	constructor() {
 		super()
 		this.state = {
 			auctions: null,
-			openClosed: "Open",
+			itemsPerPage: 5,
+			currentPage: -1,
+			lastPage: "",
 		}
-
 	}
 
-	getOpenAuctions() {
-		customRequest("GET", "/user/myOpenAuctions")
+	getAuctions(currPage) {
+		customRequest("GET", `/user/myHistory?page=${currPage-1}&size=${this.state.itemsPerPage}`)
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
 			this.setState({
-				auctions: response.data
+				lastPage: response.data.totalPages,
+				currentPage: currPage,
+				auctions: response.data.content,
 			})
 		}).catch(err => {
 			displayError(err)
 		})
 	}
-
-	getClosedAuctions() {
-		customRequest("GET", "/user/myCompletedAuctions")
-		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
-			this.setState({
-				auctions: response.data
-			})
-		}).catch(err => {
-			displayError(err)
-		})
-	}
-
 
 	componentDidMount() {
-		if(!AuthHelper.loggedIn()) {
-			return false
+		const query = new URLSearchParams(window.location.search)
+		let currPage = query.get('page')
+
+		if(currPage === null) {
+			this.props.history.push("?page=1")
+			currPage = 1
 		}
 
-		if(this.props.completed) {
-			this.setState({
-				openClosed: "Closed",
-			})
-			this.getClosedAuctions()
-		}
-		else {
-			this.setState({
-				openClosed: "Open",
-			})
-			this.getOpenAuctions()
-		}
-		
+		currPage = Number(currPage)
+		this.getAuctions(currPage)
 	}
 
 	render() {
@@ -97,6 +80,7 @@ class MyAuctions extends Component {
 						<h2 className="auction-managment-myactivity-title">My {this.state.openClosed} Auctions</h2>
 						<div>
 							{myAuctions}
+							<PageWheel activePage={this.state.currentPage} lastPage={this.state.lastPage} />
 						</div>
 					</div>
 				</div>
@@ -105,4 +89,4 @@ class MyAuctions extends Component {
 	}
 }
 
-export default MyAuctions
+export default ViewedAuctions

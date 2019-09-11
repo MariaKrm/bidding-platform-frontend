@@ -31,6 +31,9 @@ class AuctionManagmentControl extends Component {
 						<li className="nav-item">
 							<a className="nav-link" href="/auction-managment/my-bids">My Bids</a>
 						</li>
+						<li className="nav-item">
+							<a className="nav-link" href="/auction-managment/my-history">Viewed Auctions</a>
+						</li>
 					</ul>
 				</nav>
 

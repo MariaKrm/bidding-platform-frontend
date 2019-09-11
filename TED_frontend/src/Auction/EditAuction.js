@@ -142,7 +142,10 @@ class EditAuction extends Component {
     	})
 
     	console.log("error: ", errorMessage)
-    	if(errorMessage !== "" && errorMessage !== null) return false
+    	if(errorMessage) {
+            window.scrollTo(0, 0)
+            return false
+        }
 
     	const javaDate = this.state.endsAt.toISOString()
 

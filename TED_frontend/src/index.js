@@ -11,6 +11,7 @@ import AuctionPage from "./Auction/AuctionPage"
 import EditAuction from "./Auction/EditAuction"
 import MyAuctions from "./AuctionManagment/MyAuctions"
 import MyBids from "./AuctionManagment/MyBids"
+import ViewedAuctions from "./AuctionManagment/ViewedAuctions"
 import PendingRegisters from "./AccountManagment/PendingRegisters"
 import AllAccounts from "./AccountManagment/AllAccounts"
 import AccountPage from "./Account/AccountPage"
@@ -50,6 +51,7 @@ ReactDOM.render(
 	    	<Route path="/auction-managment/my-open-auctions" render={(props) => <MyAuctions completed={false} {...props} />} />
 	    	<Route path="/auction-managment/my-closed-auctions" render={(props) => <MyAuctions completed={true} {...props} />} />
 	    	<Route path="/auction-managment/my-bids" component={MyBids} />
+	    	<Route path="/auction-managment/my-history" component={ViewedAuctions} />
 	    	<Route path="/account-managment/pending-registers" component={PendingRegisters} />
 	    	<Route path="/account-managment/all-accounts" component={AllAccounts} />
 	    	<Route path="/createAuction" component={CreateAuction} />

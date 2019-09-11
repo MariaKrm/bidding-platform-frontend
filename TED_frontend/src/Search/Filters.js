@@ -197,8 +197,8 @@ class Filters extends Component {
 
 				<br />
 				<br />
-				<button type="button" className="btn btn-success btn-margin" onClick={this.clearFilters}>Clear</button>
 				<button type="submit" className="btn btn-success btn-margin" onClick={this.handleSubmit}>Find Auctions</button>
+				<button type="button" className="btn btn-success btn-margin" onClick={this.clearFilters}>Clear</button>
 			</form>
 		)
 	}

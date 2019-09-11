@@ -13,6 +13,8 @@ class AuctionsDisplay extends Component {
 			currentPage: -1,
 			lastPage: "",
 			keepParams: "?",
+			searchText: "",
+			filters: false,
 		}
 
 		this.getAuctions = this.getAuctions.bind(this)
@@ -108,6 +110,11 @@ class AuctionsDisplay extends Component {
 		const type = path.slice(pos+1)
 
 		if(type === "filters") {
+			this.setState({
+				filters: true,
+				searchText: "",
+			})
+
 			const lowerPrice = query.get("lowerPrice")
 			const higherPrice = query.get("higherPrice")
 			const locationTitle = query.get("locationTitle")
@@ -117,9 +124,17 @@ class AuctionsDisplay extends Component {
 		}
 		else if(type === "search") {
 			const searchText = query.get("searchText")
+			this.setState({
+				searchText: searchText,
+				filters: false,
+			})
 			this.getSearchAuctions(currPage, searchText)
 		}
 		else {
+			this.setState({
+				searchText: "",
+				filters: false,
+			})
 			this.getOpenAuctions(currPage)
 		}
 	}
@@ -158,11 +173,23 @@ class AuctionsDisplay extends Component {
 			auctions = <div><br />No Auctions</div>
 		}
 
+		let helpText
+		if(this.state.searchText) {
+			helpText = <h5 className="help-text">Search Results for: "{this.state.searchText}"</h5>
+		}
+		else if(this.state.filters) {
+			helpText = <h5 className="help-text">Filtered Results</h5>
+		}
+		else {
+			helpText = null
+		}
+
 		return (
 			<div>
 				<div className="refresh-button-container">
 					<button className="refresh-small" onClick={this.getAuctions}>Refresh</button>
 				</div>
+				{helpText}
 				{auctions}
 				<PageWheel activePage={this.state.currentPage} lastPage={this.state.lastPage} params={this.state.keepParams} />
 			</div>

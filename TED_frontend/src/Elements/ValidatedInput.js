@@ -33,6 +33,7 @@ class ValidatedInput extends Component {
 
 	validateUsername(value) {
 		let regEx = /\S{6,}/
+		if (!value) return null
 		if (!regEx.test(value)) return "Must be 6+ characters long"
 		regEx = /^\w{6,}$/
 		if (!regEx.test(value)) return "Can only contain alphanumeric symbols"
@@ -43,26 +44,26 @@ class ValidatedInput extends Component {
 
 	validateEmail(value) {
 		const regEx = /\S+@\S+\.\S+/
-		return (!regEx.test(value)) ? "Invalid email address" : null
+		return (value && !regEx.test(value)) ? "Invalid email address" : null
 	}
  
 	validatePassword(value) {
 		const regEx = /^(?=.*[A-z])(?=.*[0-9])(?=.{8,})/
-		return (!regEx.test(value)) ? "Password not strong enough" : null
+		return (value && !regEx.test(value)) ? "Password not strong enough" : null
 	}
  
 	validateConfirm(value) {
-		return (this.props.password !== value) ? "Passwords do not match" : null
+		return (value && this.props.password !== value) ? "Passwords do not match" : null
 	}
 
 	validateTelNumber(value) {
 		const regEx = /^[0-9]\d{9,11}$/
-		return (!regEx.test(value)) ? "Invalid number" : null
+		return (value && !regEx.test(value)) ? "Invalid number" : null
 	}
 
 	validatePrice(value) {
 		const regEx = /(^[1-9]\d*$)|(^\d+\.\d{1,2}$)/
-		return (!regEx.test(value)) ? "Invalid price" : null
+		return (value && !regEx.test(value)) ? "Invalid price" : null
 	}
 
 	validateItemName(value) {

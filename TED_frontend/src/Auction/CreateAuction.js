@@ -99,7 +99,7 @@ class CreateAuction extends Component {
 
     passresult(name, value, error) {
     	if(error !== null) {
-    		value = null
+    		value = ""
     	}
     	this.setState({
     		[name]: value,

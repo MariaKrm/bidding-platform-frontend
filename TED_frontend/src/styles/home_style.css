@@ -99,3 +99,8 @@
 .auction-managment-radio-group {
 	vertical-align: middle;
 }
+
+.help-text {
+	color: grey;
+	font-style: italic;
+}

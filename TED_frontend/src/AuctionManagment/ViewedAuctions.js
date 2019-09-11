@@ -77,7 +77,7 @@ class ViewedAuctions extends Component {
 				<div className="auction-managment">
 					<AuctionManagmentControl history={this.props.history} />
 					<div className="auction-managment-myactivity">
-						<h2 className="auction-managment-myactivity-title">My {this.state.openClosed} Auctions</h2>
+						<h2 className="auction-managment-myactivity-title">Viewed Auctions</h2>
 						<div>
 							{myAuctions}
 							<PageWheel activePage={this.state.currentPage} lastPage={this.state.lastPage} />

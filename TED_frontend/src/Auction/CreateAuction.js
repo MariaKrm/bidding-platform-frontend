@@ -276,8 +276,6 @@ class CreateAuction extends Component {
 				<div className="new-auction-form-group">
 					<form className="new-auction-form" onSubmit={this.handleSubmit}>
 						{this.state.error && this.state.error !== "" && <div className="alert-danger"><strong>{this.state.error}</strong> </div>}
-						{/*eslint-disable-next-line*/}
-					{/*}	<img className="add-image-picture" src={require("../images/add_image.png")} alt="Add image" onClick={this.handleImageClick} /> */}
 						<div className="new-auction-fields">
 							<ValidatedInput 
 								type="text" 

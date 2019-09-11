@@ -9,6 +9,8 @@ import ValidatedInput from "../Elements/ValidatedInput"
 import AddressForm from "../Address/AddressForm"
 import NotAvailable from "../utils/NotAvailable"
 import DropdownContainer from "../Elements/DropdownContainer"
+import ImageThumb from "../Elements/ImageThumb"
+import * as Constants from "../Constants/Constants"
 
 import "react-datepicker/dist/react-datepicker.css"
 
@@ -25,6 +27,8 @@ class EditAuction extends Component {
 			coords: null,
 			locationTitle: "",
 			description: "",
+            images: [],
+            imageURLs: [],
 			error: "",
 			category: "",
             initialCategories: [],
@@ -35,7 +39,8 @@ class EditAuction extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.handleSelectChange = this.handleSelectChange.bind(this)
 		this.handleDateChange = this.handleDateChange.bind(this)
-		this.handleImageClick = this.handleImageClick.bind(this)
+		this.handleImageUpload = this.handleImageUpload.bind(this)
+        this.removeImage = this.removeImage.bind(this)
 		this.passresult = this.passresult.bind(this)
 		this.getAllCategories = this.getAllCategories.bind(this)
 		this.handleAddressSubmit = this.handleAddressSubmit.bind(this)
@@ -71,8 +76,28 @@ class EditAuction extends Component {
     	})
     }
 
-    handleImageClick() {
-    	alert("Yay!")
+    handleImageUpload(event) {
+        if(!event.target.files[0].type.includes("image")) {
+            return false
+        }
+        const image = event.target.files[0]
+        const imageURL = URL.createObjectURL(event.target.files[0])
+        this.setState({
+            images: this.state.images.concat(image),
+            imageURLs: this.state.imageURLs.concat(imageURL),
+        })
+    }
+
+    removeImage(id) {
+        let images = this.state.images
+        let imageURLs = this.state.imageURLs
+        images.splice(id, 1)
+        imageURLs.splice(id, 1)
+        this.setState({
+            images: images,
+            imageURLs: imageURLs,
+        })
+
     }
 
     passresult(name, value, error) {
@@ -90,6 +115,8 @@ class EditAuction extends Component {
     		locationTitle: city + ", " + country
     	})
     }
+
+
 
 
     handleSubmit(event) {
@@ -162,6 +189,20 @@ class EditAuction extends Component {
     	.then(response => {
     		console.log("response: ", response)
     		console.log("response.data: ", response.data)
+
+            this.state.images.forEach(img => {
+                let formData = new FormData()
+                formData.append("media", img)
+
+                customRequest("PATCH", `/media/uploadPicture/${this.state.data.id}`, formData)
+                .then(response => {
+                    console.log("response: ", response)
+                    console.log("response.data: ", response.data)
+                }).catch(err => {
+                    displayError(err)
+                })
+            })
+
     		this.setState({
     			success: true,
     		})
@@ -272,9 +313,22 @@ class EditAuction extends Component {
             return <NotAvailable />
         }
 
-        if(this.state.loading) {
+        if(this.state.loading || !this.state.transformedCategories) {
         	return <div>Loading...</div>
         }
+
+        const images = this.state.imageURLs.map((img, index) => {
+            return (
+                <ImageThumb key={index} id={index} image={img} alt={this.state.name} removeImage={this.removeImage} />
+            )
+        })
+
+        let previousImages = null
+        previousImages = this.state.data.getMediaPath.map((img, index) => {
+            return (
+                <ImageThumb id={index} image={Constants.BASEURL + "/media" + img} alt={this.state.data.name} noX />
+            )
+        })
 
 		return (
 			<div>
@@ -283,8 +337,6 @@ class EditAuction extends Component {
 				<div className="new-auction-form-group">
 					<form className="new-auction-form" onSubmit={this.handleSubmit}>
 						{this.state.error && this.state.error !== "" && <div className="alert-danger"><strong>{this.state.error}</strong> </div>}
-						{/*eslint-disable-next-line*/}
-						<img className="add-image-picture" src={require("../images/add_image.png")} alt="Add image" onClick={this.handleImageClick} />
 						<div className="new-auction-fields">
 							<ValidatedInput 
 								type="text" 
@@ -329,6 +381,17 @@ class EditAuction extends Component {
                                 <h4 className="field-label">Pick a category</h4>
                                 <DropdownContainer data={this.state.transformedCategories[0]} mode="radioSelect" onChange={this.handleSelectChange} required />
                             </div>
+
+                            <br />
+                            <div className="auction-pictures">
+                                <h4 className="field-label">Previous Images (You can't delete those)</h4>
+                                {previousImages}
+                            </div>
+
+                            <br />
+                            <label>Add pictures &nbsp;&nbsp;</label> <input type="file" accept="image/*" onChange={this.handleImageUpload}/>
+                            {images}
+                            <br />
 							
 
 							<div className="description-container">

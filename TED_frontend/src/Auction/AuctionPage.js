@@ -20,7 +20,6 @@ class AuctionPage extends Component {
 			data: null,
 			pics: [],
 			picURLs: [],
-			picsDone: false,
 			success: false,
 			bid: "",
 		}
@@ -29,7 +28,6 @@ class AuctionPage extends Component {
 		this.sendBid = this.sendBid.bind(this)
 		this.makeBid = this.makeBid.bind(this)
 		this.buyNow = this.buyNow.bind(this)
-		this.getPics = this.getPics.bind(this)
 		this.getAuctionData = this.getAuctionData.bind(this)
 		this.toPreviousPage = this.toPreviousPage.bind(this)
 	}
@@ -97,29 +95,6 @@ class AuctionPage extends Component {
 		})
 	}
 
-	getPics(mediaPaths) {
-		mediaPaths.forEach(path => {
-			customRequest("GET", `/media${path}`)
-			.then(response => {
-				console.log("response: ", response)
-				console.log("response.data: ", response.data)
-				const url = URL.createObjectURL(response.data)
-				const pics = this.state.pics
-				const picURLs = this.state.picURLs
-				this.setState({
-					pics: pics.concat(response.data),
-					picURLs: picURLs.concat(url),
-				})
-			}).catch(err => {
-				displayError(err)
-			})
-		})
-
-		this.setState({
-			picsDone: true,
-		})
-	}
-
 	toPreviousPage() {
 		clearInterval(this.intervalId)
 		this.props.history.goBack()
@@ -134,10 +109,6 @@ class AuctionPage extends Component {
 			this.setState({
 				data: response.data,
 			})
-
-		//	if(!this.state.picsDone) {
-			//	this.getPics(response.data.getMediaPath)
-		//	}
 		}).catch(err => {
 			displayError(err)
 		})
@@ -196,7 +167,7 @@ class AuctionPage extends Component {
 		let pics = null
 		pics = this.state.data.getMediaPath.map((pic, index) => {
 			return (
-				<ImageThumb id={index} image={Constants.BASEURL + "/media" + pic} alt={this.state.name} noX />
+				<ImageThumb id={index} image={Constants.BASEURL + "/media" + pic} alt={this.state.data.name} noX />
 			)
 		})
 

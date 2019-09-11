@@ -26,7 +26,7 @@ class ImageThumb extends Component {
 	render() {
 		return (
 			<div className="image-thumb-container" onMouseOver={this.displayX} onMouseLeave={this.hideX}>
-				<img id={this.props.id} className="image-thumb" src={this.props.src} alt={this.props.alt} />
+				<img id={this.props.id} className="image-thumb" src={this.props.image} alt={this.props.alt} />
 				{this.state.displayX ? <span className="remove-image-icon fa fa-remove" onClick={() => this.props.removeImage(this.props.id)}></span> : null}
 			</div>
 		)

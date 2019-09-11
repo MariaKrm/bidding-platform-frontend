@@ -27,6 +27,7 @@ class CreateAuction extends Component {
 			locationTitle: "",
 			description: "",
             images: [],
+            imageURLs: [],
 			error: "",
 			category: "",
 			initialCategories: [],
@@ -76,17 +77,22 @@ class CreateAuction extends Component {
         if(!event.target.files[0].type.includes("image")) {
             return false
         }
-        const image = URL.createObjectURL(event.target.files[0])
+        const image = event.target.files[0]
+        const imageURL = URL.createObjectURL(event.target.files[0])
         this.setState({
-            images: this.state.images.concat(image)
+            images: this.state.images.concat(image),
+            imageURLs: this.state.imageURLs.concat(imageURL),
         })
     }
 
     removeImage(id) {
         let images = this.state.images
+        let imageURLs = this.state.imageURLs
         images.splice(id, 1)
+        imageURLs.splice(id, 1)
         this.setState({
             images: images,
+            imageURLs: imageURLs,
         })
 
     }
@@ -167,9 +173,6 @@ class CreateAuction extends Component {
 
     	const javaDate = this.state.endsAt.toISOString()
 
-        console.log("images: ", this.state.images)
-
-
     	const newAuction = {
     		name: this.state.itemName,
     		buyPrice: this.state.buyPrice,
@@ -180,14 +183,17 @@ class CreateAuction extends Component {
     		locationTitle: this.state.locationTitle,
     		categoryId: this.state.category,
     		description: this.state.description,
-            media: this.state.images[0],
     	}
 
 
-        const formData = new FormData();
+        const formData = new FormData()
         Object.keys(newAuction).forEach(key => {
-            formData.append(key, newAuction[key]);
-        });
+            formData.append(key, newAuction[key])
+        })
+
+        this.state.images.forEach(img => {
+            formData.append('media', img)
+        })
 
     	this.verifySubmit(formData)
     }
@@ -257,9 +263,9 @@ class CreateAuction extends Component {
             )
         }
 
-        const images = this.state.images.map((img, index) => {
+        const images = this.state.imageURLs.map((img, index) => {
             return (
-                <ImageThumb key={index} id={index} src={img} alt={this.state.name} removeImage={this.removeImage} />
+                <ImageThumb key={index} id={index} image={img} alt={this.state.name} removeImage={this.removeImage} />
             )
         })
 

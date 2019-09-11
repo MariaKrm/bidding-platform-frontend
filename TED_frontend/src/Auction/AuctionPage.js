@@ -101,7 +101,7 @@ class AuctionPage extends Component {
 	}
 
 	getAuctionData(id) {
-		const visitor = !AuthHelper.loggedIn() ? "/visitor" : ""
+		const visitor = !AuthHelper.loggedIn() && !AuthHelper.unverifiedUser() ? "/visitor" : ""
 		customRequest("GET", "/item/" + id + visitor)
 		.then(response => {
 			console.log("response: ", response)

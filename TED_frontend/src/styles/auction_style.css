@@ -157,7 +157,12 @@
 .auction-pictures {
 	margin: 10px;
 	text-align: center;
+	flex: 1;
 	/*border: 2px solid cyan;*/
+}
+
+.auction-media {
+	display: flex;
 }
 
 .auction-bids {

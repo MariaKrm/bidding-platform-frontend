@@ -280,14 +280,15 @@ class AuctionPage extends Component {
 						<div className="auction-info-bottom">
 							<h3 className="auction-description-title">Description:</h3>
 							<p className="auction-description">{this.state.data.description}</p>
-							<div className="auction-pictures">
-								{pics}
+							<div className="auction-media">
+								{this.state.data.location && this.state.data.location.latitude !== 0 && this.state.data.location.longitude !== 0 ?
+									<Map style={{flex: 1}} lat={this.state.data.location.latitude} lon={this.state.data.location.longitude} />
+									: null
+								}
+								<div className="auction-pictures">
+									{pics}
+								</div>
 							</div>
-							{this.state.data.location && this.state.data.location.latitude !== 0 && this.state.data.location.longitude !== 0 ?
-								<Map lat={this.state.data.location.latitude} lon={this.state.data.location.longitude} />
-								: null
-							}
-							
 						</div>
 					</div>
 

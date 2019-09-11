@@ -159,7 +159,7 @@ class CreateAuction extends Component {
             errorMessage = "Please choose a category."
         }
 
-    	const errors = this.state.name === null || this.state.buyPrice === null || this.state.firstBid === null
+    	const errors = this.state.name === null || this.state.firstBid === null
     	if(errors) {
     		errorMessage = "Please fix the mistakes first."
     	}

@@ -210,7 +210,7 @@ class CreateAuction extends Component {
     		confirmButtonText: 'Start Auction'
     	}).then(result => {
     		if(result.value) {
-    			this.submitAuction(newAuction)
+    			setTimeout(() => this.submitAuction(newAuction), 300)
     		}
     	})
     }

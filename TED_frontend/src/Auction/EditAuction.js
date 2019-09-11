@@ -158,7 +158,16 @@ class EditAuction extends Component {
     		description: this.state.description
     	}
 
-    	this.verifySubmit(editedAuction)
+    	const formData = new FormData()
+        Object.keys(editedAuction).forEach(key => {
+            formData.append(key, editedAuction[key])
+        })
+
+        this.state.images.forEach(img => {
+            formData.append('media', img)
+        })
+
+        this.verifySubmit(formData)
     }
 
 
@@ -180,28 +189,11 @@ class EditAuction extends Component {
 
 
     submitAuction(editedAuction) {
-    	const pathWithParams = `/item/${this.state.data.id}?name=${editedAuction.name}&buyPrice=${editedAuction.buyPrice}&firstBid=${editedAuction.firstBid}
-    		&categoryId=${editedAuction.categoryId}&longitude=${editedAuction.coords.lon}&latitude=${editedAuction.coords.lat}
-    		&locationTitle=${editedAuction.locationTitle}&media=${editedAuction.fromData}
-    		&endsAt=${editedAuction.endsAt}&description=${editedAuction.description}`
 
-    	customRequest("PATCH", pathWithParams, editedAuction)
+    	customRequest("PATCH", `/item/${this.state.data.id}`, editedAuction)
     	.then(response => {
     		console.log("response: ", response)
     		console.log("response.data: ", response.data)
-
-            this.state.images.forEach(img => {
-                let formData = new FormData()
-                formData.append("media", img)
-
-                customRequest("PATCH", `/media/uploadPicture/${this.state.data.id}`, formData)
-                .then(response => {
-                    console.log("response: ", response)
-                    console.log("response.data: ", response.data)
-                }).catch(err => {
-                    displayError(err)
-                })
-            })
 
     		this.setState({
     			success: true,

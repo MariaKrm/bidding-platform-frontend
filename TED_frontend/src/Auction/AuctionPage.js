@@ -101,7 +101,8 @@ class AuctionPage extends Component {
 	}
 
 	getAuctionData(id) {
-		customRequest("GET", `/item/${id}`)
+		const visitor = !AuthHelper.loggedIn() ? "/visitor" : ""
+		customRequest("GET", "/item/" + id + visitor)
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
@@ -167,7 +168,7 @@ class AuctionPage extends Component {
 		let pics = null
 		pics = this.state.data.getMediaPath.map((pic, index) => {
 			return (
-				<ImageThumb id={index} image={Constants.BASEURL + "/media" + pic} alt={this.state.data.name} noX />
+				<ImageThumb key={index} id={index} image={Constants.BASEURL + "/media" + pic} alt={this.state.data.name} noX />
 			)
 		})
 

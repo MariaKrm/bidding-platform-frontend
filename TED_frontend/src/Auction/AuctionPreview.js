@@ -17,6 +17,7 @@ class AuctionPreview extends Component {
 		const alt = this.props.auction.getMediaPath.length > 0 ? this.props.auction.name : "no image available"
 		const endDate = new Date(this.props.auction.endsAt)
 		const ended = endDate < Date.now()
+
 		return (
 			<div className="auction-preview">
 				<img className="preview-image" src={image} alt={alt}/>

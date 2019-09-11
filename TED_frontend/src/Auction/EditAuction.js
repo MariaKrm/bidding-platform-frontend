@@ -318,7 +318,7 @@ class EditAuction extends Component {
         let previousImages = null
         previousImages = this.state.data.getMediaPath.map((img, index) => {
             return (
-                <ImageThumb id={index} image={Constants.BASEURL + "/media" + img} alt={this.state.data.name} noX />
+                <ImageThumb key={index} id={index} image={Constants.BASEURL + "/media" + img} alt={this.state.data.name} noX />
             )
         })
 

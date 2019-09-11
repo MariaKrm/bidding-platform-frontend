@@ -182,6 +182,7 @@ class Filters extends Component {
 				<br />
 				<br />
 
+				<h5>Category</h5>
 				<DropdownContainer data={this.state.transformedCategories[0]} mode="radioSelect" onChange={this.handleSelectChange} />
 
 				<br />

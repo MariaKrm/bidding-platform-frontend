@@ -155,7 +155,8 @@ class EditAuction extends Component {
     		buyPrice: this.state.buyPrice,
     		firstBid: this.state.firstBid,
     		endsAt: javaDate,
-    		coords: this.state.coords,
+    		latitude: this.state.coords.lat,
+            longitude: this.state.coords.lon,
     		locationTitle: this.state.locationTitle,
     		categoryId: this.state.category,
     		description: this.state.description
@@ -163,7 +164,12 @@ class EditAuction extends Component {
 
     	const formData = new FormData()
         Object.keys(editedAuction).forEach(key => {
-            formData.append(key, editedAuction[key])
+            if(key !== "categoryId" && editedAuction[key] !== this.state.data[key]) {
+                formData.append(key, editedAuction[key])
+            }
+            if(key === "categoryId" && editedAuction[key] !== this.state.data.categories[this.state.data.categories.length - 1].id) {
+                formData.append(key, editedAuction[key])
+            }
         })
 
         this.state.images.forEach(img => {

@@ -7,8 +7,23 @@ class AuthHelper {
 
   static loggedIn() {
     // Checks if there is a saved token and it's still valid
-    const token = AuthHelper.getToken() // Getting token from localstorage
-    return !!token && !AuthHelper.isTokenExpired(token) // handwaiving here
+    const token = AuthHelper.getToken()
+    if(token && !AuthHelper.isTokenExpired(token)) {
+      return !AuthHelper.unverifiedUser()
+    }
+    else {
+      return false
+    }
+  }
+
+  static unverifiedUser() {
+    const user = JSON.parse(sessionStorage.getItem("user"))
+    if(user) {
+      return !user.verified
+    }
+    else {
+      return false
+    }
   }
 
   static isAdmin() {
@@ -73,11 +88,20 @@ class AuthHelper {
 
   static displayVisitorSign() {
     if(!AuthHelper.loggedIn()) {
-      return (
-        <div className="alert alert-info" style={{margin: 0}}>
-          You are logged in as a visitor. Sign up to access all features.
-        </div>
-      )
+      if(AuthHelper.unverifiedUser()) {
+        return (
+            <div className="alert alert-info" style={{margin: 0}}>
+              Your account's verification is pending. Until then you won't be able to access all features.
+            </div>
+          )
+      }
+      else {
+        return (
+          <div className="alert alert-info" style={{margin: 0}}>
+            You are logged in as a visitor. Sign up to access all features.
+          </div>
+        )
+      }
     }
     else {
       return null

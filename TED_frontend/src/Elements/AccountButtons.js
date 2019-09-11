@@ -14,7 +14,7 @@ class AccountButtons extends Component {
 	}
 
 	displayAccountButtons() {
-		if(AuthHelper.loggedIn()) {
+		if(AuthHelper.loggedIn() || AuthHelper.unverifiedUser()) {
 			return (
 				<div className="home-header-actions">
 					<div className="dropdown">

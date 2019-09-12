@@ -11,7 +11,7 @@ class Recommendations extends Component {
 			recommendations: null,
 		}
 	}
-/*
+
 	componentDidMount() {
 		const me = AuthHelper.me()
 		let path
@@ -32,7 +32,7 @@ class Recommendations extends Component {
 			displayError(err)
 		})
 	}
-*/
+
 
 	render() {
 		let recommendations = <div>Loading...</div>

@@ -71,3 +71,23 @@
 	font-weight: bold;
 	font-family: sans-serif;
 }
+
+.notification-dropdown {
+	align-self: center;
+	width: 300px;
+	padding: 10px;
+}
+
+.notification {
+	border: none;
+	overflow-x: hidden;
+	overflow-wrap: break-word;
+	background-color: white;
+	margin: 5px;
+	border-bottom: 1px solid #d9d9d9;
+	font-weight: bold;
+}
+
+.notification:active {
+	background-color: #d9d9d9;
+}

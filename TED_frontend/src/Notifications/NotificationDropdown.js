@@ -51,9 +51,9 @@ class NotificationDropdown extends Component {
 		let notifications = <button className="dropdown-item">Nothing here</button>
 		let notificationDot = null
 		if(this.state.newNotifications) {
-			notifications = this.state.notifications.map((notification, index) => {
+			notifications = this.state.notifications.map(notification => {
 				return (
-					<Notification className="dropdown-item" key={index} message={notification.message} item={notification.item} />
+					<Notification className="dropdown-item" key={notification.id} id={notification.id} message={notification.message} item={notification.item} />
 				)
 			})
 
@@ -64,10 +64,10 @@ class NotificationDropdown extends Component {
 
 		return (
 			<div className="dropdown">
-				<button className="header-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onClick={() => {this.setState({newNotifications: false})}}>
+				<button className="header-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				<i className="fa fa-bell notification-bell">{notificationDot}</i>
 				</button>
-				<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				<div className="dropdown-menu dropdown-menu-right notification-dropdown" aria-labelledby="dropdownMenuButton">
 					{notifications}
 				</div>
 			</div>

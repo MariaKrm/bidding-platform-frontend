@@ -149,10 +149,9 @@ class EditAuction extends Component {
 
     	const javaDate = this.state.endsAt.toISOString()
 
-
     	const editedAuction = {
     		name: this.state.itemName,
-    		buyPrice: this.state.buyPrice,
+    		buyPrice: this.state.buyPrice ? this.state.buyPrice : null,
     		firstBid: this.state.firstBid,
     		endsAt: javaDate,
     		latitude: this.state.coords.lat,

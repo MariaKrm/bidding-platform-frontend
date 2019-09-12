@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { customRequest } from "../utils/AuthHelper"
+import AuthHelper, { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
 
 class Notification extends Component {
@@ -14,7 +14,7 @@ class Notification extends Component {
 	}
 
 	notificationSeen() {
-		customRequest("PATCH", `/user/markNotification/${this.props.id}`)
+		customRequest("PATCH", `/user/markNotification/${this.props.notification.id}`)
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
@@ -28,7 +28,15 @@ class Notification extends Component {
 
 	handleClick() {
 		this.notificationSeen()
-		//do other stuff depending on what the notification is about
+
+		if(this.props.notification.message.includes("verified")) {
+			AuthHelper.verify()
+			window.location.reload()
+		}
+
+		if(this.props.notification.message.includes("auction")) {
+			this.props.history.push(`/auctions/${this.props.notification.itemId}?rate=true`)
+		}
 	}
 
 	componentDidMount() {
@@ -39,8 +47,8 @@ class Notification extends Component {
 
 	render() {
 		return (
-			<button className={"notification " + this.state.type} onClick={this.handleClick}>
-				{this.props.message}
+			<button className={"notification " + this.state.type} onClick={this.handleClick} data-dismiss={this.props.dataDismiss}>
+				{this.props.notification.message}
 			</button>
 		)
 	}

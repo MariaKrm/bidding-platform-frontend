@@ -39,7 +39,7 @@ class Recommendations extends Component {
 		if(this.state.recommendations) {
 			recommendations = this.state.recommendations.map((rec, index) => {
 				return (
-					<RecommendationPreview id={index} auction={rec} />
+					<RecommendationPreview key={index} id={index} auction={rec} />
 				)
 			})
 		}

@@ -10,6 +10,7 @@ import Bidder from "../Bid/Bidder"
 import Map from "../Elements/Map"
 import ImageThumb from "../Elements/ImageThumb"
 import * as Constants from "../Constants/Constants"
+import RatePopup from "../Elements/RatePopup"
 
 
 
@@ -22,6 +23,7 @@ class AuctionPage extends Component {
 			picURLs: [],
 			success: false,
 			bid: "",
+			showRatePopup: false,
 		}
 
 		this.handleChange = this.handleChange.bind(this)
@@ -124,6 +126,14 @@ class AuctionPage extends Component {
 		this.intervalId = setInterval(() => {
 			this.getAuctionData(id)
 		}, 5000)
+
+		const query = new URLSearchParams(window.location.search)
+		let rate = query.get("rate")
+		if(rate === "true") {
+			this.setState({
+				showRatePopup: true,
+			})
+		}
 	}
 
 	componentWillUnmount() {
@@ -271,6 +281,8 @@ class AuctionPage extends Component {
 						</ul>
 					</div>
 				</div>
+
+				{this.state.showRatePopup ? <RatePopup itemId={this.state.data.id} /> : null}
 			</div>
 		)
 	}

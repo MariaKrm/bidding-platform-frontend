@@ -56,7 +56,7 @@ class AccountButtons extends Component {
 
 		return (
 			<div className="home-header-actions">
-				<NotificationDropdown />
+				<NotificationDropdown history={this.props.history} />
 				{loginButton}
 			</div>
 		)

@@ -41,6 +41,14 @@ class AuthHelper {
     return JSON.parse(sessionStorage.getItem("user"))
   }
 
+  static verify() {
+    let user = AuthHelper.me()
+    if(user) {
+      user.verified = true
+      AuthHelper.setUser(user)
+    }
+  }
+
   static isTokenExpired(token) {
     try {
       const decoded = decode(token)

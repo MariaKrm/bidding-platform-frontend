@@ -74,13 +74,14 @@ class AuctionsDisplay extends Component {
 
 	getSearchAuctions(currPage, searchText) {
 		const decodedText = searchText.replace(/%23/g, "#").replace(/%26/g, "&").replace(/%25/g, "%")
-		customRequest("PUT", `/search/searchBar?lower=0&upper=10`, decodedText)
+		customRequest("PUT", `/search/searchBar?page=${currPage-1}&size=${this.state.itemsPerPage}`, decodedText)
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
 			this.setState({
-				lastPage: 0,
-				auctions: response.data,
+				lastPage: response.data.totalPages,
+				currentPage: currPage,
+				auctions: response.data.content,
 			})
 		}).catch(err => {
 			displayError(err)

@@ -5,8 +5,8 @@ import axios from "axios"
 
 class AuthHelper {
 
+  //Returns true if user is logged in and verified
   static loggedIn() {
-    // Checks if there is a saved token and it's still valid
     const token = AuthHelper.getToken()
     if(token && !AuthHelper.isTokenExpired(token)) {
       return !AuthHelper.unverifiedUser()
@@ -16,6 +16,7 @@ class AuthHelper {
     }
   }
 
+  //Returns true if user is logged in and not verified (false if visitor or verified)
   static unverifiedUser() {
     const user = JSON.parse(sessionStorage.getItem("user"))
     if(user) {
@@ -79,13 +80,6 @@ class AuthHelper {
     return answer
   }
 
-  static getAuthHeader() {
-    const header = {
-      "Authorization": "Bearer " + AuthHelper.getToken()
-    }
-    return header
-  }
-
   static displayVisitorSign() {
     if(!AuthHelper.loggedIn()) {
       if(AuthHelper.unverifiedUser()) {
@@ -110,13 +104,16 @@ class AuthHelper {
 
 }
 
-export function customRequest(method, url, data) {
+export function customRequest(method, url, data, header) {
     // performs api calls sending the required authentication headers
-    const headers = {
+    let headers = {
+    }
+    if(header) {
+      headers = header
     }
     // Setting Authorization header
     // Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
-    if(AuthHelper.loggedIn()) {
+    if(AuthHelper.loggedIn() || AuthHelper.unverifiedUser()) {
       headers["Authorization"] = "Bearer " + AuthHelper.getToken()
     }
 

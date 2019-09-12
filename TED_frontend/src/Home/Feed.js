@@ -4,6 +4,7 @@ import AuthHelper, { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
 import AuctionsDisplay from "./AuctionsDisplay"
 import Filters from "../Search/Filters"
+import Recommendations from "./Recommendations"
 
 
 class Feed extends Component {
@@ -108,8 +109,7 @@ class Feed extends Component {
 						}
 					</div>
 					<br />
-					{/*eslint-disable-next-line*/}
-					<img src={require("../images/no_image.png")} alt="no image available" />
+					<Recommendations />
 				</div>
 			</div>
 		)

@@ -5,6 +5,9 @@ import { displayError } from "../utils/ErrorHelper"
 class Notification extends Component {
 	constructor() {
 		super()
+		this.state = {
+			type: "unseen",
+		}
 
 		this.notificationSeen = this.notificationSeen.bind(this)
 		this.handleClick = this.handleClick.bind(this)
@@ -15,6 +18,9 @@ class Notification extends Component {
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
+			this.setState({
+				type: "seen",
+			})
 		}).catch(err => {
 			displayError(err)
 		})
@@ -25,9 +31,15 @@ class Notification extends Component {
 		//do other stuff depending on what the notification is about
 	}
 
+	componentDidMount() {
+		this.setState({
+			type: this.props.type,
+		})
+	}
+
 	render() {
 		return (
-			<button className="notification" onClick={this.handleClick}>
+			<button className={"notification " + this.state.type} onClick={this.handleClick}>
 				{this.props.message}
 			</button>
 		)

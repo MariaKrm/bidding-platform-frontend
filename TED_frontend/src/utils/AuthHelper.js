@@ -70,8 +70,11 @@ class AuthHelper {
 
   static logout() {
     // Clear user token and profile data from localStorage
-    sessionStorage.removeItem("id_token")
-    sessionStorage.removeItem("user")
+    setTimeout(() => {
+      sessionStorage.removeItem("id_token")
+      sessionStorage.removeItem("user")
+    }, 500)
+    
   }
 
   static getConfirm() {

@@ -73,9 +73,13 @@
 }
 
 .notification-dropdown {
-	align-self: center;
+	text-align: center;
 	width: 300px;
 	padding: 10px;
+}
+
+.all-notifications {
+	height: 500px;
 }
 
 .notification {
@@ -85,9 +89,29 @@
 	background-color: white;
 	margin: 5px;
 	border-bottom: 1px solid #d9d9d9;
+	width: 100%;
+}
+
+.seen {
+	font-weight: normal;
+}
+
+.unseen {
 	font-weight: bold;
 }
 
 .notification:active {
 	background-color: #d9d9d9;
+}
+
+.show-all-notification {
+	background-color:  #f2f2f2;
+}
+
+.modal {
+	color: #000;
+}
+
+.modal-body {
+	overflow-y: scroll;
 }

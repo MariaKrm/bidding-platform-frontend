@@ -40,7 +40,7 @@ class AuctionPage extends Component {
     	this.setState({ [name]: value })
 	}
 
-	sendBid(bid) {
+	sendBid(bid, buyNow) {
 		const pathWithParams = `/bid/makeBid/${this.state.data.id}?offer=${bid}`
 		customRequest("POST", pathWithParams)
 		.then(response => {
@@ -56,6 +56,10 @@ class AuctionPage extends Component {
 				this.setState({
 					success: false,
 				})
+				if(buyNow) {
+					this.props.history.push("?rate=true")
+					window.location.reload()
+				}
 			}, 2000)
 		}).catch(err => {
 			displayError(err)
@@ -75,7 +79,7 @@ class AuctionPage extends Component {
 				confirmButtonText: 'Make Bid'
 			}).then(result => {
 				if(result.value) {
-					this.sendBid(this.state.bid)
+					this.sendBid(this.state.bid, false)
 				}
 			})
 		}
@@ -92,7 +96,7 @@ class AuctionPage extends Component {
 			confirmButtonText: 'Buy it'
 		}).then(result => {
 			if(result.value) {
-				this.sendBid(this.state.data.buyPrice)
+				this.sendBid(this.state.data.buyPrice, true)
 			}
 		})
 	}

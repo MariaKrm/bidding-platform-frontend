@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import AuthHelper from "../utils/AuthHelper"
 import NotificationDropdown from "../Notifications/NotificationDropdown"
+import ChangePasswordPopup from "./ChangePasswordPopup"
 
 class AccountButtons extends Component {
 	constructor() {
@@ -46,6 +47,7 @@ class AccountButtons extends Component {
 						{this.state.username}
 					</button>
 					<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<button className="dropdown-item" data-toggle="modal" data-target="#changePasswordModal">Change Password</button>
 						<button className="dropdown-item" onClick={this.logout}>Logout</button>
 					</div>
 				</div>	
@@ -58,6 +60,7 @@ class AccountButtons extends Component {
 			<div className="home-header-actions">
 				<NotificationDropdown history={this.props.history} />
 				{loginButton}
+				<ChangePasswordPopup />
 			</div>
 		)
 	}

@@ -1,11 +1,11 @@
 import React from "react"
-import Header from "../Elements/Header"
-import SignupForm from "./SignupForm"
 import axios from "axios"
 import { Redirect } from "react-router"
 import * as Constants from "../Constants/Constants"
+import Header from "../Elements/Header"
 import { displayError } from "../utils/ErrorHelper"
-import "../styles/form_style.css"
+import AddressForm from "../Address/AddressForm"
+import ValidatedInput from "../Elements/ValidatedInput"
 
 
 class Signup extends React.Component {
@@ -51,7 +51,7 @@ class Signup extends React.Component {
 
     handleSubmit(event) {
     	event.preventDefault()
-    	var errorMessage = ""
+    	let errorMessage = ""
 
     	if(this.state.coords === null) {
     		errorMessage = "You have to enter a valid address."
@@ -125,7 +125,96 @@ class Signup extends React.Component {
 				{this.redirectToLogin()}
 				<Header />
 				{this.success()}
-				<SignupForm data={this.state} handleChange={this.handleChange} passresult={this.passresult} handleSubmit={this.handleSubmit} handleAddressSubmit={this.handleAddressSubmit} />
+				<div className="signup-form-group">
+                    <form className="signup-form" onSubmit={this.handleSubmit}>
+                        {this.state.error && this.state.error !== "" && <div className="alert-danger"><strong>{this.state.error}</strong> </div>}
+                        <h2>Sign Up</h2>
+                        <br />
+                        <ValidatedInput 
+                            type="text"
+                            value={this.state.username}
+                            name="username" 
+                            placeholder="Username" 
+                            passresult={this.passresult}
+                            required
+                        />
+                        <br />
+                        <ValidatedInput 
+                            type="password" 
+                            value={this.state.password}
+                            name="password" 
+                            placeholder="Password" 
+                            passresult={this.passresult}
+                            required
+                        />
+                        <ValidatedInput 
+                            type="password"
+                            value={this.state.confirmPassword}
+                            name="confirmPassword" 
+                            placeholder="Confirm Password" 
+                            passresult={this.passresult}
+                            password={this.state.password}
+                            required
+                        />
+
+                        <br />
+
+                        <input 
+                            type="text" 
+                            value={this.state.firstName} 
+                            name="firstName" 
+                            placeholder="First Name" 
+                            onChange={this.handleChange}
+                            required
+                        />
+                        <input 
+                            type="text" 
+                            value={this.state.lastName} 
+                            name="lastName" 
+                            placeholder="Last Name" 
+                            onChange={this.handleChange}
+                            required
+                        />
+
+                        <br />
+                        <ValidatedInput 
+                            type="text"
+                            value={this.state.email}
+                            name="email" 
+                            placeholder="Email" 
+                            className="email-box"
+                            passresult={this.passresult}
+                            required
+                        />
+
+                        <br />
+                        <ValidatedInput 
+                            type="text" 
+                            value={this.state.telNumber} 
+                            name="telNumber" 
+                            placeholder="Phone Number" 
+                            passresult={this.passresult}
+                            required
+                        />
+
+                        <input 
+                            type="text" 
+                            value={this.state.taxNumber} 
+                            name="taxNumber" 
+                            placeholder="TIN" 
+                            onChange={this.handleChange}
+                            required
+                        />
+
+                        <br />
+                        <br />
+
+                        <button className="btn btn-dark btn-margin btn-set-size">Sign Up</button>
+                        
+                    </form>
+
+                    <AddressForm onAddressSubmit={this.handleAddressSubmit} />
+                </div>
 			</div>
 		)
 	}

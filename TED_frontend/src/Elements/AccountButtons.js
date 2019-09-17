@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import AuthHelper from "../utils/AuthHelper"
 import NotificationDropdown from "../Notifications/NotificationDropdown"
+import MessagesIcon from "../Messages/MessagesIcon"
 import ChangePasswordPopup from "./ChangePasswordPopup"
 
 class AccountButtons extends Component {
@@ -59,6 +60,7 @@ class AccountButtons extends Component {
 		return (
 			<div className="home-header-actions">
 				<NotificationDropdown history={this.props.history} />
+				<MessagesIcon />
 				{loginButton}
 				<ChangePasswordPopup />
 			</div>

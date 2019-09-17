@@ -75,28 +75,28 @@
 	cursor: pointer;
 }
 
-.auction-managment {
+.managment-page {
 	display: flex;
 
 }
 
-.auction-managment-control {
+.managment-control {
 	flex: 1;
 	padding-right: 10px;
 }
 
-.auction-managment-myactivity {
+.managment-content {
 	flex: 5;
 }
 
-.auction-managment-myactivity-title {
+.managment-content-title {
 	font-weight: bold;
 	font-size: 24px;
 	margin: 10px 5px 5px;
 	border-bottom: 2px solid green;
 }
 
-.auction-managment-radio-group {
+.managment-page-radio-group {
 	vertical-align: middle;
 }
 

@@ -112,7 +112,7 @@ class NotificationDropdown extends Component {
 			<div>
 				<div className="dropdown">
 					<button className="header-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<i className="fa fa-bell notification-bell">{notificationDot}</i>
+					<i className="fa fa-bell notification-button">{notificationDot}</i>
 					</button>
 					<div className="dropdown-menu dropdown-menu-right notification-dropdown" aria-labelledby="dropdownMenuButton">
 						{notifications}

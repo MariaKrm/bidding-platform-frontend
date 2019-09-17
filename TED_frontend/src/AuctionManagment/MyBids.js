@@ -61,10 +61,10 @@ class MyBids extends Component {
 			<div>
 				<HomeHeader history={this.props.history} />
 				<Navbar auctionTab="active" />
-				<div className="auction-managment">
+				<div className="managment-page">
 					<AuctionManagmentControl history={this.props.history} />
-					<div className="auction-managment-myactivity">
-						<h2 className="auction-managment-myactivity-title">My Bids</h2>
+					<div className="managment-content">
+						<h2 className="managment-content-title">My Bids</h2>
 						<div>
 							{myBids}
 						</div>

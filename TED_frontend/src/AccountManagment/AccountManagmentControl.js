@@ -52,7 +52,7 @@ class AccountManagmentControl extends Component {
 
 	render() {
 		return (
-			<div className="auction-managment-control">
+			<div className="managment-control">
 				<br />
 				<br />
 				<button type="button" className="btn btn-success btn-margin btn-set-size" onClick={this.verifyAll}>Verify All</button>

@@ -320,14 +320,14 @@ class CreateAuction extends Component {
 							</div>
                             <br />
                             <div>
-                                <h4 className="field-label">Pick a category</h4>
-                                <DropdownContainer data={this.state.transformedCategories[0]} mode="radioSelect" onChange={this.handleSelectChange} required />
-                            </div>
+                            <h4 className="field-label">Pick a category</h4>
+                            <DropdownContainer data={this.state.transformedCategories[0]} mode="radioSelect" onChange={this.handleSelectChange} required />
+                        </div>
 
-                            <br />
-                            <label>Add pictures &nbsp;&nbsp;</label> <input type="file" accept="image/*" onChange={this.handleImageUpload}/>
-                            {images}
-                            <br />
+                        <br />
+                        <label>Add pictures &nbsp;&nbsp;</label> <input type="file" accept="image/*" onChange={this.handleImageUpload}/>
+                        {images}
+                        <br />
                             
                             
 

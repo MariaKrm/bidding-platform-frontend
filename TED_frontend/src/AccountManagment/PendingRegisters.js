@@ -80,10 +80,10 @@ class PendingRegisters extends Component {
 			<div>
 				<HomeHeader history={this.props.history} />
 				<Navbar accountTab="active" />
-				<div className="auction-managment">
+				<div className="managment-page">
 					<AccountManagmentControl history={this.props.history} />
-					<div className="auction-managment-myactivity">
-						<h2 className="auction-managment-myactivity-title">Pending Registers</h2>
+					<div className="managment-content">
+						<h2 className="managment-content-title">Pending Registers</h2>
 						<div>
 							{pendingAccounts}
 							<PageWheel activePage={this.state.currentPage} lastPage={this.state.lastPage} />

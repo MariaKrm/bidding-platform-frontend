@@ -55,8 +55,17 @@
 }
 
 
-.notification-bell {
+.notification-button {
+	color: white;
 	position: relative;
+}
+
+.notification-button:hover {
+	color: white;
+}
+
+.notification-button:active {
+	color: #d9d9d9;
 }
 
 .notification-dot {

@@ -5,6 +5,8 @@ import { Route, Redirect } from "react-router"
 import Login from "./Login/Login"
 import Signup from "./Signup/Signup"
 import HomePage from "./Home/HomePage"
+import Inbox from "./Messages/Inbox"
+import SentMessages from "./Messages/SentMessages"
 import CreateAuction from "./Auction/CreateAuction"
 import CreateCategory from "./Auction/CreateCategory"
 import AuctionPage from "./Auction/AuctionPage"
@@ -48,6 +50,8 @@ ReactDOM.render(
 	    	<Route path="/login" component={Login} />
 	    	<Route path="/signup" component={Signup} />
 	    	<Route path="/home" component={HomePage} />
+	    	<Route path="/messages/inbox" component={Inbox} />
+	    	<Route path="/messages/sent" component={SentMessages} />
 	    	<Route path="/auction-managment/my-open-auctions" render={(props) => <MyAuctions completed={false} {...props} />} />
 	    	<Route path="/auction-managment/my-closed-auctions" render={(props) => <MyAuctions completed={true} {...props} />} />
 	    	<Route path="/auction-managment/my-bids" component={MyBids} />

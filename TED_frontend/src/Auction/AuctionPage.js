@@ -40,7 +40,7 @@ class AuctionPage extends Component {
     	this.setState({ [name]: value })
 	}
 
-	sendBid(bid, buyNow) {
+	sendBid(bid) {
 		const pathWithParams = `/bid/makeBid/${this.state.data.id}?offer=${bid}`
 		customRequest("POST", pathWithParams)
 		.then(response => {
@@ -56,10 +56,6 @@ class AuctionPage extends Component {
 				this.setState({
 					success: false,
 				})
-				if(buyNow) {
-					this.props.history.push("?rate=true")
-					window.location.reload()
-				}
 			}, 2000)
 		}).catch(err => {
 			displayError(err)
@@ -96,7 +92,7 @@ class AuctionPage extends Component {
 			confirmButtonText: 'Buy it'
 		}).then(result => {
 			if(result.value) {
-				this.sendBid(this.state.data.buyPrice, true)
+				this.sendBid(this.state.data.buyPrice)
 			}
 		})
 	}
@@ -116,6 +112,20 @@ class AuctionPage extends Component {
 			this.setState({
 				data: response.data,
 			})
+
+			if(response.data.auctionCompleted) {
+				clearInterval(this.intervalId)
+				this.intervalId = null
+
+				const auctionWinner = response.data.bids[0].bidder
+				const me = AuthHelper.me()
+				if(me && auctionWinner.id === me.id) {
+					this.setState({
+						showRatePopup: true,
+					})
+				}
+			}
+			
 		}).catch(err => {
 			displayError(err)
 		})
@@ -127,21 +137,16 @@ class AuctionPage extends Component {
 		const pos = path.lastIndexOf("/")
 		const id = path.slice(pos+1)
 		this.getAuctionData(id)
+
 		this.intervalId = setInterval(() => {
 			this.getAuctionData(id)
 		}, 5000)
-
-		const query = new URLSearchParams(window.location.search)
-		let rate = query.get("rate")
-		if(rate === "true") {
-			this.setState({
-				showRatePopup: true,
-			})
-		}
 	}
 
 	componentWillUnmount() {
-		clearInterval(this.intervalId)
+		if(this.intervalId) {
+			clearInterval(this.intervalId)
+		}
 	}
 
 	success() {

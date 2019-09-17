@@ -35,7 +35,7 @@ class Notification extends Component {
 		}
 
 		if(this.props.notification.message.includes("auction")) {
-			this.props.history.push(`/auctions/${this.props.notification.itemId}?rate=true`)
+			this.props.history.push(`/auctions/${this.props.notification.itemId}`)
 		}
 	}
 

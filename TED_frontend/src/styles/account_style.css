@@ -1,11 +1,3 @@
-.account-preview {
-	/*border: 2px solid orange;*/
-	overflow-y: hidden;
-	margin: 10px;
-	padding: 10px;
-	border-bottom: 2px solid #d9d9d9;
-}
-
 .account-name {
 	color: #000;
 	font-weight: bold;

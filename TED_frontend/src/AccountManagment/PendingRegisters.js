@@ -62,18 +62,15 @@ class PendingRegisters extends Component {
 		}
 
 		let pendingAccounts
-		if(this.state.accounts && this.state.lastPage) {
+		if(this.state.accounts && this.state.currentPage) {
 			pendingAccounts = this.state.accounts.map(item => {
 				return (
 					<AccountPreview key={item.id} account={item} history={this.props.history} />
 				)
 			})
 		}
-		else if(this.state.accounts === ""){
+		else{
 			pendingAccounts = <div>Loading...</div>
-		}
-		else {
-			pendingAccounts = <div><br />No Accounts</div>
 		}
 
 		return (

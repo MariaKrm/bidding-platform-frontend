@@ -19,7 +19,7 @@ class AuctionPreview extends Component {
 		const ended = endDate < Date.now()
 
 		return (
-			<div className="auction-preview">
+			<div className="preview">
 				<img className="preview-image" src={image} alt={alt}/>
 				<div className="preview-text">
 					<div className="preview-title-group">

@@ -7,7 +7,7 @@ class AccountPreview extends Component {
 	render() {
 		const adminBadge = this.props.account.admin ? <sup className="admin-badge" data-toggle="tooltip" title="Site Admin">[A] </sup> : null
 		return (
-			<div className="account-preview">
+			<div className="preview">
 				<div className="preview-text">
 					<div className="preview-title-group">
 						<div className="bidder">

@@ -61,7 +61,7 @@ ReactDOM.render(
 	    	<Route path="/createAuction" component={CreateAuction} />
 	    	<Route path="/createCategory" component={CreateCategory} />
 	    	<Route path="/image" component={DisplayImage} />
-	    	<Route path="/auctions/:id" component={AuctionPage} />
+	    	<Route path="/auctions/:id" render={(props) => <AuctionPage key={props.match.params.id} {...props} /> } />
 	    	<Route path="/editAuction/:id" component={EditAuction} />
 	    	<Route path="/accounts/:username" component={AccountPage} />
 	    	<Route component={PageNotFound} />

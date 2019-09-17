@@ -119,7 +119,7 @@ class AuctionPage extends Component {
 
 				const auctionWinner = response.data.bids[0].bidder
 				const me = AuthHelper.me()
-				if(me && auctionWinner.id === me.id || response.data.seller.id === me.id) {
+				if(me && (auctionWinner.id === me.id || response.data.seller.id === me.id)) {
 					this.setState({
 						showRatePopup: true,
 					})

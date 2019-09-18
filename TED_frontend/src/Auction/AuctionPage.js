@@ -117,9 +117,9 @@ class AuctionPage extends Component {
 				clearInterval(this.intervalId)
 				this.intervalId = null
 
-				const auctionWinner = response.data.bids[0].bidder
+				const auctionWinner = response.data.bids[0]
 				const me = AuthHelper.me()
-				if(me && (auctionWinner.id === me.id || response.data.seller.id === me.id)) {
+				if(me && auctionWinner && (auctionWinner.bidder.id === me.id || response.data.seller.id === me.id)) {
 					this.setState({
 						showRatePopup: true,
 					})

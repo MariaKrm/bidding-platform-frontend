@@ -24,6 +24,7 @@ class AuctionPage extends Component {
 			success: false,
 			bid: "",
 			showRatePopup: false,
+			isSeller: false,
 		}
 
 		this.handleChange = this.handleChange.bind(this)
@@ -122,6 +123,7 @@ class AuctionPage extends Component {
 				if(me && auctionWinner && (auctionWinner.bidder.id === me.id || response.data.seller.id === me.id)) {
 					this.setState({
 						showRatePopup: true,
+						isSeller: response.data.seller.id === me.id,
 					})
 				}
 			}
@@ -231,7 +233,6 @@ class AuctionPage extends Component {
 			buyNowButton = this.state.data.buyPrice ? <button className="btn btn-success btn-margin btn-set-size" onClick={this.buyNow}>Buy Now for {this.state.data.buyPrice}$</button> : null
 		}
 
-
 		return (
 			<div>
 				<div className="home-header">
@@ -291,7 +292,7 @@ class AuctionPage extends Component {
 					</div>
 				</div>
 
-				{this.state.showRatePopup ? <RatePopup itemId={this.state.data.id} /> : null}
+				{this.state.showRatePopup ? <RatePopup itemId={this.state.data.id} isSeller={this.state.isSeller} history={this.props.history} /> : null}
 			</div>
 		)
 	}

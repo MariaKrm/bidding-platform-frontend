@@ -5,9 +5,9 @@ import { displayError } from "../utils/ErrorHelper"
 class NewMessage extends Component {
 	constructor(props) {
 		super(props)
-		const message = props.message
+		const prevMessage = props.reply ? props.sender.username + " wrote:\n" + props.message + "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" : ""
 		this.state = {
-			newMessage: message.sender.username + " wrote:\n" + message.message + "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+			newMessage: prevMessage,
 		}
 
 		this.handleChange = this.handleChange.bind(this)
@@ -27,13 +27,13 @@ class NewMessage extends Component {
 
 		const me = AuthHelper.me()
 		let path
-		if(me.id === this.props.message.item.seller.id) {
+		if(me.id === this.props.item.seller.id) {
 			path = "messageBidder"
 		}
 		else {
 			path = "messageSeller"
 		}
-		customRequest("GET", `/user/${path}/${this.props.message.item.id}?text=${fixedMessage}`)
+		customRequest("GET", `/user/${path}/${this.props.item.id}?text=${fixedMessage}`)
 		.then(response => {
 			console.log("response.data: ", response.data)
 			this.props.goBack()
@@ -43,8 +43,6 @@ class NewMessage extends Component {
 	}
 
 	render() {
-		const message = this.props.message
-
 		return (
 			<div className="full-message">
 				<div className="preview">
@@ -54,9 +52,9 @@ class NewMessage extends Component {
 				</div>
 				<div className="message">
 					<div className="message-details">
-						<label className="detail-field">From:</label> {message.recipient.username}<br />
-						<label className="detail-field">To:</label> {message.sender.username}<br />
-						<label className="detail-field">About:</label> Auction #{message.item.id} (<a href={`/auctions/${message.item.id}`}>{message.item.name}</a>)<br />
+						<label className="detail-field">From:</label> {this.props.sender.username}<br />
+						<label className="detail-field">To:</label> {this.props.recipient.username}<br />
+						<label className="detail-field">About:</label> Auction #{this.props.item.id} (<a href={`/auctions/${this.props.item.id}`}>{this.props.item.name}</a>)<br />
 					</div>
 					<br />
 					<br />

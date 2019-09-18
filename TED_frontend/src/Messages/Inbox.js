@@ -137,11 +137,16 @@ class Inbox extends Component {
 				</div>
 		}
 		else {
+			const message = this.state.messages[this.state.selected]
 			content = 
 				<div>
 					<NewMessage
-						message={this.state.messages[this.state.selected]}
+						sender={message.sender}
+						recipient={message.recipient}
+						item={message.item}
+						message={message.message}
 						goBack={this.closeMessage}
+						reply
 					/>
 				</div>
 		}

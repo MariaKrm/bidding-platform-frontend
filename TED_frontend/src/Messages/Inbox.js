@@ -7,6 +7,7 @@ import AccountButtons from "../Elements/AccountButtons"
 import MessageControl from "./MessageControl"
 import PageWheel from "../Elements/PageWheel"
 import MessagePreview from "./MessagePreview"
+import MessageDisplay from "./MessageDisplay"
 
 class Inbox extends Component {
 	constructor() {
@@ -16,9 +17,34 @@ class Inbox extends Component {
 			itemsPerPage: 20,
 			currentPage: -1,
 			lastPage: "",
+			displayMessage: false,
+			selected: "",
 		}
 
+		this.displayMessage = this.displayMessage.bind(this)
+		this.closeMessage = this.closeMessage.bind(this)
 		this.getMessages = this.getMessages.bind(this)
+	}
+
+	displayMessage(index) {
+		customRequest("PATCH", `/user/markMessage/${this.state.messages[index].id}`)
+		.then(response => {
+			console.log("response: ", response)
+			console.log("response.data: ", response.data)
+		}).catch(err => {
+			displayError(err)
+		})
+
+		this.setState({
+			selected: index,
+			displayMessage: true,
+		})
+	}
+
+	closeMessage() {
+		this.setState({
+			displayMessage: false,
+		})
 	}
 
 
@@ -64,16 +90,39 @@ class Inbox extends Component {
 
 		let messages
 		if(this.state.messages && this.state.currentPage) {
-			messages = this.state.messages.map(item => {
-				console.log("item: ", item)
+			messages = this.state.messages.map((item, index) => {
 				return (
-					<MessagePreview key={item.id} message={item} history={this.props.history} />
+					<MessagePreview 
+						key={item.id} 
+						index={index} 
+						message={item} 
+						type={item.seen ? "seen" : "unseen"}
+						history={this.props.history} 
+						onClick={this.displayMessage} 
+					/>
 				)
 			})
 		}
 		else {
 			messages = <div>Loading...</div>
 		}
+
+		let content
+		if(this.state.displayMessage) {
+			content =
+				<div>
+					<MessageDisplay message={this.state.messages[this.state.selected]} goBack={this.closeMessage} />
+				</div>
+		}
+		else {
+			content = 
+				<div>
+					{messages}
+					<PageWheel activePage={this.state.currentPage} lastPage={this.state.lastPage} />
+				</div>
+		}
+
+		
 
 		return (
 			<div className="messages">
@@ -86,8 +135,7 @@ class Inbox extends Component {
 					<div className="managment-content">
 						<h2 className="managment-content-title">Inbox</h2>
 						<div>
-							{messages}
-							<PageWheel activePage={this.state.currentPage} lastPage={this.state.lastPage} />
+							{content}
 						</div>
 					</div>
 				</div>

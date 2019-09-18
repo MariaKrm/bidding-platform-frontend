@@ -1,0 +1,12 @@
+.full-message {
+	text-align: left;
+}
+
+.message {
+	padding: 10px 20px;
+}
+
+.detail-field {
+	margin-bottom: 0;
+	font-weight: bold;
+}

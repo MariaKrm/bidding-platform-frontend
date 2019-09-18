@@ -111,11 +111,11 @@
 }
 
 .seen {
-	font-weight: normal;
+	font-weight: normal !important;
 }
 
 .unseen {
-	font-weight: bold;
+	font-weight: bold !important;
 }
 
 .notification:active {

@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import AuthHelper, { customRequest } from "../utils/AuthHelper"
+import { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
 
 class MessageControl extends Component {

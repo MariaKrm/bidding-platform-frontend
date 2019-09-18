@@ -238,3 +238,15 @@ input[type=text]:focus:read-write, input[type=password]:focus:read-write, input[
 	max-height: 250px;
 	overflow-y: scroll;
 }
+
+.link-button {
+	background: none;
+	border: none;
+	padding: 0;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.link-button:hover {
+	text-decoration: underline;
+}

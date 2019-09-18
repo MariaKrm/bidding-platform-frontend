@@ -19,7 +19,7 @@ class MessagesIcon extends Component {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
 			this.setState({
-				newMessages: !response.data.content.seen,
+				newMessages: !response.data.empty && !response.data.content.seen,
 			})
 		}).catch(err => {
 			displayError(err)

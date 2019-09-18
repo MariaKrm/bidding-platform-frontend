@@ -64,7 +64,7 @@ class SentMessages extends Component {
 		if(this.state.messages && this.state.currentPage) {
 			messages = this.state.messages.map(item => {
 				return (
-					<MessagePreview key={item.id} message={item} history={this.props.history} />
+					<MessagePreview key={item.id} sent message={item} history={this.props.history} />
 				)
 			})
 		}

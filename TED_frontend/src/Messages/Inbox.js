@@ -65,6 +65,7 @@ class Inbox extends Component {
 		let messages
 		if(this.state.messages && this.state.currentPage) {
 			messages = this.state.messages.map(item => {
+				console.log("item: ", item)
 				return (
 					<MessagePreview key={item.id} message={item} history={this.props.history} />
 				)

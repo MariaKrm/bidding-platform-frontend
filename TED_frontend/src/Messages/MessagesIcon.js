@@ -19,7 +19,7 @@ class MessagesIcon extends Component {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)
 			this.setState({
-				newMessages: response.data.content.unseen,
+				newMessages: !response.data.content.seen,
 			})
 		}).catch(err => {
 			displayError(err)
@@ -46,7 +46,7 @@ class MessagesIcon extends Component {
 		}
 		let messageDot = null
 		if(this.state.newMessages) {
-			messageDot = <span className="notification-dot" />
+			messageDot = <span className="message-dot" />
 		}
 
 		return (

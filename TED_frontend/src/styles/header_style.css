@@ -81,6 +81,15 @@
 	font-family: sans-serif;
 }
 
+.message-dot {
+	position: absolute;
+	top: -5px;
+	right: -5px;
+	padding: 5px 5px;
+	border-radius: 50%;
+	background-color: red;
+}
+
 .notification-dropdown {
 	text-align: center;
 	width: 300px;

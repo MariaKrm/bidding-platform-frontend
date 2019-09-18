@@ -88,7 +88,8 @@ class SentMessages extends Component {
 						message={item} 
 						type="seen"
 						history={this.props.history} 
-						onClick={this.displayMessage} 
+						onClick={this.displayMessage}
+						sent 
 					/>
 				)
 			})
@@ -105,7 +106,6 @@ class SentMessages extends Component {
 						index={this.state.selected}
 						message={this.state.messages[this.state.selected]} 
 						goBack={this.closeMessage} 
-						reply={this.reply}
 						sent
 					/>
 				</div>

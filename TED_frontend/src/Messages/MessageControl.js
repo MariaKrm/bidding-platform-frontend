@@ -21,7 +21,7 @@ class MessageControl extends Component {
 	}
 
 	testMessage() {
-		customRequest("GET", `user/messageSeller/${this.state.id}?text=This was really a very nice cat. Thank you!`)
+		customRequest("GET", `user/messageBidder/${this.state.id}?text=Line 1.\nLine 2.\n\nLine 4.`)
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)

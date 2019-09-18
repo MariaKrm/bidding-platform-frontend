@@ -10,3 +10,22 @@
 	margin-bottom: 0;
 	font-weight: bold;
 }
+
+.reply-button {
+	background: none;
+	border: none;
+	padding: 0;
+	color: #007bff;
+	cursor: pointer;
+}
+
+.reply-button:hover {
+	color: blue;
+}
+
+.message-textarea {
+	resize: none;
+	height: auto;
+	width: 100%;
+	white-space: pre-wrap;
+}

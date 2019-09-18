@@ -8,6 +8,7 @@ import MessageControl from "./MessageControl"
 import PageWheel from "../Elements/PageWheel"
 import MessagePreview from "./MessagePreview"
 import MessageDisplay from "./MessageDisplay"
+import NewMessage from "./NewMessage"
 
 class Inbox extends Component {
 	constructor() {
@@ -17,12 +18,13 @@ class Inbox extends Component {
 			itemsPerPage: 20,
 			currentPage: -1,
 			lastPage: "",
-			displayMessage: false,
+			show: "all",
 			selected: "",
 		}
 
 		this.displayMessage = this.displayMessage.bind(this)
 		this.closeMessage = this.closeMessage.bind(this)
+		this.reply = this.reply.bind(this)
 		this.getMessages = this.getMessages.bind(this)
 	}
 
@@ -37,13 +39,21 @@ class Inbox extends Component {
 
 		this.setState({
 			selected: index,
-			displayMessage: true,
+			show: "selected"
 		})
 	}
 
 	closeMessage() {
 		this.setState({
-			displayMessage: false,
+			show: "all",
+			selected: "",
+		})
+	}
+
+	reply(index) {
+		this.setState({
+			show: "new",
+			selected: index,
 		})
 	}
 
@@ -108,17 +118,31 @@ class Inbox extends Component {
 		}
 
 		let content
-		if(this.state.displayMessage) {
+		if(this.state.show === "selected") {
 			content =
 				<div>
-					<MessageDisplay message={this.state.messages[this.state.selected]} goBack={this.closeMessage} />
+					<MessageDisplay 
+						index={this.state.selected}
+						message={this.state.messages[this.state.selected]} 
+						goBack={this.closeMessage} 
+						reply={this.reply}
+					/>
+				</div>
+		}
+		else if(this.state.show === "all") {
+			content = 
+				<div>
+					{messages}
+					<PageWheel activePage={this.state.currentPage} lastPage={this.state.lastPage} />
 				</div>
 		}
 		else {
 			content = 
 				<div>
-					{messages}
-					<PageWheel activePage={this.state.currentPage} lastPage={this.state.lastPage} />
+					<NewMessage
+						message={this.state.messages[this.state.selected]}
+						goBack={this.closeMessage}
+					/>
 				</div>
 		}
 

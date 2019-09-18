@@ -101,7 +101,13 @@ class SentMessages extends Component {
 		if(this.state.displayMessage) {
 			content =
 				<div>
-					<MessageDisplay message={this.state.messages[this.state.selected]} goBack={this.closeMessage} />
+					<MessageDisplay 
+						index={this.state.selected}
+						message={this.state.messages[this.state.selected]} 
+						goBack={this.closeMessage} 
+						reply={this.reply}
+						sent
+					/>
 				</div>
 		}
 		else {

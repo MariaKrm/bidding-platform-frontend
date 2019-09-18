@@ -7,7 +7,7 @@ class NewMessage extends Component {
 		super(props)
 		const message = props.message
 		this.state = {
-			newMessage: message.sender.username + " wrote: " + "\n" + message.message + "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+			newMessage: message.sender.username + " wrote:\n" + message.message + "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
 		}
 
 		this.handleChange = this.handleChange.bind(this)

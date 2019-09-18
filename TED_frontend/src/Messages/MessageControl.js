@@ -1,13 +1,33 @@
 import React, { Component } from "react"
+import AuthHelper, { customRequest } from "../utils/AuthHelper"
+import { displayError } from "../utils/ErrorHelper"
 
 class MessageControl extends Component {
 	constructor() {
 		super()
-		this.newAuction = this.newAuction.bind(this)
+		this.state = {
+			id: "",
+		}
+
+		this.testMessage = this.testMessage.bind(this)
+		this.handleChange = this.handleChange.bind(this)
 	}
 
-	newAuction() {
-		this.props.history.push("/createAuction")
+	handleChange(event) {
+		const value = event.target.value
+		this.setState({
+			id: value,
+		})
+	}
+
+	testMessage() {
+		customRequest("GET", `user/messageSeller/${this.state.id}?text=This was really a very nice cat. Thank you!`)
+		.then(response => {
+			console.log("response: ", response)
+			console.log("response.data: ", response.data)
+		}).catch(err => {
+			displayError(err)
+		})
 	}
 
 	render() {
@@ -16,7 +36,8 @@ class MessageControl extends Component {
 			<div className="managment-control">
 				<br />
 				<br />
-				<button type="button" className="btn btn-success btn-margin btn-set-size" onClick={this.newAuction}>Send Message</button>
+				<input type="number" placeholder="id" value={this.state.id} onChange={this.handleChange} />
+				<button type="button" className="btn btn-success btn-margin btn-set-size" onClick={this.testMessage}>Send Test Message</button>
 				<br />
 				<br />
 

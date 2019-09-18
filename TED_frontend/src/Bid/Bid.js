@@ -9,7 +9,7 @@ class Bid extends Component {
 		return (
 			<div className="bid">
 				<div className="bid-details">
-					<p className="bid-amount">{this.props.amount} €</p>
+					<p className="bid-amount">{this.props.amount} $</p>
 					<p className="bid-time">{time.toDateString()}, {time.toLocaleTimeString()}</p>
 				</div>
 				<div className="bid-bidder">

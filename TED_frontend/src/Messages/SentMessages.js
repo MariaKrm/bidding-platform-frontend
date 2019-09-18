@@ -22,7 +22,7 @@ class SentMessages extends Component {
 	}
 
 	getMessages(currPage) {
-		customRequest("GET", `/user/receivedMessages?page=${currPage-1}&size=${this.state.itemsPerPage}`)
+		customRequest("GET", `/user/sentMessages?page=${currPage-1}&size=${this.state.itemsPerPage}`)
 		.then(response => {
 			console.log("response: ", response)
 			console.log("response.data: ", response.data)

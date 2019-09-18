@@ -25,11 +25,11 @@ class AccountPreview extends Component {
 							{this.props.account.address ? <p className="bidder-location-big">{this.props.account.address.locationTitle}</p> : null}
 						</div>
 						<div style={{display: "flex"}}>
-						{this.props.account.verified ?
-							<p className="account-verified" style={{color: "green"}}>Verified &nbsp;</p>
-							: <p className="account-verified" style={{color: "red"}}>Not Verified &nbsp;</p>
-						}
-						<AccountOptions account={this.props.account} className="preview-menu" history={this.props.history} />
+							{this.props.account.verified ?
+								<p className="account-verified" style={{color: "green"}}>Verified &nbsp;</p>
+								: <p className="account-verified" style={{color: "red"}}>Not Verified &nbsp;</p>
+							}
+							<AccountOptions account={this.props.account} className="preview-menu" history={this.props.history} />
 						</div>
 					</div>
 				</div>

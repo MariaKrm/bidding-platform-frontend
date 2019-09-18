@@ -13,7 +13,7 @@ class Inbox extends Component {
 		super()
 		this.state = {
 			messages: [],
-			itemsPerPage: 5,
+			itemsPerPage: 20,
 			currentPage: -1,
 			lastPage: "",
 		}

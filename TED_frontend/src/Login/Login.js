@@ -41,8 +41,6 @@ class Login extends Component {
         const loginRoute = Constants.BASEURL + "/auth/login"
         axios.post(loginRoute, user)
         .then(response => {
-            console.log("response ", response)
-            console.log("response.data ", response.data)
             AuthHelper.setToken(response.data.token)
             AuthHelper.setUser(response.data.user)
             console.log("isAdmin: ", response.data.user.admin)

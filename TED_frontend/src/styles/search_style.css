@@ -1,15 +1,21 @@
 .search-bar {
-	width: 550px;
+	width: 100%;
 	display: inline-block;
 	-webkit-appearance: none;
 	margin-right: 0;
 	vertical-align: middle;
 }
 
+.search-group {
+	width: 100%;
+	display: flex;
+}
+
 .search-suggestion-container {
-	width: 550px;
+	width: 500px;
 	text-align: left;
 	position: absolute;
+	top: 65px;
 	z-index: 100;
 }
 

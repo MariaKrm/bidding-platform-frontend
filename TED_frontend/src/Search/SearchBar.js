@@ -109,7 +109,7 @@ class SearchBar extends Component {
 		}
 
 		return (
-			<form onSubmit={this.handleSubmit}>
+			<form className="search-group" onSubmit={this.handleSubmit}>
 				<input
 					type="text"
 					className="search-bar"

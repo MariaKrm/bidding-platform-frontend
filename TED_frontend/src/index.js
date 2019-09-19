@@ -46,31 +46,29 @@ function App() {
 
 
 ReactDOM.render(
-	<div className="wrapper">
-		<BrowserRouter> 
-			<Switch>
-				<Route exact path="/" component={App} />
-		    	<Route path="/login" component={Login} />
-		    	<Route path="/signup" component={Signup} />
-		    	<Route path="/home" component={HomePage} />
-		    	<Route path="/messages/inbox" component={Inbox} />
-		    	<Route path="/messages/sent" component={SentMessages} />
-		    	<Route path="/messages/newMessage/:id" render={(props) => <NewMessagePage {...props} />} />
-		    	<Route path="/auction-managment/my-open-auctions" render={(props) => <MyAuctions completed={false} {...props} />} />
-		    	<Route path="/auction-managment/my-closed-auctions" render={(props) => <MyAuctions completed={true} {...props} />} />
-		    	<Route path="/auction-managment/my-bids" component={MyBids} />
-		    	<Route path="/auction-managment/my-history" component={ViewedAuctions} />
-		    	<Route path="/account-managment/pending-registers" component={PendingRegisters} />
-		    	<Route path="/account-managment/all-accounts" component={AllAccounts} />
-		    	<Route path="/createAuction" component={CreateAuction} />
-		    	<Route path="/createCategory" component={CreateCategory} />
-		    	<Route path="/image" component={DisplayImage} />
-		    	<Route path="/auctions/:id" render={(props) => <AuctionPage key={props.match.params.id} {...props} /> } />
-		    	<Route path="/editAuction/:id" component={EditAuction} />
-		    	<Route path="/accounts/:username" component={AccountPage} />
-		    	<Route component={PageNotFound} />
-			</Switch>
-	  	</BrowserRouter>
-  	</div>,
+	<BrowserRouter> 
+		<Switch>
+			<Route exact path="/" component={App} />
+	    	<Route path="/login" component={Login} />
+	    	<Route path="/signup" component={Signup} />
+	    	<Route path="/home" component={HomePage} />
+	    	<Route path="/messages/inbox" component={Inbox} />
+	    	<Route path="/messages/sent" component={SentMessages} />
+	    	<Route path="/messages/newMessage/:id" render={(props) => <NewMessagePage {...props} />} />
+	    	<Route path="/auction-managment/my-open-auctions" render={(props) => <MyAuctions completed={false} {...props} />} />
+	    	<Route path="/auction-managment/my-closed-auctions" render={(props) => <MyAuctions completed={true} {...props} />} />
+	    	<Route path="/auction-managment/my-bids" component={MyBids} />
+	    	<Route path="/auction-managment/my-history" component={ViewedAuctions} />
+	    	<Route path="/account-managment/pending-registers" component={PendingRegisters} />
+	    	<Route path="/account-managment/all-accounts" component={AllAccounts} />
+	    	<Route path="/createAuction" component={CreateAuction} />
+	    	<Route path="/createCategory" component={CreateCategory} />
+	    	<Route path="/image" component={DisplayImage} />
+	    	<Route path="/auctions/:id" render={(props) => <AuctionPage key={props.match.params.id} {...props} /> } />
+	    	<Route path="/editAuction/:id" component={EditAuction} />
+	    	<Route path="/accounts/:username" component={AccountPage} />
+	    	<Route component={PageNotFound} />
+		</Switch>
+  	</BrowserRouter>,
 	document.getElementById("root")
 )

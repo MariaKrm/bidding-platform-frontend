@@ -31,8 +31,9 @@ class AuctionPage extends Component {
 		this.sendBid = this.sendBid.bind(this)
 		this.makeBid = this.makeBid.bind(this)
 		this.buyNow = this.buyNow.bind(this)
-		this.getAuctionData = this.getAuctionData.bind(this)
+		this.toNewMessage = this.toNewMessage.bind(this)
 		this.toPreviousPage = this.toPreviousPage.bind(this)
+		this.getAuctionData = this.getAuctionData.bind(this)
 	}
 
 
@@ -101,6 +102,10 @@ class AuctionPage extends Component {
 		this.props.history.goBack()
 	}
 
+	toNewMessage() {
+		this.props.history.push(`/messages/newMessage/${this.props.itemId}`)
+	}
+
 	getAuctionData(id) {
 		const visitor = !AuthHelper.loggedIn() && !AuthHelper.unverifiedUser() ? "/visitor" : ""
 		customRequest("GET", "/item/" + id + visitor)
@@ -117,9 +122,12 @@ class AuctionPage extends Component {
 				const auctionWinner = response.data.bids[0]
 				const me = AuthHelper.me()
 				if(me && auctionWinner && (auctionWinner.bidder.id === me.id || response.data.seller.id === me.id)) {
+					const isSeller = response.data.seller.id === me.id
+					const showRatePopup = (isSeller && response.data.bidderRating === null) || (!isSeller && response.data.sellerRating === null)
 					this.setState({
-						showRatePopup: true,
-						isSeller: response.data.seller.id === me.id,
+						showRatePopup: showRatePopup, 
+						showContact: true,
+						isSeller: isSeller,
 					})
 				}
 			}
@@ -229,6 +237,8 @@ class AuctionPage extends Component {
 			buyNowButton = this.state.data.buyPrice ? <button className="btn btn-success btn-margin btn-set-size" onClick={this.buyNow}>Buy Now for {this.state.data.buyPrice}$</button> : null
 		}
 
+		const contactButton = this.state.showContact ? <button type="button" className="btn btn-success" onClick={this.toNewMessage}>Contact {this.state.isSeller ? "Top Bidder" : "Seller"}</button> : null
+
 		return (
 			<div>
 				<div className="home-header">
@@ -261,6 +271,7 @@ class AuctionPage extends Component {
 										<p className="preview-current-price">Currently {this.state.data.currently}$</p>
 										{bidGroup}
 										{buyNowButton}
+										{contactButton}
 									</div>
 								</div>
 							</div>

@@ -12,14 +12,9 @@ class RatePopup extends Component {
 			rating: 1,
 		}
 
-		this.toNewMessage = this.toNewMessage.bind(this)
 		this.closeModal = this.closeModal.bind(this)
 		this.handleStarClick = this.handleStarClick.bind(this)
 		this.submitRating = this.submitRating.bind(this)
-	}
-
-	toNewMessage() {
-		this.props.history.push(`/messages/newMessage/${this.props.itemId}`)
 	}
 
 	closeModal() {
@@ -75,7 +70,6 @@ class RatePopup extends Component {
 						</div>
 
 						<div className="modal-footer">
-							<button type="button" className="btn btn-success" onClick={this.toNewMessage}>Contact {this.props.isSeller ? "Top Bidder" : "Seller"}</button>
 							<button type="button" className="btn btn-success" onClick={this.submitRating}>Submit Rating</button>
 						</div>
 					</div>

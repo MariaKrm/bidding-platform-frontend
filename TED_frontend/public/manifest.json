@@ -1,6 +1,6 @@
 {
-  "short_name": "Bidder Site",
-  "name": "Bidder Site Without A Name",
+  "short_name": "Bidder",
+  "name": "Auction Site Without A Proper Name",
   "icons": [
     {
       "src": "white_hammer_icon.png",
@@ -10,6 +10,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#e9f0e9",
+  "theme_color": "#343a40",
   "background_color": "#ffffff"
 }

@@ -23,8 +23,6 @@ class Recommendations extends Component {
 		}
 		customRequest("GET", `/recommend/${path}`)
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 			this.setState({
 				recommendations: response.data
 			})

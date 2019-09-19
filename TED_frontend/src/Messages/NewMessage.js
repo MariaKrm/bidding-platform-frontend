@@ -25,8 +25,7 @@ class NewMessage extends Component {
 
 
 	sendMessage() {
-		let fixedMessage = this.state.newMessage.replace(/\n/g, "%0A")
-		console.log("FIXED: ", fixedMessage)
+		let encryptedMessage = this.state.newMessage.replace(/\n/g, "%0A")
 
 		const me = AuthHelper.me()
 		let path
@@ -36,7 +35,7 @@ class NewMessage extends Component {
 		else {
 			path = "messageSeller"
 		}
-		customRequest("GET", `/user/${path}/${this.props.item.id}?text=${fixedMessage}`)
+		customRequest("GET", `/user/${path}/${this.props.item.id}?text=${encryptedMessage}`)
 		.then(response => {
 			this.setState({
 				success: true,

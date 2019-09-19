@@ -26,8 +26,6 @@ class AuctionOptions extends Component {
 		console.log("Delete Auction")
 		customRequest("DELETE", `/item/${this.props.auction.id}`)
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 			Swal.fire({
 				title: "Success",
 				text: "Auction Deleted",

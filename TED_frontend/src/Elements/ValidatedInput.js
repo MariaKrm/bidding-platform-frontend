@@ -73,7 +73,6 @@ class ValidatedInput extends Component {
 	checkUsernameAvail(value) {
 		axios.get(Constants.BASEURL + `/account/checkUsername?username=${value}`)
 		.catch(err => {
-			console.log(err)
 			if(err.response && err.response.status === 400) {
 				const error = "Username is already taken"
 				this.setState({ error: error })
@@ -88,7 +87,6 @@ class ValidatedInput extends Component {
 	checkEmailAvail(value) {
 		axios.get(Constants.BASEURL + `/account/checkEmail?email=${value}`)
 		.catch(err => {
-			console.log(err)
 			if(err.response && err.response.status === 400) {
 				const error = "Email already in use"
 				this.setState({ error: error })
@@ -115,12 +113,10 @@ class ValidatedInput extends Component {
     	const { name, value } = event.target
 		if(name === "username") {
 			this.checkUsernameAvail(value)
-			console.log("error: ", this.state.error)
 			this.props.passresult(name, value, this.state.error)
 		}
 		if(name === "email") {
 			this.checkEmailAvail(value)
-			console.log("error: ", this.state.error)
 			this.props.passresult(name, value, this.state.error)
 		}
 		

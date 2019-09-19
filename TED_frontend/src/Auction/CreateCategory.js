@@ -41,8 +41,6 @@ class CreateCategory extends Component {
     getAllCategories() {
         customRequest("GET", "/item/allCategories")
         .then(response => {
-            console.log("response: ", response)
-            console.log("response.data: ", response.data)
             const categories = response.data
             this.setState({
                 initialCategories: categories,
@@ -85,13 +83,10 @@ class CreateCategory extends Component {
             error: errorMessage,
         })
 
-        console.log("error: ", errorMessage)
         if(errorMessage !== "" && errorMessage !== null) return false
 
     	customRequest("POST", `/admin/newCategory/${this.state.parentCategory}?name=${this.state.categoryName}`)
     	.then(response => {
-    		console.log("response: ", response)
-    		console.log("response.data: ", response.data)
     		this.setState({
     			success: true
     		})

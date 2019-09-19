@@ -29,8 +29,6 @@ class Feed extends Component {
 	exportXML() {
 		customRequest("GET", "/admin/allAuctions")
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 
 			const xmls = response.data.map(item => {
 				let itemXML = jsonxml(item, {prettyPrint: true})
@@ -55,8 +53,6 @@ class Feed extends Component {
 	exportJSON() {
 		customRequest("GET", "/admin/allAuctions")
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 
 			const jsons = response.data.map(item => {
 				let itemJSON = JSON.stringify(item)

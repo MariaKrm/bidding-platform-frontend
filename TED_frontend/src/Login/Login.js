@@ -43,12 +43,10 @@ class Login extends Component {
         .then(response => {
             AuthHelper.setToken(response.data.token)
             AuthHelper.setUser(response.data.user)
-            console.log("isAdmin: ", response.data.user.admin)
             this.setState({
                 redirect: true
             })
         }).catch(err => {
-            console.log("POST ERROR")
             displayError(err)
         })
     }

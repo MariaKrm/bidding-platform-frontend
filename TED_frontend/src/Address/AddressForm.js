@@ -120,9 +120,6 @@ class AddressForm extends Component {
         			error: ""
         		})
 
-      			console.log("lat: ", this.state.coords.lat)
-      			console.log("lon: ", this.state.coords.lon)
-
       			this.props.onAddressSubmit(this.state.coords, oldCity, oldCountry)
 
     		}

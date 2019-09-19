@@ -16,8 +16,6 @@ class Notification extends Component {
 	notificationSeen() {
 		customRequest("PATCH", `/user/markNotification/${this.props.notification.id}`)
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 			this.setState({
 				type: "seen",
 			})

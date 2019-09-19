@@ -27,8 +27,6 @@ class AccountPage extends Component {
 		console.log("Verify Account")
 		customRequest("PATCH", `/admin/verifyUser/${this.state.data.id}`)
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 			Swal.fire({
 				title: "Success",
 				text: "User Account Verified",
@@ -66,8 +64,6 @@ class AccountPage extends Component {
 		console.log("Delete User Account")
 		customRequest("DELETE", `/admin/deleteUser/${this.state.data.id}`)
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 			Swal.fire({
 				title: "Success",
 				text: "User Account Deleted",
@@ -103,9 +99,6 @@ class AccountPage extends Component {
 	getAccountData(username) {
 		customRequest("GET", `/user/${username}`)
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
-
 			this.setState({
 				data: response.data,
 			})

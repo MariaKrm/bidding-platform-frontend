@@ -130,8 +130,6 @@ class CreateAuction extends Component {
     getAllCategories() {
     	customRequest("GET", "/item/allCategories")
     	.then(response => {
-            console.log("response: ", response)
-            console.log("response.data: ", response.data)
     		const categories = response.data
     		this.setState({
     			initialCategories: categories,
@@ -168,7 +166,6 @@ class CreateAuction extends Component {
     		error: errorMessage
     	})
 
-    	console.log("error: ", errorMessage)
     	if(errorMessage) {
             window.scrollTo(0, 0)
             return false
@@ -222,8 +219,6 @@ class CreateAuction extends Component {
     submitAuction(newAuction) {
     	customRequest("POST", "/item", newAuction)
     	.then(response => {
-    		console.log("response: ", response)
-    		console.log("response.data: ", response.data)
     		this.setState({
     			success: true,
     		})

@@ -141,7 +141,6 @@ class EditAuction extends Component {
     		error: errorMessage
     	})
 
-    	console.log("error: ", errorMessage)
     	if(errorMessage) {
             window.scrollTo(0, 0)
             return false
@@ -200,8 +199,6 @@ class EditAuction extends Component {
 
     	customRequest("PATCH", `/item/${this.state.data.id}`, editedAuction)
     	.then(response => {
-    		console.log("response: ", response)
-    		console.log("response.data: ", response.data)
 
     		this.setState({
     			success: true,
@@ -266,8 +263,6 @@ class EditAuction extends Component {
     getAllCategories() {
         customRequest("GET", "/item/allCategories")
         .then(response => {
-            console.log("response: ", response)
-            console.log("response.data: ", response.data)
             const categories = response.data
             this.setState({
                 initialCategories: categories,
@@ -284,8 +279,6 @@ class EditAuction extends Component {
     getAuctionData(id) {
 		customRequest("GET", `/item/${id}`)
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 
 			this.setState({
 				data: response.data,

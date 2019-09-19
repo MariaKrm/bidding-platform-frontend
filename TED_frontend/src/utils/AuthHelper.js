@@ -3,6 +3,8 @@ import decode from "jwt-decode"
 import * as Constants from "../Constants/Constants"
 import axios from "axios"
 
+//https://medium.com/@romanchvalbo/how-i-set-up-react-and-node-with-json-web-token-for-authentication-259ec1a90352
+
 class AuthHelper {
 
   //Returns true if user is logged in and verified

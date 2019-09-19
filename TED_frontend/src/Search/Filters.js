@@ -86,7 +86,6 @@ class Filters extends Component {
 			error: errorMessage,
 		})
 
-		console.log("error: ", errorMessage)
     	if(errorMessage) return false
 
 

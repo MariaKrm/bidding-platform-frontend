@@ -74,7 +74,6 @@ class SearchBar extends Component {
 
 	handleSuggestSelect(event) {
 		const { textContent } = event.target
-		console.log("textContent: ", textContent)
 		this.setState({
 			text: textContent,
 		})
@@ -85,7 +84,6 @@ class SearchBar extends Component {
 		let path = "/home?page=1"
 		if(this.state.text) {
 			const encodedText = this.state.text.replace(/%/g, "%25").replace(/&/g, "%26").replace(/#/g, "%23")
-			console.log("encodedText: ", encodedText)
 			path = "/home/search?searchText=" + encodedText +"&page=1"
 			console.log("searching for: ", this.state.text)
 		}

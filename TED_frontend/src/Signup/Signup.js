@@ -80,8 +80,6 @@ class Signup extends React.Component {
     		locationTitle: this.state.locationTitle,
     	}
 
-    	console.log("Signing up with: ", newUser)
-
     	axios.post(Constants.BASEURL + "/auth/signup", newUser)
     	.then(response => {
     		this.setState({

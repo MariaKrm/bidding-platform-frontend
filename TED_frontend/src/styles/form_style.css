@@ -30,7 +30,7 @@ input[type=text]:focus:read-write, input[type=password]:focus:read-write, input[
 }
 
 .date-picker-field {
-	width: 170px;
+	width: 220px;
 }
 
 .field-error-message {

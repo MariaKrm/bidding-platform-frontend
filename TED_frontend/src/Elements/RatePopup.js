@@ -37,6 +37,7 @@ class RatePopup extends Component {
 				text: "Rating Submited",
 				type: 'success',
 			})
+			this.closeModal()
 		}).catch(err => {
 			displayError(err)
 		})

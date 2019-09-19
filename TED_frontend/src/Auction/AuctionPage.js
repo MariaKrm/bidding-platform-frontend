@@ -103,7 +103,7 @@ class AuctionPage extends Component {
 	}
 
 	toNewMessage() {
-		this.props.history.push(`/messages/newMessage/${this.props.itemId}`)
+		this.props.history.push(`/messages/newMessage/${this.state.data.id}`)
 	}
 
 	getAuctionData(id) {
@@ -204,7 +204,7 @@ class AuctionPage extends Component {
 			bidGroup = 
 				<form className="auction-bid-group">
 					<input
-						className="auction-bid-field diesabled"
+						className="auction-bid-field disabled"
 						type="number"
 						name="bid"
 						value={this.state.bid}
@@ -237,7 +237,7 @@ class AuctionPage extends Component {
 			buyNowButton = this.state.data.buyPrice ? <button className="btn btn-success btn-margin btn-set-size" onClick={this.buyNow}>Buy Now for {this.state.data.buyPrice}$</button> : null
 		}
 
-		const contactButton = this.state.showContact ? <button type="button" className="btn btn-success" onClick={this.toNewMessage}>Contact {this.state.isSeller ? "Top Bidder" : "Seller"}</button> : null
+		const contactButton = this.state.showContact ? <button className="btn btn-success btn-margin btn-set-size" onClick={this.toNewMessage}>Contact {this.state.isSeller ? "Top Bidder" : "Seller"}</button> : null
 
 		return (
 			<div>
@@ -271,6 +271,7 @@ class AuctionPage extends Component {
 										<p className="preview-current-price">Currently {this.state.data.currently}$</p>
 										{bidGroup}
 										{buyNowButton}
+										<br />
 										{contactButton}
 									</div>
 								</div>

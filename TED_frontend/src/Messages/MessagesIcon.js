@@ -20,7 +20,7 @@ class MessagesIcon extends Component {
 				newMessages: !response.data.empty && !response.data.content[0].seen,
 			})
 		}).catch(err => {
-			displayError(err)
+	//		displayError(err)
 		})
 	}
 

@@ -29,7 +29,7 @@ class Recommendations extends Component {
 				recommendations: response.data
 			})
 		}).catch(err => {
-			displayError(err)
+	//		displayError(err)
 		})
 	}
 

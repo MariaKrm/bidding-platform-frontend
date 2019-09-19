@@ -125,7 +125,7 @@ class AuctionPage extends Component {
 			}
 			
 		}).catch(err => {
-			displayError(err)
+	//		displayError(err)
 		})
 	}
 

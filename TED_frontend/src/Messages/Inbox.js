@@ -65,7 +65,7 @@ class Inbox extends Component {
 				messages: response.data.content,
 			})
 		}).catch(err => {
-			displayError(err)
+	//		displayError(err)
 		})
 	}
 

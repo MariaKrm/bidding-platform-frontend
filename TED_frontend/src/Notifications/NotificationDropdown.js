@@ -45,7 +45,7 @@ class NotificationDropdown extends Component {
 				newNotifications: response.data.length > 0,
 			})
 		}).catch(err => {
-			displayError(err)
+	//		displayError(err)
 		})
 	}
 

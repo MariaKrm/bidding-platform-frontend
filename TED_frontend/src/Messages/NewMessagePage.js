@@ -21,7 +21,7 @@ class NewMessagePage extends Component {
 	}
 
 	toInbox() {
-		this.props.history.push("/messages/inbox")
+		this.props.history.push("/messages/sent")
 	}
 
 	getAuctionData(id) {

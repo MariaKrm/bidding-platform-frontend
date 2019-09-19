@@ -8,11 +8,13 @@ class NewMessage extends Component {
 		const prevMessage = props.reply ? props.sender.username + " wrote:\n" + props.message + "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" : ""
 		this.state = {
 			newMessage: prevMessage,
+			success: false,
 		}
 
 		this.handleChange = this.handleChange.bind(this)
 		this.sendMessage = this.sendMessage.bind(this)
 	}
+
 
 	handleChange(event) {
 		const value = event.target.value
@@ -20,6 +22,7 @@ class NewMessage extends Component {
 			newMessage: value,
 		})
 	}
+
 
 	sendMessage() {
 		let fixedMessage = this.state.newMessage.replace(/\n/g, "%0A")
@@ -36,11 +39,25 @@ class NewMessage extends Component {
 		customRequest("GET", `/user/${path}/${this.props.item.id}?text=${fixedMessage}`)
 		.then(response => {
 			console.log("response.data: ", response.data)
-			this.props.goBack()
+			this.setState({
+				success: true,
+			})
+			setTimeout(this.props.goBack, 2000)
 		}).catch(err => {
 			displayError(err)
 		})
 	}
+
+
+	success() {
+    	if(this.state.success) {
+    		return (
+    			<div className="alert alert-success text-center">
+    			 	Message sent.
+    			</div>
+    		)
+    	}
+    }
 
 	render() {
 		return (
@@ -50,6 +67,7 @@ class NewMessage extends Component {
 						{"< Back to Messages"}
 					</button>
 				</div>
+				{this.success()}
 				<div className="message">
 					<div className="message-details">
 						<label className="detail-field">From:</label> {this.props.sender.username}<br />

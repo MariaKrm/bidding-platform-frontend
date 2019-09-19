@@ -89,6 +89,16 @@ class Inbox extends Component {
 		currPage = Number(currPage)
 		this.getMessages(currPage)
 
+		this.intervalId = setInterval(() => {
+			this.getMessages(currPage)
+		}, 5000)
+
+	}
+
+	componentWillUnmount() {
+		if(this.intervalId) {
+			clearInterval(this.intervalId)
+		}
 	}
 
 	render() {

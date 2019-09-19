@@ -135,10 +135,10 @@ export function customRequest(method, url, data, header) {
       headers: headers,
       data: data,
     }).then(res => {
-      console.log("\nReceived the following response from "+res.request.responseURL+":", res, "\n")
+      console.log("\nResponse from " + res.request.responseURL + ":", res, "\n")
       return res;
     }).catch(err => {
-      console.log("\nError in request to " + Constants.BASEURL + url + "\n")
+      console.log("\nError from " + Constants.BASEURL + url + "\n")
       err.response ? console.error(err.response.data) : console.error(err)
       throw err;
     });

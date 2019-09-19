@@ -37,8 +37,6 @@ class RatePopup extends Component {
 	submitRating() {
 		customRequest("PATCH", `/user/rating/${this.props.itemId}?score=${this.state.rating}`)
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 			Swal.fire({
 				title: "Success",
 				text: "Rating Submited",

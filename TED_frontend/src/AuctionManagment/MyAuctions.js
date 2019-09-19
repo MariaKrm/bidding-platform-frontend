@@ -20,8 +20,6 @@ class MyAuctions extends Component {
 	getOpenAuctions() {
 		customRequest("GET", "/user/myOpenAuctions")
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 			this.setState({
 				auctions: response.data
 			})
@@ -33,8 +31,6 @@ class MyAuctions extends Component {
 	getClosedAuctions() {
 		customRequest("GET", "/user/myCompletedAuctions")
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 			this.setState({
 				auctions: response.data
 			})

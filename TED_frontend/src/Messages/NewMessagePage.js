@@ -27,8 +27,6 @@ class NewMessagePage extends Component {
 	getAuctionData(id) {
 		customRequest("GET", "/item/" + id)
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 
 			this.setState({
 				item: response.data,

@@ -16,8 +16,6 @@ class MessagesIcon extends Component {
 	getFirstMessage() {
 		customRequest("GET", "/user/receivedMessages?page=0&size=1")
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 			this.setState({
 				newMessages: !response.data.empty && !response.data.content[0].seen,
 			})

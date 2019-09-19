@@ -84,7 +84,6 @@ class Signup extends React.Component {
 
     	axios.post(Constants.BASEURL + "/auth/signup", newUser)
     	.then(response => {
-    		console.log("response: ", response)
     		this.setState({
     			success: true,
     		})

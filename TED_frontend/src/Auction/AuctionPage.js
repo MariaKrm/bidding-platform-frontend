@@ -45,8 +45,6 @@ class AuctionPage extends Component {
 		const pathWithParams = `/bid/makeBid/${this.state.data.id}?offer=${bid}`
 		customRequest("POST", pathWithParams)
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 			var newData = this.state.data
 			newData.auctionCompleted = response.data.auctionCompleted
 			this.setState({
@@ -107,8 +105,6 @@ class AuctionPage extends Component {
 		const visitor = !AuthHelper.loggedIn() && !AuthHelper.unverifiedUser() ? "/visitor" : ""
 		customRequest("GET", "/item/" + id + visitor)
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 
 			this.setState({
 				data: response.data,

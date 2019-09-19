@@ -22,8 +22,6 @@ class ViewedAuctions extends Component {
 	getAuctions(currPage) {
 		customRequest("GET", `/user/myHistory?page=${currPage-1}&size=${this.state.itemsPerPage}`)
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 			this.setState({
 				lastPage: response.data.totalPages,
 				currentPage: currPage,

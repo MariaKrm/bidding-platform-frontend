@@ -24,8 +24,6 @@ class MyBids extends Component {
 
 		customRequest("GET", "/user/myBids")
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 			this.setState({
 				bids: response.data
 			})

@@ -51,8 +51,6 @@ class ChangePasswordPopup extends Component {
 
 		customRequest("PUT", "/account/changePassword", {oldPassword: this.state.oldPassword, newPassword: this.state.password})
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 			Swal.fire({
 				title: "Success",
 				text: response.data.text,

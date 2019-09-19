@@ -21,8 +21,6 @@ class NotificationDropdown extends Component {
 	allSeen() {
 		customRequest("PATCH", "user/allSeen")
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 		}).catch(err => {
 			displayError(err)
 		})
@@ -31,8 +29,6 @@ class NotificationDropdown extends Component {
 	showAll() {
 		customRequest("GET", "user/myNotifications")
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 			this.setState({
 				allNotifications: response.data,
 			})
@@ -44,8 +40,6 @@ class NotificationDropdown extends Component {
 	getNotifications() {
 		customRequest("GET", "/user/unseenNotifications")
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 			this.setState({
 				notifications: response.data,
 				newNotifications: response.data.length > 0,

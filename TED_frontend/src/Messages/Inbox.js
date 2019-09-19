@@ -31,8 +31,6 @@ class Inbox extends Component {
 	displayMessage(index) {
 		customRequest("PATCH", `/user/markMessage/${this.state.messages[index].id}`)
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 		}).catch(err => {
 			displayError(err)
 		})
@@ -61,8 +59,6 @@ class Inbox extends Component {
 	getMessages(currPage) {
 		customRequest("GET", `/user/receivedMessages?page=${currPage-1}&size=${this.state.itemsPerPage}`)
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 			this.setState({
 				lastPage: response.data.totalPages,
 				currentPage: currPage,

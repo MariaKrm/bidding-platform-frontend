@@ -15,8 +15,6 @@ class AccountManagmentControl extends Component {
 	submitVerification() {
 		customRequest("PATCH", "/admin/verifyAll")
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 			Swal.fire({
 				title: "Success",
 				text: "All User Accounts Verified",

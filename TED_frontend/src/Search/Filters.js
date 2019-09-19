@@ -41,8 +41,6 @@ class Filters extends Component {
 	getAllCategories() {
 		customRequest("GET", "/item/allCategories")
 		.then(response => {
-	        console.log("response: ", response)
-	        console.log("response.data: ", response.data)
 			const categories = response.data
 			this.setState({
 				initialCategories: categories,

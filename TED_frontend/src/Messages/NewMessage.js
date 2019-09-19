@@ -38,7 +38,6 @@ class NewMessage extends Component {
 		}
 		customRequest("GET", `/user/${path}/${this.props.item.id}?text=${fixedMessage}`)
 		.then(response => {
-			console.log("response.data: ", response.data)
 			this.setState({
 				success: true,
 			})

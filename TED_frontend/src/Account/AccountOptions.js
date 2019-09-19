@@ -21,8 +21,6 @@ class AccountOptions extends Component {
 		console.log("Verify Account")
 		customRequest("PATCH", `/admin/verifyUser/${this.props.account.id}`)
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 			Swal.fire({
 				title: "Success",
 				text: "User Account Verified",
@@ -60,8 +58,6 @@ class AccountOptions extends Component {
 		console.log("Delete User Account")
 		customRequest("DELETE", `/admin/deleteUser/${this.props.account.id}`)
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 			Swal.fire({
 				title: "Success",
 				text: "User Account Deleted",

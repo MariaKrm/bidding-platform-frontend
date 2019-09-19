@@ -26,8 +26,6 @@ class SearchBar extends Component {
 		console.log("Getting suggestions for: ", word)
 		customRequest("GET", `/search/partialMatch?keyword=${word}`)
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 			this.setState({
 				suggestions: response.data,
 			})

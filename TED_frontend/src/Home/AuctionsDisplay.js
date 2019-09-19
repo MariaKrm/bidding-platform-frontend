@@ -27,8 +27,6 @@ class AuctionsDisplay extends Component {
 	getOpenAuctions(currPage) {
 		customRequest("GET", `/item/openAuctions?page=${currPage-1}&size=${this.state.itemsPerPage}`)
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 			this.setState({
 				lastPage: response.data.totalPages,
 				currentPage: currPage,
@@ -60,8 +58,6 @@ class AuctionsDisplay extends Component {
 
 		customRequest("GET", `${filterRoute}page=${currPage-1}&size=${this.state.itemsPerPage}`)
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 			this.setState({
 				lastPage: response.data.totalPages,
 				currentPage: currPage,
@@ -76,8 +72,6 @@ class AuctionsDisplay extends Component {
 		const decodedText = searchText.replace(/%23/g, "#").replace(/%26/g, "&").replace(/%25/g, "%")
 		customRequest("PUT", `/search/searchBar?page=${currPage-1}&size=${this.state.itemsPerPage}`, decodedText)
 		.then(response => {
-			console.log("response: ", response)
-			console.log("response.data: ", response.data)
 			this.setState({
 				lastPage: response.data.totalPages,
 				currentPage: currPage,

@@ -4,10 +4,10 @@ import { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
 
 
+//Dropdown with options for AccountPreview
 class AccountOptions extends Component {
 	constructor() {
 		super()
-
 
 		this.submitVerification = this.submitVerification.bind(this)
 		this.verifyVerification = this.verifyVerification.bind(this)
@@ -18,7 +18,6 @@ class AccountOptions extends Component {
 	}
 
 	submitVerification() {
-		console.log("Verify Account")
 		customRequest("PATCH", `/admin/verifyUser/${this.props.account.id}`)
 		.then(response => {
 			Swal.fire({

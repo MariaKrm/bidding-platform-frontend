@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 
+//Navigation bar for auction-managment urls
 class AuctionManagmentControl extends Component {
 	constructor() {
 		super()

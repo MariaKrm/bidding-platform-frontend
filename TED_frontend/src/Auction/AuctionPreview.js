@@ -13,6 +13,7 @@ class AuctionPreview extends Component {
 			return category.name
 		})
 		const categoryString = categories.join(", ")
+		//If no image show default no_image picture
 		const image = this.props.auction.getMediaPath.length > 0 ? Constants.BASEURL + "/media" + this.props.auction.getMediaPath[0] : require("../images/no_image.png")
 		const alt = this.props.auction.getMediaPath.length > 0 ? this.props.auction.name : "no image available"
 		const endDate = new Date(this.props.auction.endsAt)

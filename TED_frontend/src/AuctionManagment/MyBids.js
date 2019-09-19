@@ -15,13 +15,11 @@ class MyBids extends Component {
 			bids: null,
 		}
 
+		this.getBids = this.getBids.bind(this)
+
 	}
 
-	componentDidMount() {
-		if(!AuthHelper.loggedIn()) {
-			return false
-		}
-
+	getBids() {
 		customRequest("GET", "/user/myBids")
 		.then(response => {
 			this.setState({
@@ -32,13 +30,22 @@ class MyBids extends Component {
 		})
 	}
 
+	componentDidMount() {
+		//Stop if not logged in
+		if(!AuthHelper.loggedIn()) {
+			return false
+		}
+
+		this.getBids()		
+	}
+
 	render() {
+		//Page only accessible by logged in users
 		if(!AuthHelper.loggedIn()) {
 			return (
 				<NotAvailable />
 			)
 		}
-
 
 		let myBids
 		if(this.state.bids) {
@@ -52,7 +59,7 @@ class MyBids extends Component {
 			})
 		}
 		else {
-			myBids = []
+			myBids = null
 		}
 
 		return (

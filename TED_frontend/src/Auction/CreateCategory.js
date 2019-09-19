@@ -25,6 +25,7 @@ class CreateCategory extends Component {
 		this.cancel = this.cancel.bind(this)
 	}
 
+    //Transform the categories to the correct form for DropDownTreeSelect (in DropDownContainer)
     tranformCategoriesToTreeSelect(categories) {
         let transCategories = categories.map(cat => {
             return ({
@@ -37,7 +38,7 @@ class CreateCategory extends Component {
         return transCategories
     }
 
-
+    //Get all categories to display on dropdown
     getAllCategories() {
         customRequest("GET", "/item/allCategories")
         .then(response => {
@@ -83,6 +84,7 @@ class CreateCategory extends Component {
             error: errorMessage,
         })
 
+        //Do not allow submit if there are errors
         if(errorMessage !== "" && errorMessage !== null) return false
 
     	customRequest("POST", `/admin/newCategory/${this.state.parentCategory}?name=${this.state.categoryName}`)
@@ -143,6 +145,7 @@ class CreateCategory extends Component {
 						onChange={this.handleChange}
 						required
 					/>
+                    
 					<br />
 					<br />
                     <div>

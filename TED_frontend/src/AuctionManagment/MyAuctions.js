@@ -7,6 +7,7 @@ import Navbar from "../Elements/Navbar"
 import AuctionManagmentControl from "./AuctionManagmentControl"
 import AuctionPreview from "../Auction/AuctionPreview"
 
+//Deals with both open and closed auctions
 class MyAuctions extends Component {
 	constructor() {
 		super()
@@ -41,10 +42,12 @@ class MyAuctions extends Component {
 
 
 	componentDidMount() {
+		//Stop if not logged in
 		if(!AuthHelper.loggedIn()) {
 			return false
 		}
 
+		//Choose to display open or closed auctions
 		if(this.props.completed) {
 			this.setState({
 				openClosed: "Closed",
@@ -61,6 +64,7 @@ class MyAuctions extends Component {
 	}
 
 	render() {
+		//Page only accessible by logged in users
 		if(!AuthHelper.loggedIn()) {
 			return (
 				<NotAvailable />
@@ -80,7 +84,7 @@ class MyAuctions extends Component {
 			})
 		}
 		else {
-			myAuctions = []
+			myAuctions = null
 		}
 
 		return (

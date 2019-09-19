@@ -46,12 +46,14 @@ class AuctionPage extends Component {
 		const pathWithParams = `/bid/makeBid/${this.state.data.id}?offer=${bid}`
 		customRequest("POST", pathWithParams)
 		.then(response => {
+			//Check if auction is completed now
 			var newData = this.state.data
 			newData.auctionCompleted = response.data.auctionCompleted
 			this.setState({
 				data: newData,
 				success: true,
 			})
+			//Show success banner for 2 seconds, then fade away
 			setTimeout(() => {
 				this.setState({
 					success: false,
@@ -75,7 +77,7 @@ class AuctionPage extends Component {
 				confirmButtonText: 'Make Bid'
 			}).then(result => {
 				if(result.value) {
-					this.sendBid(this.state.bid, false)
+					this.sendBid(this.state.bid)
 				}
 			})
 		}
@@ -92,6 +94,7 @@ class AuctionPage extends Component {
 			confirmButtonText: 'Buy it'
 		}).then(result => {
 			if(result.value) {
+				//Buy now is just a bid with buyPrice
 				this.sendBid(this.state.data.buyPrice)
 			}
 		})
@@ -107,18 +110,20 @@ class AuctionPage extends Component {
 	}
 
 	getAuctionData(id) {
+		//Get data from different route if visitor (for lsh)
 		const visitor = !AuthHelper.loggedIn() && !AuthHelper.unverifiedUser() ? "/visitor" : ""
 		customRequest("GET", "/item/" + id + visitor)
 		.then(response => {
-
 			this.setState({
 				data: response.data,
 			})
 
+			//If auction is completed stop refreshing data
 			if(response.data.auctionCompleted) {
 				clearInterval(this.intervalId)
 				this.intervalId = null
 
+				//If top bidder or seller show rating popup and button for contact
 				const auctionWinner = response.data.bids[0]
 				const me = AuthHelper.me()
 				if(me && auctionWinner && (auctionWinner.bidder.id === me.id || response.data.seller.id === me.id)) {
@@ -139,11 +144,13 @@ class AuctionPage extends Component {
 
 
 	componentDidMount() {
+		//Get id of auction
 		const path = this.props.location.pathname
 		const pos = path.lastIndexOf("/")
 		const id = path.slice(pos+1)
 		this.getAuctionData(id)
 
+		//Refresh data every 5 seconds
 		this.intervalId = setInterval(() => {
 			this.getAuctionData(id)
 		}, 5000)
@@ -155,6 +162,7 @@ class AuctionPage extends Component {
 		}
 	}
 
+	//Success banner
 	success() {
     	if(this.state.success) {
     		return (
@@ -177,6 +185,7 @@ class AuctionPage extends Component {
 			return category.name
 		})
 		const categoryString = categories.join(", ")
+		//If no image show default no_image picture
 		const image = this.state.data.getMediaPath.length > 0 ? Constants.BASEURL + "/media" + this.state.data.getMediaPath[0] : require("../images/no_image.png")
 		const alt = this.state.data.getMediaPath.length > 0 ? this.state.data.name : "no image available"
 		const endDate = new Date(this.state.data.endsAt)
@@ -198,8 +207,8 @@ class AuctionPage extends Component {
 		})
 
 		
-
 		var bidGroup, buyNowButton
+		//Disable buttons if auction is completed or visitor
 		if(this.state.data.auctionCompleted || !AuthHelper.loggedIn()) {
 			bidGroup = 
 				<form className="auction-bid-group">
@@ -247,15 +256,18 @@ class AuctionPage extends Component {
 				</div>
 				{AuthHelper.displayVisitorSign()}
 				{this.success()}
+
 				<div className="auction-page">
 					<div className="auction-info">
 						<div className="auction-info-top">
 							<img className="preview-image" src={image} alt={alt}/>
 							<div className="auction-text">
+
 								<div className="preview-title-group">
 									<a href={`/auctions/${this.state.data.id}`} className="preview-title">{this.state.data.name}</a>
 									<AuctionOptions auction={this.state.data} className="preview-menu" then={this.toPreviousPage} history={this.props.history} />
 								</div>
+
 								<div className="auction-details">
 									<div className="auction-details-left">
 										<p className="preview-categories">{categoryString}</p>
@@ -275,12 +287,15 @@ class AuctionPage extends Component {
 										{contactButton}
 									</div>
 								</div>
+
 							</div>
 						</div>
+
 						<div className="auction-info-bottom">
 							<h3 className="auction-description-title">Description:</h3>
 							<p className="auction-description">{this.state.data.description}</p>
 							<div className="auction-media">
+								{/*Show map only if coordinnates exist. (0,0) is used for auctions with no coordinates*/}
 								{this.state.data.location && this.state.data.location.latitude !== 0 && this.state.data.location.longitude !== 0 ?
 									<Map style={{flex: 1}} lat={this.state.data.location.latitude} lon={this.state.data.location.longitude} />
 									: null
@@ -290,6 +305,7 @@ class AuctionPage extends Component {
 								</div>
 							</div>
 						</div>
+
 					</div>
 
 					<div className="auction-bids">
@@ -298,6 +314,7 @@ class AuctionPage extends Component {
 							{bids}
 						</ul>
 					</div>
+
 				</div>
 
 				{this.state.showRatePopup ? <RatePopup itemId={this.state.data.id} isSeller={this.state.isSeller} history={this.props.history} /> : null}

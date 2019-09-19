@@ -3,6 +3,7 @@ import Swal from "sweetalert2"
 import { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
 
+//Navigation bar for account-managment urls
 class AccountManagmentControl extends Component {
 	constructor() {
 		super()

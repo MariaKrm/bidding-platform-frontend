@@ -35,6 +35,7 @@ class SearchBar extends Component {
 	}
 
 	handleChange(event) {
+		//Get suggestions for the last word only
 		const value = event.target.value
 		const pos = value.lastIndexOf(" ")
 		const lastWord = value.slice(pos+1)
@@ -45,11 +46,14 @@ class SearchBar extends Component {
 			keyPresses: keyPresses,
 		})
 
+		//Get suggestion only after word has 3 or more letters
 		if(lastWord.length > 2) {
+			//And only every two key presses
 			if(keyPresses % 2 === 0) {
 				this.getSuggestions(lastWord)
 			}
 		}
+		//If word is too small clear previous suggestions
 		else {
 			this.setState({
 				suggestions: [],
@@ -64,6 +68,7 @@ class SearchBar extends Component {
 	}
 
 	handleBlur() {
+		//Wait 300 milliseconds so selection of suggestion is handled
 		setTimeout(() => {
 			this.setState({
 				displaySuggestions: false,
@@ -72,6 +77,7 @@ class SearchBar extends Component {
 		
 	}
 
+	//When click on suggestion, put its text in searchbar
 	handleSuggestSelect(event) {
 		const { textContent } = event.target
 		this.setState({
@@ -83,11 +89,13 @@ class SearchBar extends Component {
 		event.preventDefault()
 		let path = "/home?page=1"
 		if(this.state.text) {
+			//Encode text to pass through url
 			const encodedText = this.state.text.replace(/%/g, "%25").replace(/&/g, "%26").replace(/#/g, "%23")
 			path = "/home/search?searchText=" + encodedText +"&page=1"
 			console.log("searching for: ", this.state.text)
 		}
 		
+		//And send text through url
 		this.props.history.push(path)
 	}
 

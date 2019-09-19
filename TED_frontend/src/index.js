@@ -54,7 +54,7 @@ ReactDOM.render(
 	    	<Route path="/home" component={HomePage} />
 	    	<Route path="/messages/inbox" component={Inbox} />
 	    	<Route path="/messages/sent" component={SentMessages} />
-	    	<Route path="/messages/newMessage/:id" render={(props) => <NewMessagePage {...props} />} />
+	    	<Route path="/messages/newMessage/:itemId" render={(props) => <NewMessagePage {...props} />} />
 	    	<Route path="/auction-managment/my-open-auctions" render={(props) => <MyAuctions completed={false} {...props} />} />
 	    	<Route path="/auction-managment/my-closed-auctions" render={(props) => <MyAuctions completed={true} {...props} />} />
 	    	<Route path="/auction-managment/my-bids" component={MyBids} />

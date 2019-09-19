@@ -35,13 +35,16 @@ class AllAccounts extends Component {
 	}
 
 	componentDidMount() {
+		//Stop if not admin
 		if(!AuthHelper.isAdmin()) {
 			return false
 		}
 
+		//Deal with page parameters
 		const query = new URLSearchParams(window.location.search)
 		let currPage = query.get('page')
 
+		//If no page is specified default to page 1
 		if(currPage === null) {
 			this.props.history.push("?page=1")
 			currPage = 1
@@ -53,6 +56,7 @@ class AllAccounts extends Component {
 
 
 	render() {
+		//Page only accessible by admin
 		if(!AuthHelper.isAdmin()) {
 			return (
 				<AdminOnly />

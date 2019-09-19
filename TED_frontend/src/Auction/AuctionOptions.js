@@ -5,6 +5,7 @@ import { displayError } from "../utils/ErrorHelper"
 import jsonxml from "jsontoxml"
 
 
+//DropDown with options for AuctionPreview and AuctionPage
 class AuctionOptions extends Component {
 	constructor() {
 		super()
@@ -18,12 +19,10 @@ class AuctionOptions extends Component {
 	}
 
 	editAuction() {
-		console.log("Edit Auction")
 		this.props.history.push(`/editAuction/${this.props.auction.id}`)
 	}
 
 	submitDelete() {
-		console.log("Delete Auction")
 		customRequest("DELETE", `/item/${this.props.auction.id}`)
 		.then(response => {
 			Swal.fire({
@@ -63,28 +62,33 @@ class AuctionOptions extends Component {
 		xml = "<item>" + xml + "</item>"
 	//	xml.replace("\n", "\n\t")
 
+		//Create element with url for xml download
 		const element = document.createElement("a");
-		const file = new Blob([xml], {type: 'application/xml'});
+		const file = new Blob([xml], {type: 'application/xml'})
 		element.href = URL.createObjectURL(file);
-		element.download = `auction_${this.props.auction.id}.xml`;
-		document.body.appendChild(element); // Required for this to work in FireFox
-		element.click();
+		element.download = `auction_${this.props.auction.id}.xml`
+		document.body.appendChild(element) // Required for this to work in FireFox
+		element.click()
 	}
 
 	exportJSON() {
 		let json = JSON.stringify(this.props.auction)
 
-		const element = document.createElement("a");
-		const file = new Blob([json], {type: "application/json"});
-		element.href = URL.createObjectURL(file);
-		element.download = `auction_${this.props.auction.id}.json`;
-		document.body.appendChild(element); // Required for this to work in FireFox
-		element.click();
+		//Create element with url for json download
+		const element = document.createElement("a")
+		const file = new Blob([json], {type: "application/json"})
+		element.href = URL.createObjectURL(file)
+		element.download = `auction_${this.props.auction.id}.json`
+		document.body.appendChild(element) // Required for this to work in FireFox
+		element.click()
 	}
 
+	//Choose which buttons to enable
 	enableButtons() { 
 		let buttons
 		const me = AuthHelper.me()
+
+		//Show export buttons only to admin
 		let exportButtons = AuthHelper.isAdmin() ? 
 			<div>
 				<button className="dropdown-item" onClick={this.exportXML}>Export to XML</button>
@@ -92,6 +96,7 @@ class AuctionOptions extends Component {
 			</div>
 			: null
 		
+		//Enable edit and delete buttons only for seller
 		if(me !== null && me.id === this.props.auction.seller.id) {
 			buttons = 
 				<div>

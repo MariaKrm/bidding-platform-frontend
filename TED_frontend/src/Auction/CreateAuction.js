@@ -11,18 +11,15 @@ import NotAvailable from "../utils/NotAvailable"
 import DropdownContainer from "../Elements/DropdownContainer"
 import ImageThumb from "../Elements/ImageThumb"
 
-import "react-datepicker/dist/react-datepicker.css"
 
 class CreateAuction extends Component {
 	constructor() {
 		super()
-		const now = new Date()
-		const after30mins =  new Date(now.getTime() + 30*60000);
 		this.state = {
 			itemName: "",
 			buyPrice: "",
 			firstBid: "",
-			endsAt: after30mins,
+			endsAt: "",
 			coords: null,
 			locationTitle: "",
 			description: "",
@@ -74,10 +71,12 @@ class CreateAuction extends Component {
     }
 
     handleImageUpload(event) {
+        //Only allow images
         if(!event.target.files[0].type.includes("image")) {
             return false
         }
         const image = event.target.files[0]
+        //Create URL for the preview
         const imageURL = URL.createObjectURL(event.target.files[0])
         this.setState({
             images: this.state.images.concat(image),
@@ -97,7 +96,9 @@ class CreateAuction extends Component {
 
     }
 
+    //Called on onChange events of ValidatedInput fields
     passresult(name, value, error) {
+        //Only keep the value if there are no errors
     	if(error !== null) {
     		value = ""
     	}
@@ -113,7 +114,7 @@ class CreateAuction extends Component {
     	})
     }
 
-
+    //Transform the categories to the correct form for DropDownTreeSelect (in DropDownContainer)
     tranformCategoriesToTreeSelect(categories) {
         let transCategories = categories.map(cat => {
             return ({
@@ -127,6 +128,7 @@ class CreateAuction extends Component {
     }
 
 
+    //Get all categories to display on dropdown
     getAllCategories() {
     	customRequest("GET", "/item/allCategories")
     	.then(response => {
@@ -166,8 +168,9 @@ class CreateAuction extends Component {
     		error: errorMessage
     	})
 
+        //Do not allow submit if there are errors
     	if(errorMessage) {
-            window.scrollTo(0, 0)
+            window.scrollTo(0, 0)   //Scroll to the top so the user sees the error message
             return false
         }
 
@@ -186,11 +189,13 @@ class CreateAuction extends Component {
     	}
 
 
+        //Send auction in formData, add every field of newAuction
         const formData = new FormData()
         Object.keys(newAuction).forEach(key => {
             formData.append(key, newAuction[key])
         })
 
+        //Add every image as "media"
         this.state.images.forEach(img => {
             formData.append('media', img)
         })
@@ -235,6 +240,7 @@ class CreateAuction extends Component {
     }
 
 
+    //Success banner
     success() {
     	if(this.state.success) {
     		return (
@@ -311,21 +317,21 @@ class CreateAuction extends Component {
 									timeIntervals={15}
 									minDate={addMinutes(new Date(), 10)}
 									dateFormat="MMMM d, yyyy h:mm aa"
+                                    required
 								/>
 							</div>
+                            
                             <br />
                             <div>
-                            <h4 className="field-label">Pick a category</h4>
-                            <DropdownContainer data={this.state.transformedCategories[0]} mode="radioSelect" onChange={this.handleSelectChange} required />
-                        </div>
+                                <h4 className="field-label">Pick a category</h4>
+                                <DropdownContainer data={this.state.transformedCategories[0]} mode="radioSelect" onChange={this.handleSelectChange} required />
+                            </div>
 
-                        <br />
-                        <label>Add pictures &nbsp;&nbsp;</label> <input type="file" accept="image/*" onChange={this.handleImageUpload}/>
-                        {images}
-                        <br />
-                            
-                            
+                            <br />
+                            <label>Add pictures &nbsp;&nbsp;</label> <input type="file" accept="image/*" onChange={this.handleImageUpload}/>
+                            {images}
 
+                            <br />
 							<div className="description-container">
 								<h4 className="field-label">Write a short description of the item</h4>
 								<textarea name="description" className="description-input" value={this.state.description} onChange={this.handleChange} cols={40} rows={3} required />

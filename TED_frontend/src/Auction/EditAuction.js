@@ -12,7 +12,6 @@ import DropdownContainer from "../Elements/DropdownContainer"
 import ImageThumb from "../Elements/ImageThumb"
 import * as Constants from "../Constants/Constants"
 
-import "react-datepicker/dist/react-datepicker.css"
 
 class EditAuction extends Component {
 	constructor() {
@@ -77,10 +76,12 @@ class EditAuction extends Component {
     }
 
     handleImageUpload(event) {
+        //Only allow images
         if(!event.target.files[0].type.includes("image")) {
             return false
         }
         const image = event.target.files[0]
+        //Create URL for the preview
         const imageURL = URL.createObjectURL(event.target.files[0])
         this.setState({
             images: this.state.images.concat(image),
@@ -100,7 +101,9 @@ class EditAuction extends Component {
 
     }
 
+    //Called on onChange events of ValidatedInput fields
     passresult(name, value, error) {
+        //Only keep the value if there are no errors
     	if(error !== null) {
     		value = ""
     	}
@@ -115,8 +118,6 @@ class EditAuction extends Component {
     		locationTitle: city + ", " + country
     	})
     }
-
-
 
 
     handleSubmit(event) {
@@ -141,8 +142,9 @@ class EditAuction extends Component {
     		error: errorMessage
     	})
 
+        //Do not allow submit if there are errors
     	if(errorMessage) {
-            window.scrollTo(0, 0)
+            window.scrollTo(0, 0)   //Scroll to the top so the user sees the error message
             return false
         }
 
@@ -160,8 +162,10 @@ class EditAuction extends Component {
     		description: this.state.description
     	}
 
+        //Send auction in formData, add every field of newAuction
     	const formData = new FormData()
         Object.keys(editedAuction).forEach(key => {
+            //Only send changed fields
             if(key !== "categoryId" && editedAuction[key] !== this.state.data[key]) {
                 formData.append(key, editedAuction[key])
             }
@@ -170,6 +174,7 @@ class EditAuction extends Component {
             }
         })
 
+        //Add every image as "media"
         this.state.images.forEach(img => {
             formData.append('media', img)
         })
@@ -196,7 +201,6 @@ class EditAuction extends Component {
 
 
     submitAuction(editedAuction) {
-
     	customRequest("PATCH", `/item/${this.state.data.id}`, editedAuction)
     	.then(response => {
 
@@ -216,6 +220,7 @@ class EditAuction extends Component {
     }
 
 
+    //Success banner
     success() {
     	if(this.state.success) {
     		return (
@@ -247,6 +252,7 @@ class EditAuction extends Component {
     }
 
 
+    //Transform the categories to the correct form for DropDownTreeSelect (in DropDownContainer)
     tranformCategoriesToTreeSelect(categories) {
         let transCategories = categories.map(cat => {
             return ({
@@ -260,6 +266,7 @@ class EditAuction extends Component {
     }
 
 
+    //Get all categories to display on dropdown
     getAllCategories() {
         customRequest("GET", "/item/allCategories")
         .then(response => {
@@ -293,6 +300,7 @@ class EditAuction extends Component {
 	componentDidMount() {
     	this.getAllCategories()
 
+        //Get id of auction
     	const path = this.props.location.pathname
 		const pos = path.lastIndexOf("/")
 		const id = path.slice(pos+1)
@@ -369,6 +377,7 @@ class EditAuction extends Component {
 									dateFormat="MMMM d, yyyy h:mm aa"
 								/>
 							</div>
+                            
                             <br />
                             <div>
                                 <h4 className="field-label">Pick a category</h4>

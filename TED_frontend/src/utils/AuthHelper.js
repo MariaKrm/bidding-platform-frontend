@@ -69,17 +69,18 @@ class AuthHelper {
   }
 
   static setToken(idToken) {
-    // Saves user token to localStorage
+    // Saves user token to sessionStorage
     sessionStorage.setItem("id_token", idToken)
   }
 
   static getToken() {
-    // Retrieves the user token from localStorage
+    // Retrieves the user token from sessionStorage
     return sessionStorage.getItem("id_token")
   }
 
   static logout() {
-    // Clear user token and profile data from localStorage
+    // Clear user token and profile data from sessionStorage
+    // Wait 500 milliseconds so intervals have time to be cleared
     setTimeout(() => {
       sessionStorage.removeItem("id_token")
       sessionStorage.removeItem("user")
@@ -95,6 +96,7 @@ class AuthHelper {
 
   static displayVisitorSign() {
     if(!AuthHelper.loggedIn()) {
+      //Unverified user sign
       if(AuthHelper.unverifiedUser()) {
         return (
             <div className="alert alert-info" style={{margin: 0}}>
@@ -102,6 +104,7 @@ class AuthHelper {
             </div>
           )
       }
+      //Visitor sign
       else {
         return (
           <div className="alert alert-info" style={{margin: 0}}>
@@ -125,7 +128,6 @@ export function customRequest(method, url, data, header) {
       headers = header
     }
     // Setting Authorization header
-    // Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
     if(AuthHelper.loggedIn() || AuthHelper.unverifiedUser()) {
       headers["Authorization"] = "Bearer " + AuthHelper.getToken()
     }

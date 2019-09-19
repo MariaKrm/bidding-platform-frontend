@@ -24,7 +24,6 @@ class AccountPage extends Component {
 	}
 
 	submitVerification() {
-		console.log("Verify Account")
 		customRequest("PATCH", `/admin/verifyUser/${this.state.data.id}`)
 		.then(response => {
 			Swal.fire({
@@ -61,7 +60,6 @@ class AccountPage extends Component {
 	}
 
 	submitDelete() {
-		console.log("Delete User Account")
 		customRequest("DELETE", `/admin/deleteUser/${this.state.data.id}`)
 		.then(response => {
 			Swal.fire({
@@ -108,9 +106,12 @@ class AccountPage extends Component {
 	}
 
 	componentDidMount() {
+		//Get user id
 		const path = this.props.location.pathname
 		const pos = path.lastIndexOf("/")
 		const username = path.slice(pos+1)
+
+		//Stop if not admin or same user
 		const me = AuthHelper.me()
 		if(!me || (!AuthHelper.isAdmin() && me.username !== username)) {
 			return false
@@ -119,6 +120,7 @@ class AccountPage extends Component {
 	}
 
 	render() {
+		//Stop if not admin or same user
 		const path = this.props.location.pathname
 		const pos = path.lastIndexOf("/")
 		const username = path.slice(pos+1)
@@ -148,23 +150,29 @@ class AccountPage extends Component {
 					<Header />
 					<AccountButtons history={this.props.history} />
 				</div>
+				
 				<h1 className="account-title">{this.state.data.username}</h1>
 				<div className="account-page">
 					<div className="account-page-info">
+						
 						<div className="account-info-flex">
+							
 							<div className="account-info-left">
 								<p className="account-field"><label className="account-field-label">Username:</label> {this.state.data.username}</p>
 								<p className="account-field"><label className="account-field-label">First Name:</label> {this.state.data.firstName}</p>
 								<p className="account-field"><label className="account-field-label">Last Name:</label> {this.state.data.lastName}</p>
 							</div>
+							
 							<div className="account-info-right">
 								<p className="account-field"><label className="account-field-label">Email:</label> {this.state.data.email}</p>
 								<p className="account-field"><label className="account-field-label">Tel Number:</label> {this.state.data.telNumber}</p>
 								<p className="account-field"><label className="account-field-label">Tax Number:</label> {this.state.data.taxNumber}</p>
 							</div>
+
 						</div>
 						
 						<br />
+						{/*Show map only if coordinnates exist. (0,0) is used for users with no coordinates*/}
 						{this.state.data.location && this.state.data.location.latitude !== 0 && this.state.data.location.longitude !== 0 ? 
 							<div>
 								<p className="account-field"><label className="account-field-label">City:</label> {city}</p>

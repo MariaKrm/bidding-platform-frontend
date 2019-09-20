@@ -68,8 +68,8 @@ class NotificationDropdown extends Component {
 			return null
 		}
 
-		let allNotifications = <button className="notification">Nothing here</button>
-		let notifications = <button className="dropdown-item">Nothing here</button>
+		let allNotifications = <button className="notification disabled" disabled>Nothing here</button>
+		let notifications = <button className="dropdown-item disabled" disabled>Nothing here</button>
 		let notificationDot = null
 		if(this.state.newNotifications) {
 			notifications = this.state.notifications.map(notification => {

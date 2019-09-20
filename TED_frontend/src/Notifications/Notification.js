@@ -9,49 +9,27 @@ class Notification extends Component {
 			type: "unseen",
 		}
 
-		this.notificationSeen = this.notificationSeen.bind(this)
 		this.handleClick = this.handleClick.bind(this)
 	}
 
-	notificationSeen() {
+	handleClick() {
 		customRequest("PATCH", `/user/markNotification/${this.props.notification.id}`)
 		.then(response => {
 			this.setState({
 				type: "seen",
 			})
+
+			if(this.props.notification.message.includes("verified")) {
+				AuthHelper.verify()
+				window.location.reload()
+			}
+
+			if(this.props.notification.message.includes("auction")) {
+				this.props.history.push(`/auctions/${this.props.notification.itemId}`)
+			}
 		}).catch(err => {
 			displayError(err)
 		})
-	}
-
-	handleClick() {
-		//this.notificationSeen()
-
-		if(this.props.notification.message.includes("verified")) {
-			AuthHelper.verify()
-			customRequest("PATCH", `/user/markNotification/${this.props.notification.id}`)
-			.then(response => {
-				this.setState({
-					type: "seen",
-				})
-				window.location.reload()
-			}).catch(err => {
-				displayError(err)
-			})
-		}
-
-		if(this.props.notification.message.includes("auction")) {
-			customRequest("PATCH", `/user/markNotification/${this.props.notification.id}`)
-			.then(response => {
-				this.setState({
-					type: "seen",
-				})
-				this.props.history.push(`/auctions/${this.props.notification.itemId}`)
-			}).catch(err => {
-				displayError(err)
-			})
-			
-		}
 	}
 
 	componentDidMount() {

@@ -29,7 +29,7 @@ class Notification extends Component {
 
 		if(this.props.notification.message.includes("verified")) {
 			AuthHelper.verify()
-			window.location.reload()
+			setTimeout(window.location.reload(), 500)
 		}
 
 		if(this.props.notification.message.includes("auction")) {

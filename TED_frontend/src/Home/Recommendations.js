@@ -13,15 +13,14 @@ class Recommendations extends Component {
 	}
 
 	componentDidMount() {
-		const me = AuthHelper.me()
 		let path
-		if(me) {
-			path = `lsh?username=${me.username}`
+		if(AuthHelper.loggedIn() || AuthHelper.unverifiedUser()) {
+			path = "/recommend/lsh"
 		}
 		else {
-			path = "visitor"
+			path = "/recommend/visitor"
 		}
-		customRequest("GET", `/recommend/${path}`)
+		customRequest("GET", path)
 		.then(response => {
 			this.setState({
 				recommendations: response.data

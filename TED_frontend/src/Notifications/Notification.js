@@ -25,15 +25,32 @@ class Notification extends Component {
 	}
 
 	handleClick() {
-		this.notificationSeen()
+		//this.notificationSeen()
 
 		if(this.props.notification.message.includes("verified")) {
 			AuthHelper.verify()
-			setTimeout(window.location.reload(), 500)
+			customRequest("PATCH", `/user/markNotification/${this.props.notification.id}`)
+			.then(response => {
+				this.setState({
+					type: "seen",
+				})
+				window.location.reload()
+			}).catch(err => {
+				displayError(err)
+			})
 		}
 
 		if(this.props.notification.message.includes("auction")) {
-			this.props.history.push(`/auctions/${this.props.notification.itemId}`)
+			customRequest("PATCH", `/user/markNotification/${this.props.notification.id}`)
+			.then(response => {
+				this.setState({
+					type: "seen",
+				})
+				this.props.history.push(`/auctions/${this.props.notification.itemId}`)
+			}).catch(err => {
+				displayError(err)
+			})
+			
 		}
 	}
 

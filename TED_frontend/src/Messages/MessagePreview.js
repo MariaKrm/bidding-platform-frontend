@@ -55,7 +55,7 @@ class MessagePreview extends Component {
 					{fromTo} about item #{this.props.message.item.id} ({this.props.message.item.name})
 				</button>
 				<br />
-				<button className="reply-button" onClick={this.deleteMessage}>Delete</button>
+				{this.props.sent && <button className="reply-button" onClick={this.deleteMessage}>Delete</button>}
 			</div>
 		)
 	}

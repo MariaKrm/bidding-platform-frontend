@@ -31,10 +31,20 @@ class Login extends Component {
 
     handleSubmit(event) {
         event.preventDefault()
+        let user
 
-        const user = {
-            username: this.state.username,
-            password: this.state.password
+        //User can login with email or username
+        if(this.state.username.includes("@")) {
+            user = {
+                email: this.state.username,
+                password: this.state.password
+            }
+        }
+        else {
+            user = {
+                username: this.state.username,
+                password: this.state.password
+            }
         }
 
         const loginRoute = Constants.BASEURL + "/auth/login"

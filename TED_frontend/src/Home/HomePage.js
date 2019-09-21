@@ -5,7 +5,6 @@ import Feed from "./Feed"
 
 
 class HomePage extends Component {
-
 	render() {
 		return (
 			<div>

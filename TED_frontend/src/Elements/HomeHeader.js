@@ -4,6 +4,7 @@ import Header from "./Header"
 import AccountButtons from "./AccountButtons"
 import SearchBar from "../Search/SearchBar"
 
+//Header with SearchBar for Home
 class HomeHeader extends Component {
 	render() {
 		return (

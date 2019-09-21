@@ -18,7 +18,9 @@ class ChangePasswordPopup extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this)
 	}
 
+	//Called on onChange events of ValidatedInput fields
 	passresult(name, value, error) {
+		//Only keep the value if there are no errors
     	if(error !== null) {
     		value = null
     	}
@@ -46,6 +48,7 @@ class ChangePasswordPopup extends Component {
     		error: errorMessage
     	})
 
+    	 //Do not allow submit if there are errors
     	if(errorMessage) return false
 
 

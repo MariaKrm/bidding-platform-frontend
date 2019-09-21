@@ -13,6 +13,7 @@ class Recommendations extends Component {
 	}
 
 	componentDidMount() {
+		//Get different recommendations for user and visitor
 		let path
 		if(AuthHelper.loggedIn() || AuthHelper.unverifiedUser()) {
 			path = "/recommend/lsh"

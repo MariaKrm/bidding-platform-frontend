@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 
+//Thumbnail for image with X for delete and display on click
 class ImageThumb extends Component {
 	constructor() {
 		super()
@@ -12,12 +13,14 @@ class ImageThumb extends Component {
 		this.openInNewTab = this.openInNewTab.bind(this)
 	}
 
+	//Show X in upper right corner when mouse over image
 	displayX() {
 		this.setState({
 			displayX: true,
 		})
 	}
 
+	//Hide X from upper right corner when mouse leaves image
 	hideX() {
 		this.setState({
 			displayX: false,

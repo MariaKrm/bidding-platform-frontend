@@ -29,15 +29,15 @@ class Inbox extends Component {
 	}
 
 	displayMessage(index) {
+		//Mark message as seen
 		customRequest("PATCH", `/user/markMessage/${this.state.messages[index].id}`)
 		.then(response => {
+			this.setState({
+				selected: index,
+				show: "selected"
+			})
 		}).catch(err => {
 			displayError(err)
-		})
-
-		this.setState({
-			selected: index,
-			show: "selected"
 		})
 	}
 
@@ -70,13 +70,16 @@ class Inbox extends Component {
 	}
 
 	componentDidMount() {
+		//Stop if not logged in
 		if(!AuthHelper.loggedIn()) {
 			return false
 		}
 
+		//Deal with page parameters
 		const query = new URLSearchParams(window.location.search)
 		let currPage = query.get('page')
 
+		//If no page is specified default to page 1
 		if(currPage === null) {
 			this.props.history.push("?page=1")
 			currPage = 1
@@ -85,6 +88,7 @@ class Inbox extends Component {
 		currPage = Number(currPage)
 		this.getMessages(currPage)
 
+		//Get messages every 5 seconds
 		this.intervalId = setInterval(() => {
 			this.getMessages(currPage)
 		}, 5000)
@@ -92,12 +96,14 @@ class Inbox extends Component {
 	}
 
 	componentWillUnmount() {
+		//Clear interval
 		if(this.intervalId) {
 			clearInterval(this.intervalId)
 		}
 	}
 
 	render() {
+		//Page only accessible by logged in users
 		if(!AuthHelper.loggedIn()) {
 			return (
 				<NotAvailable />
@@ -123,6 +129,7 @@ class Inbox extends Component {
 			messages = <div>Loading...</div>
 		}
 
+		//Display all messages/selected message/new message
 		let content
 		if(this.state.show === "selected") {
 			content =

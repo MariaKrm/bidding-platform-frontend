@@ -3,7 +3,7 @@ import AuthHelper, { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
 import Notification from "./Notification"
 
-
+//Dropdown for notifications in header
 class NotificationDropdown extends Component {
 	constructor() {
 		super()
@@ -18,6 +18,7 @@ class NotificationDropdown extends Component {
 		this.getNotifications = this.getNotifications.bind(this)
 	}
 
+	//Mark all notifications as seen
 	allSeen() {
 		customRequest("PATCH", "user/allSeen")
 		.then(response => {
@@ -26,6 +27,7 @@ class NotificationDropdown extends Component {
 		})
 	}
 
+	//Show modal with all notifications
 	showAll() {
 		customRequest("GET", "user/myNotifications")
 		.then(response => {
@@ -50,6 +52,7 @@ class NotificationDropdown extends Component {
 	}
 
 	componentDidMount() {
+		//Get new notifications every 5 seconds
 		if(AuthHelper.loggedIn() || AuthHelper.unverifiedUser()) {
 			this.intervalId = setInterval(() => {
 				this.getNotifications()
@@ -57,6 +60,7 @@ class NotificationDropdown extends Component {
 		}
 	}
 
+	//Clear interval
 	componentWillUnmount() {
 		if(AuthHelper.loggedIn() || AuthHelper.unverifiedUser()) {
 			clearInterval(this.intervalId)
@@ -64,6 +68,7 @@ class NotificationDropdown extends Component {
 	}
 
 	render() {
+		//Do not show component to visitors
 		if(!AuthHelper.loggedIn() && !AuthHelper.unverifiedUser()) {
 			return null
 		}
@@ -71,6 +76,7 @@ class NotificationDropdown extends Component {
 		let allNotifications = <button className="notification disabled" disabled>Nothing here</button>
 		let notifications = <button className="dropdown-item disabled" disabled>Nothing here</button>
 		let notificationDot = null
+
 		if(this.state.newNotifications) {
 			notifications = this.state.notifications.map(notification => {
 				return (
@@ -84,8 +90,10 @@ class NotificationDropdown extends Component {
 				)
 			})
 
+			//If new notifications show notification dot
 			notificationDot = <span className="notification-dot">{this.state.notifications.length}</span>
 		}
+
 		if(this.state.allNotifications) {
 			allNotifications = this.state.allNotifications.map(notification => {
 				return (
@@ -113,6 +121,8 @@ class NotificationDropdown extends Component {
 						<button className="notification show-all-notification" data-toggle="modal" data-target="#notificationsModal" onClick={this.showAll}>Show All</button>
 					</div>
 				</div>
+
+			{/* All notifications modal */}
 				<div className="modal" id="notificationsModal">
 					<div className="modal-dialog">
 						<div className="modal-content">

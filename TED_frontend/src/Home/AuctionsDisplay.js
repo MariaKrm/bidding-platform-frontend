@@ -4,6 +4,7 @@ import { displayError } from "../utils/ErrorHelper"
 import AuctionPreview from "../Auction/AuctionPreview"
 import PageWheel from "../Elements/PageWheel"
 
+//Display Auctions in Home depending on URL parameters
 class AuctionsDisplay extends Component {
 	constructor() {
 		super()
@@ -84,15 +85,18 @@ class AuctionsDisplay extends Component {
 
 
 	getAuctions() {
+		//Deal with page parameters
 		const query = new URLSearchParams(window.location.search)
 		let currPage = query.get("page")
 
+		//If no page is specified default to page 1
 		if(currPage === null) {
 			this.props.history.push("?page=1")
 			currPage = 1
 		}
 		currPage = Number(currPage)
 
+		//Parameters to keep on page change
 		const params = query.toString()
 		const pagePos = params.lastIndexOf("&")
 		const keepParams = params.slice(0, pagePos+1)
@@ -100,16 +104,19 @@ class AuctionsDisplay extends Component {
 			keepParams: keepParams,
 		})
 
+		//Check for filters or search
 		const path = this.props.location.pathname
 		const pos = path.lastIndexOf("/")
 		const type = path.slice(pos+1)
 
+		//Filters
 		if(type === "filters") {
 			this.setState({
 				filters: true,
 				searchText: "",
 			})
 
+			//Get filter parameters and apply them
 			const lowerPrice = query.get("lowerPrice")
 			const higherPrice = query.get("higherPrice")
 			const locationTitle = query.get("locationTitle")
@@ -117,7 +124,10 @@ class AuctionsDisplay extends Component {
 			const category = query.get("category")
 			this.getFilteredAuctions(currPage, lowerPrice, higherPrice, locationTitle, description, category)
 		}
+		//Search from SearchBar
 		else if(type === "search") {
+
+			//Get text and search for it
 			const searchText = query.get("searchText")
 			this.setState({
 				searchText: searchText,
@@ -125,6 +135,7 @@ class AuctionsDisplay extends Component {
 			})
 			this.getSearchAuctions(currPage, searchText)
 		}
+		//Home (openAuctions)
 		else {
 			this.setState({
 				searchText: "",
@@ -134,6 +145,7 @@ class AuctionsDisplay extends Component {
 		}
 	}
 
+	//Update auctions when url or parameter change
 	componentDidUpdate(prevProps) {
         if(this.props.location.pathname !== prevProps.location.pathname || this.props.location.search !== prevProps.location.search) {
             this.getAuctions()
@@ -168,6 +180,7 @@ class AuctionsDisplay extends Component {
 			auctions = <div><br />No Auctions</div>
 		}
 
+		//Show if the auctions are filtered or come from a search
 		let helpText
 		if(this.state.searchText) {
 			helpText = <h5 className="help-text">Search Results for: "{this.state.searchText}"</h5>

@@ -25,6 +25,7 @@ class NewMessage extends Component {
 
 
 	sendMessage() {
+		//Encrypt line changes to pass through url parameters
 		let encryptedMessage = this.state.newMessage.replace(/\n/g, "%0A")
 
 		const me = AuthHelper.me()
@@ -40,13 +41,13 @@ class NewMessage extends Component {
 			this.setState({
 				success: true,
 			})
-			setTimeout(this.props.goBack, 2000)
+			setTimeout(this.props.goBack, 2000)		//Wait 2 seconds to show success banner
 		}).catch(err => {
 			displayError(err)
 		})
 	}
 
-
+	//Display success banner
 	success() {
     	if(this.state.success) {
     		return (

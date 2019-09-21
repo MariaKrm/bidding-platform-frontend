@@ -32,7 +32,6 @@ class Login extends Component {
     handleSubmit(event) {
         event.preventDefault()
 
-
         const user = {
             username: this.state.username,
             password: this.state.password

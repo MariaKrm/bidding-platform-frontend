@@ -7,7 +7,8 @@ import AccountButtons from "../Elements/AccountButtons"
 import MessageControl from "./MessageControl"
 import NewMessage from "./NewMessage"
 
-
+//Shown when "contact seller/top bidder" is pressed on AuctionPage
+//Looks like NewMessage from reply on Inbox but has its own url
 class NewMessagePage extends Component {
 	constructor() {
 		super()
@@ -27,11 +28,11 @@ class NewMessagePage extends Component {
 	getAuctionData(id) {
 		customRequest("GET", "/item/" + id)
 		.then(response => {
-
 			this.setState({
 				item: response.data,
 			})
 
+			//See if we are seller or top bidder of this auction
 			const auctionWinner = response.data.bids[0]
 			const me = AuthHelper.me()
 			if(me && auctionWinner && (auctionWinner.bidder.id === me.id || response.data.seller.id === me.id)) {
@@ -46,6 +47,7 @@ class NewMessagePage extends Component {
 	}
 
 	componentDidMount() {
+		//Get auction id from url
 		const path = this.props.location.pathname
 		const pos = path.lastIndexOf("/")
 		const id = path.slice(pos+1)
@@ -54,6 +56,7 @@ class NewMessagePage extends Component {
 
 
 	render() {
+		//Page only accessible by logged in users
 		if(!AuthHelper.loggedIn()) {
 			return (
 				<NotAvailable />

@@ -99,6 +99,8 @@ class AddressForm extends Component {
     		{ params: params }
   		).then(response => {
     		const view = response.data.Response.View
+
+        //Only accepting addresses with at least city and country
     		if(view.length > 0 && view[0].Result.length > 0 && this.state.address.city && this.state.address.country) {
       			const location = view[0].Result[0].Location;
       			const oldCity = this.state.address.city
@@ -136,7 +138,6 @@ class AddressForm extends Component {
       })
 
 	}
-
 
 	onClear() {
 		const address = this.getEmptyAddress();

@@ -25,6 +25,7 @@ class Filters extends Component {
 		this.clearFilters = this.clearFilters.bind(this)
 	}
 
+	//Transform the categories to the correct form for DropDownTreeSelect (in DropDownContainer)
 	tranformCategoriesToTreeSelect(categories) {
 	    let transCategories = categories.map(cat => {
 	        return ({
@@ -37,7 +38,7 @@ class Filters extends Component {
 	    return transCategories
 	}
 
-
+	//Get all categories to display on dropdown
 	getAllCategories() {
 		customRequest("GET", "/item/allCategories")
 		.then(response => {
@@ -86,9 +87,11 @@ class Filters extends Component {
 			error: errorMessage,
 		})
 
+		 //Do not allow submit if there are errors
     	if(errorMessage) return false
 
 
+    	//Create url with filters
     	let redirectURL = "/home/filters?"
     	if(this.state.lowerPrice) {
     		redirectURL = redirectURL + "lowerPrice=" + this.state.lowerPrice + "&"
@@ -106,10 +109,12 @@ class Filters extends Component {
      		redirectURL = redirectURL + "category=" + this.state.category + "&"
      	}
 
+     	//If no filters redirect to home
      	if(!this.state.lowerPrice && !this.state.higherPrice && !this.state.location && !this.state.description && !this.state.category) {
      		redirectURL = "/home?"
      	}
 
+     	//Show first page of filter results/home
     	redirectURL = redirectURL + "page=1"
     	this.props.history.push(redirectURL)
 
@@ -130,6 +135,7 @@ class Filters extends Component {
     }
 
 	render() {
+		//Wait for categories
 		if(this.state.transformedCategories === null) {
 		    return (
 		        <div>Loading...</div>

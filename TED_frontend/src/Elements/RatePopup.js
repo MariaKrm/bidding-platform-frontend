@@ -4,6 +4,7 @@ import Swal from "sweetalert2"
 import { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
 
+//Popup requesting rating, shown in AuctionPage
 class RatePopup extends Component {
 	constructor() {
 		super()

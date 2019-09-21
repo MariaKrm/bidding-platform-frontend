@@ -38,6 +38,7 @@ class Feed extends Component {
 			})
 			const xml = "<items>\n" + xmls.join("\n") + "\n</items>"
 
+			//Create element with url for xml download
 			const element = document.createElement("a");
 			const file = new Blob([xml], {type: 'application/xml'});
 			element.href = URL.createObjectURL(file);
@@ -56,12 +57,11 @@ class Feed extends Component {
 
 			const jsons = response.data.map(item => {
 				let itemJSON = JSON.stringify(item)
-				console.log("itemJSON:\n", itemJSON)
 				return itemJSON
 			})
 			const json = jsons.join("\n")
-			console.log("json:\n", json)
 
+			//Create element with url for json download
 			const element = document.createElement("a");
 			const file = new Blob([json], {type: "application/json"});
 			element.href = URL.createObjectURL(file);
@@ -81,8 +81,6 @@ class Feed extends Component {
 					<Filters history={this.props.history} />
 				</div>
 				<div className="main-content">
-{/*							<h3>Main Content</h3>
-					<Timer />				{/* This is to test the refresh with timer; changes the time every 3 seconds */}
 					<AuctionsDisplay {...this.props} />
 				</div>
 				<div className="suggestions">

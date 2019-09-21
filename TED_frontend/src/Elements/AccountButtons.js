@@ -4,12 +4,12 @@ import NotificationDropdown from "../Notifications/NotificationDropdown"
 import MessagesIcon from "../Messages/MessagesIcon"
 import ChangePasswordPopup from "./ChangePasswordPopup"
 
+//Notifications, Messages, Login button on right of header
 class AccountButtons extends Component {
 	constructor() {
 		super()
 		this.state = {
 			username: "",
-			notifications: [],
 		}
 
 		this.logout = this.logout.bind(this)

@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import ReactTooltip from "react-tooltip"
 
+//Bidder as shown in AuctionPage
 class Bidder extends Component {
 	render() {
 		const user = this.props.user

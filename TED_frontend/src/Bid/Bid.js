@@ -4,7 +4,6 @@ import Bidder from "./Bidder"
 
 class Bid extends Component {
 	render() {
-
 		const time = new Date(this.props.time)
 		return (
 			<div className="bid">

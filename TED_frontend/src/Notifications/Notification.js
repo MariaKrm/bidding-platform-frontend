@@ -13,17 +13,20 @@ class Notification extends Component {
 	}
 
 	handleClick() {
+		//Mark notification as seen when clicked
 		customRequest("PATCH", `/user/markNotification/${this.props.notification.id}`)
 		.then(response => {
 			this.setState({
 				type: "seen",
 			})
 
+			//If notification about verification set user as verified and reload to get rid of banner
 			if(this.props.notification.message.includes("verified")) {
 				AuthHelper.verify()
 				window.location.reload()
 			}
 
+			//If notification about won/ended auction go to its page
 			if(this.props.notification.message.includes("auction")) {
 				this.props.history.push(`/auctions/${this.props.notification.itemId}`)
 			}
@@ -32,6 +35,7 @@ class Notification extends Component {
 		})
 	}
 
+	//Get type from props, then keep track of it by yourself
 	componentDidMount() {
 		this.setState({
 			type: this.props.type,

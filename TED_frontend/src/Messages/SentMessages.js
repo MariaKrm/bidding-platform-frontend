@@ -53,13 +53,16 @@ class SentMessages extends Component {
 	}
 
 	componentDidMount() {
+		//Stop if not logged in
 		if(!AuthHelper.loggedIn()) {
 			return false
 		}
 
+		//Deal with page parameters
 		const query = new URLSearchParams(window.location.search)
 		let currPage = query.get('page')
 
+		//If no page is specified default to page 1
 		if(currPage === null) {
 			this.props.history.push("?page=1")
 			currPage = 1
@@ -67,9 +70,12 @@ class SentMessages extends Component {
 
 		currPage = Number(currPage)
 		this.getMessages(currPage)
+
+		//No need to refresh messages every now and then
 	}
 
 	render() {
+		//Page only accessible by logged in users
 		if(!AuthHelper.loggedIn()) {
 			return (
 				<NotAvailable />
@@ -96,6 +102,7 @@ class SentMessages extends Component {
 			messages = <div>Loading...</div>
 		}
 
+		//Display all messages/selected message
 		let content
 		if(this.state.displayMessage) {
 			content =

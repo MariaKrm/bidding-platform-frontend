@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import Bid from "./Bid"
 
-
+//Preview of Bid in MyBids (with reference to auction)
 class BidPreview extends Component {
 	render() {
 		const auction = this.props.bid.item

@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 
+//Navigation bar for messages urls
 class MessageControl extends Component {
 	render() {
 		return (

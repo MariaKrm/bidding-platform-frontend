@@ -3,6 +3,7 @@ import axios from "axios"
 import { displayError } from "../utils/ErrorHelper"
 import * as Constants from "../Constants/Constants"
 
+//For input forms, check input and show appropriate error message under field
 class ValidatedInput extends Component {
 	constructor(props) {
 		super(props)
@@ -109,6 +110,7 @@ class ValidatedInput extends Component {
     	this.props.passresult(name, value, error)
     }
 
+    //Check for availability only when done typing
     handleBlur(event) {
     	const { name, value } = event.target
 		if(name === "username") {
@@ -122,6 +124,7 @@ class ValidatedInput extends Component {
 		
 	}
 
+	//Don't submit form with enter on username and email to check for availability
 	handleKeyPress(event){
    		if((event.target.name === "username" || event.target.name === "email") && event.keyCode === 13){
     		event.target.blur()

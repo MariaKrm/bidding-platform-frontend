@@ -28,12 +28,13 @@ class Inbox extends Component {
 		this.getMessages = this.getMessages.bind(this)
 	}
 
-	displayMessage(index) {
+	displayMessage(id) {
 		//Mark message as seen
-		customRequest("PATCH", `/user/markMessage/${this.state.messages[index].id}`)
+		const message = this.state.messages.find(x => x.id === id)
+		customRequest("PATCH", `/user/markMessage/${message.id}`)
 		.then(response => {
 			this.setState({
-				selected: index,
+				selected: message,
 				show: "selected"
 			})
 		}).catch(err => {
@@ -48,10 +49,11 @@ class Inbox extends Component {
 		})
 	}
 
-	reply(index) {
+	reply(id) {
+		const message = this.state.messages.find(x => x.id === id)
 		this.setState({
 			show: "new",
-			selected: index,
+			selected: message,
 		})
 	}
 
@@ -112,11 +114,10 @@ class Inbox extends Component {
 
 		let messages
 		if(this.state.messages && this.state.currentPage) {
-			messages = this.state.messages.map((item, index) => {
+			messages = this.state.messages.map(item => {
 				return (
 					<MessagePreview 
 						key={item.id} 
-						index={index} 
 						message={item} 
 						type={item.seen ? "seen" : "unseen"}
 						history={this.props.history} 
@@ -135,8 +136,7 @@ class Inbox extends Component {
 			content =
 				<div>
 					<MessageDisplay 
-						index={this.state.selected}
-						message={this.state.messages[this.state.selected]} 
+						message={this.state.selected} 
 						goBack={this.closeMessage} 
 						reply={this.reply}
 					/>
@@ -150,14 +150,13 @@ class Inbox extends Component {
 				</div>
 		}
 		else {
-			const message = this.state.messages[this.state.selected]
 			content = 
 				<div>
 					<NewMessage
-						sender={message.sender}
-						recipient={message.recipient}
-						item={message.item}
-						message={message.message}
+						sender={this.state.selected.sender}
+						recipient={this.state.selected.recipient}
+						item={this.state.selected.item}
+						message={this.state.selected.message}
 						goBack={this.closeMessage}
 						reply
 					/>

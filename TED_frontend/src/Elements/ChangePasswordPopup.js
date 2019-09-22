@@ -107,7 +107,7 @@ class ChangePasswordPopup extends Component {
 						</div>
 
 						<div className="modal-footer">
-							<button type="button" className="btn btn-success" onClick={this.handleSubmit}>Submit</button>
+							<button type="button" className="btn btn-success" data-dismiss="modal" onClick={this.handleSubmit}>Submit</button>
 						</div>
 					</div>
 				</div>

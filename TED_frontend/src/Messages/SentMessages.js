@@ -26,9 +26,10 @@ class SentMessages extends Component {
 		this.getMessages = this.getMessages.bind(this)
 	}
 
-	displayMessage(index) {
+	displayMessage(id) {
+		const message = this.state.messages.find(x => x.id === id)
 		this.setState({
-			selected: index,
+			selected: message,
 			displayMessage: true,
 		})
 	}
@@ -84,11 +85,10 @@ class SentMessages extends Component {
 
 		let messages
 		if(this.state.messages && this.state.currentPage) {
-			messages = this.state.messages.map((item, index) => {
+			messages = this.state.messages.map(item => {
 				return (
 					<MessagePreview 
 						key={item.id} 
-						index={index} 
 						message={item} 
 						type="seen"
 						history={this.props.history} 
@@ -108,8 +108,7 @@ class SentMessages extends Component {
 			content =
 				<div>
 					<MessageDisplay 
-						index={this.state.selected}
-						message={this.state.messages[this.state.selected]} 
+						message={this.state.selected} 
 						goBack={this.closeMessage} 
 						sent
 					/>

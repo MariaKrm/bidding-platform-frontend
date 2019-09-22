@@ -76,7 +76,7 @@ class NewMessage extends Component {
 					<br />
 					<br />
 					<div className="message-input">
-						<textarea className="message-textarea" rows="10" cols="100" value={this.state.newMessage} onChange={this.handleChange} />
+						<textarea className="message-textarea" rows="10" cols="100" maxlength="255" value={this.state.newMessage} onChange={this.handleChange} />
 						<br />
 						<button className="btn btn-success float-right" type="submit" onClick={this.sendMessage}>Send</button>
 					</div>

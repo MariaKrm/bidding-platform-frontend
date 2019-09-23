@@ -79,7 +79,7 @@ class Login extends Component {
                     	type="text" 
                     	value={this.state.username} 
                     	name="username" 
-                    	placeholder="Username" 
+                    	placeholder="Username / Email" 
                     	onChange={this.handleChange}
                     />
                     <br />

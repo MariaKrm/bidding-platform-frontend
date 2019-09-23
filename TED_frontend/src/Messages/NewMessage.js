@@ -26,7 +26,10 @@ class NewMessage extends Component {
 
 	sendMessage() {
 		//Encrypt line changes to pass through url parameters
-		let encryptedMessage = this.state.newMessage.replace(/\n/g, "%0A")
+	//	let encryptedMessage = this.state.newMessage.replace(/\n/g, "%0A")
+
+		const formData = new FormData()
+		formData.append('text', this.state.newMessage)
 
 		const me = AuthHelper.me()
 		let path
@@ -36,7 +39,8 @@ class NewMessage extends Component {
 		else {
 			path = "messageSeller"
 		}
-		customRequest("GET", `/user/${path}/${this.props.item.id}?text=${encryptedMessage}`)
+		
+		customRequest("POST", `/user/${path}/${this.props.item.id}`, formData)
 		.then(response => {
 			this.setState({
 				success: true,

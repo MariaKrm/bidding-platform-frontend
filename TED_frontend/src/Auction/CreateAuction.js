@@ -29,7 +29,7 @@ class CreateAuction extends Component {
 			category: "",
 			initialCategories: [],
             transformedCategories: null,
-            submiting: false,
+            submitting: false,
 			success: false,
 		}
 		this.handleChange = this.handleChange.bind(this)
@@ -218,7 +218,7 @@ class CreateAuction extends Component {
     		if(result.value) {
     			setTimeout(() => {
                     this.setState({
-                        submiting: true,
+                        submitting: true,
                     })
                     this.submitAuction(newAuction)
                 }, 300)
@@ -232,7 +232,7 @@ class CreateAuction extends Component {
     	.then(response => {
     		this.setState({
     			success: true,
-                submiting: false,
+                submitting: false,
     		})
     		window.scrollTo(0, 0)
     		setTimeout(() => this.props.history.goBack(), 2000)
@@ -344,7 +344,7 @@ class CreateAuction extends Component {
 								<textarea name="description" className="description-input" value={this.state.description} onChange={this.handleChange} cols={40} rows={3} required />
 							</div>
 						</div>
-                        {this.state.submiting && <div>Submiting...</div>}
+                        {this.state.submitting && <div>Submitting...</div>}
 						<button type="submit" className="btn btn-dark btn-margin btn-set-size">Submit</button>
 						<button type="button" className="btn btn-danger btn-margin btn-set-size" onClick={this.cancel}>Cancel</button>
 					</form>

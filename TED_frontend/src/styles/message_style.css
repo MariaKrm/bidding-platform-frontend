@@ -33,3 +33,8 @@
 .message-input {
 	width: 90%;
 }
+
+.message-preview-title {
+	display: flex;
+	justify-content: space-between;
+}

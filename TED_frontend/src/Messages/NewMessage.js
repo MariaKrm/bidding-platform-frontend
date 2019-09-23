@@ -39,7 +39,7 @@ class NewMessage extends Component {
 		else {
 			path = "messageSeller"
 		}
-		
+
 		customRequest("POST", `/user/${path}/${this.props.item.id}`, formData)
 		.then(response => {
 			this.setState({
@@ -76,6 +76,7 @@ class NewMessage extends Component {
 						<label className="detail-field">From:</label> {this.props.sender.username}<br />
 						<label className="detail-field">To:</label> {this.props.recipient.username}<br />
 						<label className="detail-field">About:</label> Auction #{this.props.item.id} (<a href={`/auctions/${this.props.item.id}`}>{this.props.item.name}</a>)<br />
+						
 					</div>
 					<br />
 					<br />

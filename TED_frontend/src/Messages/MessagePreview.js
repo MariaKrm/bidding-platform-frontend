@@ -49,12 +49,15 @@ class MessagePreview extends Component {
 
 	render() {
 		const fromTo = this.props.sent ? "To " + this.props.message.recipient.username : "From " + this.props.message.sender.username
+		const date = new Date(this.props.message.createdAt)
 		return (
 			<div className="preview text-left">
-				<button className={"link-button " + this.props.type} onClick={() => this.props.onClick(this.props.message.id)}>
-					{fromTo} about item #{this.props.message.item.id} ({this.props.message.item.name})
-				</button>
-				<br />
+				<div className="message-preview-title">
+					<button className={"link-button " + this.props.type} onClick={() => this.props.onClick(this.props.message.id)}>
+						{fromTo} about item #{this.props.message.item.id} ({this.props.message.item.name})
+					</button>
+					{date.toDateString()}, {date.toLocaleTimeString()}
+				</div>
 				{this.props.sent && <button className="reply-button" onClick={this.deleteMessage}>Delete</button>}
 			</div>
 		)

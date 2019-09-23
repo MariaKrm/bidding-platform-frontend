@@ -49,6 +49,7 @@ class MessageDisplay extends Component {
 
 	render() {
 		const message = this.props.message
+		const date = new Date(message.createdAt)
 		return (
 			<div className="full-message">
 				<div className="preview">
@@ -61,6 +62,7 @@ class MessageDisplay extends Component {
 						<label className="detail-field">From:</label> {message.sender.username}<br />
 						<label className="detail-field">To:</label> {message.recipient.username}<br />
 						<label className="detail-field">About:</label> Auction #{message.item.id} (<a href={`/auctions/${message.item.id}`}>{message.item.name}</a>)<br />
+						<label className="detail-field">On:</label> {date.toDateString()}, {date.toLocaleTimeString()}<br />
 						{!this.props.sent && <button className="reply-button" onClick={() => this.props.reply(message.id)}>Reply</button>}
 						{this.props.sent && <button className="reply-button" onClick={this.deleteMessage}>Delete</button>}
 					</div>

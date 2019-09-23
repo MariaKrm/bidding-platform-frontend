@@ -153,8 +153,8 @@ class Inbox extends Component {
 			content = 
 				<div>
 					<NewMessage
-						sender={this.state.selected.sender}
-						recipient={this.state.selected.recipient}
+						sender={this.state.selected.recipient}
+						recipient={this.state.selected.sender}
 						item={this.state.selected.item}
 						message={this.state.selected.message}
 						goBack={this.closeMessage}

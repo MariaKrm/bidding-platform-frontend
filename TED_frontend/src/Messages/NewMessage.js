@@ -5,9 +5,9 @@ import { displayError } from "../utils/ErrorHelper"
 class NewMessage extends Component {
 	constructor(props) {
 		super(props)
-		const prevMessage = props.reply ? props.sender.username + " wrote:\n" + props.message + "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" : ""
+		const prevMessage = props.reply ? props.recipient.username + " wrote:\n" + props.message : ""
 		this.state = {
-			newMessage: prevMessage,
+			newMessage: prevMessage.replace(/\n/g, "\n  |  "),
 			success: false,
 		}
 
@@ -76,7 +76,7 @@ class NewMessage extends Component {
 						<label className="detail-field">From:</label> {this.props.sender.username}<br />
 						<label className="detail-field">To:</label> {this.props.recipient.username}<br />
 						<label className="detail-field">About:</label> Auction #{this.props.item.id} (<a href={`/auctions/${this.props.item.id}`}>{this.props.item.name}</a>)<br />
-						
+
 					</div>
 					<br />
 					<br />

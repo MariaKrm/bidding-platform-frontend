@@ -10,13 +10,13 @@ class Navbar extends Component {
 					<li className={"nav-item " + this.props.homeTab}><a className="nav-link" href="/home">Home</a></li>
 					
 					{AuthHelper.loggedIn() ?
-						<li className={"nav-item " + this.props.auctionTab}><a className="nav-link" href="/auction-managment/my-open-auctions">Auction Managment</a></li>
+						<li className={"nav-item " + this.props.auctionTab}><a className="nav-link" href="/auction-management/my-open-auctions">Auction Management</a></li>
 						// eslint-disable-next-line
-						: <li className="nav-item disabled"><a className="nav-link" href="#" disabled>Auction Managment</a></li>
+						: <li className="nav-item disabled"><a className="nav-link" href="#" disabled>Auction Management</a></li>
 					}
 
 					{AuthHelper.isAdmin() ?
-						<li className={"nav-item " + this.props.accountTab}><a className="nav-link" href="/account-managment/pending-registers">Account Managment</a></li>
+						<li className={"nav-item " + this.props.accountTab}><a className="nav-link" href="/account-management/pending-registers">Account Management</a></li>
 						: null
 					}
 					

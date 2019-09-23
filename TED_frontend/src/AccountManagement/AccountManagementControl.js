@@ -3,8 +3,8 @@ import Swal from "sweetalert2"
 import { customRequest } from "../utils/AuthHelper"
 import { displayError } from "../utils/ErrorHelper"
 
-//Navigation bar for account-managment urls
-class AccountManagmentControl extends Component {
+//Navigation bar for account-management urls
+class AccountManagementControl extends Component {
 	constructor() {
 		super()
 
@@ -51,7 +51,7 @@ class AccountManagmentControl extends Component {
 
 	render() {
 		return (
-			<div className="managment-control">
+			<div className="management-control">
 				<br />
 				<br />
 				<button type="button" className="btn btn-success btn-margin btn-set-size" onClick={this.verifyAll}>Verify All</button>
@@ -61,10 +61,10 @@ class AccountManagmentControl extends Component {
 				<nav className="navbar navbar-expand-sm bg-light navbar-light">
 					<ul className="nav flex-column ml-auto text-right">
 						<li className="nav-item">
-							<a className="nav-link active" href="/account-managment/pending-registers">Pending Registers</a>
+							<a className="nav-link active" href="/account-management/pending-registers">Pending Registers</a>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link" href="/account-managment/all-accounts">All Accounts</a>
+							<a className="nav-link" href="/account-management/all-accounts">All Accounts</a>
 						</li>
 					</ul>
 				</nav>
@@ -74,4 +74,4 @@ class AccountManagmentControl extends Component {
 	}
 }
 
-export default AccountManagmentControl
+export default AccountManagementControl

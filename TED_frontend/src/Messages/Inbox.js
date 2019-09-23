@@ -171,10 +171,10 @@ class Inbox extends Component {
 					<Header />
 					<AccountButtons history={this.props.history} />
 				</div>
-				<div className="managment-page">
+				<div className="management-page">
 					<MessageControl />
-					<div className="managment-content">
-						<h2 className="managment-content-title">Inbox</h2>
+					<div className="management-content">
+						<h2 className="management-content-title">Inbox</h2>
 						<div>
 							{content}
 						</div>

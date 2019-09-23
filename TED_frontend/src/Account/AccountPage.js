@@ -172,7 +172,7 @@ class AccountPage extends Component {
 						</div>
 						
 						<br />
-						{/*Show map only if coordinnates exist. (0,0) is used for users with no coordinates*/}
+						{/*Show map only if coordinates exist. (0,0) is used for users with no coordinates*/}
 						{this.state.data.location && this.state.data.location.latitude !== 0 && this.state.data.location.longitude !== 0 ? 
 							<div>
 								<p className="account-field"><label className="account-field-label">City:</label> {city}</p>
@@ -180,7 +180,7 @@ class AccountPage extends Component {
 								<label className="account-field-label">Exact location:</label>
 								<Map lat={this.state.data.location.latitude} lon={this.state.data.location.longitude} />
 							</div>
-							: <div>{this.state.data.location.locationTitle}</div>
+							: <div>{this.state.data.location ? this.state.location.locationTitle : "No known location"}</div>
 						}
 					</div>
 					<div className="account-page-buttons">

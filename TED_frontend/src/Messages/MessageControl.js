@@ -4,7 +4,7 @@ import React, { Component } from "react"
 class MessageControl extends Component {
 	render() {
 		return (
-			<div className="managment-control">
+			<div className="management-control">
 				<br />
 				<br />
 

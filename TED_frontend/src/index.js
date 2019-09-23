@@ -12,11 +12,11 @@ import CreateAuction from "./Auction/CreateAuction"
 import CreateCategory from "./Auction/CreateCategory"
 import AuctionPage from "./Auction/AuctionPage"
 import EditAuction from "./Auction/EditAuction"
-import MyAuctions from "./AuctionManagment/MyAuctions"
-import MyBids from "./AuctionManagment/MyBids"
-import ViewedAuctions from "./AuctionManagment/ViewedAuctions"
-import PendingRegisters from "./AccountManagment/PendingRegisters"
-import AllAccounts from "./AccountManagment/AllAccounts"
+import MyAuctions from "./AuctionManagement/MyAuctions"
+import MyBids from "./AuctionManagement/MyBids"
+import ViewedAuctions from "./AuctionManagement/ViewedAuctions"
+import PendingRegisters from "./AccountManagement/PendingRegisters"
+import AllAccounts from "./AccountManagement/AllAccounts"
 import AccountPage from "./Account/AccountPage"
 import PageNotFound from "./utils/PageNotFound"
 import DisplayImage from "./utils/DisplayImage"
@@ -55,12 +55,12 @@ ReactDOM.render(
 	    	<Route path="/messages/inbox" component={Inbox} />
 	    	<Route path="/messages/sent" component={SentMessages} />
 	    	<Route path="/messages/newMessage/:itemId" render={(props) => <NewMessagePage {...props} />} />
-	    	<Route path="/auction-managment/my-open-auctions" render={(props) => <MyAuctions completed={false} {...props} />} />
-	    	<Route path="/auction-managment/my-closed-auctions" render={(props) => <MyAuctions completed={true} {...props} />} />
-	    	<Route path="/auction-managment/my-bids" component={MyBids} />
-	    	<Route path="/auction-managment/my-history" component={ViewedAuctions} />
-	    	<Route path="/account-managment/pending-registers" component={PendingRegisters} />
-	    	<Route path="/account-managment/all-accounts" component={AllAccounts} />
+	    	<Route path="/auction-management/my-open-auctions" render={(props) => <MyAuctions completed={false} {...props} />} />
+	    	<Route path="/auction-management/my-closed-auctions" render={(props) => <MyAuctions completed={true} {...props} />} />
+	    	<Route path="/auction-management/my-bids" component={MyBids} />
+	    	<Route path="/auction-management/my-history" component={ViewedAuctions} />
+	    	<Route path="/account-management/pending-registers" component={PendingRegisters} />
+	    	<Route path="/account-management/all-accounts" component={AllAccounts} />
 	    	<Route path="/createAuction" component={CreateAuction} />
 	    	<Route path="/createCategory" component={CreateCategory} />
 	    	<Route path="/image" component={DisplayImage} />

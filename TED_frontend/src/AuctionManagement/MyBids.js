@@ -4,7 +4,7 @@ import { displayError } from "../utils/ErrorHelper"
 import NotAvailable from "../utils/NotAvailable"
 import HomeHeader from "../Elements/HomeHeader"
 import Navbar from "../Elements/Navbar"
-import AuctionManagmentControl from "./AuctionManagmentControl"
+import AuctionManagementControl from "./AuctionManagementControl"
 import BidPreview from "../Bid/BidPreview"
 
 
@@ -66,10 +66,10 @@ class MyBids extends Component {
 			<div>
 				<HomeHeader history={this.props.history} />
 				<Navbar auctionTab="active" />
-				<div className="managment-page">
-					<AuctionManagmentControl history={this.props.history} />
-					<div className="managment-content">
-						<h2 className="managment-content-title">My Bids</h2>
+				<div className="management-page">
+					<AuctionManagementControl history={this.props.history} />
+					<div className="management-content">
+						<h2 className="management-content-title">My Bids</h2>
 						<div>
 							{myBids}
 						</div>

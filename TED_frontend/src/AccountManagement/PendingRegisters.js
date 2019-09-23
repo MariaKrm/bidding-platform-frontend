@@ -4,7 +4,7 @@ import { displayError } from "../utils/ErrorHelper"
 import HomeHeader from "../Elements/HomeHeader"
 import Navbar from "../Elements/Navbar"
 import AdminOnly from "../utils/AdminOnly"
-import AccountManagmentControl from "./AccountManagmentControl"
+import AccountManagementControl from "./AccountManagementControl"
 import AccountPreview from "../Account/AccountPreview"
 import PageWheel from "../Elements/PageWheel"
 
@@ -79,10 +79,10 @@ class PendingRegisters extends Component {
 			<div>
 				<HomeHeader history={this.props.history} />
 				<Navbar accountTab="active" />
-				<div className="managment-page">
-					<AccountManagmentControl history={this.props.history} />
-					<div className="managment-content">
-						<h2 className="managment-content-title">Pending Registers</h2>
+				<div className="management-page">
+					<AccountManagementControl history={this.props.history} />
+					<div className="management-content">
+						<h2 className="management-content-title">Pending Registers</h2>
 						<div>
 							{pendingAccounts}
 							<PageWheel activePage={this.state.currentPage} lastPage={this.state.lastPage} />

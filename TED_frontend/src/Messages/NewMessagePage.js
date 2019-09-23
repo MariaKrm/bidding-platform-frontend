@@ -77,9 +77,9 @@ class NewMessagePage extends Component {
 					<Header />
 					<AccountButtons history={this.props.history} />
 				</div>
-				<div className="managment-page">
+				<div className="management-page">
 					<MessageControl />
-					<div className="managment-content">
+					<div className="management-content">
 						<div>
 							<NewMessage 
 								sender={this.state.isSeller ? this.state.item.seller : this.state.item.bids[0].bidder}

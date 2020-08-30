@@ -1,8 +1,8 @@
 ## Τεχνολογίες Εφαρμογών Διαδικτύου, 2019
 
 ### Ομάδα
-- Μαρία Καραμηνά
-- Γιώργος Κουρσιούνης
+- Maria Karamina
+- Georgios Koursiounis
 
 ### Front-end
 React.js (Windows 10)

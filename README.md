@@ -69,6 +69,6 @@ React.js (Windows 10)
 
 ### Εκκίνηση
 
-npm start μέσα από τον φάκελο TED_frontend
-Στον φυλλομετρητή: https://localhost:3000
+- npm start μέσα από τον φάκελο TED_frontend
+- Στον φυλλομετρητή: https://localhost:3000
 

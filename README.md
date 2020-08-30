@@ -72,3 +72,22 @@ React.js (Windows 10)
 - npm start μέσα από τον φάκελο TED_frontend
 - Στον φυλλομετρητή: https://localhost:3000
 
+### Screenshots
+
+![Login](screenshots/screen.jpg)
+
+![Front Page](screenshots/screen1.jpg)
+
+![Notifications](screenshots/screen2.jpg)
+
+![Auction](screenshots/screen4.jpg)
+
+![Auction Bids](screenshots/screen5.jpg)
+
+![Publish Auction](screenshots/screen6.jpg)
+
+![My Bids](screenshots/screen7.jpg)
+
+![Messages](screenshots/screen8.jpg)
+
+![Accounts](screenshots/screen9.jpg)
